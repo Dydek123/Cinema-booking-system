@@ -1,6 +1,6 @@
-package com.company;
+package com.okno;
 
-import com.damianero.*;
+import com.bazydanych.*;
 
 import java.awt.*;
 import javax.swing.*;

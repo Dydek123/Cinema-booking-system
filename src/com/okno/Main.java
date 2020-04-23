@@ -1,11 +1,7 @@
-package com.company;
+package com.okno;
 
-import com.damianero.*;
+import com.bazydanych.*;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 public class Main {

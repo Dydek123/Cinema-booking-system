@@ -1,4 +1,4 @@
-package com.damianero;
+package com.bazydanych;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

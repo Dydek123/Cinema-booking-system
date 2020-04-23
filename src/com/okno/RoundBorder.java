@@ -1,4 +1,4 @@
-package com.company;
+package com.okno;
 
 import javax.swing.border.Border;
 import java.awt.*;

@@ -1,15 +1,10 @@
-package com.company;
+package com.okno;
 
-import com.damianero.*;
+import com.bazydanych.*;
 
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-import java.awt.image.FilteredImageSource;
-import java.awt.image.ImageFilter;
-import java.awt.image.ImageProducer;
-import java.awt.image.RGBImageFilter;
-import java.util.Arrays;
 import java.util.List;
 
 public class EkranGlowny extends JFrame implements ActionListener{

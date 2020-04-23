@@ -1,7 +1,7 @@
-package com.company;
+package com.okno;
 
-import com.damianero.BazaDanych;
-import com.damianero.Uzytkownicy;
+import com.bazydanych.BazaDanych;
+import com.bazydanych.Uzytkownicy;
 
 import javax.swing.*;
 import java.awt.*;

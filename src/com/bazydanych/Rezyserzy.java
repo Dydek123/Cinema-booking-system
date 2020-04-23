@@ -1,4 +1,4 @@
-package com.damianero;
+package com.bazydanych;
 
 public class Rezyserzy {
     private int idRezyserzy;
