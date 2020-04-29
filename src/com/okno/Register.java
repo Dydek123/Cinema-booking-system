@@ -6,100 +6,115 @@ import com.bazydanych.Uzytkownicy;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Register extends JFrame implements ActionListener {
+public class Register extends JFrame implements ActionListener  {
     private JButton bSingUp;
     private JLabel lLogin, lPassword, lEmail, lName, lSurname, lAge, lPhone, background, lWrongData;
     private JTextField tLogin, tEmail, tName, tSurname, tAge, tPhone;
+    private ImageIcon iZarejestrujSzare = new ImageIcon("Images\\Zarejestruj_szare.png");
+    private ImageIcon iZarejestrujZielone = new ImageIcon("Images\\zarejestruj_zielone.png");
+    private ImageIcon iZarejestrujZielone2 = new ImageIcon("Images\\zarejestruj_zielonev2.png");
     private JPasswordField fPassword;
     private Login login;
     private String regex = "^(.+)@(.+).(.+)$";
     private Pattern pattern;
+    int x = 500, y= 200, width = (935-80)/2, height = 50; // x=80, 935, y = 260
     public Register(){
         setSize(1920,1080); // inicjalizownie okna
         setTitle("Register"); // nazwa okna
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ustawienie domyslnego zamkniecia okna
         setLayout(null);
 
-        lLogin = new JLabel("Login: "); // inicjalizownie oraz ustawianie tekstu "login"
-        lLogin.setBounds(50,10,150,20);
+        lLogin = new JLabel("Login: ",JLabel.LEFT); // inicjalizownie oraz ustawianie tekstu "login"
+        lLogin.setFont(new Font("Impact", Font.ITALIC, 50));
+        lLogin.setBounds(x,y,width,height);
         lLogin.setBackground(Color.white);
         lLogin.setForeground(Color.black);
         add(lLogin);
 
         tLogin = new JTextField(); // inicjalizownie oraz ustawianie pola do wpisania loginu
-        tLogin.setBounds(50, 30, 150, 20);
+        tLogin.setBounds(x, y+height+20, width, height);
         tLogin.addActionListener(this);
         add(tLogin);
 
         lPassword = new JLabel("Hasło: "); // inicjalizownie oraz ustawianie tekstu "hasło"
         lPassword.setFont(new Font("Impact", Font.ITALIC, 50));
-        lPassword.setBounds(50,50,150,20);
+        lPassword.setBounds(x+width+50,y,width,height);
         lPassword.setBackground(Color.white);
         lPassword.setForeground(Color.black);
         add(lPassword);
 
         fPassword = new JPasswordField(); // inicjalizownie oraz ustawianie pola do wpisania hasla
-        fPassword.setBounds(50,70,150,20);
+        fPassword.setBounds(x+width+50,y+height+20,width,height);
         fPassword.addActionListener(this);
         add(fPassword);
 
-        lEmail = new JLabel("E-mail: "); // inicjalizownie oraz ustawianie tekstu "email"
-        lEmail.setBounds(50, 90, 150, 20);
+        lEmail = new JLabel("E-mail: ",JLabel.LEFT); // inicjalizownie oraz ustawianie tekstu "email"
+        lEmail.setFont(new Font("Impact", Font.ITALIC, 50));
+        lEmail.setBounds(x, y+2*(height+20), width*2+2*20, height);
         add(lEmail);
 
         pattern = Pattern.compile(regex);
         tEmail = new JTextField(); // inicjalizownie oraz ustawianie pola do wpisywania hasla
-        tEmail.setBounds(50,110,150,20);
+        tEmail.setBounds(x,y+3*(height+20),width*2+50,height);
         tEmail.addActionListener(this);
         add(tEmail);
 
-        lName = new JLabel("Imie: "); // inicjalizownie oraz ustawianie tekstu "imie"
-        lName.setBounds(50,130,150,20);
+        lName = new JLabel("Imie: ",JLabel.LEFT); // inicjalizownie oraz ustawianie tekstu "imie"
+        lName.setFont(new Font("Impact", Font.ITALIC, 50));
+        lName.setBounds(x,y+4*(height+20),width,height);
         add(lName);
 
         tName = new JTextField(); // inicjalizownie oraz ustawianie pola do wpisywania imienia
-        tName.setBounds(50,150,150,20);
+        tName.setBounds(x,y+5*(height+20),width,height);
         tName.addActionListener(this);
         add(tName);
 
         lSurname = new JLabel("Nazwisko: "); // inicjalizownie oraz ustawianie tekstu "nazwisko"
-        lSurname.setBounds(50,170,150,20);
+        lSurname.setFont(new Font("Impact", Font.ITALIC, 50));
+        lSurname.setBounds(x+width+50,y+4*(height+20),width,height);
         add(lSurname);
 
         tSurname = new JTextField(); // inicjalizownie oraz ustawianie pola do wpisania nazwiska
-        tSurname.setBounds(50,190,150,20);
+        tSurname.setBounds(x+width+50,y+5*(height+20),width,height);
         tSurname.addActionListener(this);
         add(tSurname);
 
-        lAge = new JLabel("Wiek"); // inicjalizownie oraz ustawianie tekstu "wiek"
-        lAge.setBounds(50,210,150,20);
+        lAge = new JLabel("Wiek",JLabel.LEFT); // inicjalizownie oraz ustawianie tekstu "wiek"
+        lAge.setFont(new Font("Impact", Font.ITALIC, 50));
+        lAge.setBounds(x,y+6*(height+20),width,height);
         add(lAge);
 
         tAge = new JTextField(); // inicjalizownie oraz ustawianie pola do wpisania wieku
-        tAge.setBounds(50,230,150,20);
+        tAge.setBounds(x,y+7*(height+20),width,height);
         tAge.addActionListener(this);
         add(tAge);
 
         lPhone = new JLabel("Numer telefon: "); // inicjalizownie oraz ustawianie tekstu "telefon"
-        lPhone.setBounds(50,250,150,20);
+        lPhone.setFont(new Font("Impact", Font.ITALIC, 50));
+        lPhone.setBounds(x+width+50,y+6*(height+20),width,height);
         add(lPhone);
 
         tPhone = new JTextField(); // inicjalizownie oraz ustawianie pola wpisania nr telefonu
-        tPhone.setBounds(50,270,150,20);
+        tPhone.setBounds(x+width+50,y+7*(height+20),width,height);
         tPhone.addActionListener(this);
         add(tPhone);
 
-        bSingUp = new JButton("Zarejestruj się");
-        bSingUp.setBounds(150,300,100,20);
+
+        bSingUp=new JButton(iZarejestrujSzare);
         bSingUp.addActionListener(this);
+        bSingUp.setBounds(x+(width/2)+25,y+8*(height+20),(937-80)/2,140);
+        bSingUp.setBorder(new RoundBorder(45)); // zaokragla przycisk
+        bSingUp.setContentAreaFilled(false); // usuwa tlo ktore powinno byc przezroczyste
         add(bSingUp);
 
-        lWrongData = new JLabel("Złe dane");
-        lWrongData.setBounds(50,300,100,20);
+        lWrongData = new JLabel("Złe dane",JLabel.CENTER);
+        lWrongData.setFont(new Font("Impact", Font.ITALIC, 50));
+        lWrongData.setBounds(x+(width/2)+25,y-height,width,height);
         lWrongData.setVisible(false);
         add(lWrongData);
 
@@ -122,7 +137,7 @@ public class Register extends JFrame implements ActionListener {
                 String ps = fPassword.getText();
                 String em = tEmail.getText();
                 Matcher matcher = pattern.matcher(em);
-                if(matcher.matches() == false){
+                if(!matcher.matches()){
                     throw new RuntimeException("zly email");
                 }
                 String name = tName.getText();
