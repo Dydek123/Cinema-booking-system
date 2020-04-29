@@ -15,9 +15,9 @@ public class Register extends JFrame implements ActionListener, MouseListener {
 
     private JLabel bSingUp, lLogin, lPassword, lEmail, lName, lSurname, lAge, lPhone, background, lWrongData, test;
     private JTextField tLogin, tEmail, tName, tSurname, tAge, tPhone;
-    private ImageIcon iZarejestrujSzare = new ImageIcon("Images\\Zarejestruj_szare.png");
-    private ImageIcon iZarejestrujZielone = new ImageIcon("Images\\zarejestruj_zielone.png");
-    private ImageIcon iZarejestrujZielone2 = new ImageIcon("Images\\zarejestruj_zielonev2.png");
+    private ImageIcon iZarejestrujZielone = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_zielone.png");
+    private ImageIcon iZarejestrujHover = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_hover.png");
+    private ImageIcon iZarejestrujClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_clicked.png");
     private JPasswordField fPassword;
     private Login login;
     private String regex = "^(.+)@(.+).(.+)$";
@@ -57,6 +57,7 @@ public class Register extends JFrame implements ActionListener, MouseListener {
         lEmail = new JLabel("E-mail: ",JLabel.LEFT); // inicjalizownie oraz ustawianie tekstu "email"
         lEmail.setFont(new Font("Impact", Font.ITALIC, 50));
         lEmail.setBounds(x, y+2*(height+20), width*2+2*20, height);
+        lEmail.setForeground(Color.black);
         add(lEmail);
 
         pattern = Pattern.compile(regex);
@@ -68,6 +69,7 @@ public class Register extends JFrame implements ActionListener, MouseListener {
         lName = new JLabel("Imie: ",JLabel.LEFT); // inicjalizownie oraz ustawianie tekstu "imie"
         lName.setFont(new Font("Impact", Font.ITALIC, 50));
         lName.setBounds(x,y+4*(height+20),width,height);
+        lName.setForeground(Color.black);
         add(lName);
 
         tName = new JTextField(); // inicjalizownie oraz ustawianie pola do wpisywania imienia
@@ -78,6 +80,7 @@ public class Register extends JFrame implements ActionListener, MouseListener {
         lSurname = new JLabel("Nazwisko: "); // inicjalizownie oraz ustawianie tekstu "nazwisko"
         lSurname.setFont(new Font("Impact", Font.ITALIC, 50));
         lSurname.setBounds(x+width+50,y+4*(height+20),width,height);
+        lSurname.setForeground(Color.black);
         add(lSurname);
 
         tSurname = new JTextField(); // inicjalizownie oraz ustawianie pola do wpisania nazwiska
@@ -88,6 +91,7 @@ public class Register extends JFrame implements ActionListener, MouseListener {
         lAge = new JLabel("Wiek",JLabel.LEFT); // inicjalizownie oraz ustawianie tekstu "wiek"
         lAge.setFont(new Font("Impact", Font.ITALIC, 50));
         lAge.setBounds(x,y+6*(height+20),width,height);
+        lAge.setForeground(Color.black);
         add(lAge);
 
         tAge = new JTextField(); // inicjalizownie oraz ustawianie pola do wpisania wieku
@@ -98,6 +102,7 @@ public class Register extends JFrame implements ActionListener, MouseListener {
         lPhone = new JLabel("Numer telefon: "); // inicjalizownie oraz ustawianie tekstu "telefon"
         lPhone.setFont(new Font("Impact", Font.ITALIC, 50));
         lPhone.setBounds(x+width+50,y+6*(height+20),width,height);
+        lPhone.setForeground(Color.black);
         add(lPhone);
 
         tPhone = new JTextField(); // inicjalizownie oraz ustawianie pola wpisania nr telefonu
@@ -106,8 +111,8 @@ public class Register extends JFrame implements ActionListener, MouseListener {
         add(tPhone);
 
         bSingUp=new JLabel();
-        bSingUp.setIcon(iZarejestrujSzare);
-        bSingUp.setBounds(x+(width/2),y+8*(height+20),500,170);
+        bSingUp.setIcon(iZarejestrujZielone);
+        bSingUp.setBounds(x+245,y+8*(height+20)+20,428,140);
         bSingUp.setBorder(null);
         bSingUp.addMouseListener(this);
         add(bSingUp);
@@ -125,7 +130,7 @@ public class Register extends JFrame implements ActionListener, MouseListener {
         lWrongData.setVisible(false);
         add(lWrongData);
 
-        background = new JLabel(new ImageIcon("Images\\Startowa v1.png")); // inicjalizownie oraz ustawianie tła
+        background = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\Startowa v1.png")); // inicjalizownie oraz ustawianie tła
         background.setBounds(0,0,1920,1080);
         add(background);
 
@@ -177,9 +182,42 @@ public class Register extends JFrame implements ActionListener, MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        Object p = e.getSource();
-        if(p == bSingUp) {
-            test.setVisible(true);
+        try {
+            Object p = e.getSource();
+            if ( p == bSingUp || p == tPhone) { // proba przypisania wpisanych tekstow w polu do zmiennych
+                //moze klasa w przyszlosci?
+                String l = tLogin.getText();
+                String ps = fPassword.getText();
+                String em = tEmail.getText();
+                Matcher matcher = pattern.matcher(em);
+                if(!matcher.matches()){
+                    throw new RuntimeException("zly email");
+                }
+                String name = tName.getText();
+                String surname = tSurname.getText();
+                String _age = tAge.getText();
+                int age = Integer.parseInt(_age);
+                String _phone = tPhone.getText();
+                int phone = Integer.parseInt(_phone);
+                if(l == null || ps == null || name == null || surname == null || age == 0 || phone == 0 ){
+                    throw new RuntimeException("Brak danych");
+                }
+                //send to check
+                BazaDanych baza = new BazaDanych();
+                List<Uzytkownicy> uzyt = baza.selectUzytkownicy();
+                for(Uzytkownicy c: uzyt){
+                    if(l.equals(c.getLogin()) || em.equals(c.getEmail())){
+                        throw new RuntimeException("Brak danych");
+                    }
+                }
+                baza.insertUzytkownicy(l,ps,em, name, surname, age, phone);
+                login.setVisible(true);
+                dispose();
+            }
+        } catch (RuntimeException err) {
+            System.out.println(err);
+            lWrongData.setForeground(Color.red);
+            lWrongData.setVisible(true);
         }
     }
 
@@ -187,7 +225,7 @@ public class Register extends JFrame implements ActionListener, MouseListener {
     public void mousePressed(MouseEvent e) {
         Object p = e.getSource();
         if(p == bSingUp) {
-            bSingUp.setIcon(iZarejestrujZielone2);
+            bSingUp.setIcon(iZarejestrujClicked);
         }
     }
 
@@ -195,7 +233,7 @@ public class Register extends JFrame implements ActionListener, MouseListener {
     public void mouseReleased(MouseEvent e) {
         Object p = e.getSource();
         if(p == bSingUp) {
-            bSingUp.setIcon(iZarejestrujSzare);
+            bSingUp.setIcon(iZarejestrujHover);
         }
     }
 
@@ -203,7 +241,7 @@ public class Register extends JFrame implements ActionListener, MouseListener {
     public void mouseEntered(MouseEvent e) {
         Object p = e.getSource();
         if(p == bSingUp) {
-            bSingUp.setIcon(iZarejestrujZielone);
+            bSingUp.setIcon(iZarejestrujHover);
         }
     }
 
@@ -211,7 +249,7 @@ public class Register extends JFrame implements ActionListener, MouseListener {
     public void mouseExited(MouseEvent e) {
         Object p = e.getSource();
         if(p == bSingUp) {
-            bSingUp.setIcon(iZarejestrujSzare);
+            bSingUp.setIcon(iZarejestrujZielone);
         }
     }
 }

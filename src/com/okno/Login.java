@@ -11,18 +11,17 @@ import java.awt.event.MouseListener;
 import java.util.List;
 
 public class Login extends JFrame implements ActionListener, MouseListener {
-    private JButton bSingUp, bLogUp;
     private JTextField tLogin;
     private JPasswordField fPassword;
-    private JLabel lLogin, lPassword, lWrongPass, background;
+    private JLabel lLogin, lPassword, lWrongPass, background,bSingUp, bLogUp;
     private Register register;
-    private ImageIcon iZalogujSzare = new ImageIcon("Images\\zaloguj_szare.png");
-    private ImageIcon iZarejestrujSzare = new ImageIcon("Images\\Zarejestruj_szare.png");
+    private ImageIcon iZalogujZielone = new ImageIcon("Coś tam\\Nowe Grafiki\\zaloguj_zielone.png");
+    private ImageIcon iZalogujHover = new ImageIcon("Coś tam\\Nowe Grafiki\\zaloguj_hover.png");
+    private ImageIcon iZalogujClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\zaloguj_clicked.png");
+    private ImageIcon iZarejestrujZielone = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_zielone.png");
+    private ImageIcon iZarejestrujHover = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_hover.png");
+    private ImageIcon iZarejestrujClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_clicked.png");
     private ImageIcon iStronaLogowania = new ImageIcon("Images\\Strona Logowania.png");
-    private ImageIcon iZalogujCzerwone = new ImageIcon("Images\\zaloguj_czerwone.png");
-    private ImageIcon iZarejestrujZielone = new ImageIcon("Images\\zarejestruj_zielone.png");
-    private ImageIcon iZalogujCzerwone2 = new ImageIcon("Images\\zaloguj_czerwonev2.png");
-    private ImageIcon iZarejestrujZielone2 = new ImageIcon("Images\\zarejestruj_zielonev2.png");
     int x = (935-80)/3, y= 300, width = (935-80)/2, height = 50; // x=80, 935, y = 260
     public Login(){
         register = new Register(this);
@@ -62,21 +61,15 @@ public class Login extends JFrame implements ActionListener, MouseListener {
         lWrongPass.setFont(new Font("Impact", Font.PLAIN, 30));
         add(lWrongPass);
 
-        bLogUp = new JButton(iZalogujSzare);
-        bLogUp.setBounds(80,y + (5*height),(938-80)/2,140);
-        bLogUp.setBackground(Color.BLUE);
-//        bLogUp.setForeground(Color.cyan);
-//        bLogUp.setBorder(new RoundBorder(45)); // zaokragla przycisk
-//        bLogUp.setContentAreaFilled(false); // usuwa tlo ktore powinno byc przezroczyste
+        bLogUp = new JLabel(iZalogujZielone);
+        bLogUp.setBounds(85,y + (5*height),428,140);
+        bLogUp.setBorder(null);
         bLogUp.addMouseListener(this);
-        bLogUp.addActionListener(this);
         add(bLogUp);
 
-        bSingUp = new JButton(iZarejestrujSzare);
-        bSingUp.addActionListener(this);
-        bSingUp.setBounds(80+(938-80)/2,y + (5*height),(937-80)/2,140);
-        bSingUp.setBorder(new RoundBorder(45)); // zaokragla przycisk
-        bSingUp.setContentAreaFilled(false); // usuwa tlo ktore powinno byc przezroczyste
+        bSingUp = new JLabel(iZarejestrujZielone);
+        bSingUp.setBounds(85+(938-80)/2,y + (5*height),428,140);
+        bSingUp.setBorder(null);
         bSingUp.addMouseListener(this);
         add(bSingUp);
 
@@ -123,9 +116,9 @@ public class Login extends JFrame implements ActionListener, MouseListener {
     public void mousePressed(MouseEvent e) {
         Object p = e.getSource();
         if(p == bSingUp) {
-            bSingUp.setIcon(iZarejestrujZielone2);
+            bSingUp.setIcon(iZarejestrujClicked);
         }else{
-            bLogUp.setIcon(iZalogujCzerwone2);
+            bLogUp.setIcon(iZalogujClicked);
         }
     }
 
@@ -133,9 +126,9 @@ public class Login extends JFrame implements ActionListener, MouseListener {
     public void mouseReleased(MouseEvent e) {
         Object p = e.getSource();
         if(p == bSingUp) {
-            bSingUp.setIcon(iZarejestrujSzare);
+            bSingUp.setIcon(iZarejestrujZielone);
         }else{
-            bLogUp.setIcon(iZalogujCzerwone);
+            bLogUp.setIcon(iZalogujHover);
         }
     }
 
@@ -143,9 +136,9 @@ public class Login extends JFrame implements ActionListener, MouseListener {
     public void mouseEntered(MouseEvent e) {
         Object p = e.getSource();
         if(p == bSingUp) {
-            bSingUp.setIcon(iZarejestrujZielone);
+            bSingUp.setIcon(iZarejestrujHover);
         }else{
-            bLogUp.setIcon(iZalogujCzerwone);
+            bLogUp.setIcon(iZalogujHover);
         }
     }
 
@@ -153,9 +146,9 @@ public class Login extends JFrame implements ActionListener, MouseListener {
     public void mouseExited(MouseEvent e) {
         Object p = e.getSource();
         if(p == bSingUp) {
-            bSingUp.setIcon(iZarejestrujSzare);
+            bSingUp.setIcon(iZarejestrujZielone);
         }else{
-             bLogUp.setIcon(iZalogujSzare);
+             bLogUp.setIcon(iZalogujZielone);
         }
     }
 }
