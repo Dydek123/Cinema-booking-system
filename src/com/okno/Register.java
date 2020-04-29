@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Register extends JFrame implements ActionListener  {
-    private JButton bSingUp;
-    private JLabel lLogin, lPassword, lEmail, lName, lSurname, lAge, lPhone, background, lWrongData;
+public class Register extends JFrame implements ActionListener, MouseListener {
+
+    private JLabel bSingUp, lLogin, lPassword, lEmail, lName, lSurname, lAge, lPhone, background, lWrongData, test;
     private JTextField tLogin, tEmail, tName, tSurname, tAge, tPhone;
     private ImageIcon iZarejestrujSzare = new ImageIcon("Images\\Zarejestruj_szare.png");
     private ImageIcon iZarejestrujZielone = new ImageIcon("Images\\zarejestruj_zielone.png");
@@ -22,6 +22,7 @@ public class Register extends JFrame implements ActionListener  {
     private Login login;
     private String regex = "^(.+)@(.+).(.+)$";
     private Pattern pattern;
+    private BufferedImage bi;
     int x = 500, y= 200, width = (935-80)/2, height = 50; // x=80, 935, y = 260
     public Register(){
         setSize(1920,1080); // inicjalizownie okna
@@ -104,13 +105,19 @@ public class Register extends JFrame implements ActionListener  {
         tPhone.addActionListener(this);
         add(tPhone);
 
-
-        bSingUp=new JButton(iZarejestrujSzare);
-        bSingUp.addActionListener(this);
-        bSingUp.setBounds(x+(width/2)+25,y+8*(height+20),(937-80)/2,140);
-        bSingUp.setBorder(new RoundBorder(45)); // zaokragla przycisk
-        bSingUp.setContentAreaFilled(false); // usuwa tlo ktore powinno byc przezroczyste
+        bSingUp=new JLabel();
+        bSingUp.setIcon(iZarejestrujSzare);
+        bSingUp.setBounds(x+(width/2),y+8*(height+20),500,170);
+        bSingUp.setBorder(null);
+        bSingUp.addMouseListener(this);
         add(bSingUp);
+
+        test = new JLabel("Kliknięcie sie powiodło");
+        test.setFont(new Font("Impact", Font.ITALIC, 50));
+        test.setBounds(x+(width/2),y-height,500,height);
+        test.setForeground(Color.RED);
+        add(test);
+        test.setVisible(false);
 
         lWrongData = new JLabel("Złe dane",JLabel.CENTER);
         lWrongData.setFont(new Font("Impact", Font.ITALIC, 50));
@@ -131,7 +138,7 @@ public class Register extends JFrame implements ActionListener  {
     public void actionPerformed(ActionEvent e) {
         try {
             Object p = e.getSource();
-            if (p == bSingUp || p == tPhone) { // proba przypisania wpisanych tekstow w polu do zmiennych
+            if ( p == bSingUp || p == tPhone) { // proba przypisania wpisanych tekstow w polu do zmiennych
                 //moze klasa w przyszlosci?
                 String l = tLogin.getText();
                 String ps = fPassword.getText();
@@ -165,6 +172,46 @@ public class Register extends JFrame implements ActionListener  {
             System.out.println(err);
             lWrongData.setForeground(Color.red);
             lWrongData.setVisible(true);
+        }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        Object p = e.getSource();
+        if(p == bSingUp) {
+            test.setVisible(true);
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        Object p = e.getSource();
+        if(p == bSingUp) {
+            bSingUp.setIcon(iZarejestrujZielone2);
+        }
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        Object p = e.getSource();
+        if(p == bSingUp) {
+            bSingUp.setIcon(iZarejestrujSzare);
+        }
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        Object p = e.getSource();
+        if(p == bSingUp) {
+            bSingUp.setIcon(iZarejestrujZielone);
+        }
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        Object p = e.getSource();
+        if(p == bSingUp) {
+            bSingUp.setIcon(iZarejestrujSzare);
         }
     }
 }
