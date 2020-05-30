@@ -143,40 +143,9 @@ public class Register extends JFrame implements ActionListener, MouseListener {
     public void actionPerformed(ActionEvent e) {
         try {
             Object p = e.getSource();
-            if ( p == bSingUp || p == tPhone) { // proba przypisania wpisanych tekstow w polu do zmiennych
-                //moze klasa w przyszlosci?
-                String l = tLogin.getText();
-                String ps = fPassword.getText();
-                String em = tEmail.getText();
-                Matcher matcher = pattern.matcher(em);
-                if(!matcher.matches()){
-                    throw new RuntimeException("zly email");
-                }
-                String name = tName.getText();
-                String surname = tSurname.getText();
-                String _age = tAge.getText();
-                int age = Integer.parseInt(_age);
-                String _phone = tPhone.getText();
-                int phone = Integer.parseInt(_phone);
-                if(l == null || ps == null || name == null || surname == null || age == 0 || phone == 0 ){
-                    throw new RuntimeException("Brak danych");
-                }
-                //send to check
-                BazaDanych baza = new BazaDanych();
-                List<Uzytkownicy> uzyt = baza.selectUzytkownicy();
-                for(Uzytkownicy c: uzyt){
-                    if(l.equals(c.getLogin()) || em.equals(c.getEmail())){
-                        throw new RuntimeException("Brak danych");
-                    }
-                }
-                baza.insertUzytkownicy(l,ps,em, name, surname, age, phone);
-                login.setVisible(true);
-                dispose();
-            }
+
         } catch (RuntimeException err) {
-            System.out.println(err);
-            lWrongData.setForeground(Color.red);
-            lWrongData.setVisible(true);
+
         }
     }
 
@@ -210,7 +179,9 @@ public class Register extends JFrame implements ActionListener, MouseListener {
                         throw new RuntimeException("Brak danych");
                     }
                 }
-                baza.insertUzytkownicy(l,ps,em, name, surname, age, phone);
+                if(!baza.insertUzytkownicy(l, ps, em, name, surname, age, phone)){
+                    throw new RuntimeException("zle dane");
+                }
                 login.setVisible(true);
                 dispose();
             }
