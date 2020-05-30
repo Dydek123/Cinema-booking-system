@@ -62,7 +62,7 @@ public class BazaFilmy {
             prepStmt.execute();
             
         } catch (SQLException e) {
-            System.err.println("Blad przy wstawianiu gatunku");
+            System.err.println("Blad przy wstawianiu oceny uzytkownika");
             e.printStackTrace();
             return false;
         } catch (Exception e) {
