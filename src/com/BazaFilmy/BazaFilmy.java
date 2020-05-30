@@ -1,6 +1,7 @@
 package com.BazaFilmy;
 
-import com.damianero.*;
+import com.BazaFilmy.*;
+import com.bazydanych.*;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -22,7 +23,7 @@ public class BazaFilmy {
 
     public BazaFilmy() {
         try {
-            Class.forName(com.damianero.BazaDanych.DRIVER);
+            Class.forName(com.bazydanych.BazaDanych.DRIVER);
         } catch (ClassNotFoundException e) {
             System.err.println("Brak sterownika JDBC");
             e.printStackTrace();
