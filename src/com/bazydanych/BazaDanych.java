@@ -158,12 +158,14 @@ public class BazaDanych {
   }
   public boolean insertUzytkownicy(String login, String haslo, String email, String imieUzytkownika, String nazwiskoUzytkownika, int wiek, int telefon) {
     try {
-      PreparedStatement prepStmt = conn.prepareStatement("insert into Uzytkownicy values (NULL, ?, ?, ?, `" + imieUzytkownika + "`, `" + nazwiskoUzytkownika + "`, ?, ?);"); // to do // sprawdzic wszystkie inserty
+      PreparedStatement prepStmt = conn.prepareStatement("insert into Uzytkownicy values (NULL, ?, ?, ?, ?, ?, ?, ?);"); // to do // sprawdzic wszystkie inserty
       prepStmt.setString(1, login);
       prepStmt.setString(2, haslo);
       prepStmt.setString(3, email);
-      prepStmt.setInt(4, wiek);
-      prepStmt.setInt(5, telefon);
+      prepStmt.setString(4, imieUzytkownika);
+      prepStmt.setString(5, nazwiskoUzytkownika);
+      prepStmt.setInt(6, wiek);
+      prepStmt.setInt(7, telefon);
       prepStmt.execute();
     } catch (SQLException e) {
       System.err.println("Blad przy wstawianiu uzytkownika");
