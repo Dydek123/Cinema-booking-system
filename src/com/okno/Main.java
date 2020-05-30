@@ -13,6 +13,7 @@ public class Main {
         System.out.println("Lista uzytkownikow: ");
         for(Uzytkownicy c: uzytkownicy)
             System.out.println(c.getLogin() + " " + c.getHaslo());
+        System.out.println("test commit");
 //        EventQueue.invokeLater(com.damianero.RateStar::createAndShowGui);
     }
 }
