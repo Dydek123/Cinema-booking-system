@@ -40,7 +40,7 @@ public class BazaDanych {
     String createFilmy = "CREATE TABLE IF NOT EXISTS Filmy (ID_filmy INTEGER, Tytul VARCHAR(100), ID_rezyserzy INTEGER, ID_gatunki INTEGER, Ocena VARCHAR(100)," +
             "Czas_trwania VARCHAR(100), Rok_produkcji VARCHAR(100), Opis VARCHAR(1000), Zwiastun VARCHAR(100) );"; // to do
     String createGatunki = "CREATE TABLE IF NOT EXISTS Gatunki (ID_gatunki INTEGER, Nazwa_gatunku VARCHAR(100) );"; // to do
-    String createRezerwacje = "CREATE TABLE IF NOT EXISTS Rezerwacje (ID_rezerwacje INTEGER, ID_uzytkownicy INTEGER, ID_seanse INTEGER, Rzad INTEGER, Miejsce INTEGER );"; // to do
+    String createRezerwacje = "CREATE TABLE IF NOT EXISTS Rezerwacje (ID_rezerwacje INTEGER, ID_uzytkownicy INTEGER, ID_seanse INTEGER, Miejsce VARCHAR );"; // to do
     String createRezyserzy = "CREATE TABLE IF NOT EXISTS Rezyserzy (ID_rezyserzy INTEGER, Imie_rezysera VARCHAR(100), Nazwisko_rezysera VARCHAR(100) );"; // to do
     String createSale = "CREATE TABLE IF NOT EXISTS Sale (ID_sale INTEGER, Numer INTEGER, Liczba_miejsc INTEGER );"; // to do
     String createSeanse = "CREATE TABLE IF NOT EXISTS Seanse (ID_seanse INTEGER, ID_sale INTEGER, ID_filmy INTEGER, Data_seansu VARCHAR(100), Godzina_seansu VARCHAR(100) );"; // to do
@@ -254,14 +254,21 @@ public class BazaDanych {
     List<Rezerwacje> rezerwacjeList = new LinkedList<Rezerwacje>();
     try {
       ResultSet result = stat.executeQuery("SELECT * FROM Rezerwacje");
-      int idRezerwacje, idUzytkownicy, idSeanse, rzad, miejsce;
+      int idRezerwacje, idUzytkownicy, idSeanse, miejsce;
+      String rzad;
       while(result.next()) {
         idRezerwacje = result.getInt("ID_rezerwacje");
         idUzytkownicy = result.getInt("ID_uzytkownicy");
         idSeanse = result.getInt("ID_seanse");
-        rzad = result.getInt("Rzad");
+        rzad = result.getString("Rzad");
         miejsce = result.getInt("Miejsce");
-        rezerwacjeList.add(new Rezerwacje(idRezerwacje, idUzytkownicy, idSeanse, rzad, miejsce));
+        rezerwacjeList.add(new Rezerwacje.RezerwacjeBuilder()
+                .idrezerwacja(idRezerwacje)
+                .iduzytkownik(idUzytkownicy)
+                .idseans(idSeanse)
+                .rzad(rzad)
+                .miejsce(miejsce)
+                .build());
       }
     } catch (SQLException e) {
       e.printStackTrace();
