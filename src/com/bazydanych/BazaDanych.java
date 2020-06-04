@@ -1,5 +1,8 @@
 package com.bazydanych;
 
+import com.movies.FactoryFilmy;
+import com.movies.Filmy;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -78,13 +81,13 @@ public class BazaDanych {
     }
     return true;
   }
-  public boolean insertFilmy(String tytul, int idRezyserzy, int idGatunki, float ocena, String czasTrwania, /*year*/ int rokProdukcji, String opis, String zwiastun) {
+  public boolean insertFilmy(String tytul, int idRezyserzy, int idGatunki, double ocena, String czasTrwania, /*year*/ int rokProdukcji, String opis, String zwiastun) {
     try {
       PreparedStatement prepStmt = conn.prepareStatement("insert into Filmy values (NULL, ?, ?, ?, ?, ?, ?, ?, ? );"); // to do // sprawdzic wszystkie inserty
       prepStmt.setString(1, tytul);
       prepStmt.setInt(2, idRezyserzy);
       prepStmt.setInt(3,idGatunki);
-      prepStmt.setFloat(4, ocena);
+      prepStmt.setDouble(4, ocena);
       prepStmt.setString(5, czasTrwania);
       prepStmt.setInt(6, rokProdukcji/*year*/);
       prepStmt.setString(7, opis);
@@ -229,6 +232,8 @@ public class BazaDanych {
       float ocena;
       String czasTrwania;
       /*year*/ int rokProdukcji;
+      FactoryFilmy filmyFactory = new FactoryFilmy();
+
       while(result.next()) {
         idFlimy = result.getInt("ID_filmy");
         tytul = result.getString("Tytul");      // to do
@@ -239,7 +244,8 @@ public class BazaDanych {
         rokProdukcji = result.getInt("Rok_produkcji");
         opis = result.getString("Opis");
         zwiastun = result.getString("Zwiastun");
-        filmyList.add(new Filmy(idFlimy, tytul, idRezyserzy, idGatunki, ocena, czasTrwania, rokProdukcji, opis, zwiastun));
+
+        filmyList.add(filmyFactory.makeFilm(idFlimy, tytul, idRezyserzy, ocena, czasTrwania, rokProdukcji, opis, zwiastun,idGatunki));
       }
     } catch (SQLException e) {
       e.printStackTrace();
@@ -344,7 +350,7 @@ public class BazaDanych {
       ResultSet result = stat.executeQuery("SELECT * FROM Uzytkownicy");
       int idUzytkownika, wiek;
       String login, haslo, email, imieUzytkownika, nazwiskoUzytkownika;
-      int telefon; // varchar?
+      int telefon,admin; // varchar?
       boolean zgodaMarketingowa; //bit?
       while(result.next()) {
         idUzytkownika = result.getInt("ID_uzytkownicy");
@@ -355,7 +361,8 @@ public class BazaDanych {
         nazwiskoUzytkownika = result.getString("Nazwisko_uzytkownika");
         wiek = result.getInt("Wiek");
         telefon = result.getInt("Telefon"); //varchar?
-        uzytkownicyList.add(new Uzytkownicy(idUzytkownika, login, haslo, email, imieUzytkownika, nazwiskoUzytkownika, wiek, telefon));
+        admin = result.getInt("Admin"); //varchar?
+        uzytkownicyList.add(new Uzytkownicy(idUzytkownika, login, haslo, email, imieUzytkownika, nazwiskoUzytkownika, wiek, telefon,admin));
       }
     } catch (SQLException e) {
       e.printStackTrace();

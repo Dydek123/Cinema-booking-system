@@ -1,6 +1,7 @@
 package com.okno;
 
 import com.bazydanych.*;
+import com.movies.Filmy;
 
 import java.awt.*;
 import javax.swing.*;
