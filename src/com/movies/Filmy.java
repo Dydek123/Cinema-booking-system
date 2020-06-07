@@ -1,7 +1,7 @@
 package com.movies;
 
 public abstract class Filmy {
-    private int idFlimy;
+    private int idFilmy;
     private String tytul;
     private int idRezyserzy;
     private int idGatunki;
@@ -20,6 +20,8 @@ public abstract class Filmy {
     private String opis;
     private String zwiastun;
 
+    //konstruktor filmow przeniesiony do poszczegolnych gatunkow w mysl wzorca factory method
+
     //public Filmy() { }
   //  public Filmy(int idFlimy, String tytul, int idRezyserzy, float ocena, String czasTrwania, /*year*/ int rokProdukcji, String opis, String zwiastun) {
     /*    this.idFlimy = idFlimy;
@@ -32,11 +34,11 @@ public abstract class Filmy {
         this.zwiastun = zwiastun;
     }  */
 
-    public int getIdFlimy() {
-        return idFlimy;
+    public int getIdFilmy() {
+        return idFilmy;
     }
-    public void setIdFlimy(int idFilmy) {
-        this.idFlimy = idFlimy;
+    public void setIdFilmy(int idFilmy) {
+        this.idFilmy = idFilmy;
     }
     public String getTytul() {
         return tytul;

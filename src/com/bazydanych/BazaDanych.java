@@ -37,7 +37,6 @@ public class BazaDanych {
 
     createTables();
   }
-
   public boolean createTables(){
     String createBilety = "CREATE TABLE IF NOT EXISTS Bilety (ID_bilety INTEGER, Cena_biletu VARCHAR(100), Rodzaj VARCHAR(100) );"; // to do
     String createFilmy = "CREATE TABLE IF NOT EXISTS Filmy (ID_filmy INTEGER, Tytul VARCHAR(100), ID_rezyserzy INTEGER, ID_gatunki INTEGER, Ocena VARCHAR(100)," +
@@ -67,7 +66,6 @@ public class BazaDanych {
     }
     return true;
   }
-
   public boolean insertBilety(float cenaBiletu, String rodzaj) {
     try {
       PreparedStatement prepStmt = conn.prepareStatement("insert into Bilety values (NULL, ?, ?);"); // to do // sprawdzic wszystkie inserty
@@ -389,7 +387,6 @@ public class BazaDanych {
     }
     return zakupyList;
   }
-
   public void closeConnection() {
     try {
       conn.close();

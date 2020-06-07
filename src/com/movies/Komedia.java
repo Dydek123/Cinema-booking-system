@@ -2,8 +2,8 @@ package com.movies;
 
 public class Komedia extends Filmy{
 
-    public Komedia(int idFlimy, String tytul, int idRezyserzy, double ocena, String czasTrwania, /*year*/ int rokProdukcji, String opis, String zwiastun){
-        setIdFlimy(idFlimy);
+    public Komedia(int idFilmy, String tytul, int idRezyserzy, double ocena, String czasTrwania, /*year*/ int rokProdukcji, String opis, String zwiastun){
+        setIdFilmy(idFilmy);
         setTytul(tytul);
         setIdRezyserzy(idRezyserzy);
         setOcena(ocena);

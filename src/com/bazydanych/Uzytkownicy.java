@@ -27,7 +27,7 @@ public class Uzytkownicy {
         this.nazwiskoUzytkownika = nazwiskoUzytkownika;
         this.wiek = wiek;
         this.telefon = telefon;
-        this.admin = telefon;
+        this.admin = admin;
     }
 
     public int getIdUzytkownika() {
@@ -84,10 +84,12 @@ public class Uzytkownicy {
     public void setAdmin(int admin){
         this.admin = admin;
     }
-    public void dodajFilm(List<Filmy> filmyList, BazaDanych baza, int idFlimy, String tytul, int idRezyserzy, double ocena, String czasTrwania, /*year*/ int rokProdukcji, String opis, String zwiastun, int newFilmGatunek){
+    public void dodajFilm(List<Filmy> filmyList, BazaDanych baza, String tytul, int idRezyserzy, double ocena, String czasTrwania, /*year*/ int rokProdukcji, String opis, String zwiastun, int newFilmGatunek){
         if (this.admin==1) {
+        //Sprawdza czy zalogowany jest adminem
             boolean found=false;
             for (int i = 0; i < filmyList.size(); i++) {
+                //Szukanie filmu o danej nazwie w bazie, blokuje duplikowanie filmów wrazie gdyby dwoch adminow chcialo jednoczesnie dodac ten sam film, w naszym projekcie bardziej bajer niz cos nawiazujacego do zalozen projektu
                 Filmy filmy =  filmyList.get(i);
                 if (filmy.getTytul().equals(tytul)){
                     found=true;
@@ -95,13 +97,19 @@ public class Uzytkownicy {
                 }
             }
             if(!found) {
+                //jesli film ktory chcemy dodac nie istnieje to go dodajemy:
+                //troubleshooting - nie wiem czemu nie jestem w stanie z listy filmow wziac ostatniego indeksu, jest to potrzebne po to zeby filmy w liscie mialy takie same ID co w bazie
+                System.out.println(filmyList.get(filmyList.size() - 1).getIdFilmy());
                 FactoryFilmy filmyFactory = new FactoryFilmy();
-                filmyList.add(filmyFactory.makeFilm(idFlimy, tytul, idRezyserzy, ocena, czasTrwania, rokProdukcji, opis, zwiastun, newFilmGatunek));
-                //WYKONAC POBRANIE NAJWIEKSZEGO IP FILMY Z BAZY I TO WLASNIE NIEGO PODAWA DO INSERTA I DO LISTY
+                filmyList.add(filmyFactory.makeFilm(filmyList.get(filmyList.size() - 1).getIdFilmy(), tytul, idRezyserzy, ocena, czasTrwania, rokProdukcji, opis, zwiastun, newFilmGatunek));
+
                 //Tworzenie rezysera jesli nie istnieje
                 //A to wymaga stworzenia obiektu rezyser zamiast tylko imienia i nazwiska
+
+                //W bazie danych id aktualizuje sie samo (autoincrement,unique) wiec nie ma problemu i nie trzeba podawac ID filmu w ogole
                 baza.insertFilmy(tytul, idRezyserzy, newFilmGatunek, ocena, czasTrwania, rokProdukcji, opis, zwiastun);
-                System.out.println("Dodano film :)");
+                //trouble shooting - sledzenie czy do listy dodal sie film o odpowiednim ID, z aktualnym kodem ID dodawanego filmu to 0, nie wiem czemu
+                System.out.println("Dodano film o indexie: " + filmyList.get(filmyList.size()-1).getIdFilmy());
             }else{
                 System.out.println("Taki film już istnieje");
             }
@@ -109,6 +117,7 @@ public class Uzytkownicy {
             System.out.println("Nie jesteś adminem!");
         }
     }
+
     public void dodajSeans(){
         //tez w przyszlosci trzeba zrobic
     }
