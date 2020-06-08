@@ -3,6 +3,7 @@ package com.bazydanych;
 import com.movies.FactoryFilmy;
 import com.movies.Filmy;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class Uzytkownicy {
@@ -84,19 +85,11 @@ public class Uzytkownicy {
     public void setAdmin(int admin){
         this.admin = admin;
     }
+
     public void dodajFilm(List<Filmy> filmyList, BazaDanych baza, String tytul, int idRezyserzy, double ocena, String czasTrwania, /*year*/ int rokProdukcji, String opis, String zwiastun, int newFilmGatunek){
-        if (this.admin==1) {
+        if (this.admin == 1) {
         //Sprawdza czy zalogowany jest adminem
-            boolean found=false;
-            for (int i = 0; i < filmyList.size(); i++) {
-                //Szukanie filmu o danej nazwie w bazie, blokuje duplikowanie filmów wrazie gdyby dwoch adminow chcialo jednoczesnie dodac ten sam film, w naszym projekcie bardziej bajer niz cos nawiazujacego do zalozen projektu
-                Filmy filmy =  filmyList.get(i);
-                if (filmy.getTytul().equals(tytul)){
-                    found=true;
-                    break;
-                }
-            }
-            if(!found) {
+            try{
                 //jesli film ktory chcemy dodac nie istnieje to go dodajemy:
                 //troubleshooting - nie wiem czemu nie jestem w stanie z listy filmow wziac ostatniego indeksu, jest to potrzebne po to zeby filmy w liscie mialy takie same ID co w bazie
                 System.out.println(filmyList.get(filmyList.size() - 1).getIdFilmy());
@@ -110,8 +103,9 @@ public class Uzytkownicy {
                 baza.insertFilmy(tytul, idRezyserzy, newFilmGatunek, ocena, czasTrwania, rokProdukcji, opis, zwiastun);
                 //trouble shooting - sledzenie czy do listy dodal sie film o odpowiednim ID, z aktualnym kodem ID dodawanego filmu to 0, nie wiem czemu
                 System.out.println("Dodano film o indexie: " + filmyList.get(filmyList.size()-1).getIdFilmy());
-            }else{
+            }catch (SQLException e){
                 System.out.println("Taki film już istnieje");
+                e.printStackTrace();
             }
         }else{
             System.out.println("Nie jesteś adminem!");

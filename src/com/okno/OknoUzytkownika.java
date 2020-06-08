@@ -10,6 +10,19 @@ opcja nr 2 - usuniecie przyciskow z tej grafiki w tle i zrobienie swoich i uloko
 WAŻNE!!!! : dodajac przyciski musi gdzies byc miejsce na przycisk: "Dodaj film", "Dodaj seans"  if (uzytkownik.getAdmin()==true)
 
  */
+/*
+
+To co zrobilem:
+-jesli chodzi o "Dodaj film", "Dodaj seans"  if (uzytkownik.getAdmin()==true) to pogadaj z Dydkiem aby dodal do obrazu przykladowe przyciski to wtedy to zaimplementuje
+-dodalem przyciski oraz napisy w skazane miejsca, trzeba sie na ktoras opcje zdecydowac, imo 2, ale to trzeba z Dydkiem pogadac
+-zauwazylem ze w Register.java (ty chyba to poprawiales, ale moge sie myslic) oraz w Login.java przyciski sa zrobione w postac JLabel, ja zrobilem w postaci JButton,
+nie wiem ktora opcja jest lepsza, ktora gorsza, podobnie dzialaja wiec jest git, na ktoras opcje trzeba sie zdecydowac, przerobienie tych przyciskow ktore stworzylem tutaj
+jest latwa do przerowbienia, tylko trzeba miec obrazy tych przciskow, a z tym trzeba sie kierowac do Dydka, imo JLabel ma wiekszy sens jesli chcemy swoje grafiki przyciskow dodac
+-brakuje jak na razie funkcji obslugujacych te przeciski, ale to jest latwe do zrobienia
+
+
+
+*/
 
 
 package com.okno;
@@ -18,6 +31,7 @@ import com.bazydanych.*;
 import com.movies.Filmy;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -25,127 +39,72 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-public class OknoUzytkownika extends JFrame implements ActionListener, MouseListener {
-
-    //private JLabel bSingUp, lLogin;
+public class OknoUzytkownika extends JFrame implements ActionListener, MouseListener
+{
     private JLabel background;
-    //private JTextField tLogin, tEmail, tName, tSurname, tAge, tPhone;
-    //private ImageIcon iZarejestrujZielone = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_zielone.png");
-
-    //private JPasswordField fPassword;
     private Login login;
-    //private String regex = "^(.+)@(.+).(.+)$";
-    //private Pattern pattern;
+
+    JButton bEdytujDane, bWyloguj, bTwojeRezerwacje, bDostepneFilmy;
+    JLabel tNazwaUzytkownika, tEmailUzytkownika, tTelefonUzytkownika, tPowitanie, tNajblizszeSeanse;
+
     BazaDanych baza = new BazaDanych();
     List<Filmy> filmy = baza.selectFilmy();
     private BufferedImage bi;
 
-    //int x = 500, y= 200, width = (935-80)/2, height = 50; // x=80, 935, y = 260
     public OknoUzytkownika(Uzytkownicy uzyt){
         setSize(1920,1080); // inicjalizownie okna
         setTitle("Okno uzytkownika"); // nazwa okna
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ustawienie domyslnego zamkniecia okna
         setLayout(null);
 
-        /*lLogin = new JLabel("Login: ",JLabel.LEFT); // inicjalizownie oraz ustawianie tekstu "login"
-        lLogin.setFont(new Font("Impact", Font.ITALIC, 50));
-        lLogin.setBounds(x,y,width,height);
-        lLogin.setBackground(Color.white);
-        lLogin.setForeground(Color.black);
-        add(lLogin);
+        bEdytujDane = new JButton("Edytuj dane"); //wersja robocza
+        bEdytujDane.setBounds(60, 575, 377, 75);
+        bEdytujDane.setBorder(null);
+        bEdytujDane.addMouseListener(this);
+        add(bEdytujDane);
 
-        tLogin = new JTextField(); // inicjalizownie oraz ustawianie pola do wpisania loginu
-        tLogin.setBounds(x, y+height+20, width, height);
-        tLogin.addActionListener(this);
-        add(tLogin);
+        bWyloguj = new JButton("Wyloguj");  //wersja robocza
+        bWyloguj.setBounds(1500, 48, 280, 70);
+        bWyloguj.setBorder(null);
+        bWyloguj.addMouseListener(this);
+        add(bWyloguj);
 
-        lPassword = new JLabel("Hasło: "); // inicjalizownie oraz ustawianie tekstu "hasło"
-        lPassword.setFont(new Font("Impact", Font.ITALIC, 50));
-        lPassword.setBounds(x+width+50,y,width,height);
-        lPassword.setBackground(Color.white);
-        lPassword.setForeground(Color.black);
-        add(lPassword);
+        bTwojeRezerwacje = new JButton("Twoje rezerwacje");
+        bTwojeRezerwacje.setBounds(520, 720, 1380, 150);
+        bTwojeRezerwacje.setBorder(null);
+        bTwojeRezerwacje.addMouseListener(this);
+        add(bTwojeRezerwacje);
 
-        fPassword = new JPasswordField(); // inicjalizownie oraz ustawianie pola do wpisania hasla
-        fPassword.setBounds(x+width+50,y+height+20,width,height);
-        fPassword.addActionListener(this);
-        add(fPassword);
+        bDostepneFilmy = new JButton("Wyswietl dostepne filmy");
+        bDostepneFilmy.setBounds(520, 900, 1380, 150);
+        bDostepneFilmy.setBorder(null);
+        bDostepneFilmy.addMouseListener(this);
+        add(bDostepneFilmy);
 
-        lEmail = new JLabel("E-mail: ",JLabel.LEFT); // inicjalizownie oraz ustawianie tekstu "email"
-        lEmail.setFont(new Font("Impact", Font.ITALIC, 50));
-        lEmail.setBounds(x, y+2*(height+20), width*2+2*20, height);
-        lEmail.setForeground(Color.black);
-        add(lEmail);
+        tNazwaUzytkownika = new JLabel(uzyt.getLogin());
+        tNazwaUzytkownika.setBounds(115, 700, 325, 25);
+        tNazwaUzytkownika.setFont(new Font("Impact", Font.PLAIN, 25));
+        add(tNazwaUzytkownika);
 
-        pattern = Pattern.compile(regex);
-        tEmail = new JTextField(); // inicjalizownie oraz ustawianie pola do wpisywania hasla
-        tEmail.setBounds(x,y+3*(height+20),width*2+50,height);
-        tEmail.addActionListener(this);
-        add(tEmail);
+        tEmailUzytkownika = new JLabel(uzyt.getEmail());
+        tEmailUzytkownika.setBounds(115, 810, 325, 25);
+        tEmailUzytkownika.setFont(new Font("Impact", Font.PLAIN, 25));
+        add(tEmailUzytkownika);
 
-        lName = new JLabel("Imie: ",JLabel.LEFT); // inicjalizownie oraz ustawianie tekstu "imie"
-        lName.setFont(new Font("Impact", Font.ITALIC, 50));
-        lName.setBounds(x,y+4*(height+20),width,height);
-        lName.setForeground(Color.black);
-        add(lName);
+        tTelefonUzytkownika = new JLabel(String.valueOf((uzyt.getTelefon())));
+        tTelefonUzytkownika.setBounds(115, 930, 325, 25);
+        tTelefonUzytkownika.setFont(new Font("Impact", Font.PLAIN, 25));
+        add(tTelefonUzytkownika);
 
-        tName = new JTextField(); // inicjalizownie oraz ustawianie pola do wpisywania imienia
-        tName.setBounds(x,y+5*(height+20),width,height);
-        tName.addActionListener(this);
-        add(tName);
+        tPowitanie = new JLabel("Witaj, ponownie, " + uzyt.getLogin()); // jak zrobic napis aby byl idalnie na srodku nie zaleznie od dlugosci nazwy uzytkownika?
+        tPowitanie.setBounds(850, 330, 730, 60); //dostosowac granice
+        tPowitanie.setFont(new Font("Impact", Font.PLAIN, 60));
+        add(tPowitanie);
 
-        lSurname = new JLabel("Nazwisko: "); // inicjalizownie oraz ustawianie tekstu "nazwisko"
-        lSurname.setFont(new Font("Impact", Font.ITALIC, 50));
-        lSurname.setBounds(x+width+50,y+4*(height+20),width,height);
-        lSurname.setForeground(Color.black);
-        add(lSurname);
-
-        tSurname = new JTextField(); // inicjalizownie oraz ustawianie pola do wpisania nazwiska
-        tSurname.setBounds(x+width+50,y+5*(height+20),width,height);
-        tSurname.addActionListener(this);
-        add(tSurname);
-
-        lAge = new JLabel("Wiek",JLabel.LEFT); // inicjalizownie oraz ustawianie tekstu "wiek"
-        lAge.setFont(new Font("Impact", Font.ITALIC, 50));
-        lAge.setBounds(x,y+6*(height+20),width,height);
-        lAge.setForeground(Color.black);
-        add(lAge);
-
-        tAge = new JTextField(); // inicjalizownie oraz ustawianie pola do wpisania wieku
-        tAge.setBounds(x,y+7*(height+20),width,height);
-        tAge.addActionListener(this);
-        add(tAge);
-
-        lPhone = new JLabel("Numer telefon: "); // inicjalizownie oraz ustawianie tekstu "telefon"
-        lPhone.setFont(new Font("Impact", Font.ITALIC, 50));
-        lPhone.setBounds(x+width+50,y+6*(height+20),width,height);
-        lPhone.setForeground(Color.black);
-        add(lPhone);
-
-        tPhone = new JTextField(); // inicjalizownie oraz ustawianie pola wpisania nr telefonu
-        tPhone.setBounds(x+width+50,y+7*(height+20),width,height);
-        tPhone.addActionListener(this);
-        add(tPhone);
-
-        bSingUp=new JLabel();
-        bSingUp.setIcon(iZarejestrujZielone);
-        bSingUp.setBounds(x+245,y+8*(height+20)+20,428,140);
-        bSingUp.setBorder(null);
-        bSingUp.addMouseListener(this);
-        add(bSingUp);
-
-        test = new JLabel("Kliknięcie sie powiodło");
-        test.setFont(new Font("Impact", Font.ITALIC, 50));
-        test.setBounds(x+(width/2),y-height,500,height);
-        test.setForeground(Color.RED);
-        add(test);
-        test.setVisible(false);
-
-        lWrongData = new JLabel("Złe dane",JLabel.CENTER);
-        lWrongData.setFont(new Font("Impact", Font.ITALIC, 50));
-        lWrongData.setBounds(x+(width/2)+25,y-height,width,height);
-        lWrongData.setVisible(false);
-        add(lWrongData);*/
+        tNajblizszeSeanse = new JLabel("Sprawdz najblizsze seanse i wybierz film dla Siebie"); //rownie dobrze moze to byc na backgroundzie, ale trzeba sie dogadac o font
+        tNajblizszeSeanse.setBounds(600,450,1210,40);
+        tNajblizszeSeanse.setFont(new Font("Impact", Font.PLAIN, 40));
+        add(tNajblizszeSeanse);
 
         background = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\Profil_uzytkownika.png")); // inicjalizownie oraz ustawianie tła
         background.setBounds(0,0,1920,1080);
@@ -154,32 +113,38 @@ public class OknoUzytkownika extends JFrame implements ActionListener, MouseList
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e)
+    {
 
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
+    public void mouseClicked(MouseEvent e)
+    {
 
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
+    public void mousePressed(MouseEvent e)
+    {
 
     }
 
     @Override
-    public void mouseReleased(MouseEvent e) {
+    public void mouseReleased(MouseEvent e)
+    {
 
     }
 
     @Override
-    public void mouseEntered(MouseEvent e) {
+    public void mouseEntered(MouseEvent e)
+    {
 
     }
 
     @Override
-    public void mouseExited(MouseEvent e) {
+    public void mouseExited(MouseEvent e)
+    {
 
     }
 }
