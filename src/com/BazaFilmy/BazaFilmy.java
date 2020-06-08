@@ -1,6 +1,5 @@
 package com.BazaFilmy;
 
-import com.BazaFilmy.*;
 import com.bazydanych.*;
 
 import java.util.LinkedList;
@@ -23,7 +22,7 @@ public class BazaFilmy {
 
     public BazaFilmy() {
         try {
-            Class.forName(com.bazydanych.BazaDanych.DRIVER);
+            Class.forName(BazaFilmy.DRIVER);
         } catch (ClassNotFoundException e) {
             System.err.println("Brak sterownika JDBC");
             e.printStackTrace();
@@ -63,7 +62,7 @@ public class BazaFilmy {
             prepStmt.execute();
             
         } catch (SQLException e) {
-            System.err.println("Blad przy wstawianiu gatunku");
+            System.err.println("Blad przy wstawianiu oceny uzytkownika");
             e.printStackTrace();
             return false;
         } catch (Exception e) {

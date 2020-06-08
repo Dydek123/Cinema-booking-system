@@ -67,8 +67,9 @@ public class BazaDanych {
 
   public boolean insertBilety(float cenaBiletu, String rodzaj) {
     try {
-      PreparedStatement prepStmt = conn.prepareStatement("insert into Bilety values (NULL, ?, `" + rodzaj + "`);"); // to do // sprawdzic wszystkie inserty
+      PreparedStatement prepStmt = conn.prepareStatement("insert into Bilety values (NULL, ?, ?);"); // to do // sprawdzic wszystkie inserty
       prepStmt.setFloat(1, cenaBiletu);
+      prepStmt.setString(2, rodzaj);
       prepStmt.execute();
     } catch (SQLException e) {
       System.err.println("Blad przy wstawianiu biletu");
@@ -79,11 +80,15 @@ public class BazaDanych {
   }
   public boolean insertFilmy(String tytul, int idRezyserzy, int idGatunki, float ocena, String czasTrwania, /*year*/ int rokProdukcji, String opis, String zwiastun) {
     try {
-      PreparedStatement prepStmt = conn.prepareStatement("insert into Filmy values (NULL, `"+ tytul +"`, ?, ?, ?, `"+ czasTrwania +"`, ?, `"+ opis +"`, `"+ zwiastun +"` );"); // to do // sprawdzic wszystkie inserty
-      prepStmt.setInt(1, idRezyserzy);
-      prepStmt.setInt(2,idGatunki);
-      prepStmt.setFloat(3, ocena);
-      prepStmt.setInt(4, rokProdukcji/*year*/);
+      PreparedStatement prepStmt = conn.prepareStatement("insert into Filmy values (NULL, ?, ?, ?, ?, ?, ?, ?, ? );"); // to do // sprawdzic wszystkie inserty
+      prepStmt.setString(1, tytul);
+      prepStmt.setInt(2, idRezyserzy);
+      prepStmt.setInt(3,idGatunki);
+      prepStmt.setFloat(4, ocena);
+      prepStmt.setString(5, czasTrwania);
+      prepStmt.setInt(6, rokProdukcji/*year*/);
+      prepStmt.setString(7, opis);
+      prepStmt.setString(8, zwiastun);
       prepStmt.execute();
     } catch (SQLException e) {
       System.err.println("Blad przy wstawianiu filmu");
@@ -94,7 +99,8 @@ public class BazaDanych {
   }
   public boolean insertGatunki(String nazwaGatunku) {
     try {
-      PreparedStatement prepStmt = conn.prepareStatement("insert into Gatunki values (NULL, `"+ nazwaGatunku +"`);"); // to do // sprawdzic wszystkie inserty
+      PreparedStatement prepStmt = conn.prepareStatement("insert into Gatunki values (NULL, ?);"); // to do // sprawdzic wszystkie inserty
+      prepStmt.setString(1, nazwaGatunku);
       prepStmt.execute();
     } catch (SQLException e) {
       System.err.println("Blad przy wstawianiu gatunku");
@@ -120,7 +126,9 @@ public class BazaDanych {
   }
   public boolean insertRezyserzy(String imieRezysera, String nazwiskoRezysera) {
     try {
-      PreparedStatement prepStmt = conn.prepareStatement("insert into Rezyserzy values (NULL, `"+ imieRezysera +", `"+ nazwiskoRezysera +"`);"); // to do // sprawdzic wszystkie inserty
+      PreparedStatement prepStmt = conn.prepareStatement("insert into Rezyserzy values (NULL, ?, ?);"); // to do // sprawdzic wszystkie inserty
+      prepStmt.setString(1, imieRezysera);
+      prepStmt.setString(2, nazwiskoRezysera);
       prepStmt.execute();
     } catch (SQLException e) {
       System.err.println("Blad przy wstawianiu rezysera");
@@ -144,10 +152,11 @@ public class BazaDanych {
   }
   public boolean insertSeanse(int idSale, int idFilmy, /*date*/String dataSeansu, float godzinaSeansu) {
     try {
-      PreparedStatement prepStmt = conn.prepareStatement("insert into Seanse values (NULL, ?, ?, `" + dataSeansu + "`, ?);"); // to do // sprawdzic wszystkie inserty
+      PreparedStatement prepStmt = conn.prepareStatement("insert into Seanse values (NULL, ?, ?, ?, ?);"); // to do // sprawdzic wszystkie inserty
       prepStmt.setInt(1, idSale);
       prepStmt.setInt(2, idFilmy);
-      prepStmt.setFloat(3, godzinaSeansu);
+      prepStmt.setString(3, dataSeansu);
+      prepStmt.setFloat(4, godzinaSeansu);
       prepStmt.execute();
     } catch (SQLException e) {
       System.err.println("Blad przy wstawianiu seansu");
@@ -158,12 +167,16 @@ public class BazaDanych {
   }
   public boolean insertUzytkownicy(String login, String haslo, String email, String imieUzytkownika, String nazwiskoUzytkownika, int wiek, int telefon) {
     try {
-      PreparedStatement prepStmt = conn.prepareStatement("insert into Uzytkownicy values (NULL, ?, ?, ?, `" + imieUzytkownika + "`, `" + nazwiskoUzytkownika + "`, ?, ?);"); // to do // sprawdzic wszystkie inserty
+      PreparedStatement prepStmt = conn.prepareStatement("insert into Uzytkownicy values (NULL, ?, ?, ?, ?, ?, ?, ?);"); // to do // sprawdzic wszystkie inserty
       prepStmt.setString(1, login);
       prepStmt.setString(2, haslo);
       prepStmt.setString(3, email);
       prepStmt.setInt(4, wiek);
       prepStmt.setInt(5, telefon);
+      prepStmt.setString(4, imieUzytkownika);
+      prepStmt.setString(5, nazwiskoUzytkownika);
+      prepStmt.setInt(6, wiek);
+      prepStmt.setInt(7, telefon);
       prepStmt.execute();
     } catch (SQLException e) {
       System.err.println("Blad przy wstawianiu uzytkownika");
@@ -174,9 +187,10 @@ public class BazaDanych {
   }
   public boolean insertZakupy(int idBilety,int idRezerwacje, /*date*/String dataZakupu) {
     try {
-      PreparedStatement prepStmt = conn.prepareStatement("insert into Zakupy values (NULL, ?, ?, `" + dataZakupu + "`);"); // to do // sprawdzic wszystkie inserty
+      PreparedStatement prepStmt = conn.prepareStatement("insert into Zakupy values (NULL, ?, ?, ?);"); // to do // sprawdzic wszystkie inserty
       prepStmt.setInt(1, idBilety);
       prepStmt.setInt(2, idRezerwacje);
+      prepStmt.setString(3, dataZakupu);
       prepStmt.execute();
     } catch (SQLException e) {
       System.err.println("Blad przy wstawianiu zakupow");
