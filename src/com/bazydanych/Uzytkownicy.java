@@ -11,16 +11,67 @@ public class Uzytkownicy {
     private int telefon; // varchar?
 //    private boolean zgodaMarketingowa; //bit?
 
-    public Uzytkownicy() { }
-    public Uzytkownicy(int idUzytkownika, String login, String haslo, String email, String imieUzytkownika, String nazwiskoUzytkownika, int wiek, int telefon) {
-        this.idUzytkownika = idUzytkownika;
-        this.login = login;
-        this.haslo = haslo;
-        this.email = email;
-        this.imieUzytkownika = imieUzytkownika;
-        this.nazwiskoUzytkownika = nazwiskoUzytkownika;
-        this.wiek = wiek;
-        this.telefon = telefon;
+    //public Uzytkownicy() { }
+    public Uzytkownicy(UzytkownicyBuilder builder) {
+        this.idUzytkownika = builder.idUzytkownika;
+        this.login = builder.login;
+        this.haslo = builder.haslo;
+        this.email = builder.email;
+        this.imieUzytkownika = builder.imieUzytkownika;
+        this.nazwiskoUzytkownika = builder.nazwiskoUzytkownika;
+        this.wiek = builder.wiek;
+        this.telefon = builder.telefon;
+    }
+    public static class UzytkownicyBuilder
+    {
+        private int idUzytkownika;
+        private String login;
+        private String haslo;
+        private String email;
+        private String imieUzytkownika;
+        private String nazwiskoUzytkownika;
+        private int wiek;
+        private int telefon;
+        public UzytkownicyBuilder(){};
+
+        public UzytkownicyBuilder idUzytkownik(int id){
+            this.idUzytkownika=id;
+            return this;
+        }
+        public UzytkownicyBuilder user_wiek(int wiek){
+            this.wiek=wiek;
+            return this;
+        }
+        public UzytkownicyBuilder user_telefon(int nr){
+            this.telefon=nr;
+            return this;
+        }
+        public UzytkownicyBuilder ustaw_login(String log){
+            this.login=log;
+            return this;
+        }
+        public UzytkownicyBuilder ustaw_haslo(String haslo){
+            this.haslo=haslo;
+            return this;
+        }
+        public UzytkownicyBuilder ustaw_email(String email){
+            this.email=email;
+            return this;
+        }
+        public UzytkownicyBuilder imie(String imie){
+            this.imieUzytkownika=imie;
+            return this;
+        }
+        public UzytkownicyBuilder nazwisko(String nazwisko){
+            this.nazwiskoUzytkownika=nazwisko;
+            return this;
+        }
+
+
+        public Uzytkownicy build(){
+            return new Uzytkownicy(this);
+        }
+
     }
 
     public int getIdUzytkownika() {
@@ -71,4 +122,5 @@ public class Uzytkownicy {
     public void setTelefon(int telefon){
         this.telefon = telefon;
     }
+
 }

@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
+import com.bazydanych.Bilety;
 
 public class BazaDanych {
   public static final String DRIVER = "org.sqlite.JDBC";
@@ -40,7 +41,7 @@ public class BazaDanych {
     String createFilmy = "CREATE TABLE IF NOT EXISTS Filmy (ID_filmy INTEGER, Tytul VARCHAR(100), ID_rezyserzy INTEGER, ID_gatunki INTEGER, Ocena VARCHAR(100)," +
             "Czas_trwania VARCHAR(100), Rok_produkcji VARCHAR(100), Opis VARCHAR(1000), Zwiastun VARCHAR(100) );"; // to do
     String createGatunki = "CREATE TABLE IF NOT EXISTS Gatunki (ID_gatunki INTEGER, Nazwa_gatunku VARCHAR(100) );"; // to do
-    String createRezerwacje = "CREATE TABLE IF NOT EXISTS Rezerwacje (ID_rezerwacje INTEGER, ID_uzytkownicy INTEGER, ID_seanse INTEGER, Miejsce VARCHAR );"; // to do
+    String createRezerwacje = "CREATE TABLE IF NOT EXISTS Rezerwacje (ID_uzytkownicy INTEGER, ID_seanse INTEGER, ID_rezerwacje INTEGER, Miejsce VARCHAR );"; // to do
     String createRezyserzy = "CREATE TABLE IF NOT EXISTS Rezyserzy (ID_rezyserzy INTEGER, Imie_rezysera VARCHAR(100), Nazwisko_rezysera VARCHAR(100) );"; // to do
     String createSale = "CREATE TABLE IF NOT EXISTS Sale (ID_sale INTEGER, Numer INTEGER, Liczba_miejsc INTEGER );"; // to do
     String createSeanse = "CREATE TABLE IF NOT EXISTS Seanse (ID_seanse INTEGER, ID_sale INTEGER, ID_filmy INTEGER, Data_seansu VARCHAR(100), Godzina_seansu VARCHAR(100) );"; // to do
@@ -109,13 +110,13 @@ public class BazaDanych {
     }
     return true;
   }
-  public boolean insertRezerwacje(int idUzytkownicy,int idSeanse, int rzad, int miejsce) {
+  public boolean insertRezerwacje(int idUzytkownicy,int idSeanse,int idRezerwacje, String miejsce) {
     try {
-      PreparedStatement prepStmt = conn.prepareStatement("insert into Rezerwacje values (NULL, ?, ?, ?, ?);"); // to do // sprawdzic wszystkie inserty
+      PreparedStatement prepStmt = conn.prepareStatement("insert into Rezerwacje values (NULL, ?, ?, ?);"); // to do // sprawdzic wszystkie inserty
       prepStmt.setInt(1, idUzytkownicy);
       prepStmt.setInt(2, idSeanse);
-      prepStmt.setInt(3, rzad);
-      prepStmt.setInt(4, miejsce);
+      prepStmt.setInt(3, idRezerwacje);
+      prepStmt.setString(4,miejsce);
       prepStmt.execute();
     } catch (SQLException e) {
       System.err.println("Blad przy wstawianiu rezerwacji");
@@ -345,6 +346,7 @@ public class BazaDanych {
     }
     return seanseList;
   }
+
   public List<Uzytkownicy> selectUzytkownicy() {
     List<Uzytkownicy> uzytkownicyList = new LinkedList<Uzytkownicy>();
     try {
@@ -362,7 +364,15 @@ public class BazaDanych {
         nazwiskoUzytkownika = result.getString("Nazwisko_uzytkownika");
         wiek = result.getInt("Wiek");
         telefon = result.getInt("Telefon"); //varchar?
-        uzytkownicyList.add(new Uzytkownicy(idUzytkownika, login, haslo, email, imieUzytkownika, nazwiskoUzytkownika, wiek, telefon));
+        uzytkownicyList.add(new Uzytkownicy.UzytkownicyBuilder()
+            .idUzytkownik(idUzytkownika)
+                .ustaw_login(login)
+                .ustaw_haslo(haslo)
+                .ustaw_email(email).imie(imieUzytkownika)
+                .nazwisko(nazwiskoUzytkownika)
+                .user_wiek(wiek)
+                .user_telefon(telefon)
+                .build());
       }
     } catch (SQLException e) {
       e.printStackTrace();
@@ -390,6 +400,22 @@ public class BazaDanych {
     return zakupyList;
   }
 
+  public int ile_wolnych(int idFilmu){
+    int wolne = 0;
+    try {
+      PreparedStatement zajete = conn.prepareStatement("SELECT COUNT(Miejsce) FROM Rezerwacje where ID_seanse=?");
+      zajete.setInt(1,idFilmu);
+      ResultSet temp=zajete.executeQuery();
+      if(temp.next()){
+        wolne=30-temp.getInt(1);
+      }
+    }catch(SQLException e){
+      e.printStackTrace();
+      return 0;
+    }
+    return wolne;
+  }
+
   public void closeConnection() {
     try {
       conn.close();
@@ -398,4 +424,5 @@ public class BazaDanych {
       e.printStackTrace();
     }
   }
+
 }

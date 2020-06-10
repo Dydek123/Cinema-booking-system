@@ -1,10 +1,10 @@
 package com.bazydanych;
-
+/*
 import com.okno.Rezerwacja;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
+*/
 
 public class Rezerwacje {
     private int idRezerwacje;
@@ -13,7 +13,7 @@ public class Rezerwacje {
     private String rzad;
     private int miejsce;
 
-    //public Rezerwacje() { }
+    public Rezerwacje() { }
     public Rezerwacje(RezerwacjeBuilder builder) {
         this.idRezerwacje = builder.idRezerwacje;
         this.idUzytkownicy = builder.idUzytkownicy;
@@ -26,7 +26,7 @@ public class Rezerwacje {
         String miejsce1=Integer.toString(this.miejsce);
         String miejsce2=this.rzad+miejsce1;
 
-        String statement =String.format("INSERT INTO Rezerwacje VALUES (%d,%d,%d,%s);",this.idRezerwacje,this.idUzytkownicy,this.idSeanse,miejsce2);
+        String statement =String.format("INSERT INTO Rezerwacje VALUES (%d,%d,%d,%s);",this.idUzytkownicy,this.idSeanse,this.idRezerwacje,miejsce2);
         return statement;
 
     }
@@ -74,7 +74,7 @@ public class Rezerwacje {
         }
 
     }
-
+    /*
     public int getIdRezerwacje() {
         return idRezerwacje;
     }
@@ -105,4 +105,6 @@ public class Rezerwacje {
     public void setMiejsce(int miejsce){
         this.miejsce = miejsce;
     }
+    */
+
 }
