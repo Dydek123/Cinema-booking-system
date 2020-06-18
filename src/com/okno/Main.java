@@ -29,7 +29,7 @@ public class Main {
         //mam admina
 
         //dodaje film
-        admin.dodajFilm(test.selectFilmy(),test,"Shrek7s",1,9.99,"1h50m",1999,"fajny film bardzo","www.link.pl",2);
+        admin.dodajFilm(test.selectFilmy(),test,"Shrek8s",1,9.99,"1h50m",1999,"fajny film bardzo","www.link.pl",2);
 
         //czemu ID filmu w liscie =0? cos jest popsute
 

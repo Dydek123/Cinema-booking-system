@@ -20,16 +20,14 @@ nie wiem ktora opcja jest lepsza, ktora gorsza, podobnie dzialaja wiec jest git,
 jest latwa do przerowbienia, tylko trzeba miec obrazy tych przciskow, a z tym trzeba sie kierowac do Dydka, imo JLabel ma wiekszy sens jesli chcemy swoje grafiki przyciskow dodac
 -brakuje jak na razie funkcji obslugujacych te przeciski, ale to jest latwe do zrobienia
 
-
-
 */
-
 
 package com.okno;
 
 import com.bazydanych.*;
 import com.movies.Filmy;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -64,6 +62,13 @@ public class OknoUzytkownika extends JFrame implements ActionListener, MouseList
         add(bEdytujDane);
 
         bWyloguj = new JButton("Wyloguj");  //wersja robocza
+        try {
+            //Image img = ImageIO.read(getClass().getResource("Coś tam\\Nowe grafiki\\wyloguj.png"));
+            ImageIcon img = new ImageIcon("Coś tam\\Nowe Grafiki\\wyloguj.png");
+            bWyloguj.setIcon(new ImageIcon(String.valueOf(img)));
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
         bWyloguj.setBounds(1500, 48, 280, 70);
         bWyloguj.setBorder(null);
         bWyloguj.addMouseListener(this);

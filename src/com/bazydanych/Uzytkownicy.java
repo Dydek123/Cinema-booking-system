@@ -103,7 +103,7 @@ public class Uzytkownicy {
                 baza.insertFilmy(tytul, idRezyserzy, newFilmGatunek, ocena, czasTrwania, rokProdukcji, opis, zwiastun);
                 //trouble shooting - sledzenie czy do listy dodal sie film o odpowiednim ID, z aktualnym kodem ID dodawanego filmu to 0, nie wiem czemu
                 System.out.println("Dodano film o indexie: " + filmyList.get(filmyList.size()-1).getIdFilmy());
-            }catch (SQLException e){
+            }catch (RuntimeException e){
                 System.out.println("Taki film już istnieje");
                 e.printStackTrace();
             }
