@@ -16,7 +16,7 @@ public class Main {
         System.out.println("test commit");
 
 
-        //test dodawania filmu
+       /* //test dodawania filmu
         Uzytkownicy admin= new Uzytkownicy();
         //szukam admina
         for (int i = 0; i < uzytkownicy.size(); i++) {
@@ -30,7 +30,7 @@ public class Main {
 
         //dodaje film
         admin.dodajFilm(test.selectFilmy(),test,"Shrek8s",1,9.99,"1h50m",1999,"fajny film bardzo","www.link.pl",2);
-
+*/
         //czemu ID filmu w liscie =0? cos jest popsute
 
         //STWORZYC ENUM DO GATUNKOW PONIEWAZ TERAZ JEST SREDNIO WPISYWAC Z GLOWY NUMEREK

@@ -27,7 +27,6 @@ package com.okno;
 import com.bazydanych.*;
 import com.movies.Filmy;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -41,8 +40,12 @@ public class OknoUzytkownika extends JFrame implements ActionListener, MouseList
 {
     private JLabel background;
     private Login login;
+    private ImageIcon wyloguj = new ImageIcon("Coś tam\\Nowe Grafiki\\wyloguj.png");
+    private ImageIcon edytuj_dane = new ImageIcon("Coś tam\\Nowe Grafiki\\edytuj_dane.png");
+    private ImageIcon twoje_rezerwacje = new ImageIcon("Coś tam\\Nowe Grafiki\\twoje_rezerwacje.png");
+    private ImageIcon wyswietl_dostepne = new ImageIcon("Coś tam\\Nowe Grafiki\\wyswietl_dostepne_filmy.png");
 
-    JButton bEdytujDane, bWyloguj, bTwojeRezerwacje, bDostepneFilmy;
+    JLabel bEdytujDane, bWyloguj, bTwojeRezerwacje, bDostepneFilmy;
     JLabel tNazwaUzytkownika, tEmailUzytkownika, tTelefonUzytkownika, tPowitanie, tNajblizszeSeanse;
 
     BazaDanych baza = new BazaDanych();
@@ -55,32 +58,25 @@ public class OknoUzytkownika extends JFrame implements ActionListener, MouseList
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ustawienie domyslnego zamkniecia okna
         setLayout(null);
 
-        bEdytujDane = new JButton("Edytuj dane"); //wersja robocza
+        bEdytujDane = new JLabel(edytuj_dane); //wersja robocza
         bEdytujDane.setBounds(60, 575, 377, 75);
         bEdytujDane.setBorder(null);
         bEdytujDane.addMouseListener(this);
         add(bEdytujDane);
 
-        bWyloguj = new JButton("Wyloguj");  //wersja robocza
-        try {
-            //Image img = ImageIO.read(getClass().getResource("Coś tam\\Nowe grafiki\\wyloguj.png"));
-            ImageIcon img = new ImageIcon("Coś tam\\Nowe Grafiki\\wyloguj.png");
-            bWyloguj.setIcon(new ImageIcon(String.valueOf(img)));
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
+        bWyloguj = new JLabel(wyloguj);  //wersja robocza
         bWyloguj.setBounds(1500, 48, 280, 70);
         bWyloguj.setBorder(null);
         bWyloguj.addMouseListener(this);
         add(bWyloguj);
 
-        bTwojeRezerwacje = new JButton("Twoje rezerwacje");
+        bTwojeRezerwacje = new JLabel(twoje_rezerwacje);
         bTwojeRezerwacje.setBounds(520, 720, 1380, 150);
         bTwojeRezerwacje.setBorder(null);
         bTwojeRezerwacje.addMouseListener(this);
         add(bTwojeRezerwacje);
 
-        bDostepneFilmy = new JButton("Wyswietl dostepne filmy");
+        bDostepneFilmy = new JLabel(wyswietl_dostepne);
         bDostepneFilmy.setBounds(520, 900, 1380, 150);
         bDostepneFilmy.setBorder(null);
         bDostepneFilmy.addMouseListener(this);
