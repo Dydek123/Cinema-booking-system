@@ -1,5 +1,8 @@
 package com.bazydanych;
 
+import com.movies.FactoryFilmy;
+import com.movies.Filmy;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -35,10 +38,9 @@ public class BazaDanych {
 
     createTables();
   }
-
   public boolean createTables(){
     String createBilety = "CREATE TABLE IF NOT EXISTS Bilety (ID_bilety INTEGER, Cena_biletu VARCHAR(100), Rodzaj VARCHAR(100) );"; // to do
-    String createFilmy = "CREATE TABLE IF NOT EXISTS Filmy (ID_filmy INTEGER, Tytul VARCHAR(100), ID_rezyserzy INTEGER, ID_gatunki INTEGER, Ocena VARCHAR(100)," +
+    String createFilmy = "CREATE TABLE IF NOT EXISTS Filmy (ID_filmy INTEGER, Tytul VARCHAR (100)  UNIQUE ON CONFLICT ABORT, ID_rezyserzy INTEGER, ID_gatunki INTEGER, Ocena VARCHAR(100)," +
             "Czas_trwania VARCHAR(100), Rok_produkcji VARCHAR(100), Opis VARCHAR(1000), Zwiastun VARCHAR(100) );"; // to do
     String createGatunki = "CREATE TABLE IF NOT EXISTS Gatunki (ID_gatunki INTEGER, Nazwa_gatunku VARCHAR(100) );"; // to do
     String createRezerwacje = "CREATE TABLE IF NOT EXISTS Rezerwacje (ID_uzytkownicy INTEGER, ID_seanse INTEGER, ID_rezerwacje INTEGER, Miejsce VARCHAR );"; // to do
@@ -46,7 +48,7 @@ public class BazaDanych {
     String createSale = "CREATE TABLE IF NOT EXISTS Sale (ID_sale INTEGER, Numer INTEGER, Liczba_miejsc INTEGER );"; // to do
     String createSeanse = "CREATE TABLE IF NOT EXISTS Seanse (ID_seanse INTEGER, ID_sale INTEGER, ID_filmy INTEGER, Data_seansu VARCHAR(100), Godzina_seansu VARCHAR(100) );"; // to do
     String createUzytkownicy = "CREATE TABLE IF NOT EXISTS Uzytkownicy (ID_uzytkownicy INTEGER, Login VARCHAR(100), Haslo VARCHAR(100), Email VARCHAR(100), " +
-            "Imie_uzytkownika VARCHAR(100), Nazwisko_uzytkownika VARCHAR(100), Wiek INTEGER, Telefon INTEGER );"; // to do
+            "Imie_uzytkownika VARCHAR(100), Nazwisko_uzytkownika VARCHAR(100), Wiek INTEGER, Telefon INTEGER, Admin INTEGER (1) DEFAULT (0) );"; // to do
     String createZakupy = "CREATE TABLE IF NOT EXISTS Zakupy(ID_zakupy INTEGER, ID_bilety INTEGER, ID_rezerwacje INTEGER, Data_zakupu VARCHAR(100) );"; // to do
     try {
       stat.execute(createBilety);
@@ -65,7 +67,6 @@ public class BazaDanych {
     }
     return true;
   }
-
   public boolean insertBilety(float cenaBiletu, String rodzaj) {
     try {
       PreparedStatement prepStmt = conn.prepareStatement("insert into Bilety values (NULL, ?, ?);"); // to do // sprawdzic wszystkie inserty
@@ -79,13 +80,13 @@ public class BazaDanych {
     }
     return true;
   }
-  public boolean insertFilmy(String tytul, int idRezyserzy, int idGatunki, float ocena, String czasTrwania, /*year*/ int rokProdukcji, String opis, String zwiastun) {
+  public boolean insertFilmy(String tytul, int idRezyserzy, int idGatunki, double ocena, String czasTrwania, /*year*/ int rokProdukcji, String opis, String zwiastun) {
     try {
       PreparedStatement prepStmt = conn.prepareStatement("insert into Filmy values (NULL, ?, ?, ?, ?, ?, ?, ?, ? );"); // to do // sprawdzic wszystkie inserty
       prepStmt.setString(1, tytul);
       prepStmt.setInt(2, idRezyserzy);
       prepStmt.setInt(3,idGatunki);
-      prepStmt.setFloat(4, ocena);
+      prepStmt.setDouble(4, ocena);
       prepStmt.setString(5, czasTrwania);
       prepStmt.setInt(6, rokProdukcji/*year*/);
       prepStmt.setString(7, opis);
@@ -230,6 +231,8 @@ public class BazaDanych {
       float ocena;
       String czasTrwania;
       /*year*/ int rokProdukcji;
+      FactoryFilmy filmyFactory = new FactoryFilmy();
+
       while(result.next()) {
         idFlimy = result.getInt("ID_filmy");
         tytul = result.getString("Tytul");      // to do
@@ -240,7 +243,8 @@ public class BazaDanych {
         rokProdukcji = result.getInt("Rok_produkcji");
         opis = result.getString("Opis");
         zwiastun = result.getString("Zwiastun");
-        filmyList.add(new Filmy(idFlimy, tytul, idRezyserzy, idGatunki, ocena, czasTrwania, rokProdukcji, opis, zwiastun));
+
+        filmyList.add(filmyFactory.makeFilm(idFlimy, tytul, idRezyserzy, ocena, czasTrwania, rokProdukcji, opis, zwiastun,idGatunki));
       }
     } catch (SQLException e) {
       e.printStackTrace();
@@ -353,7 +357,7 @@ public class BazaDanych {
       ResultSet result = stat.executeQuery("SELECT * FROM Uzytkownicy");
       int idUzytkownika, wiek;
       String login, haslo, email, imieUzytkownika, nazwiskoUzytkownika;
-      int telefon; // varchar?
+      int telefon,admin; // varchar?
       boolean zgodaMarketingowa; //bit?
       while(result.next()) {
         idUzytkownika = result.getInt("ID_uzytkownicy");
@@ -364,6 +368,7 @@ public class BazaDanych {
         nazwiskoUzytkownika = result.getString("Nazwisko_uzytkownika");
         wiek = result.getInt("Wiek");
         telefon = result.getInt("Telefon"); //varchar?
+        admin = result.getInt("Admin");
         uzytkownicyList.add(new Uzytkownicy.UzytkownicyBuilder()
             .idUzytkownik(idUzytkownika)
                 .ustaw_login(login)
@@ -372,6 +377,7 @@ public class BazaDanych {
                 .nazwisko(nazwiskoUzytkownika)
                 .user_wiek(wiek)
                 .user_telefon(telefon)
+                .user_admin(admin)
                 .build());
       }
     } catch (SQLException e) {

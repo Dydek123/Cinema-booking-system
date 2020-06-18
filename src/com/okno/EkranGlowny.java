@@ -1,7 +1,8 @@
 package com.okno;
 
 import com.bazydanych.*;
-import com.bazydanych.Filmy;
+import com.movies.Filmy;
+
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -45,4 +46,3 @@ public class EkranGlowny extends JFrame implements ActionListener{
 
     }
 }
-
