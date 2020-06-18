@@ -14,6 +14,27 @@ public class Main {
         for(Uzytkownicy c: uzytkownicy)
             System.out.println(c.getLogin() + " " + c.getHaslo());
         System.out.println("test commit");
-//        EventQueue.invokeLater(com.damianero.RateStar::createAndShowGui);
+
+
+       /* //test dodawania filmu
+        Uzytkownicy admin= new Uzytkownicy();
+        //szukam admina
+        for (int i = 0; i < uzytkownicy.size(); i++) {
+            Uzytkownicy uzytkownicy1 =  uzytkownicy.get(i);
+            if (uzytkownicy1.getAdmin()==1){
+                admin=uzytkownicy1;
+                break;
+            }
+        }
+        //mam admina
+
+        //dodaje film
+        admin.dodajFilm(test.selectFilmy(),test,"Shrek8s",1,9.99,"1h50m",1999,"fajny film bardzo","www.link.pl",2);
+*/
+        //czemu ID filmu w liscie =0? cos jest popsute
+
+        //STWORZYC ENUM DO GATUNKOW PONIEWAZ TERAZ JEST SREDNIO WPISYWAC Z GLOWY NUMEREK
+
+        //EventQueue.invokeLater(com.damianero.RateStar::createAndShowGui);
     }
 }

@@ -18,24 +18,31 @@ import java.util.List;
 
 
 public class Rezerwacja extends JFrame implements ActionListener, MouseListener {
-    BazaDanych baza=new BazaDanych();
+    BazaDanych baza = new BazaDanych();
     public JFrame bSignUp;
+    /*
+    setSize(1920, 1080); // inicjalizownie okna
+    setTitle("Okno rezerwacji"); // nazwa okna
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ustawienie domyslnego zamkniecia okna
+    setLayout(null);
+    background = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\Filmy.png")); // inicjalizownie oraz ustawianie tła
+    background.setBounds(0,0,1920,1080);
+    add(background);
+    */
+
     //Pomocnicza funkcja, bo nie wiem gdzie to ma być
-    int ile=0;
-    Rezerwacja(int IDuser, int IDfilm, int ile)
-    {
-        String miejsce="temp";
-        int wolne=baza.ile_wolnych(IDfilm);
-        if(wolne>0&&wolne>=ile)
-        {
-            for(int i=1;i<=ile;i++)
-            {
-                baza.insertRezerwacje(IDuser,IDfilm,(31-wolne),miejsce);
+    int ile = 0;
+
+    Rezerwacja(int IDuser, int IDfilm, int ile) {
+        StrinSg miejsce = "temp";
+        int wolne = baza.ile_wolnych(IDfilm);
+        if (wolne > 0 && wolne >= ile) {
+            for (int i = 1; i <= ile; i++) {
+                baza.insertRezerwacje(IDuser, IDfilm, (31 - wolne), miejsce);
             }
-        }
-        else{
+        } else {
             System.err.println("Zbyt malo wolnych miejsc!");
-            }
+        }
     }
 
 
@@ -45,32 +52,11 @@ public class Rezerwacja extends JFrame implements ActionListener, MouseListener 
     }
 
     @Override
-    public void mouseClicked(MouseEvent e){
+    public void mouseClicked(MouseEvent e) {
         Object p = e.getSource();
-        if(p == bSignUp)
-        {
+        if (p == bSignUp) {
 
         }
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
 
     }
 }
