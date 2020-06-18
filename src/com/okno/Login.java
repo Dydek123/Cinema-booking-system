@@ -1,9 +1,10 @@
 package com.okno;
 
-import com.bazydanych.*;
+import com.bazydanych.BazaDanych;
+import com.bazydanych.Uzytkownicy;
 
-import java.awt.*;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -15,6 +16,7 @@ public class Login extends JFrame implements ActionListener, MouseListener {
     private JPasswordField fPassword;
     private JLabel lLogin, lPassword, lWrongPass, background,bSingUp, bLogUp;
     private Register register;
+    private OknoUzytkownika userWindow;
     private ImageIcon iZalogujZielone = new ImageIcon("Coś tam\\Nowe Grafiki\\zaloguj_zielone.png");
     private ImageIcon iZalogujHover = new ImageIcon("Coś tam\\Nowe Grafiki\\zaloguj_hover.png");
     private ImageIcon iZalogujClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\zaloguj_clicked.png");
@@ -27,6 +29,8 @@ public class Login extends JFrame implements ActionListener, MouseListener {
         register = new Register(this);
         register.setVisible(true);
         register.setVisible(false);
+
+
 
         setSize(1920,1080);
         setTitle("test");
@@ -82,7 +86,7 @@ public class Login extends JFrame implements ActionListener, MouseListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Object p = e.getSource();
-        if(p == bLogUp || p == fPassword){
+       /* if(p == bLogUp || p == fPassword){
             String l = tLogin.getText();
             String pass = fPassword.getText();
             BazaDanych baza = new BazaDanych();
@@ -93,6 +97,7 @@ public class Login extends JFrame implements ActionListener, MouseListener {
                    lWrongPass.setVisible(false);
                    EkranGlowny ekranGlowny = new EkranGlowny(c);
                    ekranGlowny.setVisible(true);
+
                    dispose();
                    break;
                }
@@ -100,7 +105,7 @@ public class Login extends JFrame implements ActionListener, MouseListener {
             lWrongPass.setText("Zle dane logowania");
             lWrongPass.setForeground(Color.red);
             lWrongPass.setVisible(true);
-        }
+        }*/
     }
 
     @Override
@@ -109,6 +114,27 @@ public class Login extends JFrame implements ActionListener, MouseListener {
         if(p == bSingUp){
             register.setVisible(true);
             setVisible(false);
+        }else if(p == bLogUp){
+                String l = tLogin.getText();
+                String pass = fPassword.getText();
+                BazaDanych baza = new BazaDanych();
+                List<Uzytkownicy> uzyt = baza.selectUzytkownicy();
+                for(Uzytkownicy c: uzyt) {
+                    System.out.println("login podany "+ l + " login z bazy " + c.getLogin() + ".");
+                    if(l.equals(c.getLogin()) && pass.equals(c.getHaslo())){
+                        lWrongPass.setVisible(false);
+                        setVisible(false);
+                        userWindow = new OknoUzytkownika(c);
+                        userWindow.setVisible(true);
+                        dispose();
+                        break;
+                    }
+                }
+                lWrongPass.setText("Zle dane logowania");
+                lWrongPass.setForeground(Color.red);
+                lWrongPass.setVisible(true);
+
+
         }
     }
 

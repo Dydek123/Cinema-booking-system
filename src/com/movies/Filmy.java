@@ -1,34 +1,44 @@
-package com.bazydanych;
+package com.movies;
 
-public class Filmy {
-    private int idFlimy;
+public abstract class Filmy {
+    private int idFilmy;
     private String tytul;
     private int idRezyserzy;
     private int idGatunki;
-    private float ocena;
+    /*
+    1-dramat
+    2-komedia
+    3-horror
+    4-biograficzny
+    5-romans
+    6-fantasy
+    7-komedio-dramat
+     */
+    private double ocena;
     private String czasTrwania;
     private /*year*/ int rokProdukcji;
     private String opis;
     private String zwiastun;
 
-    public Filmy() { }
-    public Filmy(int idFlimy, String tytul, int idRezyserzy, int idGatunki, float ocena, String czasTrwania, /*year*/ int rokProdukcji, String opis, String zwiastun) {
-        this.idFlimy = idFlimy;
+    //konstruktor filmow przeniesiony do poszczegolnych gatunkow w mysl wzorca factory method
+
+    //public Filmy() { }
+  //  public Filmy(int idFlimy, String tytul, int idRezyserzy, float ocena, String czasTrwania, /*year*/ int rokProdukcji, String opis, String zwiastun) {
+    /*    this.idFlimy = idFlimy;
         this.tytul = tytul;
         this.idRezyserzy = idRezyserzy;
-        this.idGatunki = idGatunki;
         this.ocena = ocena;
         this.czasTrwania = czasTrwania;
         this.rokProdukcji = rokProdukcji;
         this.opis = opis;
         this.zwiastun = zwiastun;
-    }
+    }  */
 
-    public int getIdFlimy() {
-        return idFlimy;
+    public int getIdFilmy() {
+        return idFilmy;
     }
-    public void setIdFlimy(int idFilmy) {
-        this.idFlimy = idFlimy;
+    public void setIdFilmy(int idFilmy) {
+        this.idFilmy = idFilmy;
     }
     public String getTytul() {
         return tytul;
@@ -36,22 +46,22 @@ public class Filmy {
     public void setTytul(String tytul) {
         this.tytul = tytul;
     }
+    public int getIdGatunki() {
+        return idGatunki;
+    }
+    public void setIdGatunki(int IdGatunki) {
+        this.idGatunki = IdGatunki;
+    }
     public int getIdRezyserzy(){
         return idRezyserzy;
     }
-    public void getidRezyserzy(int idRezyserzy){
+    public void setIdRezyserzy(int idRezyserzy){
         this.idRezyserzy = idRezyserzy;
     }
-    public int getIdGatunki(){
-        return idGatunki;
-    }
-    public void setIdGatunki(){
-        this.idGatunki = idGatunki;
-    }
-    public float getOcena(){
+    public double getOcena(){
         return ocena;
     }
-    public void setOcena(float ocena){
+    public void setOcena(double ocena){
         this.ocena = ocena;
     }
     public String getCzasTrwania() {
@@ -69,7 +79,7 @@ public class Filmy {
     public String getOpis() {
         return opis;
     }
-    public void setOpis(){
+    public void setOpis(String opis){
         this.opis = opis;
     }
     public String getZwiastun() {
