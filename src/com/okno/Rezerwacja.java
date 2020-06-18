@@ -14,13 +14,13 @@ import java.util.List;
 public class Rezerwacja extends JFrame implements ActionListener, MouseListener {
     private JLabel background;
 
-    public Rezerwacja(Uzytkownicy uzyt) {
+    public Rezerwacja() {
         setSize(1920, 1080); // inicjalizownie okna
         setTitle("Okno rezerwacji"); // nazwa okna
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ustawienie domyslnego zamkniecia okna
         setLayout(null);
 
-        background = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\Profil_uzytkownika.png")); // inicjalizownie oraz ustawianie tła
+        background = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\Filmy.png")); // inicjalizownie oraz ustawianie tła
         background.setBounds(0,0,1920,1080);
         add(background);
     }

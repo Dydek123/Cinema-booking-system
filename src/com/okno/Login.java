@@ -27,7 +27,7 @@ public class Login extends JFrame implements ActionListener, MouseListener {
     int x = (935-80)/3, y= 300, width = (935-80)/2, height = 50; // x=80, 935, y = 260
     public Login(){
         register = new Register(this);
-        register.setVisible(true);
+        //register.setVisible(true);
         register.setVisible(false);
 
 
