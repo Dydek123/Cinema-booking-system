@@ -34,7 +34,7 @@ public class Rezerwacja extends JFrame implements ActionListener, MouseListener 
     int ile = 0;
 
     Rezerwacja(int IDuser, int IDfilm, int ile) {
-        StrinSg miejsce = "temp";
+        String miejsce = "temp";
         int wolne = baza.ile_wolnych(IDfilm);
         if (wolne > 0 && wolne >= ile) {
             for (int i = 1; i <= ile; i++) {
@@ -57,6 +57,26 @@ public class Rezerwacja extends JFrame implements ActionListener, MouseListener 
         if (p == bSignUp) {
 
         }
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
 
     }
 }
