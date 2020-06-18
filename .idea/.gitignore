@@ -155,6 +155,7 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 .idea/misc.xml
 JFrameTest.iml
+Java-projekt.iml
 *.iml
 .idea/dataSources.xml
 .idea/modules.xml

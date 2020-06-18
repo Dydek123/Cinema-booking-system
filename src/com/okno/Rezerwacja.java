@@ -20,20 +20,14 @@ import java.util.List;
 public class Rezerwacja extends JFrame implements ActionListener, MouseListener {
     BazaDanych baza = new BazaDanych();
     public JFrame bSignUp;
-    /*
-    setSize(1920, 1080); // inicjalizownie okna
-    setTitle("Okno rezerwacji"); // nazwa okna
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ustawienie domyslnego zamkniecia okna
-    setLayout(null);
-    background = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\Filmy.png")); // inicjalizownie oraz ustawianie tła
-    background.setBounds(0,0,1920,1080);
-    add(background);
-    */
+    public JLabel background;
+
+
+
 
     //Pomocnicza funkcja, bo nie wiem gdzie to ma być
     int ile = 0;
-
-    Rezerwacja(int IDuser, int IDfilm, int ile) {
+    public Rezerwacja(int IDuser,int IDfilm, int ile) {
         String miejsce = "temp";
         int wolne = baza.ile_wolnych(IDfilm);
         if (wolne > 0 && wolne >= ile) {
@@ -43,6 +37,16 @@ public class Rezerwacja extends JFrame implements ActionListener, MouseListener 
         } else {
             System.err.println("Zbyt malo wolnych miejsc!");
         }
+    }
+    public Rezerwacja() {
+        setSize(1920, 1080); // inicjalizownie okna
+        setTitle("Okno rezerwacji"); // nazwa okna
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ustawienie domyslnego zamkniecia okna
+        setLayout(null);
+        background = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\Filmy.png")); // inicjalizownie oraz ustawianie tła
+        background.setBounds(0,0,1920,1080);
+        add(background);
+
     }
 
 
@@ -55,7 +59,7 @@ public class Rezerwacja extends JFrame implements ActionListener, MouseListener 
     public void mouseClicked(MouseEvent e) {
         Object p = e.getSource();
         if (p == bSignUp) {
-
+            this.ile+=1;
         }
 
     }
