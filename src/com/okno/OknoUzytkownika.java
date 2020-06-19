@@ -126,8 +126,12 @@ public class OknoUzytkownika extends JFrame implements ActionListener, MouseList
             Object p = e.getSource();
             if ( p == bDostepneFilmy ) {
                 //private Login login;
-                Rezerwacja rezerwacja = new Rezerwacja();
+                /*Rezerwacja rezerwacja = new Rezerwacja();
                 rezerwacja.setVisible(true);
+                dispose();
+                */
+                DostepneFilmy dostepneFilmy = new DostepneFilmy();
+                dostepneFilmy.setVisible(true);
                 dispose();
             }
         } catch (RuntimeException err) {
