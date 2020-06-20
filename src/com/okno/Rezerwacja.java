@@ -48,7 +48,10 @@ public class Rezerwacja extends JFrame implements ActionListener, MouseListener 
         add(background);
 
     }
+    public void ktore_zajete()
+    {
 
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -60,6 +63,7 @@ public class Rezerwacja extends JFrame implements ActionListener, MouseListener 
         Object p = e.getSource();
         if (p == bSignUp) {
             this.ile+=1;
+
         }
 
     }
