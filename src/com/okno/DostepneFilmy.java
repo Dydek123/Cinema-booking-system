@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
 
@@ -60,12 +61,15 @@ public class DostepneFilmy extends JFrame implements ActionListener, MouseListen
         try {
             Object p = e.getSource();
             if ( p == bOk ) {
-                Rezerwacja rezerwacja = new Rezerwacja(dostepneFilmy[selected]);
+                /*Rezerwacja rezerwacja = new Rezerwacja(dostepneFilmy[selected]);
                 rezerwacja.setVisible(true);
+                dispose();*/
+                OknoFilmu oknoFilmu = new OknoFilmu(dostepneFilmy[selected]);
+                oknoFilmu.setVisible(true);
                 dispose();
 
             }
-        } catch (RuntimeException err) {
+        } catch (RuntimeException | IOException err) {
             System.out.println(err);
         }
     }
