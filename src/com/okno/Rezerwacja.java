@@ -13,14 +13,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import com.okno.Siedzenie;
 
 
 public class Rezerwacja extends JFrame implements ActionListener, MouseListener {
     BazaDanych baza = new BazaDanych();
     public JFrame bSignUp;
     public JLabel background;
+
+    Siedzenie [][] lista_siedzen = new Siedzenie[3][10];
 
 
 
@@ -50,8 +54,29 @@ public class Rezerwacja extends JFrame implements ActionListener, MouseListener 
 
 
     }
-    public void ktore_zajete()
+
+
+    public void create_list_of_seats(Siedzenie [][] l)
     {
+        for(int i=0;i<3;i++){
+            for(int j=0;j<10;j++){
+                String x=Integer.toString(j);
+
+                switch(i){
+                    case 0:
+                        x="A"+x;
+                        l[i][j]= new Siedzenie(10+i*10,10+j*10, x,State.WOLNE);
+                    case 1:
+                        x="B"+x;
+                        l[i][j]= new Siedzenie(10+i*10,10+j*10, x,State.WOLNE);
+                    case 2:
+                        x="C"+x;
+                        l[i][j]= new Siedzenie(10+i*10,10+j*10, x,State.WOLNE);
+
+                }
+
+            }
+        }
 
     }
 

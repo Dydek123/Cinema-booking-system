@@ -10,9 +10,9 @@ public class Siedzenie{
     private int size=149;
     private JLabel bSiedzenie;
     private String miejsce; //"litera+liczba", litera - rzad, liczba miejsce w rzędzie
-    private State state;
+    public State state;
 
-    public Siedzenie(int coordX, int coordY, String miejsce, int state) {
+    public Siedzenie(int coordX, int coordY, String miejsce, State state) {
         /*
         coordX: 0-9
         coordY: 0-2
@@ -31,7 +31,10 @@ public class Siedzenie{
         bSiedzenie.setBounds(paddingX + coordX *this.size, paddingY + coordY *(this.size + gapY), this.size, this.size);
         bSiedzenie.setBorder(null);
         this.miejsce = miejsce;
-        this.state = WOLNE;
+        this.state = state;
+    }
+
+    public Siedzenie(int i, int i1, String x) {
     }
 
     public void setState(State state) {
@@ -72,4 +75,5 @@ public class Siedzenie{
     public JLabel getbSiedzenie() {
         return bSiedzenie;
     }
+
 }

@@ -9,9 +9,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import com.bazydanych.Bilety;
+import com.okno.Siedzenie;
+import com.okno.State;
+
+import javax.xml.transform.Result;
 
 public class BazaDanych {
   public static final String DRIVER = "org.sqlite.JDBC";
@@ -420,6 +425,41 @@ public class BazaDanych {
       return 0;
     }
     return wolne;
+  }
+  public void ktore_zajete(int id_film, Siedzenie[][] l)
+  {
+    int rzad,miejsce;
+    String pomocnicza;
+    try{
+      PreparedStatement zajete = conn.prepareStatement("SELECT * FROM Rezerwacje where ID_seanse=?");
+          zajete.setInt(1,id_film);
+      ResultSet temp=zajete.executeQuery();
+      while(temp.next())
+      {
+          pomocnicza=temp.getString("Miejsce");
+          char pomocnicza2 = pomocnicza.charAt(0);
+          miejsce=Integer.parseInt(String.valueOf(pomocnicza.charAt(1)));
+          switch (pomocnicza2){
+            case 'A':
+              rzad=0;
+              l[rzad][miejsce].state= State.ZAJETE;
+            case 'B':
+              rzad=1;
+              l[rzad][miejsce].state= State.ZAJETE;
+            case 'C':
+              rzad=2;
+              l[rzad][miejsce].state= State.ZAJETE;
+          }
+      }
+
+
+
+
+    }catch(SQLException e){
+      e.printStackTrace();
+    }
+
+
   }
 
   public void closeConnection() {
