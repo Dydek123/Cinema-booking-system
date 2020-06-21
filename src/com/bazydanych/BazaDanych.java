@@ -278,20 +278,24 @@ public class BazaDanych {
     List<Rezerwacje> rezerwacjeList = new LinkedList<Rezerwacje>();
     try {
       ResultSet result = stat.executeQuery("SELECT * FROM Rezerwacje");
-      int idRezerwacje, idUzytkownicy, idSeanse, miejsce;
-      String rzad;
+      int idRezerwacje, idUzytkownicy, idSeanse,miejsce_nr;
+      char rzad;
+      String miejsce_bd;
       while(result.next()) {
         idRezerwacje = result.getInt("ID_rezerwacje");
         idUzytkownicy = result.getInt("ID_uzytkownicy");
         idSeanse = result.getInt("ID_seanse");
-        rzad = result.getString("Rzad");
-        miejsce = result.getInt("Miejsce");
+        //rzad = result.getString("Rzad");
+        miejsce_bd = result.getString("Miejsce");
+        rzad=miejsce_bd.charAt(0);
+        miejsce_nr=Integer.parseInt(String.valueOf(miejsce_bd.charAt(1)));
+
         rezerwacjeList.add(new Rezerwacje.RezerwacjeBuilder()
                 .idrezerwacja(idRezerwacje)
                 .iduzytkownik(idUzytkownicy)
                 .idseans(idSeanse)
                 .rzad(rzad)
-                .miejsce(miejsce)
+                .miejsce(miejsce_nr)
                 .build());
       }
     } catch (SQLException e) {

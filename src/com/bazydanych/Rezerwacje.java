@@ -10,7 +10,7 @@ public class Rezerwacje {
     private int idRezerwacje;
     private int idUzytkownicy;
     private int idSeanse;
-    private String rzad;
+    private char rzad;
     private int miejsce;
 
     public Rezerwacje() { }
@@ -22,7 +22,7 @@ public class Rezerwacje {
         this.miejsce = builder.miejsce;
     }
 
-    public String makeStatement(){ //tworzymy statement do bazy danych
+    public String statement_rezerwacja_biletow(){ //tworzymy statement do bazy danych
         String miejsce1=Integer.toString(this.miejsce);
         String miejsce2=this.rzad+miejsce1;
 
@@ -40,7 +40,7 @@ public class Rezerwacje {
         private int idRezerwacje;
         private int idUzytkownicy;
         private int idSeanse;
-        private String rzad;
+        private char rzad;
         private int miejsce;
         public RezerwacjeBuilder(){};
 
@@ -59,7 +59,7 @@ public class Rezerwacje {
             return this;
         }
 
-        public RezerwacjeBuilder rzad(String rzad){
+        public RezerwacjeBuilder rzad(char rzad){
             this.rzad=rzad;
             return this;
         }
