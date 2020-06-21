@@ -415,7 +415,7 @@ public class BazaDanych {
     return zakupyList;
   }
 
-  public int ile_wolnych(int idFilmu){
+  public int ile_wolnych(int idFilmu){        //funkcja zwracająca ilosc wolnych miejsc na dany seans
     int wolne = 0;
     try {
       PreparedStatement zajete = conn.prepareStatement("SELECT COUNT(Miejsce) FROM Rezerwacje where ID_seanse=?");
@@ -430,8 +430,9 @@ public class BazaDanych {
     }
     return wolne;
   }
-  public void ktore_zajete(int id_film, Siedzenie[][] l)
-  {
+
+  public void ktore_zajete(int id_film, Siedzenie[][] l)  //Funkcja zmieniająca kolory zajętych miejsc, sprawdzane przed
+  {                                                       //wyborem miejsc w sali na dany film
     int rzad,miejsce;
     String pomocnicza;
     try{

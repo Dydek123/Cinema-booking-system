@@ -29,9 +29,10 @@ public class Rezerwacja extends JFrame implements ActionListener, MouseListener 
 
 
 
-    //Pomocnicza funkcja, bo nie wiem gdzie to ma być
+
     int ile = 0;
-    public Rezerwacja(int IDuser,int IDfilm, int ile) {
+    //Klasa pomocnicza
+    public Rezerwacja(int IDuser,int IDfilm, int ile) { //w tym konstruktorze wstawiamy wybrane siedzenia do bazy danych
         String miejsce = "temp";
         int wolne = baza.ile_wolnych(IDfilm);
         if (wolne > 0 && wolne >= ile) {
@@ -55,7 +56,7 @@ public class Rezerwacja extends JFrame implements ActionListener, MouseListener 
 
     }
 
-
+//Tworzy liste do przechowywania obiektów Siedzenie, żeby nie ustawiać ręcznie tylu obiektow
     public void create_list_of_seats(Siedzenie [][] l)
     {
         for(int i=0;i<3;i++){
