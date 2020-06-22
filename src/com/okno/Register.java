@@ -130,7 +130,7 @@ public class Register extends JFrame implements ActionListener, MouseListener {
         lWrongData.setVisible(false);
         add(lWrongData);
 
-        background = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\Startowa v1.png")); // inicjalizownie oraz ustawianie tła
+        background = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\Rejestracjav2.png")); // inicjalizownie oraz ustawianie tła
         background.setBounds(0,0,1920,1080);
         add(background);
 
