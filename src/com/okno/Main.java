@@ -11,9 +11,9 @@ public class Main {
         BazaDanych test = new BazaDanych();
         List<Uzytkownicy> uzytkownicy = test.selectUzytkownicy();
         System.out.println("Lista uzytkownikow: ");
-
+        for(Uzytkownicy c: uzytkownicy)
+            System.out.println(c.getLogin() + " " + c.getHaslo());
         System.out.println("test commit");
-        System.out.println("test2");
 
        /* //test dodawania filmu
         Uzytkownicy admin= new Uzytkownicy();
