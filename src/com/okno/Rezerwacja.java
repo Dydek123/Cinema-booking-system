@@ -1,7 +1,6 @@
 package com.okno;
 import com.bazydanych.*;
 import com.bazydanych.BazaDanych;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,10 +19,11 @@ import com.okno.Siedzenie;
 
 
 public class Rezerwacja extends JFrame implements ActionListener, MouseListener {
+
     BazaDanych baza = new BazaDanych();
     public JFrame bSignUp;
     public JLabel background;
-
+    double cena = 0.0;
     Siedzenie [][] lista_siedzen = new Siedzenie[3][10];
 
 
@@ -31,6 +31,8 @@ public class Rezerwacja extends JFrame implements ActionListener, MouseListener 
 
 
     int ile = 0;
+    public Siedzenie seat;
+
     //Klasa pomocnicza
     public Rezerwacja(int IDuser,int IDfilm, int ile) { //w tym konstruktorze wstawiamy wybrane siedzenia do bazy danych
         String miejsce = "temp";
@@ -89,8 +91,16 @@ public class Rezerwacja extends JFrame implements ActionListener, MouseListener 
     @Override
     public void mouseClicked(MouseEvent e) {
         Object p = e.getSource();
-        if (p == bSignUp) {
-            this.ile+=1;
+        if (p == seat) {
+            if(seat.state==State.WOLNE){
+                seat.state=State.WYBRANE;
+                this.ile+=1;
+                this.cena+=15.00;
+            }else if(seat.state==State.WYBRANE){
+                seat.state=State.WOLNE;
+                this.ile-=1;
+                this.cena-=15.00;
+            }
 
         }
 

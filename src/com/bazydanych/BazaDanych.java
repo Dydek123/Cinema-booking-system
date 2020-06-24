@@ -45,14 +45,14 @@ public class BazaDanych {
   }
   public boolean createTables(){
     String createBilety = "CREATE TABLE IF NOT EXISTS Bilety (ID_bilety INTEGER, Cena_biletu VARCHAR(100), Rodzaj VARCHAR(100) );"; // to do
-    String createFilmy = "CREATE TABLE IF NOT EXISTS Filmy (ID_filmy INTEGER, Tytul VARCHAR (100)  UNIQUE ON CONFLICT ABORT, ID_rezyserzy INTEGER, ID_gatunki INTEGER, Ocena VARCHAR(100)," +
+    String createFilmy = "CREATE TABLE IF NOT EXISTS Filmy (ID_filmy INTEGER AUTOINCREMENT PRIMARY KEY, Tytul VARCHAR (100)  UNIQUE ON CONFLICT ABORT, ID_rezyserzy INTEGER, ID_gatunki INTEGER, Ocena VARCHAR(100)," +
             "Czas_trwania VARCHAR(100), Rok_produkcji VARCHAR(100), Opis VARCHAR(1000), Zwiastun VARCHAR(100) );"; // to do
-    String createGatunki = "CREATE TABLE IF NOT EXISTS Gatunki (ID_gatunki INTEGER, Nazwa_gatunku VARCHAR(100) );"; // to do
+    String createGatunki = "CREATE TABLE IF NOT EXISTS Gatunki (ID_gatunki INTEGER AUTOINCREMENT PRIMARY KEY, Nazwa_gatunku VARCHAR(100) );"; // to do
     String createRezerwacje = "CREATE TABLE IF NOT EXISTS Rezerwacje (ID_uzytkownicy INTEGER, ID_seanse INTEGER, ID_rezerwacje INTEGER, Miejsce VARCHAR );"; // to do
-    String createRezyserzy = "CREATE TABLE IF NOT EXISTS Rezyserzy (ID_rezyserzy INTEGER, Imie_rezysera VARCHAR(100), Nazwisko_rezysera VARCHAR(100) );"; // to do
-    String createSale = "CREATE TABLE IF NOT EXISTS Sale (ID_sale INTEGER, Numer INTEGER, Liczba_miejsc INTEGER );"; // to do
-    String createSeanse = "CREATE TABLE IF NOT EXISTS Seanse (ID_seanse INTEGER, ID_sale INTEGER, ID_filmy INTEGER, Data_seansu VARCHAR(100), Godzina_seansu VARCHAR(100) );"; // to do
-    String createUzytkownicy = "CREATE TABLE IF NOT EXISTS Uzytkownicy (ID_uzytkownicy INTEGER, Login VARCHAR(100), Haslo VARCHAR(100), Email VARCHAR(100), " +
+    String createRezyserzy = "CREATE TABLE IF NOT EXISTS Rezyserzy (ID_rezyserzy INTEGER AUTOINCREMENT PRIMARY KEY, Imie_rezysera VARCHAR(100), Nazwisko_rezysera VARCHAR(100) );"; // to do
+    String createSale = "CREATE TABLE IF NOT EXISTS Sale (ID_sale INTEGER AUTOINCREMENT PRIMARY KEY, Numer INTEGER, Liczba_miejsc INTEGER );"; // to do
+    String createSeanse = "CREATE TABLE IF NOT EXISTS Seanse (ID_seanse INTEGER AUTOINCREMENT PRIMARY KEY, ID_sale INTEGER, ID_filmy INTEGER, Data_seansu VARCHAR(100), Godzina_seansu VARCHAR(100) );"; // to do
+    String createUzytkownicy = "CREATE TABLE IF NOT EXISTS Uzytkownicy (ID_uzytkownicy INTEGER AUTOINCREMENT PRIMARY KEY, Login VARCHAR(100), Haslo VARCHAR(100), Email VARCHAR(100), " +
             "Imie_uzytkownika VARCHAR(100), Nazwisko_uzytkownika VARCHAR(100), Wiek INTEGER, Telefon INTEGER, Admin INTEGER (1) DEFAULT (0) );"; // to do
     String createZakupy = "CREATE TABLE IF NOT EXISTS Zakupy(ID_zakupy INTEGER, ID_bilety INTEGER, ID_rezerwacje INTEGER, Data_zakupu VARCHAR(100) );"; // to do
     try {
@@ -118,7 +118,7 @@ public class BazaDanych {
   }
   public boolean insertRezerwacje(int idUzytkownicy,int idSeanse,int idRezerwacje, String miejsce) {
     try {
-      PreparedStatement prepStmt = conn.prepareStatement("insert into Rezerwacje values (NULL, ?, ?, ?);"); // to do // sprawdzic wszystkie inserty
+      PreparedStatement prepStmt = conn.prepareStatement("insert into Rezerwacje values (?, ?, ?, ?);"); // to do // sprawdzic wszystkie inserty
       prepStmt.setInt(1, idUzytkownicy);
       prepStmt.setInt(2, idSeanse);
       prepStmt.setInt(3, idRezerwacje);
@@ -433,47 +433,41 @@ public class BazaDanych {
 
   public void ktore_zajete(int id_film, Siedzenie[][] l)  //Funkcja zmieniająca kolory zajętych miejsc, sprawdzane przed
   {                                                       //wyborem miejsc w sali na dany film
-    int rzad,miejsce;
+    int rzad, miejsce;
     String pomocnicza;
-    try{
+    try {
       PreparedStatement zajete = conn.prepareStatement("SELECT * FROM Rezerwacje where ID_seanse=?");
-          zajete.setInt(1,id_film);
-      ResultSet temp=zajete.executeQuery();
-      while(temp.next())
-      {
-          pomocnicza=temp.getString("Miejsce");
-          char pomocnicza2 = pomocnicza.charAt(0);
-          miejsce=Integer.parseInt(String.valueOf(pomocnicza.charAt(1)));
-          switch (pomocnicza2){
-            case 'A':
-              rzad=0;
-              l[rzad][miejsce].state= State.ZAJETE;
-            case 'B':
-              rzad=1;
-              l[rzad][miejsce].state= State.ZAJETE;
-            case 'C':
-              rzad=2;
-              l[rzad][miejsce].state= State.ZAJETE;
-          }
+      zajete.setInt(1, id_film);
+      ResultSet temp = zajete.executeQuery();
+      while (temp.next()) {
+        pomocnicza = temp.getString("Miejsce");
+        char pomocnicza2 = pomocnicza.charAt(0);
+        miejsce = Integer.parseInt(String.valueOf(pomocnicza.charAt(1)));
+        switch (pomocnicza2) {
+          case 'A':
+            rzad = 0;
+            l[rzad][miejsce].state = State.ZAJETE;
+          case 'B':
+            rzad = 1;
+            l[rzad][miejsce].state = State.ZAJETE;
+          case 'C':
+            rzad = 2;
+            l[rzad][miejsce].state = State.ZAJETE;
+        }
       }
-
-
-
-
-    }catch(SQLException e){
+    } catch (SQLException e) {
       e.printStackTrace();
     }
-
-
   }
 
-  public void closeConnection() {
+
+
+  public void closeConnection(){
     try {
       conn.close();
-    } catch (SQLException e) {
+         } catch (SQLException e) {
       System.err.println("Problem z zamknieciem polaczenia");
       e.printStackTrace();
-    }
-  }
-
+                          }
+          }
 }
