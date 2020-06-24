@@ -25,6 +25,7 @@ public class Rezerwacja extends JFrame implements ActionListener, MouseListener 
     public JLabel background;
     double cena = 0.0;
     Siedzenie [][] lista_siedzen = new Siedzenie[3][10];
+    List<Siedzenie> zajete_siedzenia = new LinkedList<>();
 
 
 
@@ -35,10 +36,11 @@ public class Rezerwacja extends JFrame implements ActionListener, MouseListener 
 
     //Klasa pomocnicza
     public Rezerwacja(int IDuser,int IDfilm, int ile) { //w tym konstruktorze wstawiamy wybrane siedzenia do bazy danych
-        String miejsce = "temp";
+        String miejsce;
         int wolne = baza.ile_wolnych(IDfilm);
         if (wolne > 0 && wolne >= ile) {
             for (int i = 1; i <= ile; i++) {
+                miejsce = zajete_siedzenia.get(i-1).getMiejsce();
                 baza.insertRezerwacje(IDuser, IDfilm, (31 - wolne), miejsce);
             }
         } else {
@@ -96,10 +98,12 @@ public class Rezerwacja extends JFrame implements ActionListener, MouseListener 
                 seat.state=State.WYBRANE;
                 this.ile+=1;
                 this.cena+=15.00;
+                zajete_siedzenia.add(seat);
             }else if(seat.state==State.WYBRANE){
                 seat.state=State.WOLNE;
                 this.ile-=1;
                 this.cena-=15.00;
+                zajete_siedzenia.remove(seat);
             }
 
         }
