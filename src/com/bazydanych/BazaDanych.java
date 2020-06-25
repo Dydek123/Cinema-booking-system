@@ -260,7 +260,6 @@ public class BazaDanych {
       while(result.next()) {
         tytul = result.getString("Tytul");      // to do
         filmyList[it]=tytul;
-        //System.out.println(it + " " + filmyList[it]+ " " + cntr);
         it++;
       }
     } catch (SQLException e) {
@@ -430,7 +429,7 @@ public class BazaDanych {
 
     String[][] seanseList;
 
-    final String sql = "select ID_seanse as id,Data_seansu as data, Godzina_seansu as czas, (select count(*) from (select Data_seansu, Godzina_seansu from Seanse where ID_filmy=? and Data_seansu>=date()) as tabelka) as counter from Seanse where ID_filmy=? and Data_seansu>date()" ;
+    final String sql = "select ID_seanse as id,Data_seansu as data, Godzina_seansu as czas, (select count(*) from (select Data_seansu, Godzina_seansu from Seanse where ID_seanse=? and Data_seansu>=date())) as counter from Seanse where ID_seanse=? and Data_seansu>date()" ;
     PreparedStatement ps = null;
     try {
       ps = conn.prepareStatement(sql);
@@ -438,16 +437,17 @@ public class BazaDanych {
       ps.setInt(2, idFilmu);
       ResultSet result = ps.executeQuery(); // to do
       int cntr=result.getInt("counter");
+      System.out.println(cntr);
       int it=0;
       seanseList = new String[2][cntr];
       while(result.next()) {
         String data = result.getString("data");      // to do
         String czas = result.getString("czas");      // to do
         int id=result.getInt("id");
-        System.out.println("Data seansu: " + data + " " + czas);
+        System.out.println(data + " " + czas);
         seanseList[0][it]=data + " "+ czas;
         seanseList[1][it]=String.valueOf(id);
-        System.out.println("ID seansu:" + seanseList[1][it]);
+        System.out.println(seanseList[it]);
         it++;
       }
     } catch (SQLException e) {
