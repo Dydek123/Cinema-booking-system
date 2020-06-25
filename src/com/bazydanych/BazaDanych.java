@@ -261,7 +261,7 @@ public class BazaDanych {
   public String[] selectDostepneFilmy() {
     String[] filmyList;
     try {
-      ResultSet result = stat.executeQuery("SELECT Filmy.Tytul, (select count(*) FROM (select Filmy.Tytul from Filmy inner join Seanse using (ID_filmy) WHERE `Seanse`.`Data_seansu`>date() group by Tytul)) as counter FROM Filmy inner join Seanse using (ID_filmy) WHERE `Seanse`.`Data_seansu`>date() group by Tytul"); // to do
+      ResultSet result = stat.executeQuery("SELECT Filmy.Tytul, (select count(*) FROM Filmy inner join Seanse using (ID_filmy) WHERE `Seanse`.`Data_seansu`>date()) as counter FROM Filmy inner join Seanse using (ID_filmy) WHERE `Seanse`.`Data_seansu`>date()"); // to do
       String tytul;
       int cntr=result.getInt("counter");
       int it=0;
@@ -270,47 +270,13 @@ public class BazaDanych {
         tytul = result.getString("Tytul");      // to do
         filmyList[it]=tytul;
         it++;
+
       }
     } catch (SQLException e) {
       e.printStackTrace();
       return null;
     }
     return filmyList;
-  }
-
-  public Filmy selectFilm(String tytulComp) {
-    final String sql = "SELECT * FROM Filmy WHERE Tytul= ? ";
-    PreparedStatement ps = null;
-    Filmy film = null;
-    try {
-      ps = conn.prepareStatement(sql);
-      ps.setString(1, tytulComp);
-      ResultSet result = ps.executeQuery(); // to do
-      int idFlimy, idRezyserzy, idGatunki;
-      String tytul, opis, zwiastun;
-      float ocena;
-      String czasTrwania;
-      /*year*/ int rokProdukcji;
-      FactoryFilmy filmyFactory = new FactoryFilmy();
-
-      while(result.next()) {
-        idFlimy = result.getInt("ID_filmy");
-        tytul = result.getString("Tytul");      // to do
-        idRezyserzy = result.getInt("ID_rezyserzy");
-        idGatunki = result.getInt("ID_gatunki");
-        ocena = result.getFloat("Ocena");
-        czasTrwania = result.getString("Czas_trwania"); // string?
-        rokProdukcji = result.getInt("Rok_produkcji");
-        opis = result.getString("Opis");
-        zwiastun = result.getString("Zwiastun");
-
-        film = filmyFactory.makeFilm(idFlimy, tytul, idRezyserzy, ocena, czasTrwania, rokProdukcji, opis, zwiastun,idGatunki);
-      }
-    } catch (SQLException e) {
-      e.printStackTrace();
-      return null;
-    }
-    return film;
   }
 
   public List<Gatunki> selectGatunki() {
