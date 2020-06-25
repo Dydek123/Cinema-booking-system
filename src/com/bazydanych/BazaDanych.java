@@ -3,6 +3,7 @@ package com.bazydanych;
 import com.movies.FactoryFilmy;
 import com.movies.Filmy;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -257,6 +258,63 @@ public class BazaDanych {
     }
     return filmyList;
   }
+
+  public String[] selectDostepneFilmy() {
+    String[] filmyList;
+    try {
+      ResultSet result = stat.executeQuery("SELECT Filmy.Tytul, (select count(*) FROM (select Filmy.Tytul from Filmy inner join Seanse using (ID_filmy) WHERE `Seanse`.`Data_seansu`>date() group by Tytul)) as counter FROM Filmy inner join Seanse using (ID_filmy) WHERE `Seanse`.`Data_seansu`>date() group by Tytul"); // to do
+      String tytul;
+      int cntr=result.getInt("counter");
+      int it=0;
+      filmyList = new String[cntr];
+      while(result.next()) {
+        tytul = result.getString("Tytul");      // to do
+        filmyList[it]=tytul;
+        //System.out.println(it + " " + filmyList[it]+ " " + cntr);
+        it++;
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return null;
+    }
+    return filmyList;
+  }
+
+  public Filmy selectFilm(String tytulComp) {
+    final String sql = "SELECT * FROM Filmy WHERE Tytul= ? ";
+    PreparedStatement ps = null;
+    Filmy film = null;
+    try {
+      ps = conn.prepareStatement(sql);
+      ps.setString(1, tytulComp);
+      ResultSet result = ps.executeQuery(); // to do
+      int idFlimy, idRezyserzy, idGatunki;
+      String tytul, opis, zwiastun;
+      float ocena;
+      String czasTrwania;
+      /*year*/ int rokProdukcji;
+      FactoryFilmy filmyFactory = new FactoryFilmy();
+
+      while(result.next()) {
+        idFlimy = result.getInt("ID_filmy");
+        tytul = result.getString("Tytul");      // to do
+        idRezyserzy = result.getInt("ID_rezyserzy");
+        idGatunki = result.getInt("ID_gatunki");
+        ocena = result.getFloat("Ocena");
+        czasTrwania = result.getString("Czas_trwania"); // string?
+        rokProdukcji = result.getInt("Rok_produkcji");
+        opis = result.getString("Opis");
+        zwiastun = result.getString("Zwiastun");
+
+        film = filmyFactory.makeFilm(idFlimy, tytul, idRezyserzy, ocena, czasTrwania, rokProdukcji, opis, zwiastun,idGatunki);
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return null;
+    }
+    return film;
+  }
+
   public List<Gatunki> selectGatunki() {
     List<Gatunki> gatunkiList = new LinkedList<Gatunki>();
     try {
@@ -322,6 +380,28 @@ public class BazaDanych {
     }
     return rezyserzyList;
   }
+  public Rezyserzy selectRezyser(int idRezysera) {
+      final String sql = "SELECT * FROM Rezyserzy where ID_rezyserzy= ? ";
+      PreparedStatement ps = null;
+      Rezyserzy rezyser = null;
+    try {
+      ps = conn.prepareStatement(sql);
+      ps.setInt(1, idRezysera);
+      ResultSet result = ps.executeQuery(); // to do
+      int idRezyserzy;
+      String imieRezysera, nazwiskoRezysera;
+      while(result.next()) {
+        idRezyserzy = result.getInt("ID_rezyserzy");
+        imieRezysera = result.getString("Imie_rezysera");
+        nazwiskoRezysera = result.getString("Nazwisko_rezysera");
+        rezyser=new Rezyserzy(idRezyserzy, imieRezysera, nazwiskoRezysera);
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return null;
+    }
+    return rezyser;
+  }
   public List<Sale> selectSale() {
     List<Sale> saleList = new LinkedList<Sale>();
     try {
@@ -352,6 +432,37 @@ public class BazaDanych {
         dataSeansu = result.getString("Data_seansu");
         godzinaSeansu = result.getString("Godzina_seansu");
         seanseList.add(new Seanse(idSeanse, idSale, idFilmy, dataSeansu, godzinaSeansu));
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return null;
+    }
+    return seanseList;
+  }
+
+  public String[][] selectDostepneSeanse(int idFilmu) {
+
+    String[][] seanseList;
+
+    final String sql = "select ID_seanse as id,Data_seansu as data, Godzina_seansu as czas, (select count(*) from (select Data_seansu, Godzina_seansu from Seanse where ID_filmy=? and Data_seansu>=date()) as tabelka) as counter from Seanse where ID_filmy=? and Data_seansu>date()" ;
+    PreparedStatement ps = null;
+    try {
+      ps = conn.prepareStatement(sql);
+      ps.setInt(1, idFilmu);
+      ps.setInt(2, idFilmu);
+      ResultSet result = ps.executeQuery(); // to do
+      int cntr=result.getInt("counter");
+      int it=0;
+      seanseList = new String[2][cntr];
+      while(result.next()) {
+        String data = result.getString("data");      // to do
+        String czas = result.getString("czas");      // to do
+        int id=result.getInt("id");
+        System.out.println("Data seansu: " + data + " " + czas);
+        seanseList[0][it]=data + " "+ czas;
+        seanseList[1][it]=String.valueOf(id);
+        System.out.println("ID seansu:" + seanseList[1][it]);
+        it++;
       }
     } catch (SQLException e) {
       e.printStackTrace();

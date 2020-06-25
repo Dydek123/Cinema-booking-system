@@ -19,8 +19,8 @@ import com.okno.Siedzenie;
 
 
 public class Rezerwacja extends JFrame implements ActionListener, MouseListener {
-
-    BazaDanych baza = new BazaDanych();
+    private BazaDanych baza = new BazaDanych();
+    private String selectedMovie;
     public JFrame bSignUp;
     public JLabel background;
     double cena = 0.0;
