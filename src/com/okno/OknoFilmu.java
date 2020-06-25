@@ -2,6 +2,7 @@ package com.okno;
 
 import com.bazydanych.BazaDanych;
 import com.bazydanych.Rezyserzy;
+import com.bazydanych.Uzytkownicy;
 import com.movies.Filmy;
 
 import javax.imageio.ImageIO;
@@ -22,6 +23,8 @@ public class OknoFilmu  extends JFrame implements ActionListener, MouseListener 
     private String chosenMovieTitle;
     private int selected;
     private int selectedSeansId;
+    private Uzytkownicy uzytkownicy;
+    private DostepneFilmy dostepneFilmy;
     /*
      chcialem to tak zrobic zeby tabela wyglądała tak:
     dostepneSeanse:
@@ -33,49 +36,52 @@ public class OknoFilmu  extends JFrame implements ActionListener, MouseListener 
     */
     String[][] dostepneSeanse;
 
-    public OknoFilmu(String chosenMovieTitle) throws IOException {
-        this.chosenMovieTitle = chosenMovieTitle;
+    public OknoFilmu(String chosenMovieTitle, Uzytkownicy uzytkownicy,DostepneFilmy dostepneFilmy) throws IOException, FontFormatException {
+
         setSize(1920, 1080); // inicjalizownie okna
-        setTitle("Opis filmu: "+ this.chosenMovieTitle); // nazwa okna
+        setTitle("Opis filmu: "+ chosenMovieTitle); // nazwa okna
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ustawienie domyslnego zamkniecia okna
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setUndecorated(true);
         setVisible(true);
         setLayout(null);
-
+        this.uzytkownicy = uzytkownicy;
+        this.chosenMovieTitle = chosenMovieTitle;
+        this.dostepneFilmy = dostepneFilmy;
         Filmy chosenMovie = baza.selectFilm(this.chosenMovieTitle);
-
+        Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Coś tam\\Fonts\\Caudex-Regular.ttf"));
 
         ImageIcon zarezerwuj = new ImageIcon("Coś tam\\Nowe Grafiki\\rezerwuj.png");
         bZarezerwuj = new JLabel(zarezerwuj);
-        bZarezerwuj.setBounds(1570, 740, 260, 110);
+        bZarezerwuj.setBounds(1580, 25, 260, 110);
         bZarezerwuj.setBorder(null);
         bZarezerwuj.addMouseListener(this);
         add(bZarezerwuj);
 
         ImageIcon powrot = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot.png");
         bPowrot = new JLabel(powrot);
-        bPowrot.setBounds(1570, 870, 260, 110);
+        bPowrot.setBounds(1300, 25, 260, 110);
         bPowrot.setBorder(null);
         bPowrot.addMouseListener(this);
         add(bPowrot);
 
-        JLabel tTytul = new JLabel(chosenMovie.getTytul(), SwingConstants.CENTER); // jak zrobic napis aby byl idalnie na srodku nie zaleznie od dlugosci nazwy uzytkownika?
+        JLabel tTytul = new JLabel(chosenMovie.getTytul(), SwingConstants.LEFT); // jak zrobic napis aby byl idalnie na srodku nie zaleznie od dlugosci nazwy uzytkownika?
         tTytul.setVerticalAlignment(JLabel.TOP);
-        tTytul.setBounds(745, 90, 1080, 90); //dostosowac granice
-        tTytul.setFont(new Font("Elephant", Font.PLAIN, 70));
-        tTytul.setForeground(Color.RED);
+        tTytul.setBounds(40, 25, 1080, 90); //dostosowac granice
+        //tTytul.setFont(new Font("Elephant", Font.PLAIN, 70));
+        tTytul.setFont(font.deriveFont(Font.BOLD, 70f));
+        tTytul.setForeground(new Color(23, 101, 202));
         add(tTytul);
 
         JLabel tOpis = new JLabel("<html>"+ chosenMovie.getOpis() +"</html>"); // jak zrobic napis aby byl idalnie na srodku nie zaleznie od dlugosci nazwy uzytkownika?
         tOpis.setVerticalAlignment(JLabel.TOP);
-        tOpis.setBounds(745, 189, 1080, 550); //dostosowac granice
+        tOpis.setBounds(745, 190, 1080, 550); //dostosowac granice
         tOpis.setFont(new Font("Arial", Font.PLAIN, 35));
-        tOpis.setForeground(Color.white);
+        tOpis.setForeground(Color.BLACK);
         add(tOpis);
 
         JLabel iPlakat = new JLabel();
-        iPlakat.setBounds(100, 90, 605, 900);
+        iPlakat.setBounds(40, 200, 577, 840);
         iPlakat.setBorder(null);
         //Ustawienie plakatu dopasowanego do labela
         BufferedImage img = null;
@@ -96,18 +102,18 @@ public class OknoFilmu  extends JFrame implements ActionListener, MouseListener 
 
         JLabel tRezyser = new JLabel("Rezyser: "+rezyser.getImieRezysera()+" "+rezyser.getNazwiskoRezysera()); // jak zrobic napis aby byl idalnie na srodku nie zaleznie od dlugosci nazwy uzytkownika?
         tRezyser.setVerticalAlignment(JLabel.TOP);
-        tRezyser.setBounds(745, 740, 500, 50);
+        tRezyser.setBounds(745, 810, 500, 50);
         tRezyser.setFont(new Font("Arial", Font.BOLD, 30));
-        tRezyser.setForeground(Color.WHITE);
+        tRezyser.setForeground(Color.BLACK);
         add(tRezyser);
 
         //Czas trwania
 
         JLabel tCzas = new JLabel("Czas trwania: "+chosenMovie.getCzasTrwania()); // jak zrobic napis aby byl idalnie na srodku nie zaleznie od dlugosci nazwy uzytkownika?
         tCzas.setVerticalAlignment(JLabel.TOP);
-        tCzas.setBounds(745, 800, 500, 50);
+        tCzas.setBounds(745, 870, 500, 50);
         tCzas.setFont(new Font("Arial", Font.BOLD, 30));
-        tCzas.setForeground(Color.WHITE);
+        tCzas.setForeground(Color.BLACK);
         add(tCzas);
 
         //Ocena
@@ -115,41 +121,41 @@ public class OknoFilmu  extends JFrame implements ActionListener, MouseListener 
         String ocena=String.format("%.1f",chosenMovie.getOcena());
         JLabel tOcena = new JLabel("Ocena: "+ ocena); // jak zrobic napis aby byl idalnie na srodku nie zaleznie od dlugosci nazwy uzytkownika?
         tOcena.setVerticalAlignment(JLabel.TOP);
-        tOcena.setBounds(745, 860, 500, 50);
+        tOcena.setBounds(745, 930, 500, 50);
         tOcena.setFont(new Font("Arial", Font.BOLD, 30));
-        tOcena.setForeground(Color.WHITE);
+        tOcena.setForeground(Color.BLACK);
         add(tOcena);
 
         //Rok Produkcji
 
         JLabel tRok = new JLabel("Wyprodukowano: "+ chosenMovie.getRokProdukcji()); // jak zrobic napis aby byl idalnie na srodku nie zaleznie od dlugosci nazwy uzytkownika?
         tRok.setVerticalAlignment(JLabel.TOP);
-        tRok.setBounds(745, 920, 500, 50);
+        tRok.setBounds(745, 990, 500, 50);
         tRok.setFont(new Font("Arial", Font.BOLD, 30));
-        tRok.setForeground(Color.WHITE);
+        tRok.setForeground(Color.BLACK);
         add(tRok);
 
         //Lista seansów
         //napis
-        JLabel tWybierz = new JLabel("Wybierz seans: "); // jak zrobic napis aby byl idalnie na srodku nie zaleznie od dlugosci nazwy uzytkownika?
+        JLabel tWybierz = new JLabel("<html><div style='text-align: center;'>"+ "Wybierz seans: " +"</div></html>"); // jak zrobic napis aby byl idalnie na srodku nie zaleznie od dlugosci nazwy uzytkownika?
         tWybierz.setVerticalAlignment(JLabel.TOP);
-        tWybierz.setBounds(745, 680, 500, 50);
-        tWybierz.setFont(new Font("Arial", Font.BOLD, 30));
-        tWybierz.setForeground(Color.WHITE);
+        tWybierz.setBounds(745, 15, 250, 160);
+        //tWybierz.setFont(new Font("Arial", Font.BOLD, 50));
+        tWybierz.setFont(font.deriveFont(Font.BOLD, 50f));
+        tWybierz.setForeground(new Color(23, 101, 202));
         add(tWybierz);
 
         //Ten select powinien zwracać seanse Filmu o danym ID ktore jeszcze sie nie odbyły - Data_seansu>date()
         //ale chyba nie zwraca, nie wiem czemu, coś nie wychodzi mi napisanie tego selecta
         dostepneSeanse=baza.selectDostepneSeanse(chosenMovie.getIdFilmy());
         JComboBox seanseList = new JComboBox(dostepneSeanse[0]);
-
         Font theFont = new Font("Arial", Font.BOLD, 25);
         seanseList.setSelectedIndex(0);
         //Ustawienie domyslnie pierwszego dostepnego seansu jesli uzytkownik nie wybierze zadnego z combo box'a
         selectedSeansId=Integer.parseInt(dostepneSeanse[1][0]);
         seanseList.setFont(theFont);
         seanseList.addActionListener(this);
-        seanseList.setBounds(1250,680,270,50);
+        seanseList.setBounds(1000,50,275,70);
         add(seanseList);
 
         background = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\Film.png")); // inicjalizownie oraz ustawianie tła
@@ -172,7 +178,22 @@ public class OknoFilmu  extends JFrame implements ActionListener, MouseListener 
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        try {
+            Object p = e.getSource();
+            if ( p == bZarezerwuj ) {
+                Rezerwacja rezerwacja = new Rezerwacja(uzytkownicy,selectedSeansId,this);
+                rezerwacja.setVisible(true);
+                dispose();
 
+            }
+            if ( p == bPowrot ) {
+                dostepneFilmy.setVisible(true);
+                dispose();
+
+            }
+        } catch (RuntimeException | IOException | FontFormatException err) {
+            System.out.println(err);
+        }
     }
 
     @Override

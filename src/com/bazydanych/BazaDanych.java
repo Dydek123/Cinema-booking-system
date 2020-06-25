@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import com.bazydanych.Bilety;
+import com.okno.Siedzenie;
+import com.okno.State;
 
 public class BazaDanych {
   public static final String DRIVER = "org.sqlite.JDBC";
@@ -112,8 +114,8 @@ public class BazaDanych {
       PreparedStatement prepStmt = conn.prepareStatement("insert into Rezerwacje values (NULL, ?, ?, ?);"); // to do // sprawdzic wszystkie inserty
       prepStmt.setInt(1, idUzytkownicy);
       prepStmt.setInt(2, idSeanse);
-      prepStmt.setInt(3, idRezerwacje);
-      prepStmt.setString(4,miejsce);
+      //prepStmt.setInt(3, idRezerwacje);
+      prepStmt.setString(3,miejsce);
       prepStmt.execute();
     } catch (SQLException e) {
       System.err.println("Blad przy wstawianiu rezerwacji");
@@ -512,11 +514,11 @@ public class BazaDanych {
     return zakupyList;
   }
 
-  public int ile_wolnych(int idFilmu){
+  public int ile_wolnych(int IDSeansu){
     int wolne = 0;
     try {
       PreparedStatement zajete = conn.prepareStatement("SELECT COUNT(Miejsce) FROM Rezerwacje where ID_seanse=?");
-      zajete.setInt(1,idFilmu);
+      zajete.setInt(1,IDSeansu);
       ResultSet temp=zajete.executeQuery();
       if(temp.next()){
         wolne=30-temp.getInt(1);
@@ -527,6 +529,39 @@ public class BazaDanych {
     }
     return wolne;
   }
+
+  public void ktore_zajete(int IDSeansu, Siedzenie[][] l)  //Funkcja zmieniająca kolory zajętych miejsc, sprawdzane przed
+  {                                                       //wyborem miejsc w sali na dany film
+    int rzad, miejsce;
+    String pomocnicza;
+    try {
+      PreparedStatement zajete = conn.prepareStatement("SELECT * FROM Rezerwacje where ID_seanse=?");
+      zajete.setInt(1, IDSeansu);
+      ResultSet temp = zajete.executeQuery();
+      while (temp.next()) {
+        pomocnicza = temp.getString("Miejsce");
+        char pomocnicza2 = pomocnicza.charAt(0);
+        miejsce = Integer.parseInt(String.valueOf(pomocnicza.charAt(1)));
+        switch (pomocnicza2) {
+          case 'A':
+            rzad = 0;
+            l[rzad][miejsce].setState(State.ZAJETE);
+            break;
+          case 'B':
+            rzad = 1;
+            l[rzad][miejsce].setState(State.ZAJETE);
+            break;
+          case 'C':
+            rzad = 2;
+            l[rzad][miejsce].setState(State.ZAJETE);
+            break;
+        }
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
+
 
   public void closeConnection() {
     try {

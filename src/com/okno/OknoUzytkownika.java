@@ -34,15 +34,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.List;
 import java.util.regex.Matcher;
 
 public class OknoUzytkownika extends JFrame implements ActionListener, MouseListener
 {
 
-    JLabel bEdytujDane, bWyloguj, bTwojeRezerwacje, bDostepneFilmy;
-    JLabel tNazwaUzytkownika, tEmailUzytkownika, tTelefonUzytkownika, tPowitanie, tNajblizszeSeanse;
-
+    private JLabel bEdytujDane, bWyloguj, bTwojeRezerwacje, bDostepneFilmy;
+    private JLabel tNazwaUzytkownika, tEmailUzytkownika, tTelefonUzytkownika, tPowitanie, tNajblizszeSeanse;
+    private Uzytkownicy uzytkownik;
     BazaDanych baza = new BazaDanych();
     //List<Filmy> filmy = baza.selectFilmy();
 
@@ -56,6 +57,8 @@ public class OknoUzytkownika extends JFrame implements ActionListener, MouseList
         setUndecorated(true);
         setVisible(true);
         setLayout(null);
+
+        uzytkownik=uzyt;
 
         ImageIcon edytuj_dane = new ImageIcon("Coś tam\\Nowe Grafiki\\edytuj_dane.png");
         bEdytujDane = new JLabel(edytuj_dane); //wersja robocza
@@ -133,11 +136,11 @@ public class OknoUzytkownika extends JFrame implements ActionListener, MouseList
                 rezerwacja.setVisible(true);
                 dispose();
                 */
-                DostepneFilmy dostepneFilmy = new DostepneFilmy();
+                DostepneFilmy dostepneFilmy = new DostepneFilmy(uzytkownik,this);
                 dostepneFilmy.setVisible(true);
                 dispose();
             }
-        } catch (RuntimeException err) {
+        } catch (RuntimeException | IOException | FontFormatException err) {
             System.out.println(err);
         }
     }
