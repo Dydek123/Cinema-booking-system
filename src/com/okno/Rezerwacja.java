@@ -78,7 +78,6 @@ public class Rezerwacja extends JFrame implements ActionListener, MouseListener 
     public void setIDuser(int IDuser) {
         this.IDuser = IDuser;
     }
-<<<<<<< HEAD
 
     public void setIDfilm(int IDfilm) {
         this.IDfilm = IDfilm;
@@ -90,17 +89,6 @@ public class Rezerwacja extends JFrame implements ActionListener, MouseListener 
 
     public int getIDuser() {
         return IDuser;
-=======
-    public Rezerwacja() {
-        setSize(1920, 1080); // inicjalizownie okna
-        setTitle("Okno rezerwacji"); // nazwa okna
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ustawienie domyslnego zamkniecia okna
-        setLayout(null);
-        background = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\Filmy.png")); // inicjalizownie oraz ustawianie tła
-        background.setBounds(0,0,1920,1080);
-        add(background);
-
->>>>>>> parent of e96c7da... Revert "Revert "Klasa i enum do obslugi siedzen, update grafik""
     }
 
     public int getIDfilm() {
