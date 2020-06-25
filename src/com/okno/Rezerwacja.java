@@ -140,7 +140,7 @@ public class Rezerwacja extends JFrame implements ActionListener, MouseListener 
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        
+
     }
 
     @Override
