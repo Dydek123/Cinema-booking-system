@@ -97,13 +97,13 @@ public class OknoUzytkownika extends JFrame implements ActionListener, MouseList
         tTelefonUzytkownika.setFont(new Font("Impact", Font.PLAIN, 25));
         add(tTelefonUzytkownika);
 
-        tPowitanie = new JLabel("Witaj, ponownie, " + uzyt.getLogin()); // jak zrobic napis aby byl idalnie na srodku nie zaleznie od dlugosci nazwy uzytkownika?
-        tPowitanie.setBounds(850, 330, 730, 60); //dostosowac granice
+        tPowitanie = new JLabel("Witaj ponownie, " + uzyt.getLogin(), SwingConstants.CENTER); // jak zrobic napis aby byl idalnie na srodku nie zaleznie od dlugosci nazwy uzytkownika?
+        tPowitanie.setBounds(500, 330, 1420, 60); //dostosowac granice
         tPowitanie.setFont(new Font("Impact", Font.PLAIN, 60));
         add(tPowitanie);
 
-        tNajblizszeSeanse = new JLabel("Sprawdz najblizsze seanse i wybierz film dla Siebie"); //rownie dobrze moze to byc na backgroundzie, ale trzeba sie dogadac o font
-        tNajblizszeSeanse.setBounds(600,450,1210,40);
+        tNajblizszeSeanse = new JLabel("Sprawdz najblizsze seanse i wybierz film dla Siebie", SwingConstants.CENTER); //rownie dobrze moze to byc na backgroundzie, ale trzeba sie dogadac o font
+        tNajblizszeSeanse.setBounds(500,450,1420,40);
         tNajblizszeSeanse.setFont(new Font("Impact", Font.PLAIN, 40));
         add(tNajblizszeSeanse);
 
@@ -126,8 +126,12 @@ public class OknoUzytkownika extends JFrame implements ActionListener, MouseList
             Object p = e.getSource();
             if ( p == bDostepneFilmy ) {
                 //private Login login;
-                Rezerwacja rezerwacja = new Rezerwacja();
+                /*Rezerwacja rezerwacja = new Rezerwacja();
                 rezerwacja.setVisible(true);
+                dispose();
+                */
+                DostepneFilmy dostepneFilmy = new DostepneFilmy();
+                dostepneFilmy.setVisible(true);
                 dispose();
             }
         } catch (RuntimeException err) {

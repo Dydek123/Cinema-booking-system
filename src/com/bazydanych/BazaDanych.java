@@ -3,20 +3,11 @@ package com.bazydanych;
 import com.movies.FactoryFilmy;
 import com.movies.Filmy;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import com.bazydanych.Bilety;
-import com.okno.Siedzenie;
-import com.okno.State;
-
-import javax.xml.transform.Result;
 
 public class BazaDanych {
   public static final String DRIVER = "org.sqlite.JDBC";
@@ -45,14 +36,14 @@ public class BazaDanych {
   }
   public boolean createTables(){
     String createBilety = "CREATE TABLE IF NOT EXISTS Bilety (ID_bilety INTEGER, Cena_biletu VARCHAR(100), Rodzaj VARCHAR(100) );"; // to do
-    String createFilmy = "CREATE TABLE IF NOT EXISTS Filmy (ID_filmy INTEGER PRIMARY KEY AUTOINCREMENT, Tytul VARCHAR (100)  UNIQUE ON CONFLICT ABORT, ID_rezyserzy INTEGER, ID_gatunki INTEGER, Ocena VARCHAR(100)," +
+    String createFilmy = "CREATE TABLE IF NOT EXISTS Filmy (ID_filmy INTEGER, Tytul VARCHAR (100)  UNIQUE ON CONFLICT ABORT, ID_rezyserzy INTEGER, ID_gatunki INTEGER, Ocena VARCHAR(100)," +
             "Czas_trwania VARCHAR(100), Rok_produkcji VARCHAR(100), Opis VARCHAR(1000), Zwiastun VARCHAR(100) );"; // to do
-    String createGatunki = "CREATE TABLE IF NOT EXISTS Gatunki (ID_gatunki INTEGER PRIMARY KEY AUTOINCREMENT, Nazwa_gatunku VARCHAR(100) );"; // to do
+    String createGatunki = "CREATE TABLE IF NOT EXISTS Gatunki (ID_gatunki INTEGER, Nazwa_gatunku VARCHAR(100) );"; // to do
     String createRezerwacje = "CREATE TABLE IF NOT EXISTS Rezerwacje (ID_uzytkownicy INTEGER, ID_seanse INTEGER, ID_rezerwacje INTEGER, Miejsce VARCHAR );"; // to do
-    String createRezyserzy = "CREATE TABLE IF NOT EXISTS Rezyserzy (ID_rezyserzy INTEGER PRIMARY KEY AUTOINCREMENT, Imie_rezysera VARCHAR(100), Nazwisko_rezysera VARCHAR(100) );"; // to do
-    String createSale = "CREATE TABLE IF NOT EXISTS Sale (ID_sale INTEGER PRIMARY KEY AUTOINCREMENT, Numer INTEGER, Liczba_miejsc INTEGER );"; // to do
-    String createSeanse = "CREATE TABLE IF NOT EXISTS Seanse (ID_seanse INTEGER PRIMARY KEY AUTOINCREMENT, ID_sale INTEGER, ID_filmy INTEGER, Data_seansu VARCHAR(100), Godzina_seansu VARCHAR(100) );"; // to do
-    String createUzytkownicy = "CREATE TABLE IF NOT EXISTS Uzytkownicy (ID_uzytkownicy INTEGER PRIMARY KEY AUTOINCREMENT, Login VARCHAR(100), Haslo VARCHAR(100), Email VARCHAR(100), " +
+    String createRezyserzy = "CREATE TABLE IF NOT EXISTS Rezyserzy (ID_rezyserzy INTEGER, Imie_rezysera VARCHAR(100), Nazwisko_rezysera VARCHAR(100) );"; // to do
+    String createSale = "CREATE TABLE IF NOT EXISTS Sale (ID_sale INTEGER, Numer INTEGER, Liczba_miejsc INTEGER );"; // to do
+    String createSeanse = "CREATE TABLE IF NOT EXISTS Seanse (ID_seanse INTEGER, ID_sale INTEGER, ID_filmy INTEGER, Data_seansu VARCHAR(100), Godzina_seansu VARCHAR(100) );"; // to do
+    String createUzytkownicy = "CREATE TABLE IF NOT EXISTS Uzytkownicy (ID_uzytkownicy INTEGER, Login VARCHAR(100), Haslo VARCHAR(100), Email VARCHAR(100), " +
             "Imie_uzytkownika VARCHAR(100), Nazwisko_uzytkownika VARCHAR(100), Wiek INTEGER, Telefon INTEGER, Admin INTEGER (1) DEFAULT (0) );"; // to do
     String createZakupy = "CREATE TABLE IF NOT EXISTS Zakupy(ID_zakupy INTEGER, ID_bilety INTEGER, ID_rezerwacje INTEGER, Data_zakupu VARCHAR(100) );"; // to do
     try {
@@ -118,7 +109,7 @@ public class BazaDanych {
   }
   public boolean insertRezerwacje(int idUzytkownicy,int idSeanse,int idRezerwacje, String miejsce) {
     try {
-      PreparedStatement prepStmt = conn.prepareStatement("insert into Rezerwacje values (?, ?, ?, ?);"); // to do // sprawdzic wszystkie inserty
+      PreparedStatement prepStmt = conn.prepareStatement("insert into Rezerwacje values (NULL, ?, ?, ?);"); // to do // sprawdzic wszystkie inserty
       prepStmt.setInt(1, idUzytkownicy);
       prepStmt.setInt(2, idSeanse);
       prepStmt.setInt(3, idRezerwacje);
@@ -261,7 +252,7 @@ public class BazaDanych {
   public String[] selectDostepneFilmy() {
     String[] filmyList;
     try {
-      ResultSet result = stat.executeQuery("SELECT Filmy.Tytul, (select count(*) FROM Filmy inner join Seanse using (ID_filmy) WHERE `Seanse`.`Data_seansu`>date()) as counter FROM Filmy inner join Seanse using (ID_filmy) WHERE `Seanse`.`Data_seansu`>date()"); // to do
+      ResultSet result = stat.executeQuery("SELECT Filmy.Tytul, (select count(*) FROM (select Filmy.Tytul from Filmy inner join Seanse using (ID_filmy) WHERE `Seanse`.`Data_seansu`>date() group by Tytul)) as counter FROM Filmy inner join Seanse using (ID_filmy) WHERE `Seanse`.`Data_seansu`>date() group by Tytul"); // to do
       String tytul;
       int cntr=result.getInt("counter");
       int it=0;
@@ -269,14 +260,49 @@ public class BazaDanych {
       while(result.next()) {
         tytul = result.getString("Tytul");      // to do
         filmyList[it]=tytul;
+        //System.out.println(it + " " + filmyList[it]+ " " + cntr);
         it++;
-
       }
     } catch (SQLException e) {
       e.printStackTrace();
       return null;
     }
     return filmyList;
+  }
+
+  public Filmy selectFilm(String tytulComp) {
+    final String sql = "SELECT * FROM Filmy WHERE Tytul= ? ";
+    PreparedStatement ps = null;
+    Filmy film = null;
+    try {
+      ps = conn.prepareStatement(sql);
+      ps.setString(1, tytulComp);
+      ResultSet result = ps.executeQuery(); // to do
+      int idFlimy, idRezyserzy, idGatunki;
+      String tytul, opis, zwiastun;
+      float ocena;
+      String czasTrwania;
+      /*year*/ int rokProdukcji;
+      FactoryFilmy filmyFactory = new FactoryFilmy();
+
+      while(result.next()) {
+        idFlimy = result.getInt("ID_filmy");
+        tytul = result.getString("Tytul");      // to do
+        idRezyserzy = result.getInt("ID_rezyserzy");
+        idGatunki = result.getInt("ID_gatunki");
+        ocena = result.getFloat("Ocena");
+        czasTrwania = result.getString("Czas_trwania"); // string?
+        rokProdukcji = result.getInt("Rok_produkcji");
+        opis = result.getString("Opis");
+        zwiastun = result.getString("Zwiastun");
+
+        film = filmyFactory.makeFilm(idFlimy, tytul, idRezyserzy, ocena, czasTrwania, rokProdukcji, opis, zwiastun,idGatunki);
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return null;
+    }
+    return film;
   }
 
   public List<Gatunki> selectGatunki() {
@@ -300,24 +326,20 @@ public class BazaDanych {
     List<Rezerwacje> rezerwacjeList = new LinkedList<Rezerwacje>();
     try {
       ResultSet result = stat.executeQuery("SELECT * FROM Rezerwacje");
-      int idRezerwacje, idUzytkownicy, idSeanse,miejsce_nr;
-      char rzad;
-      String miejsce_bd;
+      int idRezerwacje, idUzytkownicy, idSeanse, miejsce;
+      String rzad;
       while(result.next()) {
         idRezerwacje = result.getInt("ID_rezerwacje");
         idUzytkownicy = result.getInt("ID_uzytkownicy");
         idSeanse = result.getInt("ID_seanse");
-        //rzad = result.getString("Rzad");
-        miejsce_bd = result.getString("Miejsce");
-        rzad=miejsce_bd.charAt(0);
-        miejsce_nr=Integer.parseInt(String.valueOf(miejsce_bd.charAt(1)));
-
+        rzad = result.getString("Rzad");
+        miejsce = result.getInt("Miejsce");
         rezerwacjeList.add(new Rezerwacje.RezerwacjeBuilder()
                 .idrezerwacja(idRezerwacje)
                 .iduzytkownik(idUzytkownicy)
                 .idseans(idSeanse)
                 .rzad(rzad)
-                .miejsce(miejsce_nr)
+                .miejsce(miejsce)
                 .build());
       }
     } catch (SQLException e) {
@@ -343,6 +365,28 @@ public class BazaDanych {
       return null;
     }
     return rezyserzyList;
+  }
+  public Rezyserzy selectRezyser(int idRezysera) {
+      final String sql = "SELECT * FROM Rezyserzy where ID_rezyserzy= ? ";
+      PreparedStatement ps = null;
+      Rezyserzy rezyser = null;
+    try {
+      ps = conn.prepareStatement(sql);
+      ps.setInt(1, idRezysera);
+      ResultSet result = ps.executeQuery(); // to do
+      int idRezyserzy;
+      String imieRezysera, nazwiskoRezysera;
+      while(result.next()) {
+        idRezyserzy = result.getInt("ID_rezyserzy");
+        imieRezysera = result.getString("Imie_rezysera");
+        nazwiskoRezysera = result.getString("Nazwisko_rezysera");
+        rezyser=new Rezyserzy(idRezyserzy, imieRezysera, nazwiskoRezysera);
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return null;
+    }
+    return rezyser;
   }
   public List<Sale> selectSale() {
     List<Sale> saleList = new LinkedList<Sale>();
@@ -386,7 +430,7 @@ public class BazaDanych {
 
     String[][] seanseList;
 
-    final String sql = "select ID_seanse as id,Data_seansu as data, Godzina_seansu as czas, (select count(*) from (select Data_seansu, Godzina_seansu from Seanse where ID_seanse=? and Data_seansu>=date())) as counter from Seanse where ID_seanse=? and Data_seansu>date()" ;
+    final String sql = "select ID_seanse as id,Data_seansu as data, Godzina_seansu as czas, (select count(*) from (select Data_seansu, Godzina_seansu from Seanse where ID_filmy=? and Data_seansu>=date()) as tabelka) as counter from Seanse where ID_filmy=? and Data_seansu>date()" ;
     PreparedStatement ps = null;
     try {
       ps = conn.prepareStatement(sql);
@@ -394,17 +438,16 @@ public class BazaDanych {
       ps.setInt(2, idFilmu);
       ResultSet result = ps.executeQuery(); // to do
       int cntr=result.getInt("counter");
-      System.out.println(cntr);
       int it=0;
       seanseList = new String[2][cntr];
       while(result.next()) {
         String data = result.getString("data");      // to do
         String czas = result.getString("czas");      // to do
         int id=result.getInt("id");
-        System.out.println(data + " " + czas);
+        System.out.println("Data seansu: " + data + " " + czas);
         seanseList[0][it]=data + " "+ czas;
         seanseList[1][it]=String.valueOf(id);
-        System.out.println(seanseList[it]);
+        System.out.println("ID seansu:" + seanseList[1][it]);
         it++;
       }
     } catch (SQLException e) {
@@ -413,7 +456,6 @@ public class BazaDanych {
     }
     return seanseList;
   }
-
 
   public List<Uzytkownicy> selectUzytkownicy() {
     List<Uzytkownicy> uzytkownicyList = new LinkedList<Uzytkownicy>();
@@ -470,7 +512,7 @@ public class BazaDanych {
     return zakupyList;
   }
 
-  public int ile_wolnych(int idFilmu){        //funkcja zwracająca ilosc wolnych miejsc na dany seans
+  public int ile_wolnych(int idFilmu){
     int wolne = 0;
     try {
       PreparedStatement zajete = conn.prepareStatement("SELECT COUNT(Miejsce) FROM Rezerwacje where ID_seanse=?");
@@ -486,43 +528,13 @@ public class BazaDanych {
     return wolne;
   }
 
-  public void ktore_zajete(int id_film, Siedzenie[][] l)  //Funkcja zmieniająca kolory zajętych miejsc, sprawdzane przed
-  {                                                       //wyborem miejsc w sali na dany film
-    int rzad, miejsce;
-    String pomocnicza;
+  public void closeConnection() {
     try {
-      PreparedStatement zajete = conn.prepareStatement("SELECT * FROM Rezerwacje where ID_seanse=?");
-      zajete.setInt(1, id_film);
-      ResultSet temp = zajete.executeQuery();
-      while (temp.next()) {
-        pomocnicza = temp.getString("Miejsce");
-        char pomocnicza2 = pomocnicza.charAt(0);
-        miejsce = Integer.parseInt(String.valueOf(pomocnicza.charAt(1)));
-        switch (pomocnicza2) {
-          case 'A':
-            rzad = 0;
-            l[rzad][miejsce].state = State.ZAJETE;
-          case 'B':
-            rzad = 1;
-            l[rzad][miejsce].state = State.ZAJETE;
-          case 'C':
-            rzad = 2;
-            l[rzad][miejsce].state = State.ZAJETE;
-        }
-      }
+      conn.close();
     } catch (SQLException e) {
+      System.err.println("Problem z zamknieciem polaczenia");
       e.printStackTrace();
     }
   }
 
-
-
-  public void closeConnection(){
-    try {
-      conn.close();
-         } catch (SQLException e) {
-      System.err.println("Problem z zamknieciem polaczenia");
-      e.printStackTrace();
-                          }
-          }
 }
