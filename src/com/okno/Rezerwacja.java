@@ -79,7 +79,6 @@ public class Rezerwacja extends JFrame implements ActionListener, MouseListener 
         this.IDuser = IDuser;
     }
 
-
     public void setIDfilm(int IDfilm) {
         this.IDfilm = IDfilm;
     }
@@ -91,7 +90,6 @@ public class Rezerwacja extends JFrame implements ActionListener, MouseListener 
     public int getIDuser() {
         return IDuser;
     }
-
 
     public int getIDfilm() {
         return IDfilm;
