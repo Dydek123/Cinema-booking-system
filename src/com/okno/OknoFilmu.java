@@ -38,6 +38,9 @@ public class OknoFilmu  extends JFrame implements ActionListener, MouseListener 
         setSize(1920, 1080); // inicjalizownie okna
         setTitle("Opis filmu: "+ this.chosenMovieTitle); // nazwa okna
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ustawienie domyslnego zamkniecia okna
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setUndecorated(true);
+        setVisible(true);
         setLayout(null);
 
         Filmy chosenMovie = baza.selectFilm(this.chosenMovieTitle);

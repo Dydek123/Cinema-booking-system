@@ -23,19 +23,19 @@ public class Login extends JFrame implements ActionListener, MouseListener {
     private ImageIcon iZarejestrujZielone = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_zielone.png");
     private ImageIcon iZarejestrujHover = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_hover.png");
     private ImageIcon iZarejestrujClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_clicked.png");
-    private ImageIcon iStronaLogowania = new ImageIcon("Images\\Strona Logowania2.png");
+    private ImageIcon iStronaLogowania = new ImageIcon("Coś tam\\Nowe Grafiki\\Strona Logowania2.png");
+
     int x = (935-80)/3, y= 300, width = (935-80)/2, height = 50; // x=80, 935, y = 260
     public Login(){
         register = new Register(this);
         //register.setVisible(true);
         register.setVisible(false);
 
-
-
         setSize(1920,1080);
         setTitle("test");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        getContentPane().setBackground(Color.white);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setUndecorated(true);
         setLayout(null);
 
         lLogin = new JLabel("Login: ", JLabel.LEFT);

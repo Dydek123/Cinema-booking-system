@@ -18,7 +18,9 @@ public class EkranGlowny extends JFrame implements ActionListener{
         setSize(1920,1080);
         setTitle("EkranGlowny");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        getContentPane().setBackground(Color.white);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setUndecorated(true);
+        setVisible(true);
         setLayout(null);
 
         test = new JSlider(0,10,1);  // suwak

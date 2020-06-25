@@ -28,6 +28,9 @@ public class Register extends JFrame implements ActionListener, MouseListener {
         setSize(1920,1080); // inicjalizownie okna
         setTitle("Register"); // nazwa okna
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ustawienie domyslnego zamkniecia okna
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setUndecorated(true);
+        setVisible(true);
         setLayout(null);
 
         lLogin = new JLabel("Login: ",JLabel.LEFT); // inicjalizownie oraz ustawianie tekstu "login"

@@ -24,6 +24,9 @@ public class DostepneFilmy extends JFrame implements ActionListener, MouseListen
         setSize(1920, 1080); // inicjalizownie okna
         setTitle("Dostepne filmy"); // nazwa okna
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ustawienie domyslnego zamkniecia okna
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setUndecorated(true);
+        setVisible(true);
         setLayout(null);
 
 
