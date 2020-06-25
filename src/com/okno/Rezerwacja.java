@@ -26,16 +26,26 @@ public class Rezerwacja extends JFrame implements ActionListener, MouseListener 
     double cena = 0.0;
     Siedzenie [][] lista_siedzen = new Siedzenie[3][10];
     List<Siedzenie> zajete_siedzenia = new LinkedList<>();
+    int IDuser;
+    int IDfilm;
+    int ile=0;
 
 
-
-
-
-    int ile = 0;
     public Siedzenie seat;
 
-    //Klasa pomocnicza
-    public Rezerwacja(int IDuser,int IDfilm, int ile) { //w tym konstruktorze wstawiamy wybrane siedzenia do bazy danych
+    public Rezerwacja() {
+        setSize(1920, 1080); // inicjalizownie okna
+        setTitle("Okno rezerwacji"); // nazwa okna
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ustawienie domyslnego zamkniecia okna
+        setLayout(null);
+        background = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\Miejsce.png")); // inicjalizownie oraz ustawianie tła
+        background.setBounds(0,0,1920,1080);
+        add(background);
+
+    }
+
+    //Funkcja rezerwująca miejsca
+    public void rezerwowanie_miejsc(int IDuser,int IDfilm, int ile){
         String miejsce;
         int wolne = baza.ile_wolnych(IDfilm);
         if (wolne > 0 && wolne >= ile) {
@@ -46,17 +56,6 @@ public class Rezerwacja extends JFrame implements ActionListener, MouseListener 
         } else {
             System.err.println("Zbyt malo wolnych miejsc!");
         }
-    }
-    public Rezerwacja() {
-        setSize(1920, 1080); // inicjalizownie okna
-        setTitle("Okno rezerwacji"); // nazwa okna
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ustawienie domyslnego zamkniecia okna
-        setLayout(null);
-        background = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\Miejsce.png")); // inicjalizownie oraz ustawianie tła
-        background.setBounds(0,0,1920,1080);
-        add(background);
-
-
 
     }
 
@@ -83,6 +82,30 @@ public class Rezerwacja extends JFrame implements ActionListener, MouseListener 
             }
         }
 
+    }
+
+    public void setIDuser(int IDuser) {
+        this.IDuser = IDuser;
+    }
+
+    public void setIDfilm(int IDfilm) {
+        this.IDfilm = IDfilm;
+    }
+
+    public void setIle(int ile) {
+        this.ile = ile;
+    }
+
+    public int getIDuser() {
+        return IDuser;
+    }
+
+    public int getIDfilm() {
+        return IDfilm;
+    }
+
+    public int getIle() {
+        return ile;
     }
 
     @Override

@@ -13,7 +13,7 @@ public class Rezerwacje {
     private char rzad;
     private int miejsce;
 
-    public Rezerwacje() { }
+
     public Rezerwacje(RezerwacjeBuilder builder) {
         this.idRezerwacje = builder.idRezerwacje;
         this.idUzytkownicy = builder.idUzytkownicy;
