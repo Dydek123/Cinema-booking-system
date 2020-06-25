@@ -1,6 +1,7 @@
 package com.okno;
 
 import com.bazydanych.BazaDanych;
+import com.bazydanych.Uzytkownicy;
 import com.movies.Filmy;
 
 import javax.swing.*;
@@ -9,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
@@ -16,11 +18,13 @@ import java.util.Vector;
 public class DostepneFilmy extends JFrame implements ActionListener, MouseListener {
     BazaDanych baza = new BazaDanych();
     public JFrame bSignUp;
-    public JLabel background, bOk;
+    public JLabel background, bRezerwuj,bPowrot;
     public String[] dostepneFilmy=baza.selectDostepneFilmy();
     JComboBox filmList = new JComboBox(dostepneFilmy);
     private int selected;
-    public DostepneFilmy() {
+    private Uzytkownicy uzytkownik;
+    private OknoUzytkownika oknoUzytkownika;
+    public DostepneFilmy(Uzytkownicy uzytkownik,OknoUzytkownika oknoUzytkownika) throws IOException, FontFormatException {
         setSize(1920, 1080); // inicjalizownie okna
         setTitle("Dostepne filmy"); // nazwa okna
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ustawienie domyslnego zamkniecia okna
@@ -29,14 +33,33 @@ public class DostepneFilmy extends JFrame implements ActionListener, MouseListen
         setVisible(true);
         setLayout(null);
 
+        this.uzytkownik=uzytkownik;
+        this.oknoUzytkownika=oknoUzytkownika;
+        Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Coś tam\\Fonts\\Caudex-Regular.ttf"));
 
+        bRezerwuj = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\rezerwuj.png"));
+        bRezerwuj.setBounds(1580, 25, 260, 110);
+        bRezerwuj.addMouseListener(this);
+        add(bRezerwuj);
 
-        ImageIcon zatwierdz = new ImageIcon("Coś tam\\Nowe Grafiki\\zatwierdz.png");
-        bOk = new JLabel(zatwierdz);
-        bOk.setBounds(1160, 490, 400, 100);
-        bOk.setBorder(null);
-        bOk.addMouseListener(this);
-        add(bOk);
+        bPowrot = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\powrot.png"));
+        bPowrot.setBounds(1300, 25, 260, 110);
+        bPowrot.addMouseListener(this);
+        add(bPowrot);
+
+        JLabel tTxt = new JLabel("Dostępne filmy"); // jak zrobic napis aby byl idalnie na srodku nie zaleznie od dlugosci nazwy uzytkownika?
+        tTxt.setVerticalAlignment(JLabel.TOP);
+        tTxt.setBounds(40, 25, 600, 90); //dostosowac granice
+        tTxt.setFont(font.deriveFont(Font.BOLD, 70f));
+        tTxt.setForeground(new Color(23, 101, 202));
+        add(tTxt);
+
+        JLabel tWybierz = new JLabel("Wybierz film:"); // jak zrobic napis aby byl idalnie na srodku nie zaleznie od dlugosci nazwy uzytkownika?
+        tWybierz.setVerticalAlignment(JLabel.TOP);
+        tWybierz.setBounds(760, 400, 400, 90); //dostosowac granice
+        tWybierz.setFont(font.deriveFont(Font.BOLD, 50f));
+        tWybierz.setForeground(Color.BLACK);
+        add(tWybierz);
 
         Font theFont = new Font("Arial", Font.BOLD, 25);
         filmList.setSelectedIndex(0);
@@ -45,7 +68,7 @@ public class DostepneFilmy extends JFrame implements ActionListener, MouseListen
         filmList.setBounds(760,490,400,90);
         add(filmList);
 
-        background = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\Filmy.png")); // inicjalizownie oraz ustawianie tła
+        background = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\Film.png")); // inicjalizownie oraz ustawianie tła
         background.setBounds(0,0,1920,1080);
         add(background);
 
@@ -63,16 +86,19 @@ public class DostepneFilmy extends JFrame implements ActionListener, MouseListen
     public void mouseClicked(MouseEvent e) {
         try {
             Object p = e.getSource();
-            if ( p == bOk ) {
+            if ( p == bRezerwuj ) {
                 /*Rezerwacja rezerwacja = new Rezerwacja(dostepneFilmy[selected]);
                 rezerwacja.setVisible(true);
                 dispose();*/
-                OknoFilmu oknoFilmu = new OknoFilmu(dostepneFilmy[selected]);
+                OknoFilmu oknoFilmu = new OknoFilmu(dostepneFilmy[selected],uzytkownik,this);
                 oknoFilmu.setVisible(true);
                 dispose();
-
             }
-        } catch (RuntimeException | IOException err) {
+            if (p==bPowrot){
+                oknoUzytkownika.setVisible(true);
+                dispose();
+            }
+        } catch (RuntimeException | IOException | FontFormatException err) {
             System.out.println(err);
         }
     }

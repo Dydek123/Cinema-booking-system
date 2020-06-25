@@ -13,7 +13,7 @@ public class Siedzenie{
     private String miejsce; //"litera+liczba", litera - rzad, liczba miejsce w rzędzie
     private State state;
 
-    public Siedzenie(int coordX, int coordY, String miejsce, int state) {
+    public Siedzenie(int i, int j, String miejsce, State state) {
         /*
         coordX: 0-9
         coordY: 0-2
@@ -23,13 +23,15 @@ public class Siedzenie{
         wymaga użycia add(siedzenie[x][y].getbSiedzenie()) po uzyciu konstruktora by siedzenie wyswietlilo się w oknie
          */
         ImageIcon iWolne = new ImageIcon("Coś tam\\Nowe Grafiki\\wolne.png");
-        this.coordX = coordX;
-        this.coordY = coordY;
+        this.coordX = j;
+        this.coordY = i;
         bSiedzenie = new JLabel(iWolne);  //wersja robocza
         int paddingY = 400; //odsunięcie siatki krzeseł od górnej krawędzi
         int paddingX = 180; // odsunięcie siatki krzeseł od lewej krawędzi
-        int gapY= 70; // odstęp bo tło zawiera cyferki między rzedami siedzen
-        bSiedzenie.setBounds(paddingX + coordX *this.size, paddingY + coordY *(this.size + gapY), this.size, this.size);
+        int gapY= 50; // odstęp bo tło zawiera cyferki między rzedami siedzen
+        int gapX= 5; // odstęp miedzy siedzonkami
+        //System.out.println("X: " + coordX + ", Y: " + coordY);
+        bSiedzenie.setBounds((paddingX + coordX *(size+gapX)), (paddingY + coordY *(size + gapY)), size, size);
         bSiedzenie.setBorder(null);
         this.miejsce = miejsce;
         this.state = WOLNE;
