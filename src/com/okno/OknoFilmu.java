@@ -142,8 +142,6 @@ public class OknoFilmu  extends JFrame implements ActionListener, MouseListener 
 
         Font theFont = new Font("Arial", Font.BOLD, 25);
         seanseList.setSelectedIndex(0);
-        //Ustawienie domyslnie pierwszego dostepnego seansu jesli uzytkownik nie wybierze zadnego z combo box'a
-        selectedSeansId=Integer.parseInt(dostepneSeanse[1][0]);
         seanseList.setFont(theFont);
         seanseList.addActionListener(this);
         seanseList.setBounds(1250,680,270,50);
@@ -164,7 +162,10 @@ public class OknoFilmu  extends JFrame implements ActionListener, MouseListener 
         //i zeby uzyskac index seansu na ktory chcemy rezerwowac uzywamy tej magicznej listy String[][] ktora zrobilem
         //w dostepneSeanse[1] są indexy dostępnych seansów
         //dostepneSeanse[1][selected] to wybrany index jednego z dostępnego seansow
+        //a przynajmniej w teorii tak powinno być...
+        //problem: zwracają sie jakes dziwne losowe wartosci dla Jojo Rabita i Shrek2 a Shrek to w ogole nie działa
         selectedSeansId=Integer.parseInt(dostepneSeanse[1][selected]);
+        System.out.println(selectedSeansId);
     }
 
     @Override
