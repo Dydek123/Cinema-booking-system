@@ -15,7 +15,6 @@ public class Main {
             System.out.println(c.getLogin() + " " + c.getHaslo());
         System.out.println("test commit");
 
-
        /* //test dodawania filmu
         Uzytkownicy admin= new Uzytkownicy();
         //szukam admina
