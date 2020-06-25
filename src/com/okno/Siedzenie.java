@@ -11,6 +11,7 @@ public class Siedzenie{
     private JLabel bSiedzenie;
     private String miejsce; //"litera+liczba", litera - rzad, liczba miejsce w rzędzie
     public State state;
+    public boolean visible;
 
     public Siedzenie(int coordX, int coordY, String miejsce, State state) {
         /*

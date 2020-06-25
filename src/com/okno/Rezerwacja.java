@@ -6,13 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import com.okno.Siedzenie;
@@ -21,7 +14,6 @@ import com.okno.Siedzenie;
 public class Rezerwacja extends JFrame implements ActionListener, MouseListener {
 
     BazaDanych baza = new BazaDanych();
-    public JFrame bSignUp;
     public JLabel background;
     double cena = 0.0;
     Siedzenie [][] lista_siedzen = new Siedzenie[3][10];
@@ -29,9 +21,8 @@ public class Rezerwacja extends JFrame implements ActionListener, MouseListener 
     int IDuser;
     int IDfilm;
     int ile=0;
-
-
     public Siedzenie seat;
+
 
     public Rezerwacja() {
         setSize(1920, 1080); // inicjalizownie okna
@@ -106,6 +97,10 @@ public class Rezerwacja extends JFrame implements ActionListener, MouseListener 
 
     public int getIle() {
         return ile;
+    }
+
+    public double getCena() {
+        return cena;
     }
 
     @Override
