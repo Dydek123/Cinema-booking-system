@@ -43,11 +43,9 @@ public class Rezerwacja extends JFrame implements ActionListener, MouseListener 
         setTitle("Okno rezerwacji"); // nazwa okna
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ustawienie domyslnego zamkniecia okna
         setLayout(null);
-        background = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\Miejsce.png")); // inicjalizownie oraz ustawianie tła
+        background = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\Filmy.png")); // inicjalizownie oraz ustawianie tła
         background.setBounds(0,0,1920,1080);
         add(background);
-
-
 
     }
 
