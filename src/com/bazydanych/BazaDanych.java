@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import com.bazydanych.Bilety;
@@ -253,28 +252,6 @@ public class BazaDanych {
     }
     return filmyList;
   }
-
-  public String[] selectDostepneFilmy() {
-    String[] filmyList;
-    try {
-      ResultSet result = stat.executeQuery("SELECT Filmy.Tytul, (select count(*) FROM Filmy inner join Seanse using (ID_filmy) WHERE `Seanse`.`Data_seansu`>date()) as counter FROM Filmy inner join Seanse using (ID_filmy) WHERE `Seanse`.`Data_seansu`>date()"); // to do
-      String tytul;
-      int cntr=result.getInt("counter");
-      int it=0;
-      filmyList = new String[cntr];
-      while(result.next()) {
-        tytul = result.getString("Tytul");      // to do
-        filmyList[it]=tytul;
-        it++;
-
-      }
-    } catch (SQLException e) {
-      e.printStackTrace();
-      return null;
-    }
-    return filmyList;
-  }
-
   public List<Gatunki> selectGatunki() {
     List<Gatunki> gatunkiList = new LinkedList<Gatunki>();
     try {

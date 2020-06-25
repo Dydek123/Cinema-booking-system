@@ -18,8 +18,7 @@ import java.util.List;
 
 
 public class Rezerwacja extends JFrame implements ActionListener, MouseListener {
-    private BazaDanych baza = new BazaDanych();
-    private String selectedMovie;
+    BazaDanych baza = new BazaDanych();
     public JFrame bSignUp;
     public JLabel background;
 
@@ -39,15 +38,11 @@ public class Rezerwacja extends JFrame implements ActionListener, MouseListener 
             System.err.println("Zbyt malo wolnych miejsc!");
         }
     }
-    public Rezerwacja(String selectedMovie) {
+    public Rezerwacja() {
         setSize(1920, 1080); // inicjalizownie okna
         setTitle("Okno rezerwacji"); // nazwa okna
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ustawienie domyslnego zamkniecia okna
         setLayout(null);
-        this.selectedMovie=selectedMovie;
-
-
-
         background = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\Miejsce.png")); // inicjalizownie oraz ustawianie tła
         background.setBounds(0,0,1920,1080);
         add(background);
