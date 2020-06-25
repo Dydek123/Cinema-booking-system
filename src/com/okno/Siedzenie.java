@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import static com.okno.State.*;
 
+
 public class Siedzenie{
     private int coordX;
     private int coordY;

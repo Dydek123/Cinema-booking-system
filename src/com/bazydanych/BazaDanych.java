@@ -38,12 +38,12 @@ public class BazaDanych {
     String createBilety = "CREATE TABLE IF NOT EXISTS Bilety (ID_bilety INTEGER, Cena_biletu VARCHAR(100), Rodzaj VARCHAR(100) );"; // to do
     String createFilmy = "CREATE TABLE IF NOT EXISTS Filmy (ID_filmy INTEGER, Tytul VARCHAR (100)  UNIQUE ON CONFLICT ABORT, ID_rezyserzy INTEGER, ID_gatunki INTEGER, Ocena VARCHAR(100)," +
             "Czas_trwania VARCHAR(100), Rok_produkcji VARCHAR(100), Opis VARCHAR(1000), Zwiastun VARCHAR(100) );"; // to do
-    String createGatunki = "CREATE TABLE IF NOT EXISTS Gatunki (ID_gatunki INTEGER, Nazwa_gatunku VARCHAR(100) );"; // to do
+    String createGatunki = "CREATE TABLE IF NOT EXISTS Gatunki (ID_gatunki INTEGER PRIMARY KEY  AUTOINCREMENT, Nazwa_gatunku VARCHAR(100) );"; // to do
     String createRezerwacje = "CREATE TABLE IF NOT EXISTS Rezerwacje (ID_uzytkownicy INTEGER, ID_seanse INTEGER, ID_rezerwacje INTEGER, Miejsce VARCHAR );"; // to do
-    String createRezyserzy = "CREATE TABLE IF NOT EXISTS Rezyserzy (ID_rezyserzy INTEGER, Imie_rezysera VARCHAR(100), Nazwisko_rezysera VARCHAR(100) );"; // to do
-    String createSale = "CREATE TABLE IF NOT EXISTS Sale (ID_sale INTEGER, Numer INTEGER, Liczba_miejsc INTEGER );"; // to do
-    String createSeanse = "CREATE TABLE IF NOT EXISTS Seanse (ID_seanse INTEGER, ID_sale INTEGER, ID_filmy INTEGER, Data_seansu VARCHAR(100), Godzina_seansu VARCHAR(100) );"; // to do
-    String createUzytkownicy = "CREATE TABLE IF NOT EXISTS Uzytkownicy (ID_uzytkownicy INTEGER, Login VARCHAR(100), Haslo VARCHAR(100), Email VARCHAR(100), " +
+    String createRezyserzy = "CREATE TABLE IF NOT EXISTS Rezyserzy (ID_rezyserzy INTEGER PRIMARY KEY  AUTOINCREMENT, Imie_rezysera VARCHAR(100), Nazwisko_rezysera VARCHAR(100) );"; // to do
+    String createSale = "CREATE TABLE IF NOT EXISTS Sale (ID_sale INTEGER PRIMARY KEY  AUTOINCREMENT, Numer INTEGER, Liczba_miejsc INTEGER );"; // to do
+    String createSeanse = "CREATE TABLE IF NOT EXISTS Seanse (ID_seanse INTEGER PRIMARY KEY  AUTOINCREMENT, ID_sale INTEGER, ID_filmy INTEGER, Data_seansu VARCHAR(100), Godzina_seansu VARCHAR(100) );"; // to do
+    String createUzytkownicy = "CREATE TABLE IF NOT EXISTS Uzytkownicy (ID_uzytkownicy INTEGER PRIMARY KEY AUTOINCREMENT, Login VARCHAR(100), Haslo VARCHAR(100), Email VARCHAR(100), " +
             "Imie_uzytkownika VARCHAR(100), Nazwisko_uzytkownika VARCHAR(100), Wiek INTEGER, Telefon INTEGER, Admin INTEGER (1) DEFAULT (0) );"; // to do
     String createZakupy = "CREATE TABLE IF NOT EXISTS Zakupy(ID_zakupy INTEGER, ID_bilety INTEGER, ID_rezerwacje INTEGER, Data_zakupu VARCHAR(100) );"; // to do
     try {
