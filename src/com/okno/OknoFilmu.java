@@ -137,6 +137,7 @@ public class OknoFilmu  extends JPanel implements ActionListener, MouseListener 
         //tWybierz.setFont(new Font("Arial", Font.BOLD, 50));
         tWybierz.setFont(font.deriveFont(Font.BOLD, 50f));
         tWybierz.setForeground(new Color(23, 101, 202));
+        //tWybierz.setBackground(Color.white);
         add(tWybierz);
 
         //Ten select powinien zwracać seanse Filmu o danym ID ktore jeszcze sie nie odbyły - Data_seansu>date()
@@ -144,6 +145,8 @@ public class OknoFilmu  extends JPanel implements ActionListener, MouseListener 
         dostepneSeanse=baza.selectDostepneSeanse(chosenMovie.getIdFilmy());
         JComboBox seanseList = new JComboBox(dostepneSeanse[0]);
         Font theFont = new Font("Arial", Font.BOLD, 25);
+        seanseList.setEditable(true);
+        seanseList.getEditor().getEditorComponent().setBackground(new Color(170,170,170));
         seanseList.setSelectedIndex(0);
         //Ustawienie domyslnie pierwszego dostepnego seansu jesli uzytkownik nie wybierze zadnego z combo box'a
         selectedSeansId=Integer.parseInt(dostepneSeanse[1][0]);

@@ -159,6 +159,8 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
             }
             if(p==bDodajFilm){
                 Main.setJPanel(Window.DodajFilm,uzytkownik);
+            }else if(p==bDodajSeans){
+                Main.setJPanel(Window.DodajSeans,uzytkownik);
             }
         } catch (RuntimeException err) {
             System.out.println(err);

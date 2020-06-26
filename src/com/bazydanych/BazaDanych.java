@@ -171,13 +171,13 @@ public class BazaDanych {
     }
     return true;
   }
-  public boolean insertSeanse(int idSale, int idFilmy, /*date*/String dataSeansu, float godzinaSeansu) {
+  public boolean insertSeanse(int idSale, int idFilmy, /*date*/String dataSeansu, String godzinaSeansu) {
     try {
       PreparedStatement prepStmt = conn.prepareStatement("insert into Seanse values (NULL, ?, ?, ?, ?);"); // to do // sprawdzic wszystkie inserty
       prepStmt.setInt(1, idSale);
       prepStmt.setInt(2, idFilmy);
       prepStmt.setString(3, dataSeansu);
-      prepStmt.setFloat(4, godzinaSeansu);
+      prepStmt.setString(4, godzinaSeansu);
       prepStmt.execute();
     } catch (SQLException e) {
       System.err.println("Blad przy wstawianiu seansu");

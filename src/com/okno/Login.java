@@ -11,7 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
 
-public class Login extends JPanel implements ActionListener, MouseListener {
+public class Login extends JPanel implements ActionListener, MouseListener{
     private JTextField tLogin;
     private JPasswordField fPassword;
     private JLabel lLogin, lPassword, lWrongPass, background,bSingUp, bLogUp;
@@ -29,7 +29,6 @@ public class Login extends JPanel implements ActionListener, MouseListener {
     public Login(){
         setBounds(0,0,1920,1080);
         setLayout(null);
-
         lLogin = new JLabel("Login: ", JLabel.LEFT);
         lLogin.setBounds(x,y,width,height);
         lLogin.setFont(new Font("Impact", Font.PLAIN, 30));
