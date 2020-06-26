@@ -59,9 +59,6 @@ public class Main {
                 okno.setContentPane(new Register());
                 break;
 
-            case DodajSeans:
-                //okno.setContentPane(new DodajSeans());
-                break;
 
             default:
                 System.out.println("Bledne okno w setJPanel");
@@ -83,9 +80,15 @@ public class Main {
                     e.printStackTrace();
                 }
                 break;
+
             case DodajFilm:
                 okno.setContentPane(new DodajFilm(uzyt));
                 break;
+
+            case DodajSeans:
+                okno.setContentPane(new DodajSeans(uzyt));
+                break;
+
             default:
                 System.out.println("Bledne okno w setJPanel uzyt");
         }
