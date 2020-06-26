@@ -14,11 +14,11 @@ public class PlakatFilmu {
     int cordX=200;
     int cordY=400;
     BazaDanych baza = new BazaDanych();
-    JLabel iPlakat = new JLabel();
+    JLabel iPlakat;
 
     PlakatFilmu(String chosenMovieTitle) throws IOException {
 
-
+        iPlakat = new JLabel();
         this.iPlakat.setBounds(this.cordX, this.cordY, 170, 250);
         this.iPlakat.setBorder(null);
         //Ustawienie plakatu dopasowanego do labela
@@ -55,10 +55,11 @@ public class PlakatFilmu {
     }
 
     public JLabel getiPlakat() {
-        return iPlakat;
+        return this.iPlakat;
     }
+
     public String getchosenMovieTitle() {
-        return chosenMovieTitle;
+        return this.chosenMovieTitle;
     }
 
     public int getCordX() {

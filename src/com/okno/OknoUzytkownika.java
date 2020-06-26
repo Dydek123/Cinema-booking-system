@@ -126,7 +126,6 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
         try {
             Object p = e.getSource();
             if ( p == bDostepneFilmy ) {
-                System.out.println("KLIKAM DOSTEPNE FILMY CO JEST");
                 //private Login login;
                 /*Rezerwacja rezerwacja = new Rezerwacja();
                 rezerwacja.setVisible(true);

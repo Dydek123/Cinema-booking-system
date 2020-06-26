@@ -53,13 +53,18 @@ public class DostepneFilmy extends JPanel implements ActionListener, MouseListen
 
         for(int i=0;i<lista_plakatow.size();i++)
         {
-            int x = lista_plakatow.get(i).getCordX();
-            int y = lista_plakatow.get(i).getCordY();
-            lista_plakatow.get(i).setCordX(x+i*250);
-            if(lista_plakatow.get(i).getCordX()> 1650){
-                lista_plakatow.get(i).setCordX(50);
-                lista_plakatow.get(i).setCordY(y+250);
+            lista_plakatow.get(i).getiPlakat().addMouseListener(this);
+            int old_x = lista_plakatow.get(i).getCordX();
+            int old_y = lista_plakatow.get(i).getCordY();
 
+            if(lista_plakatow.get(i).getCordX()> 1650)
+            {
+                lista_plakatow.get(i).setCordX(50);
+                lista_plakatow.get(i).setCordY(old_y +500);
+            }
+            else{
+
+                lista_plakatow.get(i).setCordX(old_x+i*400);
             }
         }
         for(PlakatFilmu p: lista_plakatow)
@@ -83,12 +88,12 @@ public class DostepneFilmy extends JPanel implements ActionListener, MouseListen
         tWybierz.setForeground(Color.BLACK);
         add(tWybierz);
 
-        Font theFont = new Font("Arial", Font.BOLD, 25);
-        filmList.setSelectedIndex(0);
-        filmList.setFont(theFont);
-        filmList.addActionListener(this);
-        filmList.setBounds(760,490,400,90);
-        add(filmList);
+//        Font theFont = new Font("Arial", Font.BOLD, 25);
+//        filmList.setSelectedIndex(0);
+//        filmList.setFont(theFont);
+//        filmList.addActionListener(this);
+//        filmList.setBounds(760,490,400,90);
+//        add(filmList);
 
         background = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\Film.png")); // inicjalizownie oraz ustawianie tła
         background.setBounds(0,0,1920,1080);
@@ -99,25 +104,25 @@ public class DostepneFilmy extends JPanel implements ActionListener, MouseListen
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JComboBox cb = (JComboBox)e.getSource();
-        String filmName = (String)cb.getSelectedItem();
-        selected = (int)cb.getSelectedIndex();
+//        JComboBox cb = (JComboBox)e.getSource();
+//        String filmName = (String)cb.getSelectedItem();
+//        selected = (int)cb.getSelectedIndex();
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
         try {
             Object p = e.getSource();
-            if ( p == bRezerwuj ) {
-                /*Rezerwacja rezerwacja = new Rezerwacja(dostepneFilmy[selected]);
-                rezerwacja.setVisible(true);
-                dispose();*/
-//                OknoFilmu oknoFilmu = new OknoFilmu(dostepneFilmy[selected],uzytkownik,this);
-//                oknoFilmu.setVisible(true);
+//            if ( p == bRezerwuj ) {
+//                /*Rezerwacja rezerwacja = new Rezerwacja(dostepneFilmy[selected]);
+//                rezerwacja.setVisible(true);
+//                dispose();*/
+////                OknoFilmu oknoFilmu = new OknoFilmu(dostepneFilmy[selected],uzytkownik,this);
+////                oknoFilmu.setVisible(true);
+//
+//                Main.setJPanel(Window.OknoFilmu, uzytkownik, dostepneFilmy[selected]);
 
-                Main.setJPanel(Window.OknoFilmu, uzytkownik, dostepneFilmy[selected]);
-
-            }
+  //          }
             if (p==bPowrot){
                 Main.setJPanel(Window.OknoUzytkownika, uzytkownik);
             }
