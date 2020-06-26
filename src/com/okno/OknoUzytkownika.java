@@ -44,7 +44,7 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
 {
 
     private JLabel bEdytujDane, bWyloguj, bTwojeRezerwacje, bDostepneFilmy, bZapiszDane;
-    private JLabel tNazwaUzytkownika, tEmailUzytkownika, tTelefonUzytkownika, tPowitanie, tNajblizszeSeanse;
+    private JLabel tNazwaUzytkownika, tEmailUzytkownika, tTelefonUzytkownika, tPowitanie, tNajblizszeSeanse, tBledneDane;
     private JTextField fNoweImie, fNoweNazwisko, fNowyEmailUzytkownika, fNowyTelefonUzytkownika;
     private JPasswordField fNoweHaslo;
     private JLabel background;
@@ -153,6 +153,13 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
         bZapiszDane.addMouseListener(this);
         add(bZapiszDane);
 
+        tBledneDane = new JLabel("Bledne dane");
+        tBledneDane.setBounds(50,950,100,20);
+        tBledneDane.setFont(new Font("Impact", Font.PLAIN, 20));
+        tBledneDane.setForeground(Color.red);
+        tBledneDane.setVisible(false);
+        add(tBledneDane);
+
         background = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\Profil_uzytkownika.png")); // inicjalizownie oraz ustawianie tła
         background.setBounds(0,0,1920,1080);
         add(background);
@@ -201,8 +208,9 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
                 bZapiszDane.setVisible(true);
 
             }else if( p == bZapiszDane){
-                background.setIcon(new ImageIcon("Coś tam\\Nowe Grafiki\\Profil_uzytkownika.png"));
                 try {
+                    tBledneDane.setVisible(false);
+
                     if (fNoweImie.getText().length() != 0)
                         uzytkownik.setImieUzytkownika(fNoweImie.getText());
                     if (fNoweNazwisko.getText().length() != 0)
@@ -210,7 +218,7 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
 
                     String em = fNowyEmailUzytkownika.getText();
                     Matcher matcher = pattern.matcher(em);
-                    if (!matcher.matches())
+                    if (!matcher.matches() && em.length() > 0)
                         throw new RuntimeException("zly email");
                     else
                         uzytkownik.setEmail(em);
@@ -220,11 +228,9 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
                     if (fNoweHaslo.getText().length() != 0)
                         uzytkownik.setHaslo(fNoweHaslo.getText());
 
-                    baza.updateUzytkownicy(uzytkownik);
-                }catch(Exception err){
-                    System.out.println(err);
-                }
-                finally {
+                    if(!baza.updateUzytkownicy(uzytkownik))
+                        throw new Exception("blad update uzytkownika");
+
                     bEdytujDane.setVisible(true);
                     tNazwaUzytkownika.setVisible(true);
                     tEmailUzytkownika.setVisible(true);
@@ -236,6 +242,11 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
                     fNowyTelefonUzytkownika.setVisible(false);
                     fNoweHaslo.setVisible(false);
                     bZapiszDane.setVisible(false);
+
+                    background.setIcon(new ImageIcon("Coś tam\\Nowe Grafiki\\Profil_uzytkownika.png"));
+                }catch(Exception err){
+                    System.out.println(err);
+                    tBledneDane.setVisible(true);
                 }
             }
 

@@ -563,7 +563,7 @@ public class BazaDanych {
     }
   }
 
-  public void updateUzytkownicy(Uzytkownicy uzytkownik)
+  public boolean updateUzytkownicy(Uzytkownicy uzytkownik)
   {
     try {
       PreparedStatement prepStmt = conn.prepareStatement("UPDATE Uzytkownicy SET Haslo='" + uzytkownik.getHaslo()
@@ -576,9 +576,9 @@ public class BazaDanych {
     } catch (SQLException e) {
       System.err.println("Blad przy wstawianiu uzytkownika");
       e.printStackTrace();
-
+      return false;
     }
-
+    return true;
   }
 
   public void closeConnection() {

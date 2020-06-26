@@ -23,8 +23,8 @@ public class Register extends JPanel implements ActionListener, MouseListener {
     private ImageIcon iZarejestrujClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_clicked.png");
     private JPasswordField fPassword;
     private Login login;
-    private String regexEmail = "^(.+)@(.+).(.+)$", regexPassword = "\\w{50,}", regexLogin ="\\s{50,}"  ;
-    private Pattern patternEmail, patternPassword, patternLogin;
+    private String regexEmail = "^(.+)@(.+).(.+)$";
+    private Pattern patternEmail;
     private BufferedImage bi;
     int x = 107, y= 300, width = (835-80)/2, height = 50; // x=80, 935, y = 260
     public Register(){
@@ -51,13 +51,11 @@ public class Register extends JPanel implements ActionListener, MouseListener {
             ex.printStackTrace();
         }
 
-        patternLogin = Pattern.compile(regexLogin);
         tLogin = new JTextField(); // inicjalizownie oraz ustawianie pola do wpisania loginu
         tLogin.setBounds(x, y+height+20, width, height);
         tLogin.addActionListener(this);
         add(tLogin);
 
-        patternPassword = Pattern.compile(regexPassword);
         fPassword = new JPasswordField(); // inicjalizownie oraz ustawianie pola do wpisania hasla
         fPassword.setBounds(x+width+50,y+height+20,width,height);
         fPassword.addActionListener(this);
@@ -207,9 +205,7 @@ public class Register extends JPanel implements ActionListener, MouseListener {
             if ( p == bSingUp || p == tPhone) { // proba przypisania wpisanych tekstow w polu do zmiennych
                 //moze klasa w przyszlosci?
                 String l = tLogin.getText();
-//                Matcher matcherLogin = patternLogin.matcher(l);
-//                if(!matcherLogin.matches())
-//                    throw new RuntimeException("zly login");
+
                 String ps = fPassword.getText();
 
                 String em = tEmail.getText();
