@@ -162,3 +162,5 @@ Java-projekt.iml
 .idea/compiler.xml
 Java-projekt.iml
 .idea/modules.xml
+*.class
+target/
