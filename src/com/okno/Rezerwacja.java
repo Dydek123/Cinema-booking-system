@@ -42,11 +42,12 @@ public class Rezerwacja extends JPanel implements ActionListener, MouseListener 
     //Zainicjowanie listy siedzen stałą ilościa miejsc kazdej sali
 
 
-    public Rezerwacja(Uzytkownicy uzytkownicy, int selectedSeansId) throws IOException, FontFormatException {
+    public Rezerwacja(Uzytkownicy uzytkownicy, int selectedSeansId, String chosenMovieTitle) throws IOException, FontFormatException {
         setBounds(0,0,1920, 1080); // inicjalizownie okna
         setLayout(null);
         this.selectedSeansId=selectedSeansId;
         this.uzytkownicy=uzytkownicy;
+        this.chosenMovieTitle=chosenMovieTitle;
 
         createListOfSeats(listaSiedzen);
         baza.ktore_zajete(selectedSeansId, listaSiedzen);
