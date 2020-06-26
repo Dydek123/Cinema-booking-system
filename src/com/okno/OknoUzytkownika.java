@@ -218,9 +218,9 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
 
                     String em = fNowyEmailUzytkownika.getText();
                     Matcher matcher = pattern.matcher(em);
-                    if (!matcher.matches() && em.length() > 0)
-                        throw new RuntimeException("zly email");
-                    else
+                    if (em.length() > 0)
+                         if(!matcher.matches())
+                             throw new RuntimeException("zly email");
                         uzytkownik.setEmail(em);
 
                     if (fNowyTelefonUzytkownika.getText().length() != 0)
