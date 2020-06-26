@@ -59,6 +59,10 @@ public class Main {
                 okno.setContentPane(new Register());
                 break;
 
+            case DodajSeans:
+                //okno.setContentPane(new DodajSeans());
+                break;
+
             default:
                 System.out.println("Bledne okno w setJPanel");
         }
@@ -78,6 +82,9 @@ public class Main {
                     System.out.println("Blad przy setJPanel DostepneFilmy");
                     e.printStackTrace();
                 }
+                break;
+            case DodajFilm:
+                okno.setContentPane(new DodajFilm(uzyt));
                 break;
             default:
                 System.out.println("Bledne okno w setJPanel uzyt");

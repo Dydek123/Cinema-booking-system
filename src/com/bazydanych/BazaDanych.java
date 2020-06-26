@@ -98,6 +98,27 @@ public class BazaDanych {
     }
     return true;
   }
+
+  public boolean insertFilmy(Filmy film) {
+    try {
+      PreparedStatement prepStmt = conn.prepareStatement("insert into Filmy values (NULL, ?, ?, ?, ?, ?, ?, ?, ? );"); // to do // sprawdzic wszystkie inserty
+      prepStmt.setString(1, film.getTytul());
+      prepStmt.setInt(2, film.getIdRezyserzy());
+      prepStmt.setInt(3,film.getIdGatunki());
+      prepStmt.setDouble(4, film.getOcena());
+      prepStmt.setString(5, film.getCzasTrwania());
+      prepStmt.setInt(6, film.getRokProdukcji()/*year*/);
+      prepStmt.setString(7, film.getOpis());
+      prepStmt.setString(8, " "/*film.getZwiastun()*/);
+      prepStmt.execute();
+    } catch (SQLException e) {
+      System.err.println("Blad przy wstawianiu filmu");
+      e.printStackTrace();
+      return false;
+    }
+    return true;
+  }
+
   public boolean insertGatunki(String nazwaGatunku) {
     try {
       PreparedStatement prepStmt = conn.prepareStatement("insert into Gatunki values (NULL, ?);"); // to do // sprawdzic wszystkie inserty
@@ -243,7 +264,7 @@ public class BazaDanych {
         opis = result.getString("Opis");
         zwiastun = result.getString("Zwiastun");
 
-        filmyList.add(filmyFactory.makeFilm(idFlimy, tytul, idRezyserzy, ocena, czasTrwania, rokProdukcji, opis, zwiastun,idGatunki));
+        filmyList.add(filmyFactory.makeFilm(idFlimy, tytul, idRezyserzy, ocena, czasTrwania, rokProdukcji, opis,/* zwiastun,*/idGatunki));
       }
     } catch (SQLException e) {
       e.printStackTrace();
@@ -299,7 +320,7 @@ public class BazaDanych {
         opis = result.getString("Opis");
         zwiastun = result.getString("Zwiastun");
 
-        film = filmyFactory.makeFilm(idFlimy, tytul, idRezyserzy, ocena, czasTrwania, rokProdukcji, opis, zwiastun,idGatunki);
+        film = filmyFactory.makeFilm(idFlimy, tytul, idRezyserzy, ocena, czasTrwania, rokProdukcji, opis, /*zwiastun,*/idGatunki);
       }
     } catch (SQLException e) {
       e.printStackTrace();
@@ -391,6 +412,31 @@ public class BazaDanych {
     }
     return rezyser;
   }
+
+  public Rezyserzy selectRezyser(String name, String surname) {
+    final String sql = "SELECT * FROM Rezyserzy where Imie_rezysera= ? and Nazwisko_rezysera=?";
+    PreparedStatement ps = null;
+    Rezyserzy rezyser = null;
+    try {
+      ps = conn.prepareStatement(sql);
+      ps.setString(1, name);
+      ps.setString(2, surname);
+      ResultSet result = ps.executeQuery(); // to do
+      int idRezyserzy;
+      String imieRezysera, nazwiskoRezysera;
+      while(result.next()) {
+        idRezyserzy = result.getInt("ID_rezyserzy");
+        imieRezysera = result.getString("Imie_rezysera");
+        nazwiskoRezysera = result.getString("Nazwisko_rezysera");
+        rezyser=new Rezyserzy(idRezyserzy, imieRezysera, nazwiskoRezysera);
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return null;
+    }
+    return rezyser;
+  }
+
   public List<Sale> selectSale() {
     List<Sale> saleList = new LinkedList<Sale>();
     try {
