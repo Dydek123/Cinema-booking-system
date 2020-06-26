@@ -80,3 +80,4 @@ JFrameTest.iml
 Java-projekt.iml
 .idea/modules.xml
 .idea/modules.xml
+*.class
