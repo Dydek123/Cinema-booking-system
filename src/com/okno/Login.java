@@ -104,8 +104,8 @@ public class Login extends JPanel implements ActionListener, MouseListener {
     public void mouseClicked(MouseEvent e) {
         Object p = e.getSource();
         if(p == bSingUp){
-            register.setVisible(true);
-            setVisible(false);
+            Main.setJPanel(Window.Register);
+            removeAll();
         }else if(p == bLogUp){
                 String l = tLogin.getText();
                 String pass = fPassword.getText();
@@ -115,17 +115,13 @@ public class Login extends JPanel implements ActionListener, MouseListener {
                     System.out.println("login podany "+ l + " login z bazy " + c.getLogin() + ".");
                     if(l.equals(c.getLogin()) && pass.equals(c.getHaslo())){
                         lWrongPass.setVisible(false);
-                        setVisible(false);
-                        userWindow = new OknoUzytkownika(c);
-                        userWindow.setVisible(true);
-                        break;
+                        Main.setJPanel(Window.OknoUzytkownika, c);
+                        removeAll();
                     }
                 }
                 lWrongPass.setText("Zle dane logowania");
                 lWrongPass.setForeground(Color.red);
                 lWrongPass.setVisible(true);
-
-
         }
     }
 

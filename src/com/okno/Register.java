@@ -230,7 +230,7 @@ public class Register extends JPanel implements ActionListener, MouseListener {
                 if(!baza.insertUzytkownicy(l, ps, em, name, surname, age, phone)){
                     throw new RuntimeException("zle dane");
                 }
-                login.setVisible(true);
+                Main.setJPanel(Window.Login);
             }
         } catch (RuntimeException err) {
             System.out.println(err);

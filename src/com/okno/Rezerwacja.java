@@ -25,7 +25,6 @@ public class Rezerwacja extends JPanel implements ActionListener, MouseListener 
     private int selectedSeansId;
     private Uzytkownicy uzytkownicy;
     private String chosenMovieTitle;
-    private OknoFilmu oknoFilmu;
     private double cena = 0.0;
     private int IDuser;
     private int IDfilm;
@@ -43,12 +42,11 @@ public class Rezerwacja extends JPanel implements ActionListener, MouseListener 
     //Zainicjowanie listy siedzen stałą ilościa miejsc kazdej sali
 
 
-    public Rezerwacja(Uzytkownicy uzytkownicy, int selectedSeansId, OknoFilmu oknoFilmu) throws IOException, FontFormatException {
+    public Rezerwacja(Uzytkownicy uzytkownicy, int selectedSeansId) throws IOException, FontFormatException {
         setBounds(0,0,1920, 1080); // inicjalizownie okna
         setLayout(null);
         this.selectedSeansId=selectedSeansId;
         this.uzytkownicy=uzytkownicy;
-        this.oknoFilmu=oknoFilmu;
 
         createListOfSeats(listaSiedzen);
         baza.ktore_zajete(selectedSeansId, listaSiedzen);
@@ -162,12 +160,10 @@ public class Rezerwacja extends JPanel implements ActionListener, MouseListener 
             }
             if (p == bRezerwuj) {
                 rezerwowanieMiejsc(uzytkownicy.getIdUzytkownika(), selectedSeansId, ile);
-                OknoUzytkownika userWindow = new OknoUzytkownika(uzytkownicy);
-                userWindow.setVisible(true);
+                Main.setJPanel(Window.OknoUzytkownika, uzytkownicy);
             }
             if (p == bPowrot) {
-                //OknoFilmu oknoFilmu = new OknoFilmu(chosenMovieTitle, uzytkownicy);
-                oknoFilmu.setVisible(true);
+                Main.setJPanel(Window.OknoFilmu, uzytkownicy, chosenMovieTitle);
             }
         } catch (RuntimeException err) {
             System.out.println(err);

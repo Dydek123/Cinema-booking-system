@@ -24,7 +24,7 @@ public class OknoFilmu  extends JPanel implements ActionListener, MouseListener 
     private int selected;
     private int selectedSeansId;
     private Uzytkownicy uzytkownicy;
-    private DostepneFilmy dostepneFilmy;
+
     /*
      chcialem to tak zrobic zeby tabela wyglądała tak:
     dostepneSeanse:
@@ -36,13 +36,12 @@ public class OknoFilmu  extends JPanel implements ActionListener, MouseListener 
     */
     String[][] dostepneSeanse;
 
-    public OknoFilmu(String chosenMovieTitle, Uzytkownicy uzytkownicy,DostepneFilmy dostepneFilmy) throws IOException, FontFormatException {
+    public OknoFilmu(String chosenMovieTitle, Uzytkownicy uzytkownicy) throws IOException, FontFormatException {
 
         setBounds(0,0,1920, 1080); // inicjalizownie okna
         setLayout(null);
         this.uzytkownicy = uzytkownicy;
         this.chosenMovieTitle = chosenMovieTitle;
-        this.dostepneFilmy = dostepneFilmy;
         Filmy chosenMovie = baza.selectFilm(this.chosenMovieTitle);
         Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Coś tam\\Fonts\\Caudex-Regular.ttf"));
 
@@ -176,15 +175,14 @@ public class OknoFilmu  extends JPanel implements ActionListener, MouseListener 
         try {
             Object p = e.getSource();
             if ( p == bZarezerwuj ) {
-                Rezerwacja rezerwacja = new Rezerwacja(uzytkownicy,selectedSeansId,this);
-                rezerwacja.setVisible(true);
-
+//                Rezerwacja rezerwacja = new Rezerwacja(uzytkownicy,selectedSeansId,this);
+//                rezerwacja.setVisible(true);
+                Main.setJPanel(Window.Rezerwacja, uzytkownicy, selectedSeansId);
             }
             if ( p == bPowrot ) {
-                dostepneFilmy.setVisible(true);
-
+                Main.setJPanel(Window.DostepneFilmy, uzytkownicy);
             }
-        } catch (RuntimeException | IOException | FontFormatException err) {
+        } catch (RuntimeException err) {
             System.out.println(err);
         }
     }

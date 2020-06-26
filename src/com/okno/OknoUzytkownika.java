@@ -131,10 +131,9 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
                 rezerwacja.setVisible(true);
                 dispose();
                 */
-                DostepneFilmy dostepneFilmy = new DostepneFilmy(uzytkownik,this);
-                dostepneFilmy.setVisible(true);
+                Main.setJPanel(Window.DostepneFilmy, uzytkownik);
             }
-        } catch (RuntimeException | IOException | FontFormatException err) {
+        } catch (RuntimeException err) {
             System.out.println(err);
         }
     }

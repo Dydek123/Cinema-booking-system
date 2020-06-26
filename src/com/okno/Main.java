@@ -8,14 +8,14 @@ import java.io.IOException;
 import java.util.List;
 
 public class Main {
+
+    private static JFrame okno;
+
     public static void main(String[] args) {
-        JFrame okno = new JFrame();
-        Login login = new Login();
-        Register register = new Register();
-        OknoUzytkownika oknoUzytkownika;
+        okno = new JFrame();
 
         okno.setSize(1920,1080);
-        okno.setTitle("test");
+        okno.setTitle("Window");
         okno.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         okno.getContentPane().setBackground(Color.white);
 
@@ -23,9 +23,9 @@ public class Main {
         okno.setUndecorated(true);
 
         okno.setLayout(null);
-        okno.setVisible(true);
 
-//        okno.setContentPane(register);
+        setJPanel(Window.Login);
+
         okno.setVisible(true);
 
         BazaDanych test = new BazaDanych();
@@ -57,4 +57,64 @@ public class Main {
 
         //EventQueue.invokeLater(com.damianero.RateStar::createAndShowGui);
     }
+
+    public static void setJPanel(Window window)
+    {
+        switch (window)
+        {
+            case Login:
+                okno.setContentPane(new Login());
+                break;
+
+            case Register:
+                okno.setContentPane(new Register());
+                break;
+
+            default:
+                System.out.println("Bledne okno w setJPanel");
+        }
+    }
+
+    public static void setJPanel(Window window, Uzytkownicy uzyt)
+    {
+        switch (window) {
+            case OknoUzytkownika:
+                okno.setContentPane(new OknoUzytkownika(uzyt));
+                break;
+
+            case DostepneFilmy:
+                try {
+                    okno.setContentPane(new DostepneFilmy(uzyt));
+                }catch (IOException | FontFormatException e){
+                    System.out.println("Blad przy setJPanel DostepneFilmy");
+                    e.printStackTrace();
+                }
+                break;
+            default:
+                System.out.println("Bledne okno w setJPanel uzyt");
+        }
+    }
+
+    public static void setJPanel(Window window, Uzytkownicy uzyt, String chosenMovie)
+    {
+        try {
+            okno.setContentPane(new OknoFilmu(chosenMovie, uzyt));
+        }catch (IOException | FontFormatException e)
+        {
+            System.out.println("Blad przy setJPanel OknoFilmu");
+            e.printStackTrace();
+        }
+    }
+
+    public static void setJPanel(Window window, Uzytkownicy uzyt, int selectedSeansID)
+    {
+        try{
+            okno.setContentPane(new Rezerwacja(uzyt, selectedSeansID));
+        }catch (IOException | FontFormatException e)
+        {
+            System.out.println("Blad przy setJPanel Rezerwacje");
+            e.printStackTrace();
+        }
+    }
+
 }

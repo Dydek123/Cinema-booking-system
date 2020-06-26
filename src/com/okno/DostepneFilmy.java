@@ -23,13 +23,11 @@ public class DostepneFilmy extends JPanel implements ActionListener, MouseListen
     JComboBox filmList = new JComboBox(dostepneFilmy);
     private int selected;
     private Uzytkownicy uzytkownik;
-    private OknoUzytkownika oknoUzytkownika;
-    public DostepneFilmy(Uzytkownicy uzytkownik,OknoUzytkownika oknoUzytkownika) throws IOException, FontFormatException {
+    public DostepneFilmy(Uzytkownicy uzytkownik) throws IOException, FontFormatException {
         setBounds(0,0,1920, 1080); // inicjalizownie okna
         setLayout(null);
 
         this.uzytkownik=uzytkownik;
-        this.oknoUzytkownika=oknoUzytkownika;
         Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Coś tam\\Fonts\\Caudex-Regular.ttf"));
 
         bRezerwuj = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\rezerwuj.png"));
@@ -85,13 +83,13 @@ public class DostepneFilmy extends JPanel implements ActionListener, MouseListen
                 /*Rezerwacja rezerwacja = new Rezerwacja(dostepneFilmy[selected]);
                 rezerwacja.setVisible(true);
                 dispose();*/
-                OknoFilmu oknoFilmu = new OknoFilmu(dostepneFilmy[selected],uzytkownik,this);
-                oknoFilmu.setVisible(true);
+//                OknoFilmu oknoFilmu = new OknoFilmu(dostepneFilmy[selected],uzytkownik,this);
+//                oknoFilmu.setVisible(true);
             }
             if (p==bPowrot){
-                oknoUzytkownika.setVisible(true);
+                Main.setJPanel(Window.OknoUzytkownika, uzytkownik);
             }
-        } catch (RuntimeException | IOException | FontFormatException err) {
+        } catch (RuntimeException err) {
             System.out.println(err);
         }
     }
