@@ -10,6 +10,7 @@ import java.util.List;
 import com.bazydanych.Bilety;
 import com.okno.Siedzenie;
 import com.okno.State;
+import jdk.jshell.spi.SPIResolutionException;
 
 public class BazaDanych {
   public static final String DRIVER = "org.sqlite.JDBC";
@@ -167,7 +168,7 @@ public class BazaDanych {
   }
   public boolean insertUzytkownicy(String login, String haslo, String email, String imieUzytkownika, String nazwiskoUzytkownika, int wiek, int telefon) {
     try {
-      PreparedStatement prepStmt = conn.prepareStatement("insert into Uzytkownicy values (NULL, ?, ?, ?, ?, ?, ?, ?);"); // to do // sprawdzic wszystkie inserty
+      PreparedStatement prepStmt = conn.prepareStatement("insert into Uzytkownicy values (NULL, ?, ?, ?, ?, ?, ?, ?, 0);"); // to do // sprawdzic wszystkie inserty
       prepStmt.setString(1, login);
       prepStmt.setString(2, haslo);
       prepStmt.setString(3, email);
@@ -562,6 +563,23 @@ public class BazaDanych {
     }
   }
 
+  public void updateUzytkownicy(Uzytkownicy uzytkownik)
+  {
+    try {
+      PreparedStatement prepStmt = conn.prepareStatement("UPDATE Uzytkownicy SET Haslo='" + uzytkownik.getHaslo()
+              + "', Email='" + uzytkownik.getEmail() + "', Imie_uzytkownika='" + uzytkownik.getImieUzytkownika() +
+              "', Nazwisko_uzytkownika='" + uzytkownik.getNazwiskoUzytkownika() + "'," + "Telefon='" + uzytkownik.getTelefon()
+              + "' where ID_uzytkownicy=? ;"); // to do // sprawdzic wszystkie inserty
+      prepStmt.setInt(1, uzytkownik.getIdUzytkownika());
+      prepStmt.execute();
+
+    } catch (SQLException e) {
+      System.err.println("Blad przy wstawianiu uzytkownika");
+      e.printStackTrace();
+
+    }
+
+  }
 
   public void closeConnection() {
     try {

@@ -12,23 +12,8 @@ public class Main {
     private static Okno okno;
 
     public static void main(String[] args) {
-//        okno = new JFrame();
 
-//        okno.setSize(1920,1080);
-//        okno.setTitle("Window");
-//        okno.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        okno.getContentPane().setBackground(Color.white);
-//
-//        okno.setExtendedState(JFrame.MAXIMIZED_BOTH);
-//        okno.setUndecorated(true);
-//
-//        okno.setLayout(null);
-//
-//        setJPanel(Window.Login);
-//
-//        okno.setVisible(true);
-
-        okno = new Okno();
+         okno = new Okno();
 
         setJPanel(Window.Login);
 

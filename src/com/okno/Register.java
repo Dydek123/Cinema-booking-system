@@ -3,6 +3,7 @@ package com.okno;
 import com.bazydanych.BazaDanych;
 import com.bazydanych.Uzytkownicy;
 
+import javax.management.RuntimeErrorException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -22,8 +23,8 @@ public class Register extends JPanel implements ActionListener, MouseListener {
     private ImageIcon iZarejestrujClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_clicked.png");
     private JPasswordField fPassword;
     private Login login;
-    private String regex = "^(.+)@(.+).(.+)$";
-    private Pattern pattern;
+    private String regexEmail = "^(.+)@(.+).(.+)$", regexPassword = "\\w{50,}", regexLogin ="\\s{50,}"  ;
+    private Pattern patternEmail, patternPassword, patternLogin;
     private BufferedImage bi;
     int x = 107, y= 300, width = (835-80)/2, height = 50; // x=80, 935, y = 260
     public Register(){
@@ -50,11 +51,13 @@ public class Register extends JPanel implements ActionListener, MouseListener {
             ex.printStackTrace();
         }
 
+        patternLogin = Pattern.compile(regexLogin);
         tLogin = new JTextField(); // inicjalizownie oraz ustawianie pola do wpisania loginu
         tLogin.setBounds(x, y+height+20, width, height);
         tLogin.addActionListener(this);
         add(tLogin);
 
+        patternPassword = Pattern.compile(regexPassword);
         fPassword = new JPasswordField(); // inicjalizownie oraz ustawianie pola do wpisania hasla
         fPassword.setBounds(x+width+50,y+height+20,width,height);
         fPassword.addActionListener(this);
@@ -72,7 +75,7 @@ public class Register extends JPanel implements ActionListener, MouseListener {
             ex.printStackTrace();
         }
 
-        pattern = Pattern.compile(regex);
+        patternEmail = Pattern.compile(regexEmail);
         tEmail = new JTextField(); // inicjalizownie oraz ustawianie pola do wpisywania e-maila
         tEmail.setBounds(x,y+3*(height+20),width*2+50,height);
         tEmail.addActionListener(this);
@@ -204,19 +207,23 @@ public class Register extends JPanel implements ActionListener, MouseListener {
             if ( p == bSingUp || p == tPhone) { // proba przypisania wpisanych tekstow w polu do zmiennych
                 //moze klasa w przyszlosci?
                 String l = tLogin.getText();
+//                Matcher matcherLogin = patternLogin.matcher(l);
+//                if(!matcherLogin.matches())
+//                    throw new RuntimeException("zly login");
                 String ps = fPassword.getText();
+
                 String em = tEmail.getText();
-                Matcher matcher = pattern.matcher(em);
-                if(!matcher.matches()){
+                Matcher matcherEmail = patternEmail.matcher(em);
+                if(!matcherEmail.matches())
                     throw new RuntimeException("zly email");
-                }
+
                 String name = tName.getText();
                 String surname = tSurname.getText();
                 String _age = tAge.getText();
                 int age = Integer.parseInt(_age);
                 String _phone = tPhone.getText();
                 int phone = Integer.parseInt(_phone);
-                if(l == null || ps == null || name == null || surname == null || age == 0 || phone == 0 ){
+                if(l.length() == 0 || ps.length() == 0 || name.length() == 0 || surname.length() == 0 || age == 0 || phone == 0 ){
                     throw new RuntimeException("Brak danych");
                 }
                 //send to check
