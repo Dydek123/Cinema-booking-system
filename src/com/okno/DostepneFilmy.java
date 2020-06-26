@@ -85,7 +85,9 @@ public class DostepneFilmy extends JPanel implements ActionListener, MouseListen
                 dispose();*/
 //                OknoFilmu oknoFilmu = new OknoFilmu(dostepneFilmy[selected],uzytkownik,this);
 //                oknoFilmu.setVisible(true);
+
                 Main.setJPanel(Window.OknoFilmu, uzytkownik, dostepneFilmy[selected]);
+
             }
             if (p==bPowrot){
                 Main.setJPanel(Window.OknoUzytkownika, uzytkownik);
