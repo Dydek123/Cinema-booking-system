@@ -170,7 +170,7 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
         fNoweHaslo.setVisible(false);
         add(fNoweHaslo);
 
-        bZapiszDane = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\zatwierdz.png"));
+        bZapiszDane = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\zapisz_dane.png"));
         bZapiszDane.setBounds(97,995,300,67);
         bZapiszDane.setBorder(null);
         bZapiszDane.setVisible(false);
