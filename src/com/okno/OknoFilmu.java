@@ -16,7 +16,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class OknoFilmu  extends JFrame implements ActionListener, MouseListener {
+public class OknoFilmu  extends JPanel implements ActionListener, MouseListener {
     BazaDanych baza = new BazaDanych();
     private JLabel background;
     private JLabel bZarezerwuj, bPowrot;
@@ -24,7 +24,7 @@ public class OknoFilmu  extends JFrame implements ActionListener, MouseListener 
     private int selected;
     private int selectedSeansId;
     private Uzytkownicy uzytkownicy;
-    private DostepneFilmy dostepneFilmy;
+
     /*
      chcialem to tak zrobic zeby tabela wyglądała tak:
     dostepneSeanse:
@@ -36,18 +36,12 @@ public class OknoFilmu  extends JFrame implements ActionListener, MouseListener 
     */
     String[][] dostepneSeanse;
 
-    public OknoFilmu(String chosenMovieTitle, Uzytkownicy uzytkownicy,DostepneFilmy dostepneFilmy) throws IOException, FontFormatException {
+    public OknoFilmu(String chosenMovieTitle, Uzytkownicy uzytkownicy) throws IOException, FontFormatException {
 
-        setSize(1920, 1080); // inicjalizownie okna
-        setTitle("Opis filmu: "+ chosenMovieTitle); // nazwa okna
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ustawienie domyslnego zamkniecia okna
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setUndecorated(true);
-        setVisible(true);
+        setBounds(0,0,1920, 1080); // inicjalizownie okna
         setLayout(null);
         this.uzytkownicy = uzytkownicy;
         this.chosenMovieTitle = chosenMovieTitle;
-        this.dostepneFilmy = dostepneFilmy;
         Filmy chosenMovie = baza.selectFilm(this.chosenMovieTitle);
         Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Coś tam\\Fonts\\Caudex-Regular.ttf"));
 
@@ -181,17 +175,14 @@ public class OknoFilmu  extends JFrame implements ActionListener, MouseListener 
         try {
             Object p = e.getSource();
             if ( p == bZarezerwuj ) {
-                Rezerwacja rezerwacja = new Rezerwacja(uzytkownicy,selectedSeansId,this);
-                rezerwacja.setVisible(true);
-                dispose();
-
+//                Rezerwacja rezerwacja = new Rezerwacja(uzytkownicy,selectedSeansId,this);
+//                rezerwacja.setVisible(true);
+                Main.setJPanel(Window.Rezerwacja, uzytkownicy, selectedSeansId,chosenMovieTitle);
             }
             if ( p == bPowrot ) {
-                dostepneFilmy.setVisible(true);
-                dispose();
-
+                Main.setJPanel(Window.DostepneFilmy, uzytkownicy);
             }
-        } catch (RuntimeException | IOException | FontFormatException err) {
+        } catch (RuntimeException err) {
             System.out.println(err);
         }
     }

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Register extends JFrame implements ActionListener, MouseListener {
+public class Register extends JPanel implements ActionListener, MouseListener {
 
     private JLabel bSingUp, lLogin, lPassword, lEmail, lName, lSurname, lAge, lPhone, background, lWrongData, test;
     private JTextField tLogin, tEmail, tName, tSurname, tAge, tPhone;
@@ -27,12 +27,7 @@ public class Register extends JFrame implements ActionListener, MouseListener {
     private BufferedImage bi;
     int x = 107, y= 300, width = (835-80)/2, height = 50; // x=80, 935, y = 260
     public Register(){
-        setSize(1920,1080); // inicjalizownie okna
-        setTitle("Register"); // nazwa okna
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ustawienie domyslnego zamkniecia okna
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setUndecorated(true);
-        setVisible(true);
+        setBounds(0,0,1920,1080); // inicjalizownie okna
         setLayout(null);
 
         try {
@@ -235,8 +230,7 @@ public class Register extends JFrame implements ActionListener, MouseListener {
                 if(!baza.insertUzytkownicy(l, ps, em, name, surname, age, phone)){
                     throw new RuntimeException("zle dane");
                 }
-                login.setVisible(true);
-                dispose();
+                Main.setJPanel(Window.Login);
             }
         } catch (RuntimeException err) {
             System.out.println(err);

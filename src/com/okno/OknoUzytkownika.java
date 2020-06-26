@@ -38,7 +38,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.regex.Matcher;
 
-public class OknoUzytkownika extends JFrame implements ActionListener, MouseListener
+public class OknoUzytkownika extends JPanel implements ActionListener, MouseListener
 {
 
     private JLabel bEdytujDane, bWyloguj, bTwojeRezerwacje, bDostepneFilmy;
@@ -50,12 +50,7 @@ public class OknoUzytkownika extends JFrame implements ActionListener, MouseList
     private BufferedImage bi;
 
     public OknoUzytkownika(Uzytkownicy uzyt){
-        setSize(1920,1080); // inicjalizownie okna
-        setTitle("Okno uzytkownika"); // nazwa okna
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ustawienie domyslnego zamkniecia okna
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setUndecorated(true);
-        setVisible(true);
+        setBounds(0,0,1920,1080); // inicjalizownie okna
         setLayout(null);
 
         uzytkownik=uzyt;
@@ -136,11 +131,9 @@ public class OknoUzytkownika extends JFrame implements ActionListener, MouseList
                 rezerwacja.setVisible(true);
                 dispose();
                 */
-                DostepneFilmy dostepneFilmy = new DostepneFilmy(uzytkownik,this);
-                dostepneFilmy.setVisible(true);
-                dispose();
+                Main.setJPanel(Window.DostepneFilmy, uzytkownik);
             }
-        } catch (RuntimeException | IOException | FontFormatException err) {
+        } catch (RuntimeException err) {
             System.out.println(err);
         }
     }

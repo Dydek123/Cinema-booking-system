@@ -2,17 +2,42 @@ package com.okno;
 
 import com.bazydanych.*;
 
+import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
 import java.util.List;
 
 public class Main {
+
+    private static Okno okno;
+
     public static void main(String[] args) {
-        Login okno = new Login();
-        okno.setVisible(true);
+//        okno = new JFrame();
+
+//        okno.setSize(1920,1080);
+//        okno.setTitle("Window");
+//        okno.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        okno.getContentPane().setBackground(Color.white);
+//
+//        okno.setExtendedState(JFrame.MAXIMIZED_BOTH);
+//        okno.setUndecorated(true);
+//
+//        okno.setLayout(null);
+//
+//        setJPanel(Window.Login);
+//
+//        okno.setVisible(true);
+
+        okno = new Okno();
+
+        setJPanel(Window.Login);
+
         BazaDanych test = new BazaDanych();
         List<Uzytkownicy> uzytkownicy = test.selectUzytkownicy();
         System.out.println("Lista uzytkownikow: ");
         for(Uzytkownicy c: uzytkownicy)
             System.out.println(c.getLogin() + " " + c.getHaslo());
+
         System.out.println("test commit");
 
        /* //test dodawania filmu
@@ -36,4 +61,75 @@ public class Main {
 
         //EventQueue.invokeLater(com.damianero.RateStar::createAndShowGui);
     }
+
+    public static void setJPanel(Window window)
+    {
+        switch (window)
+        {
+            case Login:
+                okno.setContentPane(new Login());
+                break;
+
+            case Register:
+                okno.setContentPane(new Register());
+                break;
+
+            default:
+                System.out.println("Bledne okno w setJPanel");
+        }
+    }
+
+    public static void setJPanel(Window window, Uzytkownicy uzyt)
+    {
+        switch (window) {
+            case OknoUzytkownika:
+                okno.setContentPane(new OknoUzytkownika(uzyt));
+                break;
+
+            case DostepneFilmy:
+                try {
+                    okno.setContentPane(new DostepneFilmy(uzyt));
+                }catch (IOException | FontFormatException e){
+                    System.out.println("Blad przy setJPanel DostepneFilmy");
+                    e.printStackTrace();
+                }
+                break;
+            default:
+                System.out.println("Bledne okno w setJPanel uzyt");
+        }
+    }
+
+    public static void setJPanel(Window window, Uzytkownicy uzyt, String chosenMovie)
+    {
+        try {
+            okno.setContentPane(new OknoFilmu(chosenMovie, uzyt));
+        }catch (IOException | FontFormatException e)
+        {
+            System.out.println("Blad przy setJPanel OknoFilmu");
+            e.printStackTrace();
+        }
+    }
+
+    public static void setJPanel(Window window, Uzytkownicy uzyt, int selectedSeansID,String chosenMovieTitle)
+    {
+        try{
+            okno.setContentPane(new Rezerwacja(uzyt, selectedSeansID,chosenMovieTitle));
+        }catch (IOException | FontFormatException e)
+        {
+            System.out.println("Blad przy setJPanel Rezerwacje");
+            e.printStackTrace();
+        }
+    }
+
+    public static void setJPanel(Window window, String chosenMovieTitle, Uzytkownicy uzytkownicy)
+    {
+        try{
+            okno.setContentPane(new OknoFilmu(chosenMovieTitle, uzytkownicy));
+        }catch (IOException | FontFormatException e)
+        {
+            System.out.println("Blad przy setJPanel OknoFilmu");
+            e.printStackTrace();
+        }
+    }
+
 }

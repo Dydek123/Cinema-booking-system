@@ -11,7 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
 
-public class Login extends JFrame implements ActionListener, MouseListener {
+public class Login extends JPanel implements ActionListener, MouseListener {
     private JTextField tLogin;
     private JPasswordField fPassword;
     private JLabel lLogin, lPassword, lWrongPass, background,bSingUp, bLogUp;
@@ -27,15 +27,7 @@ public class Login extends JFrame implements ActionListener, MouseListener {
 
     int x = (935-80)/3, y= 300, width = (935-80)/2, height = 50; // x=80, 935, y = 260
     public Login(){
-        register = new Register(this);
-        //register.setVisible(true);
-        register.setVisible(false);
-
-        setSize(1920,1080);
-        setTitle("test");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setUndecorated(true);
+        setBounds(0,0,1920,1080);
         setLayout(null);
 
         lLogin = new JLabel("Login: ", JLabel.LEFT);
@@ -112,8 +104,8 @@ public class Login extends JFrame implements ActionListener, MouseListener {
     public void mouseClicked(MouseEvent e) {
         Object p = e.getSource();
         if(p == bSingUp){
-            register.setVisible(true);
-            setVisible(false);
+            Main.setJPanel(Window.Register);
+            removeAll();
         }else if(p == bLogUp){
                 String l = tLogin.getText();
                 String pass = fPassword.getText();
@@ -123,18 +115,13 @@ public class Login extends JFrame implements ActionListener, MouseListener {
                     System.out.println("login podany "+ l + " login z bazy " + c.getLogin() + ".");
                     if(l.equals(c.getLogin()) && pass.equals(c.getHaslo())){
                         lWrongPass.setVisible(false);
-                        setVisible(false);
-                        userWindow = new OknoUzytkownika(c);
-                        userWindow.setVisible(true);
-                        dispose();
-                        break;
+                        Main.setJPanel(Window.OknoUzytkownika, c);
+                        removeAll();
                     }
                 }
                 lWrongPass.setText("Zle dane logowania");
                 lWrongPass.setForeground(Color.red);
                 lWrongPass.setVisible(true);
-
-
         }
     }
 

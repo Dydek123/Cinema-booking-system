@@ -20,12 +20,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class Rezerwacja extends JFrame implements ActionListener, MouseListener {
+public class Rezerwacja extends JPanel implements ActionListener, MouseListener {
     private BazaDanych baza = new BazaDanych();
     private int selectedSeansId;
     private Uzytkownicy uzytkownicy;
     private String chosenMovieTitle;
-    private OknoFilmu oknoFilmu;
     private double cena = 0.0;
     private int IDuser;
     private int IDfilm;
@@ -43,17 +42,12 @@ public class Rezerwacja extends JFrame implements ActionListener, MouseListener 
     //Zainicjowanie listy siedzen stałą ilościa miejsc kazdej sali
 
 
-    public Rezerwacja(Uzytkownicy uzytkownicy, int selectedSeansId, OknoFilmu oknoFilmu) throws IOException, FontFormatException {
-        setSize(1920, 1080); // inicjalizownie okna
-        setTitle("Okno rezerwacji"); // nazwa okna
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ustawienie domyslnego zamkniecia okna
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setUndecorated(true);
-        setVisible(true);
+    public Rezerwacja(Uzytkownicy uzytkownicy, int selectedSeansId, String chosenMovieTitle) throws IOException, FontFormatException {
+        setBounds(0,0,1920, 1080); // inicjalizownie okna
         setLayout(null);
         this.selectedSeansId=selectedSeansId;
         this.uzytkownicy=uzytkownicy;
-        this.oknoFilmu=oknoFilmu;
+        this.chosenMovieTitle=chosenMovieTitle;
 
         createListOfSeats(listaSiedzen);
         baza.ktore_zajete(selectedSeansId, listaSiedzen);
@@ -167,14 +161,10 @@ public class Rezerwacja extends JFrame implements ActionListener, MouseListener 
             }
             if (p == bRezerwuj) {
                 rezerwowanieMiejsc(uzytkownicy.getIdUzytkownika(), selectedSeansId, ile);
-                OknoUzytkownika userWindow = new OknoUzytkownika(uzytkownicy);
-                userWindow.setVisible(true);
-                dispose();
+                Main.setJPanel(Window.OknoUzytkownika, uzytkownicy);
             }
             if (p == bPowrot) {
-                //OknoFilmu oknoFilmu = new OknoFilmu(chosenMovieTitle, uzytkownicy);
-                oknoFilmu.setVisible(true);
-                dispose();
+                Main.setJPanel(Window.OknoFilmu, uzytkownicy, chosenMovieTitle);
             }
         } catch (RuntimeException err) {
             System.out.println(err);
