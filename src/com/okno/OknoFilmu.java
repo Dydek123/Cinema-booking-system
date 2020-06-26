@@ -16,7 +16,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class OknoFilmu  extends JFrame implements ActionListener, MouseListener {
+public class OknoFilmu  extends JPanel implements ActionListener, MouseListener {
     BazaDanych baza = new BazaDanych();
     private JLabel background;
     private JLabel bZarezerwuj, bPowrot;
@@ -38,12 +38,7 @@ public class OknoFilmu  extends JFrame implements ActionListener, MouseListener 
 
     public OknoFilmu(String chosenMovieTitle, Uzytkownicy uzytkownicy,DostepneFilmy dostepneFilmy) throws IOException, FontFormatException {
 
-        setSize(1920, 1080); // inicjalizownie okna
-        setTitle("Opis filmu: "+ chosenMovieTitle); // nazwa okna
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ustawienie domyslnego zamkniecia okna
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setUndecorated(true);
-        setVisible(true);
+        setBounds(0,0,1920, 1080); // inicjalizownie okna
         setLayout(null);
         this.uzytkownicy = uzytkownicy;
         this.chosenMovieTitle = chosenMovieTitle;
@@ -183,12 +178,10 @@ public class OknoFilmu  extends JFrame implements ActionListener, MouseListener 
             if ( p == bZarezerwuj ) {
                 Rezerwacja rezerwacja = new Rezerwacja(uzytkownicy,selectedSeansId,this);
                 rezerwacja.setVisible(true);
-                dispose();
 
             }
             if ( p == bPowrot ) {
                 dostepneFilmy.setVisible(true);
-                dispose();
 
             }
         } catch (RuntimeException | IOException | FontFormatException err) {

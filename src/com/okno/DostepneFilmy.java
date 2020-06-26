@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
 
-public class DostepneFilmy extends JFrame implements ActionListener, MouseListener {
+public class DostepneFilmy extends JPanel implements ActionListener, MouseListener {
     BazaDanych baza = new BazaDanych();
     public JFrame bSignUp;
     public JLabel background, bRezerwuj,bPowrot;
@@ -25,12 +25,7 @@ public class DostepneFilmy extends JFrame implements ActionListener, MouseListen
     private Uzytkownicy uzytkownik;
     private OknoUzytkownika oknoUzytkownika;
     public DostepneFilmy(Uzytkownicy uzytkownik,OknoUzytkownika oknoUzytkownika) throws IOException, FontFormatException {
-        setSize(1920, 1080); // inicjalizownie okna
-        setTitle("Dostepne filmy"); // nazwa okna
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ustawienie domyslnego zamkniecia okna
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setUndecorated(true);
-        setVisible(true);
+        setBounds(0,0,1920, 1080); // inicjalizownie okna
         setLayout(null);
 
         this.uzytkownik=uzytkownik;
@@ -92,11 +87,9 @@ public class DostepneFilmy extends JFrame implements ActionListener, MouseListen
                 dispose();*/
                 OknoFilmu oknoFilmu = new OknoFilmu(dostepneFilmy[selected],uzytkownik,this);
                 oknoFilmu.setVisible(true);
-                dispose();
             }
             if (p==bPowrot){
                 oknoUzytkownika.setVisible(true);
-                dispose();
             }
         } catch (RuntimeException | IOException | FontFormatException err) {
             System.out.println(err);

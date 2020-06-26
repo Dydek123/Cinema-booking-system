@@ -20,7 +20,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class Rezerwacja extends JFrame implements ActionListener, MouseListener {
+public class Rezerwacja extends JPanel implements ActionListener, MouseListener {
     private BazaDanych baza = new BazaDanych();
     private int selectedSeansId;
     private Uzytkownicy uzytkownicy;
@@ -44,12 +44,7 @@ public class Rezerwacja extends JFrame implements ActionListener, MouseListener 
 
 
     public Rezerwacja(Uzytkownicy uzytkownicy, int selectedSeansId, OknoFilmu oknoFilmu) throws IOException, FontFormatException {
-        setSize(1920, 1080); // inicjalizownie okna
-        setTitle("Okno rezerwacji"); // nazwa okna
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ustawienie domyslnego zamkniecia okna
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setUndecorated(true);
-        setVisible(true);
+        setBounds(0,0,1920, 1080); // inicjalizownie okna
         setLayout(null);
         this.selectedSeansId=selectedSeansId;
         this.uzytkownicy=uzytkownicy;
@@ -169,12 +164,10 @@ public class Rezerwacja extends JFrame implements ActionListener, MouseListener 
                 rezerwowanieMiejsc(uzytkownicy.getIdUzytkownika(), selectedSeansId, ile);
                 OknoUzytkownika userWindow = new OknoUzytkownika(uzytkownicy);
                 userWindow.setVisible(true);
-                dispose();
             }
             if (p == bPowrot) {
                 //OknoFilmu oknoFilmu = new OknoFilmu(chosenMovieTitle, uzytkownicy);
                 oknoFilmu.setVisible(true);
-                dispose();
             }
         } catch (RuntimeException err) {
             System.out.println(err);

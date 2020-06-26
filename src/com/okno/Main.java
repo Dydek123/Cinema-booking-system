@@ -2,17 +2,38 @@ package com.okno;
 
 import com.bazydanych.*;
 
+import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Login okno = new Login();
+        JFrame okno = new JFrame();
+        Login login = new Login();
+        Register register = new Register();
+        OknoUzytkownika oknoUzytkownika;
+
+        okno.setSize(1920,1080);
+        okno.setTitle("test");
+        okno.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        okno.getContentPane().setBackground(Color.white);
+
+        okno.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        okno.setUndecorated(true);
+
+        okno.setLayout(null);
         okno.setVisible(true);
+
+//        okno.setContentPane(register);
+        okno.setVisible(true);
+
         BazaDanych test = new BazaDanych();
         List<Uzytkownicy> uzytkownicy = test.selectUzytkownicy();
         System.out.println("Lista uzytkownikow: ");
         for(Uzytkownicy c: uzytkownicy)
             System.out.println(c.getLogin() + " " + c.getHaslo());
+
         System.out.println("test commit");
 
        /* //test dodawania filmu

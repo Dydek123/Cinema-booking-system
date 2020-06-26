@@ -11,7 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
 
-public class Login extends JFrame implements ActionListener, MouseListener {
+public class Login extends JPanel implements ActionListener, MouseListener {
     private JTextField tLogin;
     private JPasswordField fPassword;
     private JLabel lLogin, lPassword, lWrongPass, background,bSingUp, bLogUp;
@@ -27,15 +27,7 @@ public class Login extends JFrame implements ActionListener, MouseListener {
 
     int x = (935-80)/3, y= 300, width = (935-80)/2, height = 50; // x=80, 935, y = 260
     public Login(){
-        register = new Register(this);
-        //register.setVisible(true);
-        register.setVisible(false);
-
-        setSize(1920,1080);
-        setTitle("test");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setUndecorated(true);
+        setBounds(0,0,1920,1080);
         setLayout(null);
 
         lLogin = new JLabel("Login: ", JLabel.LEFT);
@@ -126,7 +118,6 @@ public class Login extends JFrame implements ActionListener, MouseListener {
                         setVisible(false);
                         userWindow = new OknoUzytkownika(c);
                         userWindow.setVisible(true);
-                        dispose();
                         break;
                     }
                 }
