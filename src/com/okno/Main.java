@@ -110,24 +110,13 @@ public class Main {
         }
     }
 
-    public static void setJPanel(Window window, Uzytkownicy uzyt, int selectedSeansID,String chosenMovieTitle)
+    public static void setJPanel(Window window, Uzytkownicy uzyt, int selectedSeansID, String chosenMovieTitle)
     {
         try{
             okno.setContentPane(new Rezerwacja(uzyt, selectedSeansID,chosenMovieTitle));
         }catch (IOException | FontFormatException e)
         {
             System.out.println("Blad przy setJPanel Rezerwacje");
-            e.printStackTrace();
-        }
-    }
-
-    public static void setJPanel(Window window, String chosenMovieTitle, Uzytkownicy uzytkownicy)
-    {
-        try{
-            okno.setContentPane(new OknoFilmu(chosenMovieTitle, uzytkownicy));
-        }catch (IOException | FontFormatException e)
-        {
-            System.out.println("Blad przy setJPanel OknoFilmu");
             e.printStackTrace();
         }
     }

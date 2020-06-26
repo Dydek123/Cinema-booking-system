@@ -177,7 +177,7 @@ public class OknoFilmu  extends JPanel implements ActionListener, MouseListener 
             if ( p == bZarezerwuj ) {
 //                Rezerwacja rezerwacja = new Rezerwacja(uzytkownicy,selectedSeansId,this);
 //                rezerwacja.setVisible(true);
-                Main.setJPanel(Window.Rezerwacja, uzytkownicy, selectedSeansId,chosenMovieTitle);
+                Main.setJPanel(Window.Rezerwacja, uzytkownicy, selectedSeansId, chosenMovieTitle);
             }
             if ( p == bPowrot ) {
                 Main.setJPanel(Window.DostepneFilmy, uzytkownicy);

@@ -132,6 +132,8 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
                 dispose();
                 */
                 Main.setJPanel(Window.DostepneFilmy, uzytkownik);
+            }else if( p == bWyloguj){
+                Main.setJPanel(Window.Login);
             }
         } catch (RuntimeException err) {
             System.out.println(err);
