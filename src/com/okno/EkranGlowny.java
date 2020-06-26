@@ -27,7 +27,7 @@ public class EkranGlowny extends JFrame implements ActionListener{
         test.setBounds(700,360,300,50);
         test.setValue(0);
         for(Filmy f: filmy){
-            if(f.getTytul().equals("Jojo Rabit")){
+            if(f.getTytul().equals("Jojo Rabbit")){
                 test.setValue((int)f.getOcena());
             }
         }
