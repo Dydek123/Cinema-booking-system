@@ -18,7 +18,7 @@ public abstract class Filmy {
     private String czasTrwania;
     private /*year*/ int rokProdukcji;
     private String opis;
-    private String zwiastun;
+    //private String zwiastun;
 
     //konstruktor filmow przeniesiony do poszczegolnych gatunkow w mysl wzorca factory method
 
@@ -82,10 +82,10 @@ public abstract class Filmy {
     public void setOpis(String opis){
         this.opis = opis;
     }
-    public String getZwiastun() {
+    /*public String getZwiastun() {
         return zwiastun;
     }
     public void setZwiastun(String zwiastun) {
         this.zwiastun = zwiastun;
-    }
+    }*/
 }

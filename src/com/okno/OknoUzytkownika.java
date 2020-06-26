@@ -41,7 +41,7 @@ import java.util.regex.Matcher;
 public class OknoUzytkownika extends JPanel implements ActionListener, MouseListener
 {
 
-    private JLabel bEdytujDane, bWyloguj, bTwojeRezerwacje, bDostepneFilmy;
+    private JLabel bEdytujDane, bWyloguj, bTwojeRezerwacje, bDostepneFilmy,bDodajSeans,bDodajFilm;
     private JLabel tNazwaUzytkownika, tEmailUzytkownika, tTelefonUzytkownika, tPowitanie, tNajblizszeSeanse;
     private Uzytkownicy uzytkownik;
     BazaDanych baza = new BazaDanych();
@@ -64,10 +64,34 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
 
         ImageIcon wyloguj = new ImageIcon("Coś tam\\Nowe Grafiki\\wyloguj.png");
         bWyloguj = new JLabel(wyloguj);  //wersja robocza
-        bWyloguj.setBounds(1500, 48, 280, 70);
+        bWyloguj.setBounds(1600, 48, 280, 70);
         bWyloguj.setBorder(null);
         bWyloguj.addMouseListener(this);
         add(bWyloguj);
+
+        ImageIcon dodajSeans = new ImageIcon("Coś tam\\Nowe Grafiki\\dodaj_seans.png");
+        bDodajSeans = new JLabel(dodajSeans);  //wersja robocza
+        bDodajSeans.setBounds(1300, 48, 280, 70);
+        bDodajSeans.setBorder(null);
+        bDodajSeans.addMouseListener(this);
+        add(bDodajSeans);
+
+
+        ImageIcon dodajFilm = new ImageIcon("Coś tam\\Nowe Grafiki\\dodaj_film.png");
+        bDodajFilm = new JLabel(dodajFilm);  //wersja robocza
+        bDodajFilm.setBounds(1000, 48, 280, 70);
+        bDodajFilm.setBorder(null);
+        bDodajFilm.addMouseListener(this);
+        add(bDodajFilm);
+
+        if(uzytkownik.getAdmin()==1) {
+            bDodajSeans.setVisible(true);
+            bDodajFilm.setVisible(true);
+        }
+        else{
+            bDodajSeans.setVisible(false);
+            bDodajFilm.setVisible(false);
+        }
 
         ImageIcon twoje_rezerwacje = new ImageIcon("Coś tam\\Nowe Grafiki\\twoje_rezerwacje.png");
         bTwojeRezerwacje = new JLabel(twoje_rezerwacje);
@@ -132,6 +156,9 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
                 dispose();
                 */
                 Main.setJPanel(Window.DostepneFilmy, uzytkownik);
+            }
+            if(p==bDodajFilm){
+                Main.setJPanel(Window.DodajFilm,uzytkownik);
             }
         } catch (RuntimeException err) {
             System.out.println(err);
