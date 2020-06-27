@@ -69,6 +69,8 @@ public class Login extends JFrame implements ActionListener, MouseListener {
         bLogUp.setBounds(85,y + (5*height),428,140);
         bLogUp.setBorder(null);
         bLogUp.addMouseListener(this);
+
+
         add(bLogUp);
 
         bSingUp = new JLabel(iZarejestrujZielone);

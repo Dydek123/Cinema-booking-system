@@ -15,11 +15,14 @@ import java.util.regex.Pattern;
 
 public class Register extends JFrame implements ActionListener, MouseListener {
 
-    private JLabel bSingUp, lLogin, lPassword, lEmail, lName, lSurname, lAge, lPhone, background, lWrongData, test;
+    private JLabel bSingUp, bBack, lLogin, lPassword, lEmail, lName, lSurname, lAge, lPhone, background, lWrongData, test;
     private JTextField tLogin, tEmail, tName, tSurname, tAge, tPhone;
     private ImageIcon iZarejestrujZielone = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_zielone.png");
     private ImageIcon iZarejestrujHover = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_hover.png");
     private ImageIcon iZarejestrujClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_clicked.png");
+    private ImageIcon iPowrotZielone = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot_zielone.png");
+    private ImageIcon iPowrotHover = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot_hover.png");
+    private ImageIcon iPowrotClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot_clicked.png");
     private JPasswordField fPassword;
     private Login login;
     private String regex = "^(.+)@(.+).(.+)$";
@@ -150,10 +153,17 @@ public class Register extends JFrame implements ActionListener, MouseListener {
 
         bSingUp=new JLabel();
         bSingUp.setIcon(iZarejestrujZielone);
-        bSingUp.setBounds(x+190,y+8*(height+20)+20,428,140);
+        bSingUp.setBounds(85+(938-80)/2,y+8*(height+20)+20,428,140);
         bSingUp.setBorder(null);
         bSingUp.addMouseListener(this);
         add(bSingUp);
+
+        bBack=new JLabel();
+        bBack.setIcon(iPowrotZielone);
+        bBack.setBounds(85,y+8*(height+20)+20,428,140);
+        bBack.setBorder(null);
+        bBack.addMouseListener(this);
+        add(bBack);
 
         try {
             Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Coś tam\\Fonts\\Caudex-Regular.ttf"));
@@ -191,12 +201,7 @@ public class Register extends JFrame implements ActionListener, MouseListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        try {
-            Object p = e.getSource();
 
-        } catch (RuntimeException err) {
-
-        }
     }
 
     @Override
@@ -232,9 +237,16 @@ public class Register extends JFrame implements ActionListener, MouseListener {
                 if(!baza.insertUzytkownicy(l, ps, em, name, surname, age, phone)){
                     throw new RuntimeException("zle dane");
                 }
+<<<<<<< Updated upstream
                 login.setVisible(true);
                 dispose();
+=======
+                Main.setJPanel(Window.Login);
+            } else if(p==bBack){
+                Main.setJPanel(Window.Login);
+>>>>>>> Stashed changes
             }
+
         } catch (RuntimeException err) {
             System.out.println(err);
             lWrongData.setForeground(Color.red);
@@ -248,13 +260,19 @@ public class Register extends JFrame implements ActionListener, MouseListener {
         if(p == bSingUp) {
             bSingUp.setIcon(iZarejestrujClicked);
         }
+        if(p == bBack) {
+            bBack.setIcon(iPowrotClicked);
+        }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
         Object p = e.getSource();
         if(p == bSingUp) {
-            bSingUp.setIcon(iZarejestrujHover);
+            bSingUp.setIcon(iZarejestrujZielone);
+        }
+        if(p == bBack) {
+            bBack.setIcon(iPowrotZielone);
         }
     }
 
@@ -264,6 +282,9 @@ public class Register extends JFrame implements ActionListener, MouseListener {
         if(p == bSingUp) {
             bSingUp.setIcon(iZarejestrujHover);
         }
+        if(p == bBack) {
+            bBack.setIcon(iPowrotHover);
+        }
     }
 
     @Override
@@ -271,6 +292,9 @@ public class Register extends JFrame implements ActionListener, MouseListener {
         Object p = e.getSource();
         if(p == bSingUp) {
             bSingUp.setIcon(iZarejestrujZielone);
+        }
+        if(p == bBack) {
+            bBack.setIcon(iPowrotZielone);
         }
     }
 }
