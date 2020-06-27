@@ -239,8 +239,8 @@ public class Register extends JPanel implements ActionListener, MouseListener {
                     throw new RuntimeException("zle dane");
                 }
 
-                login.setVisible(true);
-                dispose();
+                //login.setVisible(true);
+                //dispose();
 
                 Main.setJPanel(Window.Login);
             } else if(p==bBack){
