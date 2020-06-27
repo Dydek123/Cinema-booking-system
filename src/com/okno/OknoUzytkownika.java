@@ -49,7 +49,6 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
     private JPasswordField fNoweHaslo;
     private JLabel background;
     private Uzytkownicy uzytkownik;
-    private String regex = "^(.+)@(.+).(.+)$";
     private Pattern pattern;
     BazaDanych baza = new BazaDanych();
     //List<Filmy> filmy = baza.selectFilmy();
@@ -151,7 +150,7 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
         fNoweNazwisko.setVisible(false);
         add(fNoweNazwisko);
 
-        pattern = Pattern.compile(regex);
+
         fNowyEmailUzytkownika = new JTextField();
         fNowyEmailUzytkownika.setBounds(165,760,300,40);
         fNowyEmailUzytkownika.setFont(new Font("Impact", Font.PLAIN, 40));
@@ -185,8 +184,8 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
         add(bPowrotMini);
 
         tBledneDane = new JLabel("Bledne dane");
-        tBledneDane.setBounds(50,950,100,20);
-        tBledneDane.setFont(new Font("Impact", Font.PLAIN, 20));
+        tBledneDane.setBounds(150,905,500,40);
+        tBledneDane.setFont(new Font("Impact", Font.PLAIN, 25));
         tBledneDane.setForeground(Color.red);
         tBledneDane.setVisible(false);
         add(tBledneDane);
@@ -242,23 +241,62 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
             }else if( p == bZapiszDane){
                 try {
                     tBledneDane.setVisible(false);
+                    String regex="[a-zA-Z0-9]+";
+                    pattern = Pattern.compile(regex);
+                    String im = fNoweImie.getText();
+                    Matcher matcher = pattern.matcher(im);
+                    if (!matcher.matches() && im.length()>0){
+                        System.out.println("imie ze spacjami");
+                        throw new RuntimeException("Imie nie może zawierać spacji!");}
+                    else
+                        if (im.length()!=0)
+                            uzytkownik.setImieUzytkownika(fNoweImie.getText());
 
+                    //if (fNoweNazwisko.getText().length() != 0)
+                     //   uzytkownik.setNazwiskoUzytkownika(fNoweNazwisko.getText());
+
+
+                    /*
                     if (fNoweImie.getText().length() != 0)
                         uzytkownik.setImieUzytkownika(fNoweImie.getText());
                     if (fNoweNazwisko.getText().length() != 0)
-                        uzytkownik.setNazwiskoUzytkownika(fNoweNazwisko.getText());
+                        uzytkownik.setNazwiskoUzytkownika(fNoweNazwisko.getText());*/
 
+                    regex = "^(.+)@(.+).(.+)$";
+                    pattern = Pattern.compile(regex);
                     String em = fNowyEmailUzytkownika.getText();
-                    Matcher matcher = pattern.matcher(em);
+                    matcher = pattern.matcher(em);
                     if (!matcher.matches() && em.length() > 0)
-                        throw new RuntimeException("zly email");
+                        throw new RuntimeException("Email nie jest emailem!");
                     else
-                        uzytkownik.setEmail(em);
+                        if (em.length() != 0)
+                            uzytkownik.setEmail(em);
 
-                    if (fNowyTelefonUzytkownika.getText().length() != 0)
-                        uzytkownik.setTelefon(Integer.parseInt(fNowyTelefonUzytkownika.getText()));
-                    if (fNoweHaslo.getText().length() != 0)
-                        uzytkownik.setHaslo(fNoweHaslo.getText());
+
+                    regex = "[0-9]+";
+                    pattern = Pattern.compile(regex);
+                    String tel=fNowyTelefonUzytkownika.getText();
+                    matcher = pattern.matcher(tel);
+                    if (!matcher.matches() && tel.length()> 0){
+                        throw new RuntimeException("Numer musi być cyframi!");
+                    }
+                    else{
+                        if (fNowyTelefonUzytkownika.getText().length() != 0)
+                            uzytkownik.setTelefon(Integer.parseInt(fNowyTelefonUzytkownika.getText()));
+                    }
+
+                    regex="[a-zA-Z0-9]+";
+                    pattern = Pattern.compile(regex);
+                    String pas = fNoweHaslo.getText();
+                    matcher = pattern.matcher(pas);
+                    if (!matcher.matches() && pas.length()>0){
+                        System.out.println("haslo ze spacjami");
+                        throw new RuntimeException("Haslo nie może zawierać spacji!");}
+                    else
+                        if (pas.length()!=0)
+                            uzytkownik.setHaslo(fNoweHaslo.getText());
+                    //if (fNoweHaslo.getText().length() != 0)
+                    //    uzytkownik.setHaslo(fNoweHaslo.getText());
 
                     if(!baza.updateUzytkownicy(uzytkownik))
                         throw new Exception("blad update uzytkownika");
@@ -279,6 +317,7 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
                     background.setIcon(new ImageIcon("Coś tam\\Nowe Grafiki\\Profil_uzytkownika.png"));
                 }catch(Exception err){
                     System.out.println(err);
+                    tBledneDane.setText(err.getMessage());
                     tBledneDane.setVisible(true);
                 }
             }else if(p==bDodajFilm){
@@ -300,6 +339,7 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
                 fNoweHaslo.setVisible(false);
                 bZapiszDane.setVisible(false);
                 bPowrotMini.setVisible(false);
+                tBledneDane.setVisible(false);
             }
 
     }
