@@ -237,14 +237,14 @@ public class Register extends JFrame implements ActionListener, MouseListener {
                 if(!baza.insertUzytkownicy(l, ps, em, name, surname, age, phone)){
                     throw new RuntimeException("zle dane");
                 }
-<<<<<<< Updated upstream
+
                 login.setVisible(true);
                 dispose();
-=======
+
                 Main.setJPanel(Window.Login);
             } else if(p==bBack){
                 Main.setJPanel(Window.Login);
->>>>>>> Stashed changes
+
             }
 
         } catch (RuntimeException err) {

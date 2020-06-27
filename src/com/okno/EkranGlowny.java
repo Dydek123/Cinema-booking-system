@@ -18,15 +18,13 @@ public class EkranGlowny extends JFrame implements ActionListener{
         setSize(1920,1080);
         setTitle("EkranGlowny");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-<<<<<<< Updated upstream
         getContentPane().setBackground(Color.white);
         setLayout(null);
-=======
+
         //setExtendedState(JFrame.MAXIMIZED_BOTH);
         //setUndecorated(true);
         //setVisible(true);
         //setLayout(null);
->>>>>>> Stashed changes
 
         test = new JSlider(0,10,1);  // suwak
         test.setBounds(700,360,300,50);
