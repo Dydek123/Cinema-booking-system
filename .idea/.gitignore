@@ -164,3 +164,4 @@ Java-projekt.iml
 .idea/modules.xml
 *.class
 target/
+JavaKino.db

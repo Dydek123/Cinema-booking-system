@@ -43,7 +43,7 @@ import java.util.regex.Pattern;
 public class OknoUzytkownika extends JPanel implements ActionListener, MouseListener
 {
 
-    private JLabel bEdytujDane, bWyloguj, bTwojeRezerwacje, bDostepneFilmy, bZapiszDane,bDodajSeans,bDodajFilm;;
+    private JLabel bEdytujDane, bWyloguj, bTwojeRezerwacje, bDostepneFilmy, bZapiszDane, bPowrotMini, bDodajSeans, bDodajFilm;
     private JLabel tNazwaUzytkownika, tEmailUzytkownika, tTelefonUzytkownika, tPowitanie, tNajblizszeSeanse, tBledneDane;
     private JTextField fNoweImie, fNoweNazwisko, fNowyEmailUzytkownika, fNowyTelefonUzytkownika;
     private JPasswordField fNoweHaslo;
@@ -171,11 +171,18 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
         add(fNoweHaslo);
 
         bZapiszDane = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\zapisz_dane.png"));
-        bZapiszDane.setBounds(97,995,300,67);
+        bZapiszDane.setBounds(255,1005,235,50);
         bZapiszDane.setBorder(null);
         bZapiszDane.setVisible(false);
         bZapiszDane.addMouseListener(this);
         add(bZapiszDane);
+
+        bPowrotMini = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\powrot_mini.png"));
+        bPowrotMini.setBounds(10,1005,235,50);
+        bPowrotMini.setBorder(null);
+        bPowrotMini.setVisible(false);
+        bPowrotMini.addMouseListener(this);
+        add(bPowrotMini);
 
         tBledneDane = new JLabel("Bledne dane");
         tBledneDane.setBounds(50,950,100,20);
@@ -230,6 +237,7 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
                 fNowyTelefonUzytkownika.setVisible(true);
                 fNoweHaslo.setVisible(true);
                 bZapiszDane.setVisible(true);
+                bPowrotMini.setVisible(true);
 
             }else if( p == bZapiszDane){
                 try {
@@ -266,6 +274,7 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
                     fNowyTelefonUzytkownika.setVisible(false);
                     fNoweHaslo.setVisible(false);
                     bZapiszDane.setVisible(false);
+                    bPowrotMini.setVisible(false);
 
                     background.setIcon(new ImageIcon("Coś tam\\Nowe Grafiki\\Profil_uzytkownika.png"));
                 }catch(Exception err){
@@ -276,6 +285,21 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
                 Main.setJPanel(Window.DodajFilm,uzytkownik);
             }else if(p==bDodajSeans){
                 Main.setJPanel(Window.DodajSeans,uzytkownik);
+            }else if(p==bPowrotMini){
+                background.setIcon(new ImageIcon("Coś tam\\Nowe Grafiki\\Profil_uzytkownika.png"));
+
+                bEdytujDane.setVisible(true);
+                tNazwaUzytkownika.setVisible(true);
+                tEmailUzytkownika.setVisible(true);
+                tTelefonUzytkownika.setVisible(true);
+
+                fNoweImie.setVisible(false);
+                fNoweNazwisko.setVisible(false);
+                fNowyEmailUzytkownika.setVisible(false);
+                fNowyTelefonUzytkownika.setVisible(false);
+                fNoweHaslo.setVisible(false);
+                bZapiszDane.setVisible(false);
+                bPowrotMini.setVisible(false);
             }
 
     }
