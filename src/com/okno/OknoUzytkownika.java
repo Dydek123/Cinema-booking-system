@@ -43,7 +43,7 @@ import java.util.regex.Pattern;
 public class OknoUzytkownika extends JPanel implements ActionListener, MouseListener
 {
 
-    private JLabel bEdytujDane, bWyloguj, bTwojeRezerwacje, bDostepneFilmy, bZapiszDane;
+    private JLabel bEdytujDane, bWyloguj, bTwojeRezerwacje, bDostepneFilmy, bZapiszDane, bPowrot;
     private JLabel tNazwaUzytkownika, tEmailUzytkownika, tTelefonUzytkownika, tPowitanie, tNajblizszeSeanse, tBledneDane;
     private JTextField fNoweImie, fNoweNazwisko, fNowyEmailUzytkownika, fNowyTelefonUzytkownika;
     private JPasswordField fNoweHaslo;
@@ -51,6 +51,7 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
     private Uzytkownicy uzytkownik;
     private String regex = "^(.+)@(.+).(.+)$";
     private Pattern pattern;
+    private TwojeRezerwacje twojeRezerwacje;
     BazaDanych baza = new BazaDanych();
 
     //List<Filmy> filmy = baza.selectFilmy();
@@ -62,6 +63,11 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
         setLayout(null);
 
         uzytkownik=uzyt;
+
+        twojeRezerwacje = new TwojeRezerwacje(uzytkownik);
+        twojeRezerwacje.setBounds(500,160,1420,540);
+        twojeRezerwacje.setVisible(false);
+        add(twojeRezerwacje);
 
         ImageIcon edytuj_dane = new ImageIcon("Coś tam\\Nowe Grafiki\\edytuj_dane.png");
         bEdytujDane = new JLabel(edytuj_dane); //wersja robocza
@@ -83,6 +89,11 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
         bTwojeRezerwacje.setBorder(null);
         bTwojeRezerwacje.addMouseListener(this);
         add(bTwojeRezerwacje);
+
+        bPowrot = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\powrot.png"));
+        bPowrot.setBounds(1080, 744, 260, 110);
+        bPowrot.addMouseListener(this);
+        add(bPowrot);
 
         ImageIcon wyswietl_dostepne = new ImageIcon("Coś tam\\Nowe Grafiki\\wyswietl_dostepne_filmy.png");
         bDostepneFilmy = new JLabel(wyswietl_dostepne);
@@ -194,7 +205,21 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
             }else if( p == bWyloguj){
                 Main.setJPanel(Window.Login);
             }else if( p == bTwojeRezerwacje){
-                Main.setJPanel(Window.TwojeRezrwacje, uzytkownik);
+
+                tNajblizszeSeanse.setVisible(false);
+                tPowitanie.setVisible(false);
+                bTwojeRezerwacje.setVisible(false);
+
+                twojeRezerwacje.setVisible(true);
+                bPowrot.setVisible(true);
+
+            }else if(p == bPowrot) {
+                tNajblizszeSeanse.setVisible(true);
+                tPowitanie.setVisible(true);
+                bTwojeRezerwacje.setVisible(true);
+
+                twojeRezerwacje.setVisible(false);
+                bPowrot.setVisible(false);
             }else if( p == bEdytujDane){
                 background.setIcon(new ImageIcon("Coś tam\\Nowe Grafiki\\tlo_edytuj_dane.png"));
 
