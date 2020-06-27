@@ -594,7 +594,7 @@ public class BazaDanych {
 
       if(ilosc > 0) {
 
-        rezerwacje = new String[ilosc][4];
+        rezerwacje = new String[ilosc][5];
 
         ResultSet result = stat.executeQuery(
                 "SELECT Rezerwacje.ID_seanse AS seanse, Rezerwacje.Miejsce, Seanse.Data_seansu, Seanse.Godzina_seansu, Seanse.ID_filmy AS filmy, Filmy.Tytul " +
@@ -606,6 +606,7 @@ public class BazaDanych {
           rezerwacje[i][1] = result.getString("Data_seansu");
           rezerwacje[i][2] = result.getString("Godzina_seansu");
           rezerwacje[i][0] = result.getString("Tytul");
+          rezerwacje[i][4] = "zrezygnuj";
 
         }
       }
