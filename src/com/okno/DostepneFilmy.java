@@ -131,11 +131,13 @@ public class DostepneFilmy extends JPanel implements ActionListener, MouseListen
                         this.selected_poster.selected = true;
                         this.selected_poster.iPlakat.setBorder(this.selected_poster.border);
                         this.is_selected = true;
+                        bRezerwuj.setIcon(new ImageIcon("Coś tam\\Nowe Grafiki\\rezerwuj_zielony.png"));
                     }else{
                         this.selected_poster.selected = false;
                         this.selected_poster.iPlakat.setBorder(null);
                         this.selected_poster = null;
                         this.is_selected = false;
+                        bRezerwuj.setIcon(new ImageIcon("Coś tam\\Nowe Grafiki\\rezerwuj.png"));
                     }
 
                 }
@@ -145,6 +147,7 @@ public class DostepneFilmy extends JPanel implements ActionListener, MouseListen
                     this.is_selected = false;
                     this.selected_poster.selected=false;
                     this.selected_poster.iPlakat.setBorder(null);
+                    bRezerwuj.setIcon(new ImageIcon("Coś tam\\Nowe Grafiki\\rezerwuj.png"));
                     Main.setJPanel(Window.OknoFilmu, uzytkownik, this.selected_poster.getchosenMovieTitle());
 
                 }
