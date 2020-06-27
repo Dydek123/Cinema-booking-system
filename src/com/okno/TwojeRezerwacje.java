@@ -4,9 +4,6 @@ import com.bazydanych.BazaDanych;
 import com.bazydanych.Uzytkownicy;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -27,19 +24,31 @@ public class TwojeRezerwacje extends JComponent {
         Font font = new Font("Impact", Font.PLAIN, 40);
         if(data[0][0] != null) {
 
-            tabelaRezerwacje = new JTable(data, new Object[]{"Film", "Data", "Godzina", "Miejsce", ""});
+            tabelaRezerwacje = new JTable(data, new Object[]{"Film", "Data", "Godzina", "Miejsce", "", "ID_rezerwacje"}){
+                private static final long serialVersionUID = 1L;
+
+                public boolean isCellEditable(int row, int column) {
+                    if(column == 4){
+                        return true;
+                    }else{
+                        //all other columns to false
+                        return false;
+                    }
+                };
+            };
+
+            tabelaRezerwacje.removeColumn(tabelaRezerwacje.getColumnModel().getColumn(5));
+
             tabelaRezerwacje.setFont(font);
-//            tabelaRezerwacje.setEnabled(false);
             tabelaRezerwacje.setRowHeight(50);
 
             //SET CUSTOM RENDER TO TEAMS COLUMN
             tabelaRezerwacje.getColumnModel().getColumn(4).setCellRenderer(new ButtonRenderer() );
 
             //SET VUSTOM EDITOR TO TEAMS COLUMN
-            tabelaRezerwacje.getColumnModel().getColumn(4).setCellEditor(new ButtonEditor(new JTextField("zrezygnuj")));
+            tabelaRezerwacje.getColumnModel().getColumn(4).setCellEditor(new ButtonEditor(new JTextField("Zrezygnowano"), tabelaRezerwacje.getRowCount()));
 
             tabelaRezerwacje.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
 
             JScrollPane scroll = new JScrollPane(tabelaRezerwacje);
             scroll.setBounds(50, 40, 1350, 500);
@@ -73,14 +82,17 @@ class ButtonRenderer extends JButton implements TableCellRenderer
 class ButtonEditor extends DefaultCellEditor
 {
     protected JButton btn;
-    private String lbl;
-    private Boolean clicked;
+    private Boolean[] enabel;
 
-    public ButtonEditor(JTextField textField) {
+    public ButtonEditor(JTextField textField, int rowNumber) {
         super(textField);
-
         btn = new JButton();
         btn.setOpaque(true);
+
+        enabel = new Boolean[rowNumber];
+        for(int i = 0; i < rowNumber; i++)
+            enabel[i] = true;
+        System.out.println(enabel.length);
 
         //WHEN BUTTON IS CLICKED
         btn.addActionListener(new ActionListener() {
@@ -95,33 +107,27 @@ class ButtonEditor extends DefaultCellEditor
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
 
         //SET TEXT TO BUTTON, SET CLICKED TO TRUE, THEN RETURN THE BTN OBJECT
+        if(enabel[row]) {
+            btn.setText("ZREZYNOWANO");
+            enabel[row] = false;
+            btn.setEnabled(false);
 
-        lbl = (value == null) ? "": value.toString();
-        btn.setText(lbl);
-        clicked = true;
-        //to do
+            String index = (String) table.getModel().getValueAt(row, 5);
+            System.out.println(index);
+
+            BazaDanych baza = new BazaDanych();
+
+            baza.deleteRezerwacjeUzytkownika( Integer.parseInt(index));
+
+            baza.closeConnection();
+        }
         return btn;
 //        return super.getTableCellEditorComponent(table, value, isSelected, row, column);
     }
 
-    //IF BUTTON CELL VALUE CHANGES, IF CLICKED THAT IS
-    @Override
-    public Object getCellEditorValue() {
-
-        if(clicked)
-        {
-            //SHOW US SOME MESSAGE
-            JOptionPane.showMessageDialog(btn, lbl + " clicked");
-
-        }
-        //SET IT TO FALSE NOW THAT ITS CLICKED
-//        return super.getCellEditorValue();
-        return new String(lbl);
-    }
 
     @Override
     public boolean stopCellEditing() {
-        clicked = false;
         return super.stopCellEditing();
     }
 
@@ -130,4 +136,3 @@ class ButtonEditor extends DefaultCellEditor
         super.fireEditingStopped();
     }
 }
-

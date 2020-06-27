@@ -586,27 +586,28 @@ public class BazaDanych {
     int ilosc;
     try {
       ResultSet result2 = stat.executeQuery(
-              "SELECT COUNT(*) FROM (SELECT Rezerwacje.ID_seanse AS seanse, Rezerwacje.Miejsce, Seanse.Data_seansu, Seanse.Godzina_seansu, Seanse.ID_filmy AS filmy," +
-                      "Filmy.Tytul From Rezerwacje Natural join Seanse, Filmy" +
+              "SELECT COUNT(*) FROM (SELECT Rezerwacje.ID_seanse AS seanse, Rezerwacje.Miejsce, Seanse.Data_seansu, Seanse.Godzina_seansu, Seanse.ID_filmy AS filmy, " +
+                      "Filmy.Tytul, Rezerwacje.ID_rezerwacje From Rezerwacje Natural join Seanse, Filmy" +
                       " WHERE Rezerwacje.ID_uzytkownicy = " + ID_uzytkownika + " AND Seanse.ID_seanse = seanse AND Filmy.ID_filmy = filmy);");
 
       ilosc = result2.getInt("COUNT(*)");
 
       if(ilosc > 0) {
 
-        rezerwacje = new String[ilosc][5];
+        rezerwacje = new String[ilosc][6];
 
         ResultSet result = stat.executeQuery(
-                "SELECT Rezerwacje.ID_seanse AS seanse, Rezerwacje.Miejsce, Seanse.Data_seansu, Seanse.Godzina_seansu, Seanse.ID_filmy AS filmy, Filmy.Tytul " +
+                "SELECT Rezerwacje.ID_seanse AS seanse, Rezerwacje.Miejsce, Seanse.Data_seansu, Seanse.Godzina_seansu, Seanse.ID_filmy AS filmy, Filmy.Tytul, Rezerwacje.ID_rezerwacje " +
                         "From Rezerwacje Natural join Seanse, Filmy " +
                         "WHERE Rezerwacje.ID_uzytkownicy = " + ID_uzytkownika + " AND Seanse.ID_seanse = seanse AND Filmy.ID_filmy = filmy");
 
         for (int i = 0; result.next(); i++) {
+          rezerwacje[i][5] = String.valueOf(result.getInt("ID_rezerwacje"));
           rezerwacje[i][3] = result.getString("Miejsce");
           rezerwacje[i][1] = result.getString("Data_seansu");
           rezerwacje[i][2] = result.getString("Godzina_seansu");
           rezerwacje[i][0] = result.getString("Tytul");
-          rezerwacje[i][4] = "zrezygnuj";
+          rezerwacje[i][4] = "Zrezygnuj";
 
         }
       }
@@ -614,6 +615,19 @@ public class BazaDanych {
       e.printStackTrace();
     }finally {
       return rezerwacje;
+    }
+  }
+
+  public void deleteRezerwacjeUzytkownika(int idRezerwacjeUzytkownika)
+  {
+    try{
+
+      PreparedStatement deleteRezerwacjeUzytkownika = conn.prepareStatement("DELETE FROM Rezerwacje WHERE ID_rezerwacje=?;");
+      deleteRezerwacjeUzytkownika.setInt(1, idRezerwacjeUzytkownika);
+      deleteRezerwacjeUzytkownika.execute();
+
+    }catch (SQLException e) {
+      e.printStackTrace();
     }
   }
 
