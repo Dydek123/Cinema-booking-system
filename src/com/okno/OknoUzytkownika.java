@@ -43,7 +43,7 @@ import java.util.regex.Pattern;
 public class OknoUzytkownika extends JPanel implements ActionListener, MouseListener
 {
 
-    private JLabel bEdytujDane, bWyloguj, bTwojeRezerwacje, bDostepneFilmy, bZapiszDane, bPowrotMini, bDodajSeans, bDodajFilm;
+    private JLabel bEdytujDane, bWyloguj, bTwojeRezerwacje, bExit, bDostepneFilmy, bZapiszDane, bPowrotMini, bDodajSeans, bDodajFilm;
     private JLabel tNazwaUzytkownika, tEmailUzytkownika, tTelefonUzytkownika, tPowitanie, tNajblizszeSeanse, tBledneDane;
     private JTextField fNoweImie, fNoweNazwisko, fNowyEmailUzytkownika, fNowyTelefonUzytkownika;
     private JPasswordField fNoweHaslo;
@@ -61,6 +61,13 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
 
         uzytkownik=uzyt;
 
+        ImageIcon zamknij = new ImageIcon("Coś tam\\Nowe Grafiki\\Zamknij_button.png");
+        bExit = new JLabel(zamknij);  //wersja robocza
+        bExit.setBounds(1600, 48, 280, 70);
+        bExit.setBorder(null);
+        bExit.addMouseListener(this);
+        add(bExit);
+
         ImageIcon edytuj_dane = new ImageIcon("Coś tam\\Nowe Grafiki\\edytuj_dane.png");
         bEdytujDane = new JLabel(edytuj_dane); //wersja robocza
         bEdytujDane.setBounds(60, 575, 377, 75);
@@ -70,14 +77,14 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
 
         ImageIcon wyloguj = new ImageIcon("Coś tam\\Nowe Grafiki\\wyloguj.png");
         bWyloguj = new JLabel(wyloguj);  //wersja robocza
-        bWyloguj.setBounds(1600, 48, 280, 70);
+        bWyloguj.setBounds(1300, 48, 280, 70);
         bWyloguj.setBorder(null);
         bWyloguj.addMouseListener(this);
         add(bWyloguj);
 
         ImageIcon dodajSeans = new ImageIcon("Coś tam\\Nowe Grafiki\\dodaj_seans.png");
         bDodajSeans = new JLabel(dodajSeans);  //wersja robocza
-        bDodajSeans.setBounds(1300, 48, 280, 70);
+        bDodajSeans.setBounds(1000, 48, 280, 70);
         bDodajSeans.setBorder(null);
         bDodajSeans.addMouseListener(this);
         add(bDodajSeans);
@@ -85,10 +92,11 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
 
         ImageIcon dodajFilm = new ImageIcon("Coś tam\\Nowe Grafiki\\dodaj_film.png");
         bDodajFilm = new JLabel(dodajFilm);  //wersja robocza
-        bDodajFilm.setBounds(1000, 48, 280, 70);
+        bDodajFilm.setBounds(700, 48, 280, 70);
         bDodajFilm.setBorder(null);
         bDodajFilm.addMouseListener(this);
         add(bDodajFilm);
+
 
         if(uzytkownik.getAdmin()==1) {
             bDodajSeans.setVisible(true);
@@ -190,7 +198,7 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
         tBledneDane.setVisible(false);
         add(tBledneDane);
 
-        background = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\Profil_uzytkownika.png")); // inicjalizownie oraz ustawianie tła
+        background = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\Profil_uzytkownika_2.png")); // inicjalizownie oraz ustawianie tła
         background.setBounds(0,0,1920,1080);
         add(background);
 
@@ -340,6 +348,10 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
                 bZapiszDane.setVisible(false);
                 bPowrotMini.setVisible(false);
                 tBledneDane.setVisible(false);
+            }else if(p == bExit){
+                Main.setJPanel(Window.Login);
+                removeAll();
+                System.exit(0);
             }
 
     }
