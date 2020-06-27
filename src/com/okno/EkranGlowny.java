@@ -23,6 +23,11 @@ public class EkranGlowny extends JFrame implements ActionListener{
         setVisible(true);
         setLayout(null);
 
+        //setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //setUndecorated(true);
+        //setVisible(true);
+        //setLayout(null);
+
         test = new JSlider(0,10,1);  // suwak
         test.setBounds(700,360,300,50);
         test.setValue(0);
