@@ -4,6 +4,7 @@ import com.movies.Filmy;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -11,15 +12,16 @@ import java.io.IOException;
 
 public class PlakatFilmu {
     String chosenMovieTitle;
-    int cordX=200;
-    int cordY=400;
+    int cordX=170;
+    int cordY=200;
     BazaDanych baza = new BazaDanych();
+    Border border = BorderFactory.createLineBorder(Color.YELLOW,5);
     JLabel iPlakat;
 
     PlakatFilmu(String chosenMovieTitle) throws IOException {
 
         iPlakat = new JLabel();
-        this.iPlakat.setBounds(this.cordX, this.cordY, 170, 250);
+        this.iPlakat.setBounds(this.cordX, this.cordY, 272, 400);
         this.iPlakat.setBorder(null);
         //Ustawienie plakatu dopasowanego do labela
         BufferedImage img = null;
@@ -46,13 +48,14 @@ public class PlakatFilmu {
 
     public void setCordX(int cordX) {
         this.cordX = cordX;
-        this.iPlakat.setBounds(this.cordX, this.cordY, 170, 250);
+        this.iPlakat.setBounds(this.cordX, this.cordY, 272, 400);
     }
 
     public void setCordY(int cordY) {
         this.cordY = cordY;
-        this.iPlakat.setBounds(this.cordX, this.cordY, 170, 250);
+        this.iPlakat.setBounds(this.cordX, this.cordY, 272, 400);
     }
+
 
     public JLabel getiPlakat() {
         return this.iPlakat;

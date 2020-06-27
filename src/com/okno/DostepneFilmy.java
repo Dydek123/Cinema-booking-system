@@ -19,7 +19,7 @@ import java.util.Vector;
 public class DostepneFilmy extends JPanel implements ActionListener, MouseListener {
     BazaDanych baza = new BazaDanych();
     public JFrame bSignUp;
-    public JLabel background, bRezerwuj,bPowrot, bPlakat;
+    public JLabel background, bRezerwuj,bPowrot, hover;
     public String[] dostepneFilmy=baza.selectDostepneFilmy();
     //Lista przechowująca obiekty klasy PlakatFilmu - pętla je wyswietli
     public List<PlakatFilmu> lista_plakatow = new LinkedList<>();
@@ -45,26 +45,32 @@ public class DostepneFilmy extends JPanel implements ActionListener, MouseListen
         bPowrot.addMouseListener(this);
         add(bPowrot);
 
+
         for(String s: dostepneFilmy){
             lista_plakatow.add(new PlakatFilmu(s));
         }
         int size= lista_plakatow.size();
-        System.out.println("ROZMIAR ="+size);
 
+        int old_x=lista_plakatow.get(0).getCordX();
+        int old_y=lista_plakatow.get(0).getCordY();
+        int j=0;
+        int temp_y=1;
         for(int i=0;i<lista_plakatow.size();i++)
         {
-            lista_plakatow.get(i).getiPlakat().addMouseListener(this);
-            int old_x = lista_plakatow.get(i).getCordX();
-            int old_y = lista_plakatow.get(i).getCordY();
 
-            if(lista_plakatow.get(i).getCordX()> 1650)
+            lista_plakatow.get(i).getiPlakat().addMouseListener(this);
+            if(j==5)
             {
-                lista_plakatow.get(i).setCordX(50);
-                lista_plakatow.get(i).setCordY(old_y +500);
+                lista_plakatow.get(i).setCordX(170);
+                old_x = lista_plakatow.get(i).getCordX();
+                lista_plakatow.get(i).setCordY(old_y +temp_y*450);
+                temp_y+=1;
+                j=0;
             }
             else{
+                lista_plakatow.get(i).setCordX(old_x+j*316);
+                j+=1;
 
-                lista_plakatow.get(i).setCordX(old_x+i*400);
             }
         }
         for(PlakatFilmu p: lista_plakatow)
@@ -83,9 +89,9 @@ public class DostepneFilmy extends JPanel implements ActionListener, MouseListen
 
         JLabel tWybierz = new JLabel("Wybierz film:"); // jak zrobic napis aby byl idalnie na srodku nie zaleznie od dlugosci nazwy uzytkownika?
         tWybierz.setVerticalAlignment(JLabel.TOP);
-        tWybierz.setBounds(760, 400, 400, 90); //dostosowac granice
+        tWybierz.setBounds(760, 50, 400, 90); //dostosowac granice
         tWybierz.setFont(font.deriveFont(Font.BOLD, 50f));
-        tWybierz.setForeground(Color.BLACK);
+        tWybierz.setForeground(Color.WHITE);
         add(tWybierz);
 
 //        Font theFont = new Font("Arial", Font.BOLD, 25);
@@ -149,11 +155,31 @@ public class DostepneFilmy extends JPanel implements ActionListener, MouseListen
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        try{
+            Object p= e.getSource();
+            for(PlakatFilmu poster: lista_plakatow){
+                if(p==poster){
+                    poster.iPlakat.setBorder(poster.border);
+                    add(poster.getiPlakat());
+                }
+            }
+        }catch (RuntimeException err){
+            System.out.println(err);
+        }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        try{
+            Object p= e.getSource();
+            for(PlakatFilmu poster: lista_plakatow){
+                if(p==poster){
+                    poster.iPlakat.setBorder(null);
+                    add(poster.getiPlakat());
+                }
+            }
+        }catch (RuntimeException err){
+            System.out.println(err);
+        }
     }
 }
