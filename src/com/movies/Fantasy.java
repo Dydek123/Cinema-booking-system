@@ -2,7 +2,7 @@ package com.movies;
 
 public class Fantasy extends Filmy{
 
-    public Fantasy(int idFilmy, String tytul, int idRezyserzy, double ocena, String czasTrwania, /*year*/ int rokProdukcji, String opis, String zwiastun){
+    public Fantasy(int idFilmy, String tytul, int idRezyserzy, double ocena, String czasTrwania, /*year*/ int rokProdukcji, String opis/*, String zwiastun*/){
         setIdFilmy(idFilmy);
         setTytul(tytul);
         setIdRezyserzy(idRezyserzy);
@@ -10,7 +10,7 @@ public class Fantasy extends Filmy{
         setCzasTrwania(czasTrwania);
         setRokProdukcji(rokProdukcji);
         setOpis(opis);
-        setZwiastun(zwiastun);
+        //setZwiastun(zwiastun);
         setIdGatunki(6);
     }
 }

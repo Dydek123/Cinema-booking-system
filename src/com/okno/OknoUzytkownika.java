@@ -34,25 +34,32 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class OknoUzytkownika extends JFrame implements ActionListener, MouseListener
+public class OknoUzytkownika extends JPanel implements ActionListener, MouseListener
 {
 
-    JLabel bEdytujDane, bWyloguj, bTwojeRezerwacje, bDostepneFilmy;
-    JLabel tNazwaUzytkownika, tEmailUzytkownika, tTelefonUzytkownika, tPowitanie, tNajblizszeSeanse;
-
+    private JLabel bEdytujDane, bWyloguj, bTwojeRezerwacje, bDostepneFilmy, bZapiszDane, bPowrotMini, bDodajSeans, bDodajFilm;
+    private JLabel tNazwaUzytkownika, tEmailUzytkownika, tTelefonUzytkownika, tPowitanie, tNajblizszeSeanse, tBledneDane;
+    private JTextField fNoweImie, fNoweNazwisko, fNowyEmailUzytkownika, fNowyTelefonUzytkownika;
+    private JPasswordField fNoweHaslo;
+    private JLabel background;
+    private Uzytkownicy uzytkownik;
+    private Pattern pattern;
     BazaDanych baza = new BazaDanych();
     //List<Filmy> filmy = baza.selectFilmy();
 
     private BufferedImage bi;
 
     public OknoUzytkownika(Uzytkownicy uzyt){
-        setSize(1920,1080); // inicjalizownie okna
-        setTitle("Okno uzytkownika"); // nazwa okna
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ustawienie domyslnego zamkniecia okna
+        setBounds(0,0,1920,1080); // inicjalizownie okna
         setLayout(null);
+
+        uzytkownik=uzyt;
 
         ImageIcon edytuj_dane = new ImageIcon("Coś tam\\Nowe Grafiki\\edytuj_dane.png");
         bEdytujDane = new JLabel(edytuj_dane); //wersja robocza
@@ -63,10 +70,34 @@ public class OknoUzytkownika extends JFrame implements ActionListener, MouseList
 
         ImageIcon wyloguj = new ImageIcon("Coś tam\\Nowe Grafiki\\wyloguj.png");
         bWyloguj = new JLabel(wyloguj);  //wersja robocza
-        bWyloguj.setBounds(1500, 48, 280, 70);
+        bWyloguj.setBounds(1600, 48, 280, 70);
         bWyloguj.setBorder(null);
         bWyloguj.addMouseListener(this);
         add(bWyloguj);
+
+        ImageIcon dodajSeans = new ImageIcon("Coś tam\\Nowe Grafiki\\dodaj_seans.png");
+        bDodajSeans = new JLabel(dodajSeans);  //wersja robocza
+        bDodajSeans.setBounds(1300, 48, 280, 70);
+        bDodajSeans.setBorder(null);
+        bDodajSeans.addMouseListener(this);
+        add(bDodajSeans);
+
+
+        ImageIcon dodajFilm = new ImageIcon("Coś tam\\Nowe Grafiki\\dodaj_film.png");
+        bDodajFilm = new JLabel(dodajFilm);  //wersja robocza
+        bDodajFilm.setBounds(1000, 48, 280, 70);
+        bDodajFilm.setBorder(null);
+        bDodajFilm.addMouseListener(this);
+        add(bDodajFilm);
+
+        if(uzytkownik.getAdmin()==1) {
+            bDodajSeans.setVisible(true);
+            bDodajFilm.setVisible(true);
+        }
+        else{
+            bDodajSeans.setVisible(false);
+            bDodajFilm.setVisible(false);
+        }
 
         ImageIcon twoje_rezerwacje = new ImageIcon("Coś tam\\Nowe Grafiki\\twoje_rezerwacje.png");
         bTwojeRezerwacje = new JLabel(twoje_rezerwacje);
@@ -97,17 +128,69 @@ public class OknoUzytkownika extends JFrame implements ActionListener, MouseList
         tTelefonUzytkownika.setFont(new Font("Impact", Font.PLAIN, 25));
         add(tTelefonUzytkownika);
 
-        tPowitanie = new JLabel("Witaj, ponownie, " + uzyt.getLogin()); // jak zrobic napis aby byl idalnie na srodku nie zaleznie od dlugosci nazwy uzytkownika?
-        tPowitanie.setBounds(850, 330, 730, 60); //dostosowac granice
+        tPowitanie = new JLabel("Witaj ponownie, " + uzyt.getLogin(), SwingConstants.CENTER); // jak zrobic napis aby byl idalnie na srodku nie zaleznie od dlugosci nazwy uzytkownika?
+        tPowitanie.setBounds(500, 330, 1420, 60); //dostosowac granice
         tPowitanie.setFont(new Font("Impact", Font.PLAIN, 60));
         add(tPowitanie);
 
-        tNajblizszeSeanse = new JLabel("Sprawdz najblizsze seanse i wybierz film dla Siebie"); //rownie dobrze moze to byc na backgroundzie, ale trzeba sie dogadac o font
-        tNajblizszeSeanse.setBounds(600,450,1210,40);
+        tNajblizszeSeanse = new JLabel("Sprawdz najblizsze seanse i wybierz film dla Siebie", SwingConstants.CENTER); //rownie dobrze moze to byc na backgroundzie, ale trzeba sie dogadac o font
+        tNajblizszeSeanse.setBounds(500,450,1420,40);
         tNajblizszeSeanse.setFont(new Font("Impact", Font.PLAIN, 40));
         add(tNajblizszeSeanse);
 
-        JLabel background = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\Profil_uzytkownika.png")); // inicjalizownie oraz ustawianie tła
+        fNoweImie = new JTextField();
+        fNoweImie.setBounds(165,570, 300, 40);
+        fNoweImie.setFont(new Font("Impact", Font.PLAIN, 40));
+        fNoweImie.setVisible(false);
+        add(fNoweImie);
+
+        fNoweNazwisko = new JTextField();
+        fNoweNazwisko.setBounds(165,665,300,40);
+        fNoweNazwisko.setFont(new Font("Impact", Font.PLAIN, 40));
+        fNoweNazwisko.setVisible(false);
+        add(fNoweNazwisko);
+
+
+        fNowyEmailUzytkownika = new JTextField();
+        fNowyEmailUzytkownika.setBounds(165,760,300,40);
+        fNowyEmailUzytkownika.setFont(new Font("Impact", Font.PLAIN, 40));
+        fNowyEmailUzytkownika.setVisible(false);
+        add(fNowyEmailUzytkownika);
+
+        fNowyTelefonUzytkownika = new JTextField();
+        fNowyTelefonUzytkownika.setBounds(165,855,300,40);
+        fNowyTelefonUzytkownika.setFont(new Font("Impact", Font.PLAIN, 40));
+        fNowyTelefonUzytkownika.setVisible(false);
+        add(fNowyTelefonUzytkownika);
+
+        fNoweHaslo = new JPasswordField();
+        fNoweHaslo.setBounds(165,950,300,40);
+        fNoweHaslo.setFont(new Font("Impact", Font.PLAIN, 40));
+        fNoweHaslo.setVisible(false);
+        add(fNoweHaslo);
+
+        bZapiszDane = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\zapisz_dane.png"));
+        bZapiszDane.setBounds(255,1005,235,50);
+        bZapiszDane.setBorder(null);
+        bZapiszDane.setVisible(false);
+        bZapiszDane.addMouseListener(this);
+        add(bZapiszDane);
+
+        bPowrotMini = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\powrot_mini.png"));
+        bPowrotMini.setBounds(10,1005,235,50);
+        bPowrotMini.setBorder(null);
+        bPowrotMini.setVisible(false);
+        bPowrotMini.addMouseListener(this);
+        add(bPowrotMini);
+
+        tBledneDane = new JLabel("Bledne dane");
+        tBledneDane.setBounds(150,905,500,40);
+        tBledneDane.setFont(new Font("Impact", Font.PLAIN, 25));
+        tBledneDane.setForeground(Color.red);
+        tBledneDane.setVisible(false);
+        add(tBledneDane);
+
+        background = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\Profil_uzytkownika.png")); // inicjalizownie oraz ustawianie tła
         background.setBounds(0,0,1920,1080);
         add(background);
 
@@ -122,21 +205,143 @@ public class OknoUzytkownika extends JFrame implements ActionListener, MouseList
     @Override
     public void mouseClicked(MouseEvent e)
     {
-        try {
+
             Object p = e.getSource();
+            System.out.println(e.getSource());
+
             if ( p == bDostepneFilmy ) {
+                try {
                 //private Login login;
                 /*Rezerwacja rezerwacja = new Rezerwacja();
                 rezerwacja.setVisible(true);
                 dispose();
                 */
-                DostepneFilmy dostepneFilmy = new DostepneFilmy();
-                dostepneFilmy.setVisible(true);
-                dispose();
+                Main.setJPanel(Window.DostepneFilmy, uzytkownik);
+            } catch (RuntimeException err) {
+                System.out.println(err);
             }
-        } catch (RuntimeException err) {
-            System.out.println(err);
-        }
+            }else if( p == bWyloguj){
+                Main.setJPanel(Window.Login);
+            }else if( p == bEdytujDane){
+                background.setIcon(new ImageIcon("Coś tam\\Nowe Grafiki\\tlo_edytuj_dane.png"));
+
+                bEdytujDane.setVisible(false);
+                tNazwaUzytkownika.setVisible(false);
+                tEmailUzytkownika.setVisible(false);
+                tTelefonUzytkownika.setVisible(false);
+
+                fNoweImie.setVisible(true);
+                fNoweNazwisko.setVisible(true);
+                fNowyEmailUzytkownika.setVisible(true);
+                fNowyTelefonUzytkownika.setVisible(true);
+                fNoweHaslo.setVisible(true);
+                bZapiszDane.setVisible(true);
+                bPowrotMini.setVisible(true);
+
+            }else if( p == bZapiszDane){
+                try {
+                    tBledneDane.setVisible(false);
+                    String regex="[a-zA-Z0-9]+";
+                    pattern = Pattern.compile(regex);
+                    String im = fNoweImie.getText();
+                    Matcher matcher = pattern.matcher(im);
+                    if (!matcher.matches() && im.length()>0){
+                        System.out.println("imie ze spacjami");
+                        throw new RuntimeException("Imie nie może zawierać spacji!");}
+                    else
+                        if (im.length()!=0)
+                            uzytkownik.setImieUzytkownika(fNoweImie.getText());
+
+                    //if (fNoweNazwisko.getText().length() != 0)
+                     //   uzytkownik.setNazwiskoUzytkownika(fNoweNazwisko.getText());
+
+
+                    /*
+                    if (fNoweImie.getText().length() != 0)
+                        uzytkownik.setImieUzytkownika(fNoweImie.getText());
+                    if (fNoweNazwisko.getText().length() != 0)
+                        uzytkownik.setNazwiskoUzytkownika(fNoweNazwisko.getText());*/
+
+                    regex = "^(.+)@(.+).(.+)$";
+                    pattern = Pattern.compile(regex);
+                    String em = fNowyEmailUzytkownika.getText();
+                    matcher = pattern.matcher(em);
+                    if (!matcher.matches() && em.length() > 0)
+                        throw new RuntimeException("Email nie jest emailem!");
+                    else
+                        if (em.length() != 0)
+                            uzytkownik.setEmail(em);
+
+
+                    regex = "[0-9]+";
+                    pattern = Pattern.compile(regex);
+                    String tel=fNowyTelefonUzytkownika.getText();
+                    matcher = pattern.matcher(tel);
+                    if (!matcher.matches() && tel.length()> 0){
+                        throw new RuntimeException("Numer musi być cyframi!");
+                    }
+                    else{
+                        if (fNowyTelefonUzytkownika.getText().length() != 0)
+                            uzytkownik.setTelefon(Integer.parseInt(fNowyTelefonUzytkownika.getText()));
+                    }
+
+                    regex="[a-zA-Z0-9]+";
+                    pattern = Pattern.compile(regex);
+                    String pas = fNoweHaslo.getText();
+                    matcher = pattern.matcher(pas);
+                    if (!matcher.matches() && pas.length()>0){
+                        System.out.println("haslo ze spacjami");
+                        throw new RuntimeException("Haslo nie może zawierać spacji!");}
+                    else
+                        if (pas.length()!=0)
+                            uzytkownik.setHaslo(fNoweHaslo.getText());
+                    //if (fNoweHaslo.getText().length() != 0)
+                    //    uzytkownik.setHaslo(fNoweHaslo.getText());
+
+                    if(!baza.updateUzytkownicy(uzytkownik))
+                        throw new Exception("blad update uzytkownika");
+
+                    bEdytujDane.setVisible(true);
+                    tNazwaUzytkownika.setVisible(true);
+                    tEmailUzytkownika.setVisible(true);
+                    tTelefonUzytkownika.setVisible(true);
+
+                    fNoweImie.setVisible(false);
+                    fNoweNazwisko.setVisible(false);
+                    fNowyEmailUzytkownika.setVisible(false);
+                    fNowyTelefonUzytkownika.setVisible(false);
+                    fNoweHaslo.setVisible(false);
+                    bZapiszDane.setVisible(false);
+                    bPowrotMini.setVisible(false);
+
+                    background.setIcon(new ImageIcon("Coś tam\\Nowe Grafiki\\Profil_uzytkownika.png"));
+                }catch(Exception err){
+                    System.out.println(err);
+                    tBledneDane.setText(err.getMessage());
+                    tBledneDane.setVisible(true);
+                }
+            }else if(p==bDodajFilm){
+                Main.setJPanel(Window.DodajFilm,uzytkownik);
+            }else if(p==bDodajSeans){
+                Main.setJPanel(Window.DodajSeans,uzytkownik);
+            }else if(p==bPowrotMini){
+                background.setIcon(new ImageIcon("Coś tam\\Nowe Grafiki\\Profil_uzytkownika.png"));
+
+                bEdytujDane.setVisible(true);
+                tNazwaUzytkownika.setVisible(true);
+                tEmailUzytkownika.setVisible(true);
+                tTelefonUzytkownika.setVisible(true);
+
+                fNoweImie.setVisible(false);
+                fNoweNazwisko.setVisible(false);
+                fNowyEmailUzytkownika.setVisible(false);
+                fNowyTelefonUzytkownika.setVisible(false);
+                fNoweHaslo.setVisible(false);
+                bZapiszDane.setVisible(false);
+                bPowrotMini.setVisible(false);
+                tBledneDane.setVisible(false);
+            }
+
     }
 
     @Override

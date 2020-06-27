@@ -3,6 +3,7 @@ package com.okno;
 import com.bazydanych.BazaDanych;
 import com.bazydanych.Uzytkownicy;
 
+import javax.management.RuntimeErrorException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Register extends JFrame implements ActionListener, MouseListener {
+public class Register extends JPanel implements ActionListener, MouseListener {
 
     private JLabel bSingUp, bBack, lLogin, lPassword, lEmail, lName, lSurname, lAge, lPhone, background, lWrongData, test;
     private JTextField tLogin, tEmail, tName, tSurname, tAge, tPhone;
@@ -25,14 +26,12 @@ public class Register extends JFrame implements ActionListener, MouseListener {
     private ImageIcon iPowrotClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot_clicked.png");
     private JPasswordField fPassword;
     private Login login;
-    private String regex = "^(.+)@(.+).(.+)$";
-    private Pattern pattern;
+    private String regexEmail = "^(.+)@(.+).(.+)$";
+    private Pattern patternEmail;
     private BufferedImage bi;
     int x = 107, y= 300, width = (835-80)/2, height = 50; // x=80, 935, y = 260
     public Register(){
-        setSize(1920,1080); // inicjalizownie okna
-        setTitle("Register"); // nazwa okna
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ustawienie domyslnego zamkniecia okna
+        setBounds(0,0,1920,1080); // inicjalizownie okna
         setLayout(null);
 
         try {
@@ -77,7 +76,7 @@ public class Register extends JFrame implements ActionListener, MouseListener {
             ex.printStackTrace();
         }
 
-        pattern = Pattern.compile(regex);
+        patternEmail = Pattern.compile(regexEmail);
         tEmail = new JTextField(); // inicjalizownie oraz ustawianie pola do wpisywania e-maila
         tEmail.setBounds(x,y+3*(height+20),width*2+50,height);
         tEmail.addActionListener(this);
@@ -211,19 +210,21 @@ public class Register extends JFrame implements ActionListener, MouseListener {
             if ( p == bSingUp || p == tPhone) { // proba przypisania wpisanych tekstow w polu do zmiennych
                 //moze klasa w przyszlosci?
                 String l = tLogin.getText();
+
                 String ps = fPassword.getText();
+
                 String em = tEmail.getText();
-                Matcher matcher = pattern.matcher(em);
-                if(!matcher.matches()){
+                Matcher matcherEmail = patternEmail.matcher(em);
+                if(!matcherEmail.matches())
                     throw new RuntimeException("zly email");
-                }
+
                 String name = tName.getText();
                 String surname = tSurname.getText();
                 String _age = tAge.getText();
                 int age = Integer.parseInt(_age);
                 String _phone = tPhone.getText();
                 int phone = Integer.parseInt(_phone);
-                if(l == null || ps == null || name == null || surname == null || age == 0 || phone == 0 ){
+                if(l.length() == 0 || ps.length() == 0 || name.length() == 0 || surname.length() == 0 || age == 0 || phone == 0 ){
                     throw new RuntimeException("Brak danych");
                 }
                 //send to check
