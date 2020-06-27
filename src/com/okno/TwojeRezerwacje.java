@@ -27,6 +27,7 @@ public class TwojeRezerwacje extends JComponent {
             JScrollPane scroll = new JScrollPane(tabelaRezerwacje);
             scroll.setBounds(50, 40, 1350, 500);
             add(scroll);
+
         }else{
             JLabel tRezerwacjaTeraz = new JLabel("Brak zarezerwowanych biletow. Zarezerwuj juz teraz!", SwingConstants.CENTER);
             tRezerwacjaTeraz.setBounds(50,40,1350,500);
