@@ -23,7 +23,8 @@ public class DostepneFilmy extends JPanel implements ActionListener, MouseListen
     public String[] dostepneFilmy=baza.selectDostepneFilmy();
     //Lista przechowująca obiekty klasy PlakatFilmu - pętla je wyswietli
     public List<PlakatFilmu> lista_plakatow = new LinkedList<>();
-
+    private PlakatFilmu selected_poster;
+    private  boolean is_selected = false;
     public PlakatFilmu plakat;
     JComboBox filmList = new JComboBox(dostepneFilmy);
     private int selected;
@@ -119,23 +120,33 @@ public class DostepneFilmy extends JPanel implements ActionListener, MouseListen
     public void mouseClicked(MouseEvent e) {
         try {
             Object p = e.getSource();
-//            if ( p == bRezerwuj ) {
-//                /*Rezerwacja rezerwacja = new Rezerwacja(dostepneFilmy[selected]);
-//                rezerwacja.setVisible(true);
-//                dispose();*/
-////                OknoFilmu oknoFilmu = new OknoFilmu(dostepneFilmy[selected],uzytkownik,this);
-////                oknoFilmu.setVisible(true);
-//
-//                Main.setJPanel(Window.OknoFilmu, uzytkownik, dostepneFilmy[selected]);
-
-  //          }
             if (p==bPowrot){
                 Main.setJPanel(Window.OknoUzytkownika, uzytkownik);
             }
             for(int i=0;i<lista_plakatow.size();i++) {
                 if (p == lista_plakatow.get(i).getiPlakat()) {
-                    System.out.println("KLIKAM W FILM CO JEST");
-                    Main.setJPanel(Window.OknoFilmu, uzytkownik, lista_plakatow.get(i).getchosenMovieTitle());
+                    if(lista_plakatow.get(i).selected == false) {
+                        System.out.println("KLIKAM W FILM CO JEST");
+                        this.selected_poster = lista_plakatow.get(i);
+                        this.selected_poster.selected = true;
+                        this.selected_poster.iPlakat.setBorder(this.selected_poster.border);
+                        this.is_selected = true;
+                    }else{
+                        this.selected_poster.selected = false;
+                        this.selected_poster.iPlakat.setBorder(null);
+                        this.selected_poster = null;
+                        this.is_selected = false;
+                    }
+
+                }
+            }
+            if ( p == bRezerwuj ) {
+                if(this.is_selected == true) {
+                    this.is_selected = false;
+                    this.selected_poster.selected=false;
+                    this.selected_poster.iPlakat.setBorder(null);
+                    Main.setJPanel(Window.OknoFilmu, uzytkownik, this.selected_poster.getchosenMovieTitle());
+
                 }
             }
         } catch (RuntimeException err) {
@@ -158,9 +169,9 @@ public class DostepneFilmy extends JPanel implements ActionListener, MouseListen
         try{
             Object p= e.getSource();
             for(PlakatFilmu poster: lista_plakatow){
-                if(p==poster){
+                if(p==poster.getiPlakat()){
                     poster.iPlakat.setBorder(poster.border);
-                    add(poster.getiPlakat());
+
                 }
             }
         }catch (RuntimeException err){
@@ -173,9 +184,9 @@ public class DostepneFilmy extends JPanel implements ActionListener, MouseListen
         try{
             Object p= e.getSource();
             for(PlakatFilmu poster: lista_plakatow){
-                if(p==poster){
-                    poster.iPlakat.setBorder(null);
-                    add(poster.getiPlakat());
+                if(p==poster.getiPlakat()){
+                    if(poster.selected == false) poster.iPlakat.setBorder(null);
+
                 }
             }
         }catch (RuntimeException err){

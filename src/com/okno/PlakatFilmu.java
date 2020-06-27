@@ -17,6 +17,7 @@ public class PlakatFilmu {
     BazaDanych baza = new BazaDanych();
     Border border = BorderFactory.createLineBorder(Color.YELLOW,5);
     JLabel iPlakat;
+    public boolean selected = false;
 
     PlakatFilmu(String chosenMovieTitle) throws IOException {
 
