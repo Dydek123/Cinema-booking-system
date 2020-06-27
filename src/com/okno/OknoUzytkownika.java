@@ -43,14 +43,16 @@ import java.util.regex.Pattern;
 public class OknoUzytkownika extends JPanel implements ActionListener, MouseListener
 {
 
-    private JLabel bEdytujDane, bWyloguj, bTwojeRezerwacje, bExit, bDostepneFilmy, bZapiszDane, bPowrotMini, bDodajSeans, bDodajFilm;
+    private JLabel bEdytujDane, bWyloguj, bTwojeRezerwacje, bExit, bDostepneFilmy, bZapiszDane, bPowrotMini, bDodajSeans, bDodajFilm, bPowrot;
     private JLabel tNazwaUzytkownika, tEmailUzytkownika, tTelefonUzytkownika, tPowitanie, tNajblizszeSeanse, tBledneDane;
     private JTextField fNoweImie, fNoweNazwisko, fNowyEmailUzytkownika, fNowyTelefonUzytkownika;
     private JPasswordField fNoweHaslo;
     private JLabel background;
     private Uzytkownicy uzytkownik;
     private Pattern pattern;
+    private TwojeRezerwacje twojeRezerwacje;
     BazaDanych baza = new BazaDanych();
+
     //List<Filmy> filmy = baza.selectFilmy();
 
     private BufferedImage bi;
@@ -67,6 +69,11 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
         bExit.setBorder(null);
         bExit.addMouseListener(this);
         add(bExit);
+
+        twojeRezerwacje = new TwojeRezerwacje(uzytkownik);
+        twojeRezerwacje.setBounds(500,160,1420,540);
+        twojeRezerwacje.setVisible(false);
+        add(twojeRezerwacje);
 
         ImageIcon edytuj_dane = new ImageIcon("Coś tam\\Nowe Grafiki\\edytuj_dane.png");
         bEdytujDane = new JLabel(edytuj_dane); //wersja robocza
@@ -113,6 +120,11 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
         bTwojeRezerwacje.setBorder(null);
         bTwojeRezerwacje.addMouseListener(this);
         add(bTwojeRezerwacje);
+
+        bPowrot = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\powrot.png"));
+        bPowrot.setBounds(1080, 744, 260, 110);
+        bPowrot.addMouseListener(this);
+        add(bPowrot);
 
         ImageIcon wyswietl_dostepne = new ImageIcon("Coś tam\\Nowe Grafiki\\wyswietl_dostepne_filmy.png");
         bDostepneFilmy = new JLabel(wyswietl_dostepne);
@@ -225,11 +237,27 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
                 dispose();
                 */
                 Main.setJPanel(Window.DostepneFilmy, uzytkownik);
-            } catch (RuntimeException err) {
-                System.out.println(err);
-            }
+                } catch (RuntimeException err) {
+                    System.out.println(err);
+                }
             }else if( p == bWyloguj){
                 Main.setJPanel(Window.Login);
+            }else if( p == bTwojeRezerwacje){
+
+                tNajblizszeSeanse.setVisible(false);
+                tPowitanie.setVisible(false);
+                bTwojeRezerwacje.setVisible(false);
+
+                twojeRezerwacje.setVisible(true);
+                bPowrot.setVisible(true);
+
+            }else if(p == bPowrot) {
+                tNajblizszeSeanse.setVisible(true);
+                tPowitanie.setVisible(true);
+                bTwojeRezerwacje.setVisible(true);
+
+                twojeRezerwacje.setVisible(false);
+                bPowrot.setVisible(false);
             }else if( p == bEdytujDane){
                 background.setIcon(new ImageIcon("Coś tam\\Nowe Grafiki\\tlo_edytuj_dane.png"));
 
@@ -239,10 +267,20 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
                 tTelefonUzytkownika.setVisible(false);
 
                 fNoweImie.setVisible(true);
+                fNoweImie.setText("");
+
                 fNoweNazwisko.setVisible(true);
+                fNoweNazwisko.setText("");
+
                 fNowyEmailUzytkownika.setVisible(true);
+                fNowyEmailUzytkownika.setText("");
+
                 fNowyTelefonUzytkownika.setVisible(true);
+                fNowyTelefonUzytkownika.setText("");
+
                 fNoweHaslo.setVisible(true);
+                fNoweHaslo.setText("");
+
                 bZapiszDane.setVisible(true);
                 bPowrotMini.setVisible(true);
 
@@ -279,6 +317,7 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
                     else
                         if (em.length() != 0)
                             uzytkownik.setEmail(em);
+                            tEmailUzytkownika.setText(em);
 
 
                     regex = "[0-9]+";
@@ -291,6 +330,7 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
                     else{
                         if (fNowyTelefonUzytkownika.getText().length() != 0)
                             uzytkownik.setTelefon(Integer.parseInt(fNowyTelefonUzytkownika.getText()));
+                            tTelefonUzytkownika.setText(telefon);
                     }
 
                     regex="[a-zA-Z0-9]+";
