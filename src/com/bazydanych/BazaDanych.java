@@ -4,9 +4,8 @@ import com.movies.FactoryFilmy;
 import com.movies.Filmy;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
+
 import com.bazydanych.Bilety;
 import com.okno.Siedzenie;
 import com.okno.State;
@@ -579,6 +578,36 @@ public class BazaDanych {
       return false;
     }
     return true;
+  }
+
+  public String[][] selectRezerwacjeUzytkownika(int ID_uzytkownika)
+  {
+    String[][] rezerwacje;
+    try {
+      ResultSet result2 = stat.executeQuery(
+              "SELECT COUNT(*) FROM (SELECT Rezerwacje.ID_seanse AS seanse, Rezerwacje.Miejsce, Seanse.Data_seansu, Seanse.Godzina_seansu, Seanse.ID_filmy AS filmy," +
+                      "Filmy.Tytul From Rezerwacje Natural join Seanse, Filmy" +
+                      " WHERE Rezerwacje.ID_uzytkownicy = " + ID_uzytkownika + " AND Seanse.ID_seanse = seanse AND Filmy.ID_filmy = filmy);");
+
+      rezerwacje = new String[result2.getInt("COUNT(*)")][4];
+
+      ResultSet result = stat.executeQuery(
+              "SELECT Rezerwacje.ID_seanse AS seanse, Rezerwacje.Miejsce, Seanse.Data_seansu, Seanse.Godzina_seansu, Seanse.ID_filmy AS filmy, Filmy.Tytul " +
+              "From Rezerwacje Natural join Seanse, Filmy " +
+              "WHERE Rezerwacje.ID_uzytkownicy = " + ID_uzytkownika + " AND Seanse.ID_seanse = seanse AND Filmy.ID_filmy = filmy");
+
+      for(int i = 0; result.next();i++){
+          rezerwacje[i][3] = result.getString("Miejsce");
+          rezerwacje[i][1] = result.getString("Data_seansu");
+          rezerwacje[i][2] = result.getString("Godzina_seansu");
+          rezerwacje[i][0] = result.getString("Tytul");
+
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return null;
+    }
+    return rezerwacje;
   }
 
   public void closeConnection() {

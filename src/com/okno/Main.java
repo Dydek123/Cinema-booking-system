@@ -5,6 +5,7 @@ import com.bazydanych.*;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -18,12 +19,14 @@ public class Main {
         setJPanel(Window.Login);
 
         BazaDanych test = new BazaDanych();
+//        List<ArrayList<String>> s = test.selectRezerwacjeUzytkownika(6);
         List<Uzytkownicy> uzytkownicy = test.selectUzytkownicy();
         System.out.println("Lista uzytkownikow: ");
         for(Uzytkownicy c: uzytkownicy)
             System.out.println(c.getLogin() + " " + c.getHaslo());
 
         System.out.println("test commit");
+
 
        /* //test dodawania filmu
         Uzytkownicy admin= new Uzytkownicy();
@@ -78,6 +81,9 @@ public class Main {
                     System.out.println("Blad przy setJPanel DostepneFilmy");
                     e.printStackTrace();
                 }
+                break;
+            case TwojeRezrwacje:
+                okno.setContentPane(new TwojeRezerwacje(uzyt));
                 break;
             default:
                 System.out.println("Bledne okno w setJPanel uzyt");

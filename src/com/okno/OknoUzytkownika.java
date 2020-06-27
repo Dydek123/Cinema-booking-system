@@ -52,6 +52,7 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
     private String regex = "^(.+)@(.+).(.+)$";
     private Pattern pattern;
     BazaDanych baza = new BazaDanych();
+
     //List<Filmy> filmy = baza.selectFilmy();
 
     private BufferedImage bi;
@@ -187,11 +188,13 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
                 dispose();
                 */
                 Main.setJPanel(Window.DostepneFilmy, uzytkownik);
-            } catch (RuntimeException err) {
-                System.out.println(err);
-            }
+                } catch (RuntimeException err) {
+                    System.out.println(err);
+                }
             }else if( p == bWyloguj){
                 Main.setJPanel(Window.Login);
+            }else if( p == bTwojeRezerwacje){
+                Main.setJPanel(Window.TwojeRezrwacje, uzytkownik);
             }else if( p == bEdytujDane){
                 background.setIcon(new ImageIcon("Coś tam\\Nowe Grafiki\\tlo_edytuj_dane.png"));
 
@@ -201,10 +204,20 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
                 tTelefonUzytkownika.setVisible(false);
 
                 fNoweImie.setVisible(true);
+                fNoweImie.setText("");
+
                 fNoweNazwisko.setVisible(true);
+                fNoweNazwisko.setText("");
+
                 fNowyEmailUzytkownika.setVisible(true);
+                fNowyEmailUzytkownika.setText("");
+
                 fNowyTelefonUzytkownika.setVisible(true);
+                fNowyTelefonUzytkownika.setText("");
+
                 fNoweHaslo.setVisible(true);
+                fNoweHaslo.setText("");
+
                 bZapiszDane.setVisible(true);
 
             }else if( p == bZapiszDane){
@@ -218,13 +231,18 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
 
                     String em = fNowyEmailUzytkownika.getText();
                     Matcher matcher = pattern.matcher(em);
-                    if (em.length() > 0)
-                         if(!matcher.matches())
-                             throw new RuntimeException("zly email");
+                    if (em.length() > 0) {
+                        if (!matcher.matches())
+                            throw new RuntimeException("zly email");
                         uzytkownik.setEmail(em);
+                        tEmailUzytkownika.setText(em);
+                    }
 
-                    if (fNowyTelefonUzytkownika.getText().length() != 0)
-                        uzytkownik.setTelefon(Integer.parseInt(fNowyTelefonUzytkownika.getText()));
+                    String telefon = fNowyTelefonUzytkownika.getText();
+                    if (telefon.length() != 0) {
+                        uzytkownik.setTelefon(Integer.parseInt(telefon));
+                        tTelefonUzytkownika.setText(telefon);
+                    }
                     if (fNoweHaslo.getText().length() != 0)
                         uzytkownik.setHaslo(fNoweHaslo.getText());
 
