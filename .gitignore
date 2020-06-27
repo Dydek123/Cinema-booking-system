@@ -78,9 +78,6 @@ JFrameTest.iml
 .idea/modules.xml
 .idea/compiler.xml
 Java-projekt.iml
-.idea/modules.xml
-.idea/modules.xml
 *.class
 JavaKino.db
-/target/classes/*
-/target/classes/com/okno/*
+*.xml
