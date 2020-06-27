@@ -3,6 +3,7 @@ package com.okno;
 import com.bazydanych.BazaDanych;
 import com.bazydanych.Uzytkownicy;
 
+import javax.management.RuntimeErrorException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -15,15 +16,25 @@ import java.util.regex.Pattern;
 
 public class Register extends JPanel implements ActionListener, MouseListener {
 
-    private JLabel bSingUp, lLogin, lPassword, lEmail, lName, lSurname, lAge, lPhone, background, lWrongData, test;
+
+    private JLabel bSingUp, bExit, bBack, lLogin, lPassword, lEmail, lName, lSurname, lAge, lPhone, background, lWrongData, test;
+
     private JTextField tLogin, tEmail, tName, tSurname, tAge, tPhone;
     private ImageIcon iZarejestrujZielone = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_zielone.png");
     private ImageIcon iZarejestrujHover = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_hover.png");
     private ImageIcon iZarejestrujClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_clicked.png");
+
+    private ImageIcon iPowrotZielone = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot_zielone.png");
+    private ImageIcon iPowrotHover = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot_hover.png");
+    private ImageIcon iPowrotClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot_clicked.png");
+    private ImageIcon iZamknij = new ImageIcon("Coś tam\\Nowe Grafiki\\Zamknij_x.png");
+    private ImageIcon iZamknijHover = new ImageIcon("Coś tam\\Nowe Grafiki\\Zamknij_x_hover.png");
+    private ImageIcon iZamknijClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\Zamknij_x_clicked.png");
+
     private JPasswordField fPassword;
     private Login login;
-    private String regex = "^(.+)@(.+).(.+)$";
-    private Pattern pattern;
+    private String regexEmail = "^(.+)@(.+).(.+)$";
+    private Pattern patternEmail;
     private BufferedImage bi;
     int x = 107, y= 300, width = (835-80)/2, height = 50; // x=80, 935, y = 260
     public Register(){
@@ -72,7 +83,7 @@ public class Register extends JPanel implements ActionListener, MouseListener {
             ex.printStackTrace();
         }
 
-        pattern = Pattern.compile(regex);
+        patternEmail = Pattern.compile(regexEmail);
         tEmail = new JTextField(); // inicjalizownie oraz ustawianie pola do wpisywania e-maila
         tEmail.setBounds(x,y+3*(height+20),width*2+50,height);
         tEmail.addActionListener(this);
@@ -148,10 +159,25 @@ public class Register extends JPanel implements ActionListener, MouseListener {
 
         bSingUp=new JLabel();
         bSingUp.setIcon(iZarejestrujZielone);
-        bSingUp.setBounds(x+190,y+8*(height+20)+20,428,140);
+        bSingUp.setBounds(85+(938-80)/2,y+8*(height+20)+20,428,140);
         bSingUp.setBorder(null);
         bSingUp.addMouseListener(this);
         add(bSingUp);
+
+
+        bBack=new JLabel();
+        bBack.setIcon(iPowrotZielone);
+        bBack.setBounds(85,y+8*(height+20)+20,428,140);
+        bBack.setBorder(null);
+        bBack.addMouseListener(this);
+        add(bBack);
+
+        bExit = new JLabel(iZamknij);
+        bExit.setBounds(1750,20,150,150);
+        bExit.setBorder(null);
+        bExit.addMouseListener(this);
+        add(bExit);
+
 
         try {
             Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Coś tam\\Fonts\\Caudex-Regular.ttf"));
@@ -189,12 +215,7 @@ public class Register extends JPanel implements ActionListener, MouseListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        try {
-            Object p = e.getSource();
 
-        } catch (RuntimeException err) {
-
-        }
     }
 
     @Override
@@ -204,19 +225,21 @@ public class Register extends JPanel implements ActionListener, MouseListener {
             if ( p == bSingUp || p == tPhone) { // proba przypisania wpisanych tekstow w polu do zmiennych
                 //moze klasa w przyszlosci?
                 String l = tLogin.getText();
+
                 String ps = fPassword.getText();
+
                 String em = tEmail.getText();
-                Matcher matcher = pattern.matcher(em);
-                if(!matcher.matches()){
+                Matcher matcherEmail = patternEmail.matcher(em);
+                if(!matcherEmail.matches())
                     throw new RuntimeException("zly email");
-                }
+
                 String name = tName.getText();
                 String surname = tSurname.getText();
                 String _age = tAge.getText();
                 int age = Integer.parseInt(_age);
                 String _phone = tPhone.getText();
                 int phone = Integer.parseInt(_phone);
-                if(l == null || ps == null || name == null || surname == null || age == 0 || phone == 0 ){
+                if(l.length() == 0 || ps.length() == 0 || name.length() == 0 || surname.length() == 0 || age == 0 || phone == 0 ){
                     throw new RuntimeException("Brak danych");
                 }
                 //send to check
@@ -230,7 +253,16 @@ public class Register extends JPanel implements ActionListener, MouseListener {
                 if(!baza.insertUzytkownicy(l, ps, em, name, surname, age, phone)){
                     throw new RuntimeException("zle dane");
                 }
+
+                //login.setVisible(true);
+                //dispose();
+
                 Main.setJPanel(Window.Login);
+            } else if(p==bBack){
+                Main.setJPanel(Window.Login);
+            }else if(p == bExit){
+                removeAll();
+                System.exit(0);
             }
         } catch (RuntimeException err) {
             System.out.println(err);
@@ -244,6 +276,11 @@ public class Register extends JPanel implements ActionListener, MouseListener {
         Object p = e.getSource();
         if(p == bSingUp) {
             bSingUp.setIcon(iZarejestrujClicked);
+        }else if(p == bExit){
+            bExit.setIcon(iZamknijClicked);
+        }
+        if(p == bBack) {
+            bBack.setIcon(iPowrotClicked);
         }
     }
 
@@ -251,7 +288,11 @@ public class Register extends JPanel implements ActionListener, MouseListener {
     public void mouseReleased(MouseEvent e) {
         Object p = e.getSource();
         if(p == bSingUp) {
-            bSingUp.setIcon(iZarejestrujHover);
+            bSingUp.setIcon(iZarejestrujZielone);
+        }else if(p == bExit){
+            bExit.setIcon(iZamknij);
+        }else if(p == bBack) {
+            bBack.setIcon(iPowrotZielone);
         }
     }
 
@@ -260,6 +301,11 @@ public class Register extends JPanel implements ActionListener, MouseListener {
         Object p = e.getSource();
         if(p == bSingUp) {
             bSingUp.setIcon(iZarejestrujHover);
+        }else if(p == bExit){
+            bExit.setIcon(iZamknijHover);
+        }
+        if(p == bBack) {
+            bBack.setIcon(iPowrotHover);
         }
     }
 
@@ -268,6 +314,11 @@ public class Register extends JPanel implements ActionListener, MouseListener {
         Object p = e.getSource();
         if(p == bSingUp) {
             bSingUp.setIcon(iZarejestrujZielone);
+        }else if(p == bExit){
+            bExit.setIcon(iZamknij);
+        }
+        if(p == bBack) {
+            bBack.setIcon(iPowrotZielone);
         }
     }
 }

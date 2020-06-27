@@ -33,12 +33,12 @@ public class Okno extends JFrame implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        System.out.println("dupa");
         if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
         {
             if(panelWyjscia == null)
                 panelWyjscia = new PanelWyjscia(this);
             panelWyjscia.setVisible(true);
-//            System.out.println("dupa");
         }
     }
 

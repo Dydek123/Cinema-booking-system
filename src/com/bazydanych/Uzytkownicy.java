@@ -143,23 +143,25 @@ public class Uzytkownicy {
         this.admin = admin;
     }
 
-    public void dodajFilm(List<Filmy> filmyList, BazaDanych baza, String tytul, int idRezyserzy, double ocena, String czasTrwania, /*year*/ int rokProdukcji, String opis, String zwiastun, int newFilmGatunek){
+    //public void dodajFilm(List<Filmy> filmyList, BazaDanych baza, String tytul, int idRezyserzy, double ocena, String czasTrwania, /*year*/ int rokProdukcji, String opis, String zwiastun, int newFilmGatunek){
+    public void dodajFilm(Filmy film){
         if (this.admin == 1) {
         //Sprawdza czy zalogowany jest adminem
             try{
                 //jesli film ktory chcemy dodac nie istnieje to go dodajemy:
                 //troubleshooting - nie wiem czemu nie jestem w stanie z listy filmow wziac ostatniego indeksu, jest to potrzebne po to zeby filmy w liscie mialy takie same ID co w bazie
-                System.out.println(filmyList.get(filmyList.size() - 1).getIdFilmy());
-                FactoryFilmy filmyFactory = new FactoryFilmy();
-                filmyList.add(filmyFactory.makeFilm(filmyList.get(filmyList.size() - 1).getIdFilmy(), tytul, idRezyserzy, ocena, czasTrwania, rokProdukcji, opis, zwiastun, newFilmGatunek));
+                //System.out.println(filmyList.get(filmyList.size() - 1).getIdFilmy());
+                //FactoryFilmy filmyFactory = new FactoryFilmy();
+                //filmyList.add(filmyFactory.makeFilm(filmyList.get(filmyList.size() - 1).getIdFilmy(), tytul, idRezyserzy, ocena, czasTrwania, rokProdukcji, opis,/* zwiastun,*/ newFilmGatunek));
 
                 //Tworzenie rezysera jesli nie istnieje
                 //A to wymaga stworzenia obiektu rezyser zamiast tylko imienia i nazwiska
 
                 //W bazie danych id aktualizuje sie samo (autoincrement,unique) wiec nie ma problemu i nie trzeba podawac ID filmu w ogole
-                baza.insertFilmy(tytul, idRezyserzy, newFilmGatunek, ocena, czasTrwania, rokProdukcji, opis, zwiastun);
+                BazaDanych baza=new BazaDanych();
+                baza.insertFilmy(film.getTytul(), film.getIdRezyserzy(), film.getIdGatunki(), film.getOcena(), film.getCzasTrwania(), film.getRokProdukcji(), film.getOpis(), ""/*film.getZwiastun()*/);
                 //trouble shooting - sledzenie czy do listy dodal sie film o odpowiednim ID, z aktualnym kodem ID dodawanego filmu to 0, nie wiem czemu
-                System.out.println("Dodano film o indexie: " + filmyList.get(filmyList.size()-1).getIdFilmy());
+                //System.out.println("Dodano film o indexie: " + filmyList.get(filmyList.size()-1).getIdFilmy());
             }catch (RuntimeException e){
                 System.out.println("Taki film już istnieje");
                 e.printStackTrace();

@@ -11,10 +11,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
 
-public class Login extends JPanel implements ActionListener, MouseListener {
+public class Login extends JPanel implements ActionListener, MouseListener{
     private JTextField tLogin;
     private JPasswordField fPassword;
-    private JLabel lLogin, lPassword, lWrongPass, background,bSingUp, bLogUp;
+    private JLabel lLogin, lPassword, lWrongPass, background,bSingUp, bLogUp, bExit;
     private Register register;
     private OknoUzytkownika userWindow;
     private ImageIcon iZalogujZielone = new ImageIcon("Coś tam\\Nowe Grafiki\\zaloguj_zielone.png");
@@ -24,12 +24,14 @@ public class Login extends JPanel implements ActionListener, MouseListener {
     private ImageIcon iZarejestrujHover = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_hover.png");
     private ImageIcon iZarejestrujClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_clicked.png");
     private ImageIcon iStronaLogowania = new ImageIcon("Coś tam\\Nowe Grafiki\\Strona Logowania2.png");
+    private ImageIcon iZamknij = new ImageIcon("Coś tam\\Nowe Grafiki\\Zamknij_x.png");
+    private ImageIcon iZamknijHover = new ImageIcon("Coś tam\\Nowe Grafiki\\Zamknij_x_hover.png");
+    private ImageIcon iZamknijClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\Zamknij_x_clicked.png");
 
     int x = (935-80)/3, y= 300, width = (935-80)/2, height = 50; // x=80, 935, y = 260
     public Login(){
         setBounds(0,0,1920,1080);
         setLayout(null);
-
         lLogin = new JLabel("Login: ", JLabel.LEFT);
         lLogin.setBounds(x,y,width,height);
         lLogin.setFont(new Font("Impact", Font.PLAIN, 30));
@@ -61,6 +63,8 @@ public class Login extends JPanel implements ActionListener, MouseListener {
         bLogUp.setBounds(85,y + (5*height),428,140);
         bLogUp.setBorder(null);
         bLogUp.addMouseListener(this);
+
+
         add(bLogUp);
 
         bSingUp = new JLabel(iZarejestrujZielone);
@@ -68,6 +72,12 @@ public class Login extends JPanel implements ActionListener, MouseListener {
         bSingUp.setBorder(null);
         bSingUp.addMouseListener(this);
         add(bSingUp);
+
+        bExit = new JLabel(iZamknij);
+        bExit.setBounds(1750,20,150,150);
+        bExit.setBorder(null);
+        bExit.addMouseListener(this);
+        add(bExit);
 
         background = new JLabel(iStronaLogowania);
         background.setBounds(0,0,1920,1080);
@@ -105,7 +115,7 @@ public class Login extends JPanel implements ActionListener, MouseListener {
         Object p = e.getSource();
         if(p == bSingUp){
             Main.setJPanel(Window.Register);
-            removeAll();
+//            removeAll();
         }else if(p == bLogUp){
                 String l = tLogin.getText();
                 String pass = fPassword.getText();
@@ -116,12 +126,15 @@ public class Login extends JPanel implements ActionListener, MouseListener {
                     if(l.equals(c.getLogin()) && pass.equals(c.getHaslo())){
                         lWrongPass.setVisible(false);
                         Main.setJPanel(Window.OknoUzytkownika, c);
-                        removeAll();
+//                        removeAll();
                     }
                 }
                 lWrongPass.setText("Zle dane logowania");
                 lWrongPass.setForeground(Color.red);
                 lWrongPass.setVisible(true);
+        }else if(p == bExit){
+            removeAll();
+            System.exit(0);
         }
     }
 
@@ -130,8 +143,10 @@ public class Login extends JPanel implements ActionListener, MouseListener {
         Object p = e.getSource();
         if(p == bSingUp) {
             bSingUp.setIcon(iZarejestrujClicked);
-        }else{
+        }else if(p == bLogUp){
             bLogUp.setIcon(iZalogujClicked);
+        }else if(p == bExit){
+            bExit.setIcon(iZamknijClicked);
         }
     }
 
@@ -140,8 +155,10 @@ public class Login extends JPanel implements ActionListener, MouseListener {
         Object p = e.getSource();
         if(p == bSingUp) {
             bSingUp.setIcon(iZarejestrujZielone);
-        }else{
-            bLogUp.setIcon(iZalogujHover);
+        }else if(p == bLogUp){
+            bLogUp.setIcon(iZalogujZielone);
+        }else if(p == bExit){
+            bExit.setIcon(iZamknij);
         }
     }
 
@@ -150,8 +167,10 @@ public class Login extends JPanel implements ActionListener, MouseListener {
         Object p = e.getSource();
         if(p == bSingUp) {
             bSingUp.setIcon(iZarejestrujHover);
-        }else{
+        }else if(p == bLogUp){
             bLogUp.setIcon(iZalogujHover);
+        }else if(p == bExit){
+            bExit.setIcon(iZamknijHover);
         }
     }
 
@@ -160,8 +179,10 @@ public class Login extends JPanel implements ActionListener, MouseListener {
         Object p = e.getSource();
         if(p == bSingUp) {
             bSingUp.setIcon(iZarejestrujZielone);
-        }else{
-             bLogUp.setIcon(iZalogujZielone);
+        }else if(p == bLogUp){
+            bLogUp.setIcon(iZalogujZielone);
+        }else if(p == bExit){
+            bExit.setIcon(iZamknij);
         }
     }
 }
