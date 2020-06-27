@@ -330,7 +330,7 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
                     else{
                         if (fNowyTelefonUzytkownika.getText().length() != 0)
                             uzytkownik.setTelefon(Integer.parseInt(fNowyTelefonUzytkownika.getText()));
-                            tTelefonUzytkownika.setText(telefon);
+                            tTelefonUzytkownika.setText(tel);
                     }
 
                     regex="[a-zA-Z0-9]+";
