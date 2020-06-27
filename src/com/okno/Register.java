@@ -16,11 +16,14 @@ import java.util.regex.Pattern;
 
 public class Register extends JPanel implements ActionListener, MouseListener {
 
-    private JLabel bSingUp, bExit, lLogin, lPassword, lEmail, lName, lSurname, lAge, lPhone, background, lWrongData, test;
+    private JLabel bSingUp, bExit, bReturn, lLogin, lPassword, lEmail, lName, lSurname, lAge, lPhone, background, lWrongData, test;
     private JTextField tLogin, tEmail, tName, tSurname, tAge, tPhone;
     private ImageIcon iZarejestrujZielone = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_zielone.png");
     private ImageIcon iZarejestrujHover = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_hover.png");
     private ImageIcon iZarejestrujClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_clicked.png");
+    private ImageIcon iPowrotZielone = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot.png");
+    private ImageIcon iPowrotHover = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_hover.png");
+    private ImageIcon iPowrotClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_clicked.png");
     private ImageIcon iZamknij = new ImageIcon("Coś tam\\Nowe Grafiki\\Zamknij_x.png");
     private ImageIcon iZamknijHover = new ImageIcon("Coś tam\\Nowe Grafiki\\Zamknij_x_hover.png");
     private ImageIcon iZamknijClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\Zamknij_x_clicked.png");
@@ -152,10 +155,16 @@ public class Register extends JPanel implements ActionListener, MouseListener {
 
         bSingUp=new JLabel(iZarejestrujZielone);
 //        bSingUp.setIcon(iZarejestrujZielone);
-        bSingUp.setBounds(x+190,y+8*(height+20)+20,428,140);
+        bSingUp.setBounds(x-10,y+8*(height+20)+20,428,140);
         bSingUp.setBorder(null);
         bSingUp.addMouseListener(this);
         add(bSingUp);
+
+        bReturn=new JLabel(iPowrotZielone);
+        bReturn.setBounds(x+400,y+8*(height+20)+20,428,140);
+        bReturn.setBorder(null);
+        bReturn.addMouseListener(this);
+        add(bReturn);
 
         bExit = new JLabel(iZamknij);
         bExit.setBounds(1750,20,150,150);
@@ -246,6 +255,8 @@ public class Register extends JPanel implements ActionListener, MouseListener {
             }else if(p == bExit){
                 removeAll();
                 System.exit(0);
+            }else if(p == bReturn){
+                Main.setJPanel(Window.Login);
             }
         } catch (RuntimeException err) {
             System.out.println(err);
