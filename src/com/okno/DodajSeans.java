@@ -1,12 +1,9 @@
 package com.okno;
 
 import com.bazydanych.BazaDanych;
-import com.bazydanych.Rezyserzy;
 import com.bazydanych.Sale;
 import com.bazydanych.Uzytkownicy;
-import com.movies.FactoryFilmy;
 import com.movies.Filmy;
-import com.movies.Gatunek;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +15,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DodajSeans extends JPanel implements ActionListener, MouseListener {
+public class DodajSeans extends JPanel implements MouseListener, OknoJPanel {
 
     private JLabel bZatwierdz, bPowrot, lTytul, lNumerSali, lDataSeansu, lGodzinaSeansu, background, lWrongData;
     private JTextField tTytul, tDataSeansu, tGodzinaSeansu, tNumerSali;
@@ -28,12 +25,14 @@ public class DodajSeans extends JPanel implements ActionListener, MouseListener 
     private String pGodzina = "[0-9][0-9]:[0-9][0-9]:[0-9][0-9]";
     private Pattern pattern;
     private BufferedImage bi;
+
+    BazaDanych baza = new BazaDanych();
+
     int x = 700, y= 250, width = 400, height = 50; // x=80, 935, y = 260
     public DodajSeans(Uzytkownicy uzytkownik){
         setBounds(0,0,1920,1080); // inicjalizownie okna
         setLayout(null);
         this.uzytkownik=uzytkownik;
-
 
         try {
             Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Coś tam\\Fonts\\Caudex-Regular.ttf"));
@@ -49,7 +48,6 @@ public class DodajSeans extends JPanel implements ActionListener, MouseListener 
 
         tTytul = new JTextField(); // inicjalizownie oraz ustawianie pola do wpisania wieku
         tTytul.setBounds(x,y+1*(height+20),width*2+50,height);
-        tTytul.addActionListener(this);
         add(tTytul);
 
         try {
@@ -66,7 +64,6 @@ public class DodajSeans extends JPanel implements ActionListener, MouseListener 
 
         tNumerSali = new JTextField(); // inicjalizownie oraz ustawianie pola do wpisywania imienia
         tNumerSali.setBounds(x,y+3*(height+20),width*2+50,height);
-        tNumerSali.addActionListener(this);
         add(tNumerSali);
 
         try {
@@ -84,7 +81,6 @@ public class DodajSeans extends JPanel implements ActionListener, MouseListener 
         //pattern = Pattern.compile(regex);
         tDataSeansu = new JTextField(); // inicjalizownie oraz ustawianie pola do wpisywania e-maila
         tDataSeansu.setBounds(x,y+5*(height+20),width*2+50,height);
-        tDataSeansu.addActionListener(this);
         add(tDataSeansu);
 
         try {
@@ -101,10 +97,7 @@ public class DodajSeans extends JPanel implements ActionListener, MouseListener 
 
         tGodzinaSeansu = new JTextField(); // inicjalizownie oraz ustawianie pola wpisania nr telefonu
         tGodzinaSeansu.setBounds(x,y+7*(height+20),width*2+50,height);
-        tGodzinaSeansu.addActionListener(this);
         add(tGodzinaSeansu);
-
-
 
         bPowrot=new JLabel();
         //ImageIcon iZarejestrujZielone = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_zielone.png");
@@ -141,16 +134,6 @@ public class DodajSeans extends JPanel implements ActionListener, MouseListener 
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        try {
-            Object p = e.getSource();
-
-        } catch (RuntimeException err) {
-
-        }
-    }
-
-    @Override
     public void mouseClicked(MouseEvent e) {
         try {
             Object p = e.getSource();
@@ -180,7 +163,6 @@ public class DodajSeans extends JPanel implements ActionListener, MouseListener 
                 }
                 //send to check
 
-                BazaDanych baza = new BazaDanych();
                 List<Filmy> filmy = baza.selectFilmy();
                 boolean found=false;
                 for(Filmy c: filmy){
@@ -207,9 +189,11 @@ public class DodajSeans extends JPanel implements ActionListener, MouseListener 
 
                 baza.insertSeanse(idSali,idFilmu,data,godzina);
 
+                exit();
                 Main.setJPanel(Window.OknoUzytkownika,uzytkownik);
             }
             if ( p == bPowrot) {
+                exit();
                 Main.setJPanel(Window.OknoUzytkownika,uzytkownik);
             }
         } catch (NumberFormatException err){
@@ -255,5 +239,11 @@ public class DodajSeans extends JPanel implements ActionListener, MouseListener 
         if(p == bZatwierdz) {
             //   bZatwierdz.setIcon(iZarejestrujZielone);
         }
+    }
+
+    @Override
+    public void exit() {
+        baza.closeConnection();
+        removeAll();
     }
 }
