@@ -22,7 +22,6 @@ public class Login extends JPanel implements MouseListener, OknoJPanel{
     private ImageIcon iZarejestrujZielone = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_zielone.png");
     private ImageIcon iZarejestrujHover = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_hover.png");
     private ImageIcon iZarejestrujClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_clicked.png");
-    private ImageIcon iStronaLogowania = new ImageIcon("Coś tam\\Nowe Grafiki\\Strona Logowania2.png");
     private ImageIcon iZamknij = new ImageIcon("Coś tam\\Nowe Grafiki\\Zamknij_x.png");
     private ImageIcon iZamknijHover = new ImageIcon("Coś tam\\Nowe Grafiki\\Zamknij_x_hover.png");
     private ImageIcon iZamknijClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\Zamknij_x_clicked.png");
@@ -57,7 +56,6 @@ public class Login extends JPanel implements MouseListener, OknoJPanel{
 
         tLogin = new JTextField();
             tLogin.setBounds(x, y + height, width, height);
-            tLogin.addActionListener(this);
             tLogin.setFont(new Font("Impact", Font.PLAIN, 30));
             add(tLogin);
 
@@ -86,6 +84,7 @@ public class Login extends JPanel implements MouseListener, OknoJPanel{
         bExit.addMouseListener(this);
         add(bExit);
 
+        ImageIcon iStronaLogowania = new ImageIcon("Coś tam\\Nowe Grafiki\\Strona Logowania2.png");
         background = new JLabel(iStronaLogowania);
         background.setBounds(0,0,1920,1080);
         add(background);
