@@ -49,6 +49,7 @@ cmake-build-*/
 
 # IntelliJ
 out/
+target/
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
@@ -79,3 +80,11 @@ JFrameTest.iml
 Java-projekt.iml
 .idea/modules.xml
 .idea/modules.xml
+*.class
+JavaKino.db
+target/classes/*
+target/classes/com/okno/*
+production/
+/target/classes/*
+/target/classes/com/okno/*
+/production/

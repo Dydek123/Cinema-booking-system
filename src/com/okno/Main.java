@@ -5,6 +5,7 @@ import com.bazydanych.*;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -12,33 +13,20 @@ public class Main {
     private static Okno okno;
 
     public static void main(String[] args) {
-//        okno = new JFrame();
 
-//        okno.setSize(1920,1080);
-//        okno.setTitle("Window");
-//        okno.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        okno.getContentPane().setBackground(Color.white);
-//
-//        okno.setExtendedState(JFrame.MAXIMIZED_BOTH);
-//        okno.setUndecorated(true);
-//
-//        okno.setLayout(null);
-//
-//        setJPanel(Window.Login);
-//
-//        okno.setVisible(true);
-
-        okno = new Okno();
+         okno = new Okno();
 
         setJPanel(Window.Login);
 
         BazaDanych test = new BazaDanych();
+//        List<ArrayList<String>> s = test.selectRezerwacjeUzytkownika(6);
         List<Uzytkownicy> uzytkownicy = test.selectUzytkownicy();
         System.out.println("Lista uzytkownikow: ");
         for(Uzytkownicy c: uzytkownicy)
             System.out.println(c.getLogin() + " " + c.getHaslo());
 
         System.out.println("test commit");
+
 
        /* //test dodawania filmu
         Uzytkownicy admin= new Uzytkownicy();
@@ -74,6 +62,7 @@ public class Main {
                 okno.setContentPane(new Register());
                 break;
 
+
             default:
                 System.out.println("Bledne okno w setJPanel");
         }
@@ -94,6 +83,18 @@ public class Main {
                     e.printStackTrace();
                 }
                 break;
+
+            case DodajFilm:
+                okno.setContentPane(new DodajFilm(uzyt));
+                break;
+
+            case DodajSeans:
+                okno.setContentPane(new DodajSeans(uzyt));
+                break;
+            case TwojeRezrwacje:
+                okno.setContentPane(new TwojeRezerwacje(uzyt));
+                break;
+
             default:
                 System.out.println("Bledne okno w setJPanel uzyt");
         }

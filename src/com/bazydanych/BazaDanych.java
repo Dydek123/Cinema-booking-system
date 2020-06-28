@@ -4,12 +4,12 @@ import com.movies.FactoryFilmy;
 import com.movies.Filmy;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
+
 import com.bazydanych.Bilety;
 import com.okno.Siedzenie;
 import com.okno.State;
+import jdk.jshell.spi.SPIResolutionException;
 
 public class BazaDanych {
   public static final String DRIVER = "org.sqlite.JDBC";
@@ -97,6 +97,27 @@ public class BazaDanych {
     }
     return true;
   }
+
+  public boolean insertFilmy(Filmy film) {
+    try {
+      PreparedStatement prepStmt = conn.prepareStatement("insert into Filmy values (NULL, ?, ?, ?, ?, ?, ?, ?, ? );"); // to do // sprawdzic wszystkie inserty
+      prepStmt.setString(1, film.getTytul());
+      prepStmt.setInt(2, film.getIdRezyserzy());
+      prepStmt.setInt(3,film.getIdGatunki());
+      prepStmt.setDouble(4, film.getOcena());
+      prepStmt.setString(5, film.getCzasTrwania());
+      prepStmt.setInt(6, film.getRokProdukcji()/*year*/);
+      prepStmt.setString(7, film.getOpis());
+      prepStmt.setString(8, " "/*film.getZwiastun()*/);
+      prepStmt.execute();
+    } catch (SQLException e) {
+      System.err.println("Blad przy wstawianiu filmu");
+      e.printStackTrace();
+      return false;
+    }
+    return true;
+  }
+
   public boolean insertGatunki(String nazwaGatunku) {
     try {
       PreparedStatement prepStmt = conn.prepareStatement("insert into Gatunki values (NULL, ?);"); // to do // sprawdzic wszystkie inserty
@@ -150,13 +171,13 @@ public class BazaDanych {
     }
     return true;
   }
-  public boolean insertSeanse(int idSale, int idFilmy, /*date*/String dataSeansu, float godzinaSeansu) {
+  public boolean insertSeanse(int idSale, int idFilmy, /*date*/String dataSeansu, String godzinaSeansu) {
     try {
       PreparedStatement prepStmt = conn.prepareStatement("insert into Seanse values (NULL, ?, ?, ?, ?);"); // to do // sprawdzic wszystkie inserty
       prepStmt.setInt(1, idSale);
       prepStmt.setInt(2, idFilmy);
       prepStmt.setString(3, dataSeansu);
-      prepStmt.setFloat(4, godzinaSeansu);
+      prepStmt.setString(4, godzinaSeansu);
       prepStmt.execute();
     } catch (SQLException e) {
       System.err.println("Blad przy wstawianiu seansu");
@@ -167,7 +188,7 @@ public class BazaDanych {
   }
   public boolean insertUzytkownicy(String login, String haslo, String email, String imieUzytkownika, String nazwiskoUzytkownika, int wiek, int telefon) {
     try {
-      PreparedStatement prepStmt = conn.prepareStatement("insert into Uzytkownicy values (NULL, ?, ?, ?, ?, ?, ?, ?);"); // to do // sprawdzic wszystkie inserty
+      PreparedStatement prepStmt = conn.prepareStatement("insert into Uzytkownicy values (NULL, ?, ?, ?, ?, ?, ?, ?, 0);"); // to do // sprawdzic wszystkie inserty
       prepStmt.setString(1, login);
       prepStmt.setString(2, haslo);
       prepStmt.setString(3, email);
@@ -242,7 +263,7 @@ public class BazaDanych {
         opis = result.getString("Opis");
         zwiastun = result.getString("Zwiastun");
 
-        filmyList.add(filmyFactory.makeFilm(idFlimy, tytul, idRezyserzy, ocena, czasTrwania, rokProdukcji, opis, zwiastun,idGatunki));
+        filmyList.add(filmyFactory.makeFilm(idFlimy, tytul, idRezyserzy, ocena, czasTrwania, rokProdukcji, opis,/* zwiastun,*/idGatunki));
       }
     } catch (SQLException e) {
       e.printStackTrace();
@@ -298,7 +319,7 @@ public class BazaDanych {
         opis = result.getString("Opis");
         zwiastun = result.getString("Zwiastun");
 
-        film = filmyFactory.makeFilm(idFlimy, tytul, idRezyserzy, ocena, czasTrwania, rokProdukcji, opis, zwiastun,idGatunki);
+        film = filmyFactory.makeFilm(idFlimy, tytul, idRezyserzy, ocena, czasTrwania, rokProdukcji, opis, /*zwiastun,*/idGatunki);
       }
     } catch (SQLException e) {
       e.printStackTrace();
@@ -390,6 +411,31 @@ public class BazaDanych {
     }
     return rezyser;
   }
+
+  public Rezyserzy selectRezyser(String name, String surname) {
+    final String sql = "SELECT * FROM Rezyserzy where Imie_rezysera= ? and Nazwisko_rezysera=?";
+    PreparedStatement ps = null;
+    Rezyserzy rezyser = null;
+    try {
+      ps = conn.prepareStatement(sql);
+      ps.setString(1, name);
+      ps.setString(2, surname);
+      ResultSet result = ps.executeQuery(); // to do
+      int idRezyserzy;
+      String imieRezysera, nazwiskoRezysera;
+      while(result.next()) {
+        idRezyserzy = result.getInt("ID_rezyserzy");
+        imieRezysera = result.getString("Imie_rezysera");
+        nazwiskoRezysera = result.getString("Nazwisko_rezysera");
+        rezyser=new Rezyserzy(idRezyserzy, imieRezysera, nazwiskoRezysera);
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return null;
+    }
+    return rezyser;
+  }
+
   public List<Sale> selectSale() {
     List<Sale> saleList = new LinkedList<Sale>();
     try {
@@ -562,6 +608,74 @@ public class BazaDanych {
     }
   }
 
+  public boolean updateUzytkownicy(Uzytkownicy uzytkownik)
+  {
+    try {
+      PreparedStatement prepStmt = conn.prepareStatement("UPDATE Uzytkownicy SET Haslo='" + uzytkownik.getHaslo()
+              + "', Email='" + uzytkownik.getEmail() + "', Imie_uzytkownika='" + uzytkownik.getImieUzytkownika() +
+              "', Nazwisko_uzytkownika='" + uzytkownik.getNazwiskoUzytkownika() + "'," + "Telefon='" + uzytkownik.getTelefon()
+              + "' where ID_uzytkownicy=? ;"); // to do // sprawdzic wszystkie inserty
+      prepStmt.setInt(1, uzytkownik.getIdUzytkownika());
+      prepStmt.execute();
+
+    } catch (SQLException e) {
+      System.err.println("Blad przy wstawianiu uzytkownika");
+      e.printStackTrace();
+      return false;
+    }
+    return true;
+  }
+
+  public String[][] selectRezerwacjeUzytkownika(int ID_uzytkownika)
+  {
+    String[][] rezerwacje = new String[1][1];
+    int ilosc;
+    try {
+      ResultSet result2 = stat.executeQuery(
+              "SELECT COUNT(*) FROM (SELECT Rezerwacje.ID_seanse AS seanse, Rezerwacje.Miejsce, Seanse.Data_seansu, Seanse.Godzina_seansu, Seanse.ID_filmy AS filmy, " +
+                      "Filmy.Tytul, Rezerwacje.ID_rezerwacje From Rezerwacje Natural join Seanse, Filmy" +
+                      " WHERE Rezerwacje.ID_uzytkownicy = " + ID_uzytkownika + " AND Seanse.ID_seanse = seanse AND Filmy.ID_filmy = filmy);");
+
+      ilosc = result2.getInt("COUNT(*)");
+
+      if(ilosc > 0) {
+
+        rezerwacje = new String[ilosc][6];
+
+        ResultSet result = stat.executeQuery(
+                "SELECT Rezerwacje.ID_seanse AS seanse, Rezerwacje.Miejsce, Seanse.Data_seansu, Seanse.Godzina_seansu, Seanse.ID_filmy AS filmy, Filmy.Tytul, Rezerwacje.ID_rezerwacje " +
+                        "From Rezerwacje Natural join Seanse, Filmy " +
+                        "WHERE Rezerwacje.ID_uzytkownicy = " + ID_uzytkownika + " AND Seanse.ID_seanse = seanse AND Filmy.ID_filmy = filmy");
+
+        for (int i = 0; result.next(); i++) {
+          rezerwacje[i][5] = String.valueOf(result.getInt("ID_rezerwacje"));
+          rezerwacje[i][3] = result.getString("Miejsce");
+          rezerwacje[i][1] = result.getString("Data_seansu");
+          rezerwacje[i][2] = result.getString("Godzina_seansu");
+          rezerwacje[i][0] = result.getString("Tytul");
+          rezerwacje[i][4] = "Zrezygnuj";
+
+        }
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }finally {
+      return rezerwacje;
+    }
+  }
+
+  public void deleteRezerwacjeUzytkownika(int idRezerwacjeUzytkownika)
+  {
+    try{
+
+      PreparedStatement deleteRezerwacjeUzytkownika = conn.prepareStatement("DELETE FROM Rezerwacje WHERE ID_rezerwacje=?;");
+      deleteRezerwacjeUzytkownika.setInt(1, idRezerwacjeUzytkownika);
+      deleteRezerwacjeUzytkownika.execute();
+
+    }catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
 
   public void closeConnection() {
     try {
