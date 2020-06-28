@@ -4,18 +4,14 @@ import com.bazydanych.BazaDanych;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
-import com.okno.PlakatFilmu;
 
-
-public class Rezerwacja extends JPanel implements ActionListener, MouseListener {
+public class Rezerwacja extends JPanel implements MouseListener, OknoJPanel {
     private BazaDanych baza = new BazaDanych();
     private int selectedSeansId;
     private Uzytkownicy uzytkownicy;
@@ -32,7 +28,6 @@ public class Rezerwacja extends JPanel implements ActionListener, MouseListener 
     //private JLabel [][] listaSiedzenB = new JLabel[3][10];
     private List<Siedzenie> zajete_siedzenia = new LinkedList<>();
 
-    public JFrame bSignUp;
     public JLabel background;
     //Zainicjowanie listy siedzen stałą ilościa miejsc kazdej sali
 
@@ -119,14 +114,6 @@ public class Rezerwacja extends JPanel implements ActionListener, MouseListener 
         }
     }
 
-
-
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
-
     @Override
     public void mouseClicked(MouseEvent e) {
         Object p = e.getSource();
@@ -159,6 +146,7 @@ public class Rezerwacja extends JPanel implements ActionListener, MouseListener 
             if (p == bRezerwuj) {
                 if(this.ile > 0) {
                     rezerwowanieMiejsc(uzytkownicy.getIdUzytkownika(), selectedSeansId, ile);
+                    exit();
                     Main.setJPanel(Window.OknoUzytkownika, uzytkownicy);
                 }
             }
@@ -199,5 +187,11 @@ public class Rezerwacja extends JPanel implements ActionListener, MouseListener 
     @Override
     public void mouseExited(MouseEvent e) {
 
+    }
+
+    @Override
+    public void exit() {
+        baza.closeConnection();
+        removeAll();
     }
 }

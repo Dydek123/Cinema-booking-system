@@ -3,10 +3,10 @@ package com.okno;
 import com.bazydanych.BazaDanych;
 import com.bazydanych.Uzytkownicy;
 
-import javax.management.RuntimeErrorException;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Register extends JPanel implements ActionListener, MouseListener {
+public class Register extends JPanel implements MouseListener, OknoJPanel {
 
 
     private JLabel bSingUp, bExit, bBack, lLogin, lPassword, lEmail, lName, lSurname, lAge, lPhone, background, lWrongData, test;
@@ -35,6 +35,9 @@ public class Register extends JPanel implements ActionListener, MouseListener {
     private Login login;
     private String regexEmail = "^(.+)@(.+).(.+)$";
     private Pattern patternEmail;
+
+    BazaDanych baza = new BazaDanych();
+
     private BufferedImage bi;
     int x = 107, y= 300, width = (835-80)/2, height = 50; // x=80, 935, y = 260
     public Register(){
@@ -63,12 +66,10 @@ public class Register extends JPanel implements ActionListener, MouseListener {
 
         tLogin = new JTextField(); // inicjalizownie oraz ustawianie pola do wpisania loginu
         tLogin.setBounds(x, y+height+20, width, height);
-        tLogin.addActionListener(this);
         add(tLogin);
 
         fPassword = new JPasswordField(); // inicjalizownie oraz ustawianie pola do wpisania hasla
         fPassword.setBounds(x+width+50,y+height+20,width,height);
-        fPassword.addActionListener(this);
         add(fPassword);
 
         try {
@@ -86,7 +87,6 @@ public class Register extends JPanel implements ActionListener, MouseListener {
         patternEmail = Pattern.compile(regexEmail);
         tEmail = new JTextField(); // inicjalizownie oraz ustawianie pola do wpisywania e-maila
         tEmail.setBounds(x,y+3*(height+20),width*2+50,height);
-        tEmail.addActionListener(this);
         add(tEmail);
 
         try {
@@ -103,7 +103,6 @@ public class Register extends JPanel implements ActionListener, MouseListener {
 
         tName = new JTextField(); // inicjalizownie oraz ustawianie pola do wpisywania imienia
         tName.setBounds(x,y+5*(height+20),width,height);
-        tName.addActionListener(this);
         add(tName);
 
         try {
@@ -120,7 +119,6 @@ public class Register extends JPanel implements ActionListener, MouseListener {
 
         tSurname = new JTextField(); // inicjalizownie oraz ustawianie pola do wpisania nazwiska
         tSurname.setBounds(x+width+50,y+5*(height+20),width,height);
-        tSurname.addActionListener(this);
         add(tSurname);
 
         try {
@@ -137,7 +135,6 @@ public class Register extends JPanel implements ActionListener, MouseListener {
 
         tAge = new JTextField(); // inicjalizownie oraz ustawianie pola do wpisania wieku
         tAge.setBounds(x,y+7*(height+20),width,height);
-        tAge.addActionListener(this);
         add(tAge);
 
         try {
@@ -154,7 +151,6 @@ public class Register extends JPanel implements ActionListener, MouseListener {
 
         tPhone = new JTextField(); // inicjalizownie oraz ustawianie pola wpisania nr telefonu
         tPhone.setBounds(x+width+50,y+7*(height+20),width,height);
-        tPhone.addActionListener(this);
         add(tPhone);
 
         bSingUp=new JLabel();
@@ -209,14 +205,6 @@ public class Register extends JPanel implements ActionListener, MouseListener {
         add(background);
 
     }
-    public Register(Login login){
-        this();
-        this.login = login;
-    }
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -243,7 +231,7 @@ public class Register extends JPanel implements ActionListener, MouseListener {
                     throw new RuntimeException("Brak danych");
                 }
                 //send to check
-                BazaDanych baza = new BazaDanych();
+
                 List<Uzytkownicy> uzyt = baza.selectUzytkownicy();
                 for(Uzytkownicy c: uzyt){
                     if(l.equals(c.getLogin()) || em.equals(c.getEmail())){
@@ -254,14 +242,12 @@ public class Register extends JPanel implements ActionListener, MouseListener {
                     throw new RuntimeException("zle dane");
                 }
 
-                //login.setVisible(true);
-                //dispose();
-
+                exit();
                 Main.setJPanel(Window.Login);
             } else if(p==bBack){
                 Main.setJPanel(Window.Login);
             }else if(p == bExit){
-                removeAll();
+                exit();
                 System.exit(0);
             }
         } catch (RuntimeException err) {
@@ -320,5 +306,11 @@ public class Register extends JPanel implements ActionListener, MouseListener {
         if(p == bBack) {
             bBack.setIcon(iPowrotZielone);
         }
+    }
+
+    @Override
+    public void exit() {
+        baza.closeConnection();
+        removeAll();
     }
 }

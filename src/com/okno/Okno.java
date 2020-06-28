@@ -47,9 +47,8 @@ public class Okno extends JFrame implements KeyListener {
 
     }
 
-    class PanelWyjscia extends JDialog implements ActionListener
+    static class PanelWyjscia extends JDialog implements ActionListener
     {
-        private JLabel lZapytanie;
         private JButton bTak, bNie;
         public PanelWyjscia(JFrame owner)
         {
@@ -58,7 +57,7 @@ public class Okno extends JFrame implements KeyListener {
             setLayout(null);
             setLocationRelativeTo(null);
 
-            lZapytanie = new JLabel("Czy wyjść?", JLabel.CENTER);
+            JLabel lZapytanie = new JLabel("Czy wyjść?", JLabel.CENTER);
             lZapytanie.setBounds(100,20,400,30);
             lZapytanie.setFont(new Font("Impact", Font.PLAIN, 30));
             add(lZapytanie);
