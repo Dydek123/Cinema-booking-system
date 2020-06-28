@@ -210,7 +210,7 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
         tBledneDane.setVisible(false);
         add(tBledneDane);
 
-        background = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\Profil_uzytkownika_2.png")); // inicjalizownie oraz ustawianie tła
+        background = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\Profil_uzytkownika.png")); // inicjalizownie oraz ustawianie tła
         background.setBounds(0,0,1920,1080);
         add(background);
 
