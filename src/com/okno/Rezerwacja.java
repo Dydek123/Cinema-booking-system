@@ -10,14 +10,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
+import com.okno.PlakatFilmu;
 
 
 public class Rezerwacja extends JPanel implements ActionListener, MouseListener {
@@ -142,6 +137,7 @@ public class Rezerwacja extends JPanel implements ActionListener, MouseListener 
                         if (listaSiedzen[i][j].getState() == State.WOLNE) {
                             listaSiedzen[i][j].setState(State.WYBRANE);
                             this.ile += 1;
+                            if (this.ile > 0) this.bRezerwuj.setIcon(new ImageIcon("Coś tam\\Nowe Grafiki\\rezerwuj_zielony.png"));
                             this.cena += 15.00;
                             System.out.println("miejsce: " + listaSiedzen[i][j].getMiejsce());
                             zajete_siedzenia.add(listaSiedzen[i][j]);
@@ -150,6 +146,7 @@ public class Rezerwacja extends JPanel implements ActionListener, MouseListener 
                         } else if (listaSiedzen[i][j].getState() == State.WYBRANE) {
                             listaSiedzen[i][j].setState(State.WOLNE);
                             this.ile -= 1;
+                            if (this.ile == 0) this.bRezerwuj.setIcon(new ImageIcon("Coś tam\\Nowe Grafiki\\rezerwuj.png"));
                             this.cena -= 15.00;
                             zajete_siedzenia.remove(listaSiedzen[i][j]);
                             tIleBiletow.setText("" + ile);
@@ -160,12 +157,22 @@ public class Rezerwacja extends JPanel implements ActionListener, MouseListener 
                 }
             }
             if (p == bRezerwuj) {
-                rezerwowanieMiejsc(uzytkownicy.getIdUzytkownika(), selectedSeansId, ile);
-                Main.setJPanel(Window.OknoUzytkownika, uzytkownicy);
+                if(this.ile > 0) {
+                    rezerwowanieMiejsc(uzytkownicy.getIdUzytkownika(), selectedSeansId, ile);
+                    Main.setJPanel(Window.OknoUzytkownika, uzytkownicy);
+                }
             }
             if (p == bPowrot) {
+                this.ile = 0;
+                this.cena = 0;
+                for (int i = 0; i < 3; i++) {
+                    for (int j = 0; j < 10; j++) {
+                        if(listaSiedzen[i][j].getState() == State.WYBRANE) listaSiedzen[i][j].setState(State.WOLNE);
+                    }
+                }
                 Main.setJPanel(Window.OknoFilmu, uzytkownicy, chosenMovieTitle);
             }
+
         } catch (RuntimeException err) {
             System.out.println(err);
         } /*catch (IOException ex) {
