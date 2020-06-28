@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 public class Login extends JPanel implements ActionListener, MouseListener{
@@ -32,21 +34,36 @@ public class Login extends JPanel implements ActionListener, MouseListener{
     public Login(){
         setBounds(0,0,1920,1080);
         setLayout(null);
-        lLogin = new JLabel("Login: ", JLabel.LEFT);
-        lLogin.setBounds(x,y,width,height);
-        lLogin.setFont(new Font("Impact", Font.PLAIN, 30));
-        add(lLogin);
+
+        try {
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Coś tam\\Fonts\\Caudex-Regular.ttf"));
+
+            lLogin = new JLabel("Login: ", JLabel.LEFT);
+            lLogin.setBounds(x, y, width, height);
+            lLogin.setFont(font.deriveFont(Font.BOLD, 30));
+            add(lLogin);
+
+            lPassword = new JLabel("Hasło: ", JLabel.RIGHT);
+            lPassword.setBounds(x, y + (2 * height), width, height);
+            lPassword.setFont(font.deriveFont(Font.BOLD, 30));
+            add(lPassword);
+
+            lWrongPass = new JLabel();
+            lWrongPass.setBounds(x,y + (4*height),width,height);
+            lWrongPass.setFont(font.deriveFont(Font.BOLD, 30));
+            add(lWrongPass);
+
+
+        } catch (FontFormatException | IOException ex) {
+            ex.printStackTrace();
+        }
 
         tLogin = new JTextField();
-        tLogin.setBounds(x,y + height,width,height);
-        tLogin.addActionListener(this);
-        tLogin.setFont(new Font("Impact", Font.PLAIN, 30));
-        add(tLogin);
+            tLogin.setBounds(x, y + height, width, height);
+            tLogin.addActionListener(this);
+            tLogin.setFont(new Font("Impact", Font.PLAIN, 30));
+            add(tLogin);
 
-        lPassword = new JLabel("Hasło: ", JLabel.RIGHT);
-        lPassword.setBounds(x,y + (2*height),width,height);
-        lPassword.setFont(new Font("Impact", Font.PLAIN, 30));
-        add(lPassword);
 
         fPassword = new JPasswordField();
         fPassword.setBounds(x,y + (3*height),width,height);
@@ -54,10 +71,6 @@ public class Login extends JPanel implements ActionListener, MouseListener{
         fPassword.addActionListener(this);
         add(fPassword);
 
-        lWrongPass = new JLabel();
-        lWrongPass.setBounds(x,y + (4*height),width,height);
-        lWrongPass.setFont(new Font("Impact", Font.PLAIN, 30));
-        add(lWrongPass);
 
         bLogUp = new JLabel(iZalogujZielone);
         bLogUp.setBounds(85,y + (5*height),428,140);
