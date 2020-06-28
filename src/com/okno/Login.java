@@ -43,7 +43,7 @@ public class Login extends JPanel implements ActionListener, MouseListener{
             lLogin.setFont(font.deriveFont(Font.BOLD, 30));
             add(lLogin);
 
-            lPassword = new JLabel("Hasło: ", JLabel.RIGHT);
+            lPassword = new JLabel("Hasło: ", JLabel.LEFT);
             lPassword.setBounds(x, y + (2 * height), width, height);
             lPassword.setFont(font.deriveFont(Font.BOLD, 30));
             add(lPassword);
