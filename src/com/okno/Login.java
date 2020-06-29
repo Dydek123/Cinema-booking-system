@@ -48,8 +48,6 @@ public class Login extends JPanel implements MouseListener, OknoJPanel{
             lWrongPass.setBounds(x,y + (4*height),width,height);
             lWrongPass.setFont(font.deriveFont(Font.BOLD, 30));
             add(lWrongPass);
-
-
         } catch (FontFormatException | IOException ex) {
             ex.printStackTrace();
         }
