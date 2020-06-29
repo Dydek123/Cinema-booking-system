@@ -1,6 +1,6 @@
-package com.okno;
-import com.bazydanych.*;
-import com.bazydanych.BazaDanych;
+package main.java.com.okno;
+import main.java.com.bazydanych.*;
+import main.java.com.bazydanych.BazaDanych;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,7 +41,7 @@ public class Rezerwacja extends JPanel implements MouseListener, OknoJPanel {
 
         createListOfSeats(listaSiedzen);
         baza.ktore_zajete(selectedSeansId, listaSiedzen);
-        Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Coś tam\\Fonts\\Caudex-Regular.ttf"));
+        Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
 
         tIleBiletow = new JLabel("0");
         tIleBiletow.setBounds(1030, 165, 45, 40);
@@ -55,18 +55,18 @@ public class Rezerwacja extends JPanel implements MouseListener, OknoJPanel {
         tTxt.setForeground(new Color(23, 101, 202));
         add(tTxt);
 
-        bPowrot = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\powrot.png"));
+        bPowrot = new JLabel(new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot.png"));
         bPowrot.setBounds(1300, 25, 260, 110);
         bPowrot.addMouseListener(this);
         add(bPowrot);
 
-        bRezerwuj = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\rezerwuj.png"));
+        bRezerwuj = new JLabel(new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\rezerwuj.png"));
         bRezerwuj.setBounds(1580, 25, 260, 110);
         bRezerwuj.addMouseListener(this);
         add(bRezerwuj);
 
 
-        background = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\Miejsce.png")); // inicjalizownie oraz ustawianie tła
+        background = new JLabel(new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\Miejsce.png")); // inicjalizownie oraz ustawianie tła
         background.setBounds(0,0,1920,1080);
         add(background);
     }
@@ -124,7 +124,7 @@ public class Rezerwacja extends JPanel implements MouseListener, OknoJPanel {
                         if (listaSiedzen[i][j].getState() == State.WOLNE) {
                             listaSiedzen[i][j].setState(State.WYBRANE);
                             this.ile += 1;
-                            if (this.ile > 0) this.bRezerwuj.setIcon(new ImageIcon("Coś tam\\Nowe Grafiki\\rezerwuj_zielony.png"));
+                            if (this.ile > 0) this.bRezerwuj.setIcon(new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\rezerwuj_zielony.png"));
                             this.cena += 15.00;
                             System.out.println("miejsce: " + listaSiedzen[i][j].getMiejsce());
                             zajete_siedzenia.add(listaSiedzen[i][j]);
@@ -133,7 +133,7 @@ public class Rezerwacja extends JPanel implements MouseListener, OknoJPanel {
                         } else if (listaSiedzen[i][j].getState() == State.WYBRANE) {
                             listaSiedzen[i][j].setState(State.WOLNE);
                             this.ile -= 1;
-                            if (this.ile == 0) this.bRezerwuj.setIcon(new ImageIcon("Coś tam\\Nowe Grafiki\\rezerwuj.png"));
+                            if (this.ile == 0) this.bRezerwuj.setIcon(new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\rezerwuj.png"));
                             this.cena -= 15.00;
                             zajete_siedzenia.remove(listaSiedzen[i][j]);
                             tIleBiletow.setText("" + ile);

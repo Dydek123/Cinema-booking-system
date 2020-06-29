@@ -1,4 +1,4 @@
-package com.bazydanych;
+package main.java.com.bazydanych;
 
 public class Gatunki {
     private int idGatunki;

@@ -1,9 +1,9 @@
-package com.okno;
+package main.java.com.okno;
 
-import com.bazydanych.BazaDanych;
-import com.bazydanych.Sale;
-import com.bazydanych.Uzytkownicy;
-import com.movies.Filmy;
+import main.java.com.bazydanych.BazaDanych;
+import main.java.com.bazydanych.Sale;
+import main.java.com.bazydanych.Uzytkownicy;
+import main.java.com.movies.Filmy;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,7 +35,7 @@ public class DodajSeans extends JPanel implements MouseListener, OknoJPanel {
         this.uzytkownik=uzytkownik;
 
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Coś tam\\Fonts\\Caudex-Regular.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
 
             lTytul = new JLabel("Tytul filmu:",JLabel.LEFT); // inicjalizownie oraz ustawianie tekstu "wiek"
             lTytul.setFont(font.deriveFont(Font.BOLD, 50f));
@@ -51,7 +51,7 @@ public class DodajSeans extends JPanel implements MouseListener, OknoJPanel {
         add(tTytul);
 
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Coś tam\\Fonts\\Caudex-Regular.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
 
             lNumerSali = new JLabel("Numer Sali: ",JLabel.LEFT); // inicjalizownie oraz ustawianie tekstu "imie"
             lNumerSali.setFont(font.deriveFont(Font.BOLD, 50f));
@@ -67,7 +67,7 @@ public class DodajSeans extends JPanel implements MouseListener, OknoJPanel {
         add(tNumerSali);
 
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Coś tam\\Fonts\\Caudex-Regular.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
 
             lDataSeansu = new JLabel("Data seansu: ",JLabel.LEFT); // inicjalizownie oraz ustawianie tekstu "email"
             lDataSeansu.setFont(font.deriveFont(Font.BOLD, 50f));
@@ -84,7 +84,7 @@ public class DodajSeans extends JPanel implements MouseListener, OknoJPanel {
         add(tDataSeansu);
 
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Coś tam\\Fonts\\Caudex-Regular.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
 
             lGodzinaSeansu = new JLabel("Godzina Seansu: "); // inicjalizownie oraz ustawianie tekstu "telefon"
             lGodzinaSeansu.setFont(font.deriveFont(Font.BOLD, 50f));
@@ -101,7 +101,7 @@ public class DodajSeans extends JPanel implements MouseListener, OknoJPanel {
 
         bPowrot=new JLabel();
         //ImageIcon iZarejestrujZielone = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_zielone.png");
-        bPowrot.setIcon(new ImageIcon("Coś tam\\Nowe Grafiki\\powrot2.png"));
+        bPowrot.setIcon(new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot2.png"));
         bPowrot.setBounds(x,y+10*(height+20),400,100);
         bPowrot.setBorder(null);
         bPowrot.addMouseListener(this);
@@ -109,7 +109,7 @@ public class DodajSeans extends JPanel implements MouseListener, OknoJPanel {
 
         bZatwierdz=new JLabel();
         //ImageIcon iZarejestrujZielone = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_zielone.png");
-        bZatwierdz.setIcon(new ImageIcon("Coś tam\\Nowe Grafiki\\zatwierdz.png"));
+        bZatwierdz.setIcon(new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\zatwierdz.png"));
         bZatwierdz.setBounds(x+width+50,y+10*(height+20),400,100);
         bZatwierdz.setBorder(null);
         bZatwierdz.addMouseListener(this);
@@ -117,7 +117,7 @@ public class DodajSeans extends JPanel implements MouseListener, OknoJPanel {
 
 
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Coś tam\\Fonts\\Caudex-Regular.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
 
             lWrongData = new JLabel("Złe dane",JLabel.CENTER);
             lWrongData.setFont(font.deriveFont(Font.BOLD, 50f));
@@ -128,7 +128,7 @@ public class DodajSeans extends JPanel implements MouseListener, OknoJPanel {
             ex.printStackTrace();
         }
 
-        background = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\dodaj_seans_bg.png")); // inicjalizownie oraz ustawianie tła
+        background = new JLabel(new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\dodaj_seans_bg.png")); // inicjalizownie oraz ustawianie tła
         background.setBounds(0,0,1920,1080);
         add(background);
     }

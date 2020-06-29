@@ -1,6 +1,6 @@
-package com.movies;
+package main.java.com.movies;
 
-import static com.movies.Gatunek.*;
+import static main.java.com.movies.Gatunek.*;
 
 public class FactoryFilmy {
     public Filmy makeFilm(int idFilmy, String tytul, int idRezyserzy, double ocena, String czasTrwania, /*year*/ int rokProdukcji, String opis,/* String zwiastun,*/ Gatunek newFilmGatunek){

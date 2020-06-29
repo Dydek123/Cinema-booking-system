@@ -1,6 +1,6 @@
-package com.bazydanych;
+package main.java.com.bazydanych;
 
-import com.okno.EkranGlowny;
+import main.java.com.okno.EkranGlowny;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -70,7 +70,7 @@ public final class RateStar extends JPanel {
         }
         JFrame frame = new JFrame("@title@");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.getContentPane().add(new com.bazydanych.RateStar());
+        frame.getContentPane().add(new main.java.com.bazydanych.RateStar());
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

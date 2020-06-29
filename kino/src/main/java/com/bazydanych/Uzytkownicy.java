@@ -1,7 +1,7 @@
-package com.bazydanych;
+package main.java.com.bazydanych;
 
-import com.movies.FactoryFilmy;
-import com.movies.Filmy;
+import main.java.com.movies.FactoryFilmy;
+import main.java.com.movies.Filmy;
 
 import java.sql.SQLException;
 import java.util.List;

@@ -1,6 +1,6 @@
-package com.okno;
+package main.java.com.okno;
 
-import com.bazydanych.*;
+import main.java.com.bazydanych.*;
 
 import javax.swing.*;
 import java.awt.*;

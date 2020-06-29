@@ -1,7 +1,7 @@
-package com.okno;
+package main.java.com.okno;
 
-import com.bazydanych.BazaDanych;
-import com.bazydanych.Uzytkownicy;
+import main.java.com.bazydanych.BazaDanych;
+import main.java.com.bazydanych.Uzytkownicy;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,15 +16,15 @@ public class Login extends JPanel implements MouseListener, OknoJPanel{
     private JPasswordField fPassword;
     private JLabel lLogin, lPassword, lWrongPass, background,bSingUp, bLogUp, bExit;
     BazaDanych baza = new BazaDanych();
-    private ImageIcon iZalogujZielone = new ImageIcon("Coś tam\\Nowe Grafiki\\zaloguj_zielone.png");
-    private ImageIcon iZalogujHover = new ImageIcon("Coś tam\\Nowe Grafiki\\zaloguj_hover.png");
-    private ImageIcon iZalogujClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\zaloguj_clicked.png");
-    private ImageIcon iZarejestrujZielone = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_zielone.png");
-    private ImageIcon iZarejestrujHover = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_hover.png");
-    private ImageIcon iZarejestrujClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_clicked.png");
-    private ImageIcon iZamknij = new ImageIcon("Coś tam\\Nowe Grafiki\\Zamknij_x.png");
-    private ImageIcon iZamknijHover = new ImageIcon("Coś tam\\Nowe Grafiki\\Zamknij_x_hover.png");
-    private ImageIcon iZamknijClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\Zamknij_x_clicked.png");
+    private ImageIcon iZalogujZielone = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\zaloguj_zielone.png");
+    private ImageIcon iZalogujHover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\zaloguj_hover.png");
+    private ImageIcon iZalogujClicked = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\zaloguj_clicked.png");
+    private ImageIcon iZarejestrujZielone = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\zarejestruj_zielone.png");
+    private ImageIcon iZarejestrujHover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\zarejestruj_hover.png");
+    private ImageIcon iZarejestrujClicked = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\zarejestruj_clicked.png");
+    private ImageIcon iZamknij = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\Zamknij_x.png");
+    private ImageIcon iZamknijHover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\Zamknij_x_hover.png");
+    private ImageIcon iZamknijClicked = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\Zamknij_x_clicked.png");
 
     int x = (935-80)/3, y= 300, width = (935-80)/2, height = 50; // x=80, 935, y = 260
     public Login(){
@@ -32,7 +32,7 @@ public class Login extends JPanel implements MouseListener, OknoJPanel{
         setLayout(null);
 
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Coś tam\\Fonts\\Caudex-Regular.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
 
             lLogin = new JLabel("Login: ", JLabel.LEFT);
             lLogin.setBounds(x, y, width, height);
@@ -84,7 +84,7 @@ public class Login extends JPanel implements MouseListener, OknoJPanel{
         bExit.addMouseListener(this);
         add(bExit);
 
-        ImageIcon iStronaLogowania = new ImageIcon("Coś tam\\Nowe Grafiki\\Strona Logowania2.png");
+        ImageIcon iStronaLogowania = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\Strona Logowania2.png");
         background = new JLabel(iStronaLogowania);
         background.setBounds(0,0,1920,1080);
         add(background);

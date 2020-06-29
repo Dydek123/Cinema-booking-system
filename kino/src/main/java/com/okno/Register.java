@@ -1,7 +1,7 @@
-package com.okno;
+package main.java.com.okno;
 
-import com.bazydanych.BazaDanych;
-import com.bazydanych.Uzytkownicy;
+import main.java.com.bazydanych.BazaDanych;
+import main.java.com.bazydanych.Uzytkownicy;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,16 +20,16 @@ public class Register extends JPanel implements MouseListener, OknoJPanel {
     private JLabel bSingUp, bExit, bBack, lLogin, lPassword, lEmail, lName, lSurname, lAge, lPhone, background, lWrongData, test;
 
     private JTextField tLogin, tEmail, tName, tSurname, tAge, tPhone;
-    private ImageIcon iZarejestrujZielone = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_zielone.png");
-    private ImageIcon iZarejestrujHover = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_hover.png");
-    private ImageIcon iZarejestrujClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_clicked.png");
+    private ImageIcon iZarejestrujZielone = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\zarejestruj_zielone.png");
+    private ImageIcon iZarejestrujHover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\zarejestruj_hover.png");
+    private ImageIcon iZarejestrujClicked = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\zarejestruj_clicked.png");
 
-    private ImageIcon iPowrotZielone = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot_zielone.png");
-    private ImageIcon iPowrotHover = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot_hover.png");
+    private ImageIcon iPowrotZielone = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot_zielone.png");
+    private ImageIcon iPowrotHover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot_hover.png");
     private ImageIcon iPowrotClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot_clicked.png");
-    private ImageIcon iZamknij = new ImageIcon("Coś tam\\Nowe Grafiki\\Zamknij_x.png");
-    private ImageIcon iZamknijHover = new ImageIcon("Coś tam\\Nowe Grafiki\\Zamknij_x_hover.png");
-    private ImageIcon iZamknijClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\Zamknij_x_clicked.png");
+    private ImageIcon iZamknij = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\Zamknij_x.png");
+    private ImageIcon iZamknijHover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\Zamknij_x_hover.png");
+    private ImageIcon iZamknijClicked = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\Zamknij_x_clicked.png");
 
     private JPasswordField fPassword;
     private Login login;
@@ -45,7 +45,7 @@ public class Register extends JPanel implements MouseListener, OknoJPanel {
         setLayout(null);
 
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Coś tam\\Fonts\\Caudex-Regular.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
 
             lLogin = new JLabel("Login: ",JLabel.LEFT); // inicjalizownie oraz ustawianie tekstu "login"
             lLogin.setFont(font.deriveFont(Font.BOLD, 50f));
@@ -73,7 +73,7 @@ public class Register extends JPanel implements MouseListener, OknoJPanel {
         add(fPassword);
 
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Coś tam\\Fonts\\Caudex-Regular.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
 
             lEmail = new JLabel("E-mail: ",JLabel.LEFT); // inicjalizownie oraz ustawianie tekstu "email"
             lEmail.setFont(font.deriveFont(Font.BOLD, 50f));
@@ -90,7 +90,7 @@ public class Register extends JPanel implements MouseListener, OknoJPanel {
         add(tEmail);
 
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Coś tam\\Fonts\\Caudex-Regular.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
 
             lName = new JLabel("Imie: ",JLabel.LEFT); // inicjalizownie oraz ustawianie tekstu "imie"
             lName.setFont(font.deriveFont(Font.BOLD, 50f));
@@ -106,7 +106,7 @@ public class Register extends JPanel implements MouseListener, OknoJPanel {
         add(tName);
 
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Coś tam\\Fonts\\Caudex-Regular.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
 
             lSurname = new JLabel("Nazwisko: "); // inicjalizownie oraz ustawianie tekstu "nazwisko"
             lSurname.setFont(font.deriveFont(Font.BOLD, 50f));
@@ -122,7 +122,7 @@ public class Register extends JPanel implements MouseListener, OknoJPanel {
         add(tSurname);
 
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Coś tam\\Fonts\\Caudex-Regular.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
 
             lAge = new JLabel("Wiek",JLabel.LEFT); // inicjalizownie oraz ustawianie tekstu "wiek"
             lAge.setFont(font.deriveFont(Font.BOLD, 50f));
@@ -138,7 +138,7 @@ public class Register extends JPanel implements MouseListener, OknoJPanel {
         add(tAge);
 
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Coś tam\\Fonts\\Caudex-Regular.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
 
             lPhone = new JLabel("Nr telefonu: "); // inicjalizownie oraz ustawianie tekstu "telefon"
             lPhone.setFont(font.deriveFont(Font.BOLD, 50f));
@@ -176,7 +176,7 @@ public class Register extends JPanel implements MouseListener, OknoJPanel {
 
 
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Coś tam\\Fonts\\Caudex-Regular.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
 
             test = new JLabel("Kliknięcie sie powiodło");
             test.setFont(font.deriveFont(Font.BOLD, 50f));
@@ -189,7 +189,7 @@ public class Register extends JPanel implements MouseListener, OknoJPanel {
         }
 
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Coś tam\\Fonts\\Caudex-Regular.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
 
             lWrongData = new JLabel("Złe dane",JLabel.CENTER);
             lWrongData.setFont(font.deriveFont(Font.BOLD, 50f));
@@ -200,7 +200,7 @@ public class Register extends JPanel implements MouseListener, OknoJPanel {
             ex.printStackTrace();
         }
 
-        background = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\Rejestracjav2.png")); // inicjalizownie oraz ustawianie tła
+        background = new JLabel(new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\Rejestracjav2.png")); // inicjalizownie oraz ustawianie tła
         background.setBounds(0,0,1920,1080);
         add(background);
 

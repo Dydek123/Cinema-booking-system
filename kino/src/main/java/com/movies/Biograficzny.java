@@ -1,4 +1,4 @@
-package com.movies;
+package main.java.com.movies;
 
 public class Biograficzny extends Filmy{
 

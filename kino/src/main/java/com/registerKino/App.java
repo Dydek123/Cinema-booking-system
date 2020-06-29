@@ -1,4 +1,4 @@
-package com.registerKino;
+package main.java.com.registerKino;
 
 /**
  * Hello world!

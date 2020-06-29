@@ -1,6 +1,6 @@
-package com.bazydanych;
+package main.java.com.bazydanych;
 /*
-import com.okno.Rezerwacja;
+import main.java.com.okno.Rezerwacja;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

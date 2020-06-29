@@ -1,7 +1,7 @@
-package com.okno;
+package main.java.com.okno;
 
-import com.bazydanych.BazaDanych;
-import com.bazydanych.Uzytkownicy;
+import main.java.com.bazydanych.BazaDanych;
+import main.java.com.bazydanych.Uzytkownicy;
 
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;

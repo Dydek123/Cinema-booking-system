@@ -1,4 +1,4 @@
-package com.bazydanych;
+package main.java.com.bazydanych;
 
 public class Rezyserzy {
     private int idRezyserzy;

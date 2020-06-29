@@ -1,14 +1,14 @@
-package com.bazydanych;
+package main.java.com.bazydanych;
 
-import com.movies.FactoryFilmy;
-import com.movies.Filmy;
+import main.java.com.movies.FactoryFilmy;
+import main.java.com.movies.Filmy;
 
 import java.sql.*;
 import java.util.*;
 
-import com.bazydanych.Bilety;
-import com.okno.Siedzenie;
-import com.okno.State;
+import main.java.com.bazydanych.Bilety;
+import main.java.com.okno.Siedzenie;
+import main.java.com.okno.State;
 import jdk.jshell.spi.SPIResolutionException;
 
 public class BazaDanych {
@@ -37,6 +37,7 @@ public class BazaDanych {
     createTables();
   }
   public boolean createTables(){
+    System.out.println("jestem w createTables");
     String createBilety = "CREATE TABLE IF NOT EXISTS Bilety (ID_bilety INTEGER, Cena_biletu VARCHAR(100), Rodzaj VARCHAR(100) );"; // to do
     String createFilmy = "CREATE TABLE IF NOT EXISTS Filmy (ID_filmy INTEGER, Tytul VARCHAR (100)  UNIQUE ON CONFLICT ABORT, ID_rezyserzy INTEGER, ID_gatunki INTEGER, Ocena VARCHAR(100)," +
             "Czas_trwania VARCHAR(100), Rok_produkcji VARCHAR(100), Opis VARCHAR(1000), Zwiastun VARCHAR(100) );"; // to do
@@ -508,12 +509,14 @@ public class BazaDanych {
   public List<Uzytkownicy> selectUzytkownicy() {
     List<Uzytkownicy> uzytkownicyList = new LinkedList<Uzytkownicy>();
     try {
+      System.out.println("jestem w selectUzytkownicy");
       ResultSet result = stat.executeQuery("SELECT * FROM Uzytkownicy");
       int idUzytkownika, wiek;
       String login, haslo, email, imieUzytkownika, nazwiskoUzytkownika;
       int telefon,admin; // varchar?
       boolean zgodaMarketingowa; //bit?
       while(result.next()) {
+        System.out.println("jestesm w while");
         idUzytkownika = result.getInt("ID_uzytkownicy");
         login = result.getString("Login");
         haslo = result.getString("Haslo");
@@ -523,6 +526,8 @@ public class BazaDanych {
         wiek = result.getInt("Wiek");
         telefon = result.getInt("Telefon"); //varchar?
         admin = result.getInt("Admin");
+        System.out.println(idUzytkownika + " " + login + " " + haslo + " " + email + " " + imieUzytkownika + " " + nazwiskoUzytkownika + " " + wiek + " " + telefon + " "
+        + admin);
         uzytkownicyList.add(new Uzytkownicy.UzytkownicyBuilder()
             .idUzytkownik(idUzytkownika)
                 .ustaw_login(login)
@@ -536,8 +541,10 @@ public class BazaDanych {
       }
     } catch (SQLException e) {
       e.printStackTrace();
+      System.out.println("jestem w selectUzytkownicy catch");
       return null;
     }
+    System.out.println("jestem w selectUzytkownicy return");
     return uzytkownicyList;
   }
   public List<Zakupy> selectZakupy() {

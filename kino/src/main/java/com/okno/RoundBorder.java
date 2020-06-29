@@ -1,4 +1,4 @@
-package com.okno;
+package main.java.com.okno;
 
 import javax.swing.border.Border;
 import java.awt.*;

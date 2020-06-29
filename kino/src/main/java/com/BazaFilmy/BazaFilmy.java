@@ -1,7 +1,7 @@
-package com.BazaFilmy;
+package main.java.com.BazaFilmy;
 
-import com.bazydanych.*;
-import com.movies.*;
+import main.java.com.bazydanych.*;
+import main.java.com.movies.*;
 
 import java.util.LinkedList;
 import java.util.List;

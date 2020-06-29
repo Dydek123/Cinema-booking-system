@@ -1,4 +1,4 @@
-package com.BazaFilmy;
+package main.java.com.BazaFilmy;
 
 public class FilmyOceny {
     private int idUzytkownika;
