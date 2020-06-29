@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DodajFilm extends JPanel implements ActionListener, MouseListener {
+public class DodajFilm extends JPanel implements MouseListener, OknoJPanel {
 
     private JLabel bZatwierdz, bPowrot, lRezyserImie, lRezyserNazwisko, lTytul, lGatunek, lOcena, lCzasTrwania, lRokProdukcji, lOpis, background, lWrongData, test;
     private JTextField tTytul, tCzasTrwania, tRezyserImie, tRezyserNazwisko, tOcena, tRokProdukcji,tGatunek, tOpis;
@@ -29,6 +29,9 @@ public class DodajFilm extends JPanel implements ActionListener, MouseListener {
     private String regex = "^([0-9])h[0-9][0-9]m$";
     private Pattern pattern;
     private BufferedImage bi;
+
+    BazaDanych baza = new BazaDanych();
+
     int x = 700, y= 250, width = 400, height = 50; // x=80, 935, y = 260
     public DodajFilm(Uzytkownicy uzytkownik){
         setBounds(0,0,1920,1080); // inicjalizownie okna
@@ -50,7 +53,6 @@ public class DodajFilm extends JPanel implements ActionListener, MouseListener {
 
         tTytul = new JTextField(); // inicjalizownie oraz ustawianie pola do wpisania wieku
         tTytul.setBounds(x,y+1*(height+20),width*2+50,height);
-        tTytul.addActionListener(this);
         add(tTytul);
 
         try {
@@ -67,7 +69,6 @@ public class DodajFilm extends JPanel implements ActionListener, MouseListener {
 
         tGatunek = new JTextField(); // inicjalizownie oraz ustawianie pola do wpisywania imienia
         tGatunek.setBounds(x,y+3*(height+20),width,height);
-        tGatunek.addActionListener(this);
         add(tGatunek);
 
         try {
@@ -85,7 +86,6 @@ public class DodajFilm extends JPanel implements ActionListener, MouseListener {
         pattern = Pattern.compile(regex);
         tCzasTrwania = new JTextField(); // inicjalizownie oraz ustawianie pola do wpisywania e-maila
         tCzasTrwania.setBounds(x+width+50,y+3*(height+20),width,height);
-        tCzasTrwania.addActionListener(this);
         add(tCzasTrwania);
 
         try {
@@ -102,7 +102,6 @@ public class DodajFilm extends JPanel implements ActionListener, MouseListener {
 
         tRokProdukcji = new JTextField(); // inicjalizownie oraz ustawianie pola wpisania nr telefonu
         tRokProdukcji.setBounds(x,y+5*(height+20),width,height);
-        tRokProdukcji.addActionListener(this);
         add(tRokProdukcji);
 
         try {
@@ -119,7 +118,6 @@ public class DodajFilm extends JPanel implements ActionListener, MouseListener {
 
         tOcena = new JTextField(); // inicjalizownie oraz ustawianie pola do wpisania nazwiska
         tOcena.setBounds(x+width+50,y+5*(height+20),width,height);
-        tOcena.addActionListener(this);
         add(tOcena);
 
         try {
@@ -144,15 +142,11 @@ public class DodajFilm extends JPanel implements ActionListener, MouseListener {
 
         tRezyserImie = new JTextField(); // inicjalizownie oraz ustawianie pola do wpisania loginu
         tRezyserImie.setBounds(x, y+7*(height+20), width, height);
-        tRezyserImie.addActionListener(this);
         add(tRezyserImie);
 
         tRezyserNazwisko = new JTextField(); // inicjalizownie oraz ustawianie pola do wpisania loginu
         tRezyserNazwisko.setBounds(x+width+50, y+7*(height+20), width, height);
-        tRezyserNazwisko.addActionListener(this);
         add(tRezyserNazwisko);
-
-
 
         try {
             Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Coś tam\\Fonts\\Caudex-Regular.ttf"));
@@ -168,13 +162,7 @@ public class DodajFilm extends JPanel implements ActionListener, MouseListener {
 
         tOpis = new JTextField(); // inicjalizownie oraz ustawianie pola wpisania nr telefonu
         tOpis.setBounds(x,y+9*(height+20),width*2+50,height);
-        tOpis.addActionListener(this);
         add(tOpis);
-
-
-
-
-
 
         bPowrot=new JLabel();
         //ImageIcon iZarejestrujZielone = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_zielone.png");
@@ -223,16 +211,6 @@ public class DodajFilm extends JPanel implements ActionListener, MouseListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        try {
-            Object p = e.getSource();
-
-        } catch (RuntimeException err) {
-
-        }
-    }
-
-    @Override
     public void mouseClicked(MouseEvent e) {
         try {
             Object p = e.getSource();
@@ -259,7 +237,7 @@ public class DodajFilm extends JPanel implements ActionListener, MouseListener {
                     throw new RuntimeException("Zly czas trwania (np. 1h00m)");
                 }
                 //send to check
-                BazaDanych baza = new BazaDanych();
+
                 List<Filmy> filmy = baza.selectFilmy();
                 for(Filmy c: filmy){
                     if(tyt.equals(c.getTytul())){
@@ -289,9 +267,12 @@ public class DodajFilm extends JPanel implements ActionListener, MouseListener {
 
                 Filmy tempFilm = filmyFactory.makeFilm(1, tyt, idRezyserzy, ocena, czas, rok, opis,/* zwiastun,*/ gatunek);
                 uzytkownik.dodajFilm(tempFilm);
+
+                exit();
                 Main.setJPanel(Window.OknoUzytkownika,uzytkownik);
             }
             if ( p == bPowrot) {
+                exit();
                 Main.setJPanel(Window.OknoUzytkownika,uzytkownik);
             }
         } catch (NumberFormatException err){
@@ -337,5 +318,11 @@ public class DodajFilm extends JPanel implements ActionListener, MouseListener {
         if(p == bZatwierdz) {
          //   bZatwierdz.setIcon(iZarejestrujZielone);
         }
+    }
+
+    @Override
+    public void exit() {
+        baza.closeConnection();
+        removeAll();
     }
 }

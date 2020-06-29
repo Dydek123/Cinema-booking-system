@@ -16,7 +16,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class OknoFilmu  extends JPanel implements ActionListener, MouseListener {
+public class OknoFilmu  extends JPanel implements ActionListener, MouseListener, OknoJPanel {
     BazaDanych baza = new BazaDanych();
     private JLabel background;
     private JLabel bZarezerwuj, bPowrot;
@@ -145,7 +145,7 @@ public class OknoFilmu  extends JPanel implements ActionListener, MouseListener 
         dostepneSeanse=baza.selectDostepneSeanse(chosenMovie.getIdFilmy());
         JComboBox seanseList = new JComboBox(dostepneSeanse[0]);
         Font theFont = new Font("Arial", Font.BOLD, 25);
-        seanseList.setEditable(true);
+        seanseList.setEditable(false);
         seanseList.getEditor().getEditorComponent().setBackground(new Color(170,170,170));
         seanseList.setSelectedIndex(0);
         //Ustawienie domyslnie pierwszego dostepnego seansu jesli uzytkownik nie wybierze zadnego z combo box'a
@@ -178,11 +178,11 @@ public class OknoFilmu  extends JPanel implements ActionListener, MouseListener 
         try {
             Object p = e.getSource();
             if ( p == bZarezerwuj ) {
-//                Rezerwacja rezerwacja = new Rezerwacja(uzytkownicy,selectedSeansId,this);
-//                rezerwacja.setVisible(true);
+                exit();
                 Main.setJPanel(Window.Rezerwacja, uzytkownicy, selectedSeansId, chosenMovieTitle);
             }
             if ( p == bPowrot ) {
+                exit();
                 Main.setJPanel(Window.DostepneFilmy, uzytkownicy);
             }
         } catch (RuntimeException err) {
@@ -208,5 +208,11 @@ public class OknoFilmu  extends JPanel implements ActionListener, MouseListener 
     @Override
     public void mouseExited(MouseEvent e) {
 
+    }
+
+    @Override
+    public void exit() {
+        baza.closeConnection();
+        removeAll();
     }
 }

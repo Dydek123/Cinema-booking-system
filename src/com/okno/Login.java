@@ -5,27 +5,23 @@ import com.bazydanych.Uzytkownicy;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public class Login extends JPanel implements ActionListener, MouseListener{
+public class Login extends JPanel implements MouseListener, OknoJPanel{
     private JTextField tLogin;
     private JPasswordField fPassword;
     private JLabel lLogin, lPassword, lWrongPass, background,bSingUp, bLogUp, bExit;
-    private Register register;
-    private OknoUzytkownika userWindow;
+    BazaDanych baza = new BazaDanych();
     private ImageIcon iZalogujZielone = new ImageIcon("Coś tam\\Nowe Grafiki\\zaloguj_zielone.png");
     private ImageIcon iZalogujHover = new ImageIcon("Coś tam\\Nowe Grafiki\\zaloguj_hover.png");
     private ImageIcon iZalogujClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\zaloguj_clicked.png");
     private ImageIcon iZarejestrujZielone = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_zielone.png");
     private ImageIcon iZarejestrujHover = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_hover.png");
     private ImageIcon iZarejestrujClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_clicked.png");
-    private ImageIcon iStronaLogowania = new ImageIcon("Coś tam\\Nowe Grafiki\\Strona Logowania2.png");
     private ImageIcon iZamknij = new ImageIcon("Coś tam\\Nowe Grafiki\\Zamknij_x.png");
     private ImageIcon iZamknijHover = new ImageIcon("Coś tam\\Nowe Grafiki\\Zamknij_x_hover.png");
     private ImageIcon iZamknijClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\Zamknij_x_clicked.png");
@@ -39,42 +35,39 @@ public class Login extends JPanel implements ActionListener, MouseListener{
             Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Coś tam\\Fonts\\Caudex-Regular.ttf"));
 
             lLogin = new JLabel("Login: ", JLabel.LEFT);
-            lLogin.setFont(font.deriveFont(Font.BOLD, 50f));
-            lLogin.setBounds(x,y,width,height);
-            lLogin.setForeground(Color.black);
+            lLogin.setBounds(x, y, width, height);
+            lLogin.setFont(font.deriveFont(Font.BOLD, 30));
             add(lLogin);
+
+            lPassword = new JLabel("Hasło: ", JLabel.RIGHT);
+            lPassword.setBounds(x, y + (2 * height), width, height);
+            lPassword.setFont(font.deriveFont(Font.BOLD, 30));
+            add(lPassword);
+
+            lWrongPass = new JLabel();
+            lWrongPass.setBounds(x,y + (4*height),width,height);
+            lWrongPass.setFont(font.deriveFont(Font.BOLD, 30));
+            add(lWrongPass);
         } catch (FontFormatException | IOException ex) {
             ex.printStackTrace();
         }
 
         tLogin = new JTextField();
-        tLogin.setBounds(x,y + height,width,height);
-        tLogin.addActionListener(this);
-        tLogin.setFont(new Font("Impact", Font.PLAIN, 30));
-        add(tLogin);
+            tLogin.setBounds(x, y + height, width, height);
+            tLogin.setFont(new Font("Impact", Font.PLAIN, 30));
+            add(tLogin);
 
-        lPassword = new JLabel("Hasło: ", JLabel.RIGHT);
-        lPassword.setBounds(x,y + (2*height),width,height);
-        lPassword.setFont(new Font("Impact", Font.PLAIN, 30));
-        add(lPassword);
 
         fPassword = new JPasswordField();
         fPassword.setBounds(x,y + (3*height),width,height);
         fPassword.setFont(new Font("Impact", Font.PLAIN, 30));
-        fPassword.addActionListener(this);
         add(fPassword);
 
-        lWrongPass = new JLabel();
-        lWrongPass.setBounds(x,y + (4*height),width,height);
-        lWrongPass.setFont(new Font("Impact", Font.PLAIN, 30));
-        add(lWrongPass);
 
         bLogUp = new JLabel(iZalogujZielone);
         bLogUp.setBounds(85,y + (5*height),428,140);
         bLogUp.setBorder(null);
         bLogUp.addMouseListener(this);
-
-
         add(bLogUp);
 
         bSingUp = new JLabel(iZarejestrujZielone);
@@ -89,6 +82,7 @@ public class Login extends JPanel implements ActionListener, MouseListener{
         bExit.addMouseListener(this);
         add(bExit);
 
+        ImageIcon iStronaLogowania = new ImageIcon("Coś tam\\Nowe Grafiki\\Strona Logowania2.png");
         background = new JLabel(iStronaLogowania);
         background.setBounds(0,0,1920,1080);
         add(background);
@@ -96,45 +90,20 @@ public class Login extends JPanel implements ActionListener, MouseListener{
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        Object p = e.getSource();
-       /* if(p == bLogUp || p == fPassword){
-            String l = tLogin.getText();
-            String pass = fPassword.getText();
-            BazaDanych baza = new BazaDanych();
-            List<Uzytkownicy> uzyt = baza.selectUzytkownicy();
-            for(Uzytkownicy c: uzyt) {
-                System.out.println("login podany "+ l + " login z bazy " + c.getLogin() + ".");
-               if(l.equals(c.getLogin()) && pass.equals(c.getHaslo())){
-                   lWrongPass.setVisible(false);
-                   EkranGlowny ekranGlowny = new EkranGlowny(c);
-                   ekranGlowny.setVisible(true);
-
-                   dispose();
-                   break;
-               }
-            }
-            lWrongPass.setText("Zle dane logowania");
-            lWrongPass.setForeground(Color.red);
-            lWrongPass.setVisible(true);
-        }*/
-    }
-
-    @Override
     public void mouseClicked(MouseEvent e) {
         Object p = e.getSource();
         if(p == bSingUp){
+            exit();
             Main.setJPanel(Window.Register);
-//            removeAll();
         }else if(p == bLogUp){
                 String l = tLogin.getText();
                 String pass = fPassword.getText();
-                BazaDanych baza = new BazaDanych();
                 List<Uzytkownicy> uzyt = baza.selectUzytkownicy();
                 for(Uzytkownicy c: uzyt) {
                     System.out.println("login podany "+ l + " login z bazy " + c.getLogin() + ".");
                     if(l.equals(c.getLogin()) && pass.equals(c.getHaslo())){
                         lWrongPass.setVisible(false);
+                        exit();
                         Main.setJPanel(Window.OknoUzytkownika, c);
 //                        removeAll();
                     }
@@ -143,7 +112,7 @@ public class Login extends JPanel implements ActionListener, MouseListener{
                 lWrongPass.setForeground(Color.red);
                 lWrongPass.setVisible(true);
         }else if(p == bExit){
-            removeAll();
+            exit();
             System.exit(0);
         }
     }
@@ -194,5 +163,11 @@ public class Login extends JPanel implements ActionListener, MouseListener{
         }else if(p == bExit){
             bExit.setIcon(iZamknij);
         }
+    }
+
+    @Override
+    public void exit() {
+        baza.closeConnection();
+        removeAll();
     }
 }

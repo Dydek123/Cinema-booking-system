@@ -25,22 +25,16 @@ jest latwa do przerowbienia, tylko trzeba miec obrazy tych przciskow, a z tym tr
 package com.okno;
 
 import com.bazydanych.*;
-import com.movies.Filmy;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class OknoUzytkownika extends JPanel implements ActionListener, MouseListener
+public class OknoUzytkownika extends JPanel implements  MouseListener, OknoJPanel
 {
 
     private JLabel bEdytujDane, bWyloguj, bTwojeRezerwacje, bExit, bDostepneFilmy, bZapiszDane, bPowrotMini, bDodajSeans, bDodajFilm, bPowrot;
@@ -217,12 +211,6 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
     }
 
     @Override
-    public void actionPerformed(ActionEvent e)
-    {
-
-    }
-
-    @Override
     public void mouseClicked(MouseEvent e)
     {
 
@@ -236,11 +224,13 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
                 rezerwacja.setVisible(true);
                 dispose();
                 */
+                exit();
                 Main.setJPanel(Window.DostepneFilmy, uzytkownik);
                 } catch (RuntimeException err) {
                     System.out.println(err);
                 }
             }else if( p == bWyloguj){
+                exit();
                 Main.setJPanel(Window.Login);
             }else if( p == bTwojeRezerwacje){
 
@@ -369,8 +359,10 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
                     tBledneDane.setVisible(true);
                 }
             }else if(p==bDodajFilm){
+                exit();
                 Main.setJPanel(Window.DodajFilm,uzytkownik);
             }else if(p==bDodajSeans){
+                exit();
                 Main.setJPanel(Window.DodajSeans,uzytkownik);
             }else if(p==bPowrotMini){
                 background.setIcon(new ImageIcon("Coś tam\\Nowe Grafiki\\Profil_uzytkownika.png"));
@@ -389,8 +381,7 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
                 bPowrotMini.setVisible(false);
                 tBledneDane.setVisible(false);
             }else if(p == bExit){
-                Main.setJPanel(Window.Login);
-                removeAll();
+                exit();
                 System.exit(0);
             }
 
@@ -418,5 +409,11 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
     public void mouseExited(MouseEvent e)
     {
 
+    }
+
+    @Override
+    public void exit() {
+        baza.closeConnection();
+        removeAll();
     }
 }
