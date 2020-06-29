@@ -91,9 +91,6 @@ public class Main {
             case DodajSeans:
                 okno.setContentPane(new DodajSeans(uzyt));
                 break;
-            case TwojeRezrwacje:
-                okno.setContentPane(new TwojeRezerwacje(uzyt));
-                break;
 
             default:
                 System.out.println("Bledne okno w setJPanel uzyt");

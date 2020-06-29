@@ -145,7 +145,7 @@ public class OknoFilmu  extends JPanel implements ActionListener, MouseListener,
         dostepneSeanse=baza.selectDostepneSeanse(chosenMovie.getIdFilmy());
         JComboBox seanseList = new JComboBox(dostepneSeanse[0]);
         Font theFont = new Font("Arial", Font.BOLD, 25);
-        seanseList.setEditable(true);
+        seanseList.setEditable(false);
         seanseList.getEditor().getEditorComponent().setBackground(new Color(170,170,170));
         seanseList.setSelectedIndex(0);
         //Ustawienie domyslnie pierwszego dostepnego seansu jesli uzytkownik nie wybierze zadnego z combo box'a
