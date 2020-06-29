@@ -77,7 +77,7 @@
               <manifest>
                 <addClasspath>true</addClasspath>
                 <classpathPrefix>lib/</classpathPrefix>
-                <mainClass>com.okno.Main</mainClass>
+                <mainClass>main.java.com.okno.Main</mainClass>
               </manifest>
             </archive>
           </configuration>
