@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 public class Login extends JPanel implements ActionListener, MouseListener{
@@ -32,10 +34,18 @@ public class Login extends JPanel implements ActionListener, MouseListener{
     public Login(){
         setBounds(0,0,1920,1080);
         setLayout(null);
-        lLogin = new JLabel("Login: ", JLabel.LEFT);
-        lLogin.setBounds(x,y,width,height);
-        lLogin.setFont(new Font("Impact", Font.PLAIN, 30));
-        add(lLogin);
+
+        try {
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Coś tam\\Fonts\\Caudex-Regular.ttf"));
+
+            lLogin = new JLabel("Login: ", JLabel.LEFT);
+            lLogin.setFont(font.deriveFont(Font.BOLD, 50f));
+            lLogin.setBounds(x,y,width,height);
+            lLogin.setForeground(Color.black);
+            add(lLogin);
+        } catch (FontFormatException | IOException ex) {
+            ex.printStackTrace();
+        }
 
         tLogin = new JTextField();
         tLogin.setBounds(x,y + height,width,height);
