@@ -53,7 +53,6 @@ public class Login extends JPanel implements ActionListener, MouseListener{
             lWrongPass.setFont(font.deriveFont(Font.BOLD, 30));
             add(lWrongPass);
 
-
         } catch (FontFormatException | IOException ex) {
             ex.printStackTrace();
         }
