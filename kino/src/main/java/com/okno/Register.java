@@ -20,16 +20,16 @@ public class Register extends JPanel implements MouseListener, OknoJPanel {
     private JLabel bSingUp, bExit, bBack, lLogin, lPassword, lEmail, lName, lSurname, lAge, lPhone, background, lWrongData, test;
 
     private JTextField tLogin, tEmail, tName, tSurname, tAge, tPhone;
-    private ImageIcon iZarejestrujZielone = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\zarejestruj_zielone.png");
-    private ImageIcon iZarejestrujHover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\zarejestruj_hover.png");
-    private ImageIcon iZarejestrujClicked = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\zarejestruj_clicked.png");
+    private ImageIcon iZarejestrujZielone = new ImageIcon("kino\\src\\main\\resources\\Images\\zarejestruj_zielone.png");
+    private ImageIcon iZarejestrujHover = new ImageIcon("kino\\src\\main\\resources\\Images\\zarejestruj_hover.png");
+    private ImageIcon iZarejestrujClicked = new ImageIcon("kino\\src\\main\\resources\\Images\\zarejestruj_clicked.png");
 
-    private ImageIcon iPowrotZielone = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot_zielone.png");
-    private ImageIcon iPowrotHover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot_hover.png");
-    private ImageIcon iPowrotClicked = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot_clicked.png");
-    private ImageIcon iZamknij = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\Zamknij_x.png");
-    private ImageIcon iZamknijHover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\Zamknij_x_hover.png");
-    private ImageIcon iZamknijClicked = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\Zamknij_x_clicked.png");
+    private ImageIcon iPowrotZielone = new ImageIcon("kino\\src\\main\\resources\\Images\\powrot_zielone.png");
+    private ImageIcon iPowrotHover = new ImageIcon("kino\\src\\main\\resources\\Images\\powrot_hover.png");
+    private ImageIcon iPowrotClicked = new ImageIcon("kino\\src\\main\\resources\\Images\\powrot_clicked.png");
+    private ImageIcon iZamknij = new ImageIcon("kino\\src\\main\\resources\\Images\\Zamknij_x.png");
+    private ImageIcon iZamknijHover = new ImageIcon("kino\\src\\main\\resources\\Images\\Zamknij_x_hover.png");
+    private ImageIcon iZamknijClicked = new ImageIcon("kino\\src\\main\\resources\\Images\\Zamknij_x_clicked.png");
 
     private JPasswordField fPassword;
     private Login login;
@@ -200,7 +200,7 @@ public class Register extends JPanel implements MouseListener, OknoJPanel {
             ex.printStackTrace();
         }
 
-        background = new JLabel(new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\Rejestracjav2.png")); // inicjalizownie oraz ustawianie tła
+        background = new JLabel(new ImageIcon("kino\\src\\main\\resources\\Images\\Rejestracjav2.png")); // inicjalizownie oraz ustawianie tła
         background.setBounds(0,0,1920,1080);
         add(background);
 

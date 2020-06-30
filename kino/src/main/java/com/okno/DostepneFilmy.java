@@ -17,8 +17,8 @@ public class DostepneFilmy extends JPanel implements MouseListener, OknoJPanel {
     public PlakatFilmuBorder plakat_border;
     public JFrame bSignUp;
     public JLabel background, bRezerwuj,bPowrot, hover;
-    private ImageIcon iPowrot = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot.png");
-    private ImageIcon iPowrotHover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot2_hover.png");
+    private ImageIcon iPowrot = new ImageIcon("kino\\src\\main\\resources\\Images\\powrot.png");
+    private ImageIcon iPowrotHover = new ImageIcon("kino\\src\\main\\resources\\Images\\powrot2_hover.png");
     public String[] dostepneFilmy=baza.selectDostepneFilmy();
     //Lista przechowująca obiekty klasy PlakatFilmu - pętla je wyswietli
     public List<PlakatFilmu> lista_plakatow = new LinkedList<>();
@@ -35,12 +35,12 @@ public class DostepneFilmy extends JPanel implements MouseListener, OknoJPanel {
         this.uzytkownik=uzytkownik;
         Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
 
-        bRezerwuj = new JLabel(new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\wybierz_film.png"));
+        bRezerwuj = new JLabel(new ImageIcon("kino\\src\\main\\resources\\Images\\wybierz_film.png"));
         bRezerwuj.setBounds(1580, 25, 260, 110);
         bRezerwuj.addMouseListener(this);
         add(bRezerwuj);
 
-        bPowrot = new JLabel(new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot.png"));
+        bPowrot = new JLabel(new ImageIcon("kino\\src\\main\\resources\\Images\\powrot.png"));
         bPowrot.setBounds(1300, 25, 260, 110);
         bPowrot.addMouseListener(this);
         add(bPowrot);
@@ -98,7 +98,7 @@ public class DostepneFilmy extends JPanel implements MouseListener, OknoJPanel {
 //        filmList.setBounds(760,490,400,90);
 //        add(filmList);
 
-        background = new JLabel(new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\Film.png")); // inicjalizownie oraz ustawianie tła
+        background = new JLabel(new ImageIcon("kino\\src\\main\\resources\\Images\\Film.png")); // inicjalizownie oraz ustawianie tła
         background.setBounds(0,0,1920,1080);
         add(background);
 
@@ -133,7 +133,7 @@ public class DostepneFilmy extends JPanel implements MouseListener, OknoJPanel {
                             this.plakat_border.set_border(plakat_border.border_yellow);
                             //this.selected_poster.iPlakat.setBorder(this.selected_poster.border);
                             this.is_selected = true;
-                            bRezerwuj.setIcon(new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\wybierz_film_zielony.png"));
+                            bRezerwuj.setIcon(new ImageIcon("kino\\src\\main\\resources\\Images\\wybierz_film_zielony.png"));
                         }
                     }else if(lista_plakatow.get(i).selected == true){
                         if(this.is_selected == true) {
@@ -142,7 +142,7 @@ public class DostepneFilmy extends JPanel implements MouseListener, OknoJPanel {
                             this.selected_poster.selected = false;
                             this.selected_poster = null;
                             this.is_selected = false;
-                            bRezerwuj.setIcon(new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\wybierz_film.png"));
+                            bRezerwuj.setIcon(new ImageIcon("kino\\src\\main\\resources\\Images\\wybierz_film.png"));
                         }
                     }
 
@@ -154,7 +154,7 @@ public class DostepneFilmy extends JPanel implements MouseListener, OknoJPanel {
                     this.selected_poster.selected=false;
                     this.plakat_border.set_border(null);
                     //this.selected_poster.iPlakat.setBorder(null);
-                    bRezerwuj.setIcon(new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\wybierz_film.png"));
+                    bRezerwuj.setIcon(new ImageIcon("kino\\src\\main\\resources\\Images\\wybierz_film.png"));
                     Main.setJPanel(Window.OknoFilmu, uzytkownik, this.selected_poster.getchosenMovieTitle());
 
                 }

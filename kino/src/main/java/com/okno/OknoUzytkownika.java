@@ -48,39 +48,39 @@ public class OknoUzytkownika extends JPanel implements  MouseListener, OknoJPane
     private TwojeRezerwacje twojeRezerwacje;
     BazaDanych baza = new BazaDanych();
 
-    private ImageIcon zamknij = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\Zamknij_button.png");
-    private ImageIcon zamknij_hover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\Zamknij_button_hover.png");
+    private ImageIcon zamknij = new ImageIcon("kino\\src\\main\\resources\\Images\\Zamknij_button.png");
+    private ImageIcon zamknij_hover = new ImageIcon("kino\\src\\main\\resources\\Images\\Zamknij_button_hover.png");
 
-    private ImageIcon edytuj_dane = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\edytuj_dane.png");
-    private ImageIcon edytuj_dane_hover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\edytuj_dane_hover.png");
+    private ImageIcon edytuj_dane = new ImageIcon("kino\\src\\main\\resources\\Images\\edytuj_dane.png");
+    private ImageIcon edytuj_dane_hover = new ImageIcon("kino\\src\\main\\resources\\Images\\edytuj_dane_hover.png");
 
-    private ImageIcon wyloguj = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\wyloguj.png");
-    private ImageIcon wyloguj_hover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\wyloguj_hover.png");
+    private ImageIcon wyloguj = new ImageIcon("kino\\src\\main\\resources\\Images\\wyloguj.png");
+    private ImageIcon wyloguj_hover = new ImageIcon("kino\\src\\main\\resources\\Images\\wyloguj_hover.png");
 
-    private ImageIcon dodajSeans = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\dodaj_seans.png");
-    private ImageIcon dodajSeans_hover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\dodaj_seans_hover.png");
+    private ImageIcon dodajSeans = new ImageIcon("kino\\src\\main\\resources\\Images\\dodaj_seans.png");
+    private ImageIcon dodajSeans_hover = new ImageIcon("kino\\src\\main\\resources\\Images\\dodaj_seans_hover.png");
 
-    private ImageIcon dodajFilm = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\dodaj_film.png");
-    private ImageIcon dodajFilm_hover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\dodaj_film_hover.png");
+    private ImageIcon dodajFilm = new ImageIcon("kino\\src\\main\\resources\\Images\\dodaj_film.png");
+    private ImageIcon dodajFilm_hover = new ImageIcon("kino\\src\\main\\resources\\Images\\dodaj_film_hover.png");
 
-    private ImageIcon twoje_rezerwacje = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\twoje_rezerwacje.png");
-    private ImageIcon twoje_rezerwacje_hover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\twoje_rezerwacje_hover.png");
+    private ImageIcon twoje_rezerwacje = new ImageIcon("kino\\src\\main\\resources\\Images\\twoje_rezerwacje.png");
+    private ImageIcon twoje_rezerwacje_hover = new ImageIcon("kino\\src\\main\\resources\\Images\\twoje_rezerwacje_hover.png");
 
-    private ImageIcon wyswietl_dostepne = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\wyswietl_dostepne_filmy.png");
-    private ImageIcon wyswietl_dostepne_hover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\wyswietl_dostepne_filmy_hover.png");
+    private ImageIcon wyswietl_dostepne = new ImageIcon("kino\\src\\main\\resources\\Images\\wyswietl_dostepne_filmy.png");
+    private ImageIcon wyswietl_dostepne_hover = new ImageIcon("kino\\src\\main\\resources\\Images\\wyswietl_dostepne_filmy_hover.png");
 
-    private ImageIcon powrot = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot.png");
-    private ImageIcon powrot_hover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot_hover.png");
+    private ImageIcon powrot = new ImageIcon("kino\\src\\main\\resources\\Images\\powrot.png");
+    private ImageIcon powrot_hover = new ImageIcon("kino\\src\\main\\resources\\Images\\powrot_hover.png");
 
-    private ImageIcon zapisz_dane = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\zapisz_dane.png");
-    private ImageIcon zapisz_dane_hover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\zapisz_dane_hover.png");
+    private ImageIcon zapisz_dane = new ImageIcon("kino\\src\\main\\resources\\Images\\zapisz_dane.png");
+    private ImageIcon zapisz_dane_hover = new ImageIcon("kino\\src\\main\\resources\\Images\\zapisz_dane_hover.png");
 
-    private ImageIcon powrot_mini = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot_mini.png");
-    private ImageIcon powrot_mini_hover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot_mini_hover.png");
+    private ImageIcon powrot_mini = new ImageIcon("kino\\src\\main\\resources\\Images\\powrot_mini.png");
+    private ImageIcon powrot_mini_hover = new ImageIcon("kino\\src\\main\\resources\\Images\\powrot_mini_hover.png");
 
     //List<Filmy> filmy = baza.selectFilmy();
 
-    private BufferedImage bi;
+    //private BufferedImage bi;
 
     public OknoUzytkownika(Uzytkownicy uzyt){
         setBounds(0,0,1920,1080); // inicjalizownie okna
@@ -88,7 +88,6 @@ public class OknoUzytkownika extends JPanel implements  MouseListener, OknoJPane
 
         uzytkownik=uzyt;
 
-        ImageIcon zamknij = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\Zamknij_button.png");
         bExit = new JLabel(zamknij);  //wersja robocza
         bExit.setBounds(1600, 48, 280, 70);
         bExit.setBorder(null);
@@ -100,21 +99,18 @@ public class OknoUzytkownika extends JPanel implements  MouseListener, OknoJPane
         twojeRezerwacje.setVisible(false);
         add(twojeRezerwacje);
 
-        ImageIcon edytuj_dane = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\edytuj_dane.png");
         bEdytujDane = new JLabel(edytuj_dane); //wersja robocza
         bEdytujDane.setBounds(60, 575, 377, 75);
         bEdytujDane.setBorder(null);
         bEdytujDane.addMouseListener(this);
         add(bEdytujDane);
 
-        ImageIcon wyloguj = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\wyloguj.png");
         bWyloguj = new JLabel(wyloguj);  //wersja robocza
         bWyloguj.setBounds(1300, 48, 280, 70);
         bWyloguj.setBorder(null);
         bWyloguj.addMouseListener(this);
         add(bWyloguj);
 
-        ImageIcon dodajSeans = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\dodaj_seans.png");
         bDodajSeans = new JLabel(dodajSeans);  //wersja robocza
         bDodajSeans.setBounds(1000, 48, 280, 70);
         bDodajSeans.setBorder(null);
@@ -122,7 +118,6 @@ public class OknoUzytkownika extends JPanel implements  MouseListener, OknoJPane
         add(bDodajSeans);
 
 
-        ImageIcon dodajFilm = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\dodaj_film.png");
         bDodajFilm = new JLabel(dodajFilm);  //wersja robocza
         bDodajFilm.setBounds(700, 48, 280, 70);
         bDodajFilm.setBorder(null);
@@ -139,19 +134,18 @@ public class OknoUzytkownika extends JPanel implements  MouseListener, OknoJPane
             bDodajFilm.setVisible(false);
         }
 
-        ImageIcon twoje_rezerwacje = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\twoje_rezerwacje.png");
+        //ImageIcon twoje_rezerwacje = new ImageIcon("kkino\\src\\main\\resources\\Images\\twoje_rezerwacje.png");
         bTwojeRezerwacje = new JLabel(twoje_rezerwacje);
         bTwojeRezerwacje.setBounds(520, 720, 1380, 150);
         bTwojeRezerwacje.setBorder(null);
         bTwojeRezerwacje.addMouseListener(this);
         add(bTwojeRezerwacje);
 
-        bPowrot = new JLabel(new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot.png"));
+        bPowrot = new JLabel(powrot);
         bPowrot.setBounds(1080, 744, 260, 110);
         bPowrot.addMouseListener(this);
         add(bPowrot);
 
-        ImageIcon wyswietl_dostepne = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\wyswietl_dostepne_filmy.png");
         bDostepneFilmy = new JLabel(wyswietl_dostepne);
         bDostepneFilmy.setBounds(520, 900, 1380, 150);
         bDostepneFilmy.setBorder(null);
@@ -214,14 +208,14 @@ public class OknoUzytkownika extends JPanel implements  MouseListener, OknoJPane
         fNoweHaslo.setVisible(false);
         add(fNoweHaslo);
 
-        bZapiszDane = new JLabel(new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\zapisz_dane.png"));
+        bZapiszDane = new JLabel(zapisz_dane);
         bZapiszDane.setBounds(255,1005,235,50);
         bZapiszDane.setBorder(null);
         bZapiszDane.setVisible(false);
         bZapiszDane.addMouseListener(this);
         add(bZapiszDane);
 
-        bPowrotMini = new JLabel(new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot_mini.png"));
+        bPowrotMini = new JLabel(powrot_mini);
         bPowrotMini.setBounds(10,1005,235,50);
         bPowrotMini.setBorder(null);
         bPowrotMini.setVisible(false);
@@ -235,7 +229,7 @@ public class OknoUzytkownika extends JPanel implements  MouseListener, OknoJPane
         tBledneDane.setVisible(false);
         add(tBledneDane);
 
-        background = new JLabel(new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\Profil_uzytkownika.png")); // inicjalizownie oraz ustawianie tła
+        background = new JLabel(new ImageIcon("kino\\src\\main\\resources\\Images\\Profil_uzytkownika.png")); // inicjalizownie oraz ustawianie tła
         background.setBounds(0,0,1920,1080);
         add(background);
 
@@ -280,7 +274,7 @@ public class OknoUzytkownika extends JPanel implements  MouseListener, OknoJPane
                 twojeRezerwacje.setVisible(false);
                 bPowrot.setVisible(false);
             }else if( p == bEdytujDane){
-                background.setIcon(new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\tlo_edytuj_dane.png"));
+                background.setIcon(new ImageIcon("kino\\src\\main\\resources\\Images\\tlo_edytuj_dane.png"));
 
                 bEdytujDane.setVisible(false);
                 tNazwaUzytkownika.setVisible(false);
@@ -383,7 +377,7 @@ public class OknoUzytkownika extends JPanel implements  MouseListener, OknoJPane
                     bZapiszDane.setVisible(false);
                     bPowrotMini.setVisible(false);
 
-                    background.setIcon(new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\Profil_uzytkownika.png"));
+                    background.setIcon(new ImageIcon("kino\\src\\main\\resources\\Images\\Profil_uzytkownika.png"));
                 }catch(Exception err){
                     System.out.println(err);
                     tBledneDane.setText(err.getMessage());
@@ -396,7 +390,7 @@ public class OknoUzytkownika extends JPanel implements  MouseListener, OknoJPane
                 exit();
                 Main.setJPanel(Window.DodajSeans,uzytkownik);
             }else if(p==bPowrotMini){
-                background.setIcon(new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\Profil_uzytkownika.png"));
+                background.setIcon(new ImageIcon("kino\\src\\main\\resources\\Images\\Profil_uzytkownika.png"));
 
                 bEdytujDane.setVisible(true);
                 tNazwaUzytkownika.setVisible(true);

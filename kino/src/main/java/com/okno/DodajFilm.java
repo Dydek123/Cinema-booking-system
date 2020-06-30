@@ -27,10 +27,10 @@ public class DodajFilm extends JPanel implements MouseListener, OknoJPanel {
     //private ImageIcon iZarejestrujClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_clicked.png");
     //private JPasswordField fPassword;
     //private Login login;
-    private ImageIcon iPowrot = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot2.png");
-    private ImageIcon iPowrot_hover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot_button_hover.png");
-    private ImageIcon iZatwierdz = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\zatwierdz.png");
-    private ImageIcon iZatwierdz_hover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\zatwierdz_hover.png");
+    private ImageIcon iPowrot = new ImageIcon("kino\\src\\main\\resources\\Images\\powrot2.png");
+    private ImageIcon iPowrot_hover = new ImageIcon("kino\\src\\main\\resources\\Images\\powrot_button_hover.png");
+    private ImageIcon iZatwierdz = new ImageIcon("kino\\src\\main\\resources\\Images\\zatwierdz.png");
+    private ImageIcon iZatwierdz_hover = new ImageIcon("kino\\src\\main\\resources\\Images\\zatwierdz_hover.png");
     private String regex = "^([0-9])h[0-9][0-9]m$";
     private Pattern pattern;
     private BufferedImage bi;
@@ -210,7 +210,7 @@ public class DodajFilm extends JPanel implements MouseListener, OknoJPanel {
             ex.printStackTrace();
         }
 
-        background = new JLabel(new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\dodaj_film_bg.png")); // inicjalizownie oraz ustawianie tła
+        background = new JLabel(new ImageIcon("kino\\src\\main\\resources\\Images\\dodaj_film_bg.png")); // inicjalizownie oraz ustawianie tła
         background.setBounds(0,0,1920,1080);
         add(background);
     }

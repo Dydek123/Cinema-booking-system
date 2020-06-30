@@ -8,7 +8,7 @@ public class RoundBorder implements Border {
     private int radius;
 
 
-    RoundBorder(int radius) {
+    public RoundBorder(int radius) {
         this.radius = radius;
     }
 

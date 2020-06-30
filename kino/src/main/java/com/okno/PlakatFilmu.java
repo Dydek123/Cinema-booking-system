@@ -28,10 +28,10 @@ public class PlakatFilmu {
         this.chosenMovieTitle=chosenMovieTitle;
         Filmy chosenMovie = baza.selectFilm(this.chosenMovieTitle);
         try {
-            img = ImageIO.read(new File("kino\\Coś tam\\Nowe Grafiki\\"+chosenMovie.getTytul()+".png"));
+            img = ImageIO.read(new File("kino\\src\\main\\resources\\Images\\"+chosenMovie.getTytul()+".png"));
         } catch (IOException e) {
             e.printStackTrace();
-            img = ImageIO.read(new File("kino\\Coś tam\\Nowe Grafiki\\default.png"));
+            img = ImageIO.read(new File("kino\\src\\main\\resources\\Images\\default.png"));
         }
         Image dimg = img.getScaledInstance(iPlakat.getWidth(), iPlakat.getHeight(),
                 Image.SCALE_SMOOTH);

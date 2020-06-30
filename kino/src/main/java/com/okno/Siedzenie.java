@@ -22,7 +22,7 @@ public class Siedzenie{
         wymaga użycia siedzenia[x][y].getbSiedzenie().addMouseListener(this) po uzyciu konstruktora by siedzenie było clickable
         wymaga użycia add(siedzenie[x][y].getbSiedzenie()) po uzyciu konstruktora by siedzenie wyswietlilo się w oknie
          */
-        ImageIcon iWolne = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\wolne.png");
+        ImageIcon iWolne = new ImageIcon("kino\\src\\main\\resources\\Images\\wolne.png");
         this.coordX = j;
         this.coordY = i;
         bSiedzenie = new JLabel(iWolne);  //wersja robocza
@@ -42,13 +42,13 @@ public class Siedzenie{
             this.state = state;
             //Zmiana ikony wraz ze zmianą stanu kliknięcia
             if (state == WOLNE) {
-                ImageIcon iWolne = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\wolne.png");
+                ImageIcon iWolne = new ImageIcon("kino\\src\\main\\resources\\Images\\wolne.png");
                 bSiedzenie.setIcon(iWolne);
             } else if (state == ZAJETE) {
-                ImageIcon iZajete = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\zajete.png");
+                ImageIcon iZajete = new ImageIcon("kino\\src\\main\\resources\\Images\\zajete.png");
                 bSiedzenie.setIcon(iZajete);
             } else if (state == WYBRANE) {
-                ImageIcon iWybrane = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\wybrane.png");
+                ImageIcon iWybrane = new ImageIcon("kino\\src\\main\\resources\\Images\\wybrane.png");
                 bSiedzenie.setIcon(iWybrane);
             }
         } catch (RuntimeException err) {

@@ -25,11 +25,11 @@ public class OknoFilmu  extends JPanel implements ActionListener, MouseListener,
     private int selectedSeansId;
     private Uzytkownicy uzytkownicy;
 
-    private ImageIcon powrot = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot.png");
-    private ImageIcon powrotHover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot2_hover.png");
+    private ImageIcon powrot = new ImageIcon("kino\\src\\main\\resources\\Images\\powrot.png");
+    private ImageIcon powrotHover = new ImageIcon("kino\\src\\main\\resources\\Images\\powrot2_hover.png");
 
-    private ImageIcon zarezerwuj = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\rezerwuj.png");
-    private ImageIcon zarezerwujHover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\rezerwuj_zielony.png");
+    private ImageIcon zarezerwuj = new ImageIcon("kino\\src\\main\\resources\\Images\\rezerwuj.png");
+    private ImageIcon zarezerwujHover = new ImageIcon("kino\\src\\main\\resources\\Images\\rezerwuj_zielony.png");
 
     /*
      chcialem to tak zrobic zeby tabela wyglądała tak:
@@ -51,14 +51,14 @@ public class OknoFilmu  extends JPanel implements ActionListener, MouseListener,
         Filmy chosenMovie = baza.selectFilm(this.chosenMovieTitle);
         Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
 
-        ImageIcon zarezerwuj = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\rezerwuj_zielony.png");
+        ImageIcon zarezerwuj = new ImageIcon("kino\\src\\main\\resources\\Images\\rezerwuj_zielony.png");
         bZarezerwuj = new JLabel(zarezerwuj);
         bZarezerwuj.setBounds(1580, 25, 260, 110);
         bZarezerwuj.setBorder(null);
         bZarezerwuj.addMouseListener(this);
         add(bZarezerwuj);
 
-        ImageIcon powrot = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot.png");
+        ImageIcon powrot = new ImageIcon("kino\\src\\main\\resources\\Images\\powrot.png");
         bPowrot = new JLabel(powrot);
         bPowrot.setBounds(1300, 25, 260, 110);
         bPowrot.setBorder(null);
@@ -86,10 +86,10 @@ public class OknoFilmu  extends JPanel implements ActionListener, MouseListener,
         //Ustawienie plakatu dopasowanego do labela
         BufferedImage img = null;
         try {
-            img = ImageIO.read(new File("kino\\Coś tam\\Nowe Grafiki\\"+chosenMovie.getTytul()+".png"));
+            img = ImageIO.read(new File("kino\\src\\main\\resources\\Images\\"+chosenMovie.getTytul()+".png"));
         } catch (IOException e) {
             e.printStackTrace();
-            img = ImageIO.read(new File("kino\\Coś tam\\Nowe Grafiki\\default.png"));
+            img = ImageIO.read(new File("kino\\src\\main\\resources\\Images\\default.png"));
         }
         Image dimg = img.getScaledInstance(iPlakat.getWidth(), iPlakat.getHeight(),
                 Image.SCALE_SMOOTH);
@@ -161,7 +161,7 @@ public class OknoFilmu  extends JPanel implements ActionListener, MouseListener,
         seanseList.setBounds(1000,50,275,70);
         add(seanseList);
 
-        background = new JLabel(new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\Film.png")); // inicjalizownie oraz ustawianie tła
+        background = new JLabel(new ImageIcon("kino\\src\\main\\resources\\Images\\Film.png")); // inicjalizownie oraz ustawianie tła
         background.setBounds(0,0,1920,1080);
         add(background);
 

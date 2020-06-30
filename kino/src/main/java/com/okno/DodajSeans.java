@@ -21,10 +21,10 @@ public class DodajSeans extends JPanel implements MouseListener, OknoJPanel {
     private JLabel bZatwierdz, bPowrot, lTytul, lNumerSali, lDataSeansu, lGodzinaSeansu, background, lWrongData;
     private JTextField tTytul, tDataSeansu, tGodzinaSeansu, tNumerSali;
     private Uzytkownicy uzytkownik;
-    private ImageIcon iPowrot = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot2.png");
-    private ImageIcon iPowrot_hover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot_button_hover.png");
-    private ImageIcon iZatwierdz = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\zatwierdz.png");
-    private ImageIcon iZatwierdz_hover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\zatwierdz_hover.png");
+    private ImageIcon iPowrot = new ImageIcon("kino\\src\\main\\resources\\Images\\powrot2.png");
+    private ImageIcon iPowrot_hover = new ImageIcon("kino\\src\\main\\resources\\Images\\powrot_button_hover.png");
+    private ImageIcon iZatwierdz = new ImageIcon("kino\\src\\main\\resources\\Images\\zatwierdz.png");
+    private ImageIcon iZatwierdz_hover = new ImageIcon("kino\\src\\main\\resources\\Images\\zatwierdz_hover.png");
     private String pData = "[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]";
     private String pGodzina = "[0-9][0-9]:[0-9][0-9]:[0-9][0-9]";
     private Pattern pattern;
@@ -105,7 +105,7 @@ public class DodajSeans extends JPanel implements MouseListener, OknoJPanel {
 
         bPowrot=new JLabel();
         //ImageIcon iZarejestrujZielone = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_zielone.png");
-        bPowrot.setIcon(new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot2.png"));
+        bPowrot.setIcon(new ImageIcon("kino\\src\\main\\resources\\Images\\powrot2.png"));
         bPowrot.setBounds(x,y+10*(height+20),400,100);
         bPowrot.setBorder(null);
         bPowrot.addMouseListener(this);
@@ -113,7 +113,7 @@ public class DodajSeans extends JPanel implements MouseListener, OknoJPanel {
 
         bZatwierdz=new JLabel();
         //ImageIcon iZarejestrujZielone = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_zielone.png");
-        bZatwierdz.setIcon(new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\zatwierdz.png"));
+        bZatwierdz.setIcon(new ImageIcon("kino\\src\\main\\resources\\Images\\zatwierdz.png"));
         bZatwierdz.setBounds(x+width+50,y+10*(height+20),400,100);
         bZatwierdz.setBorder(null);
         bZatwierdz.addMouseListener(this);
@@ -132,7 +132,7 @@ public class DodajSeans extends JPanel implements MouseListener, OknoJPanel {
             ex.printStackTrace();
         }
 
-        background = new JLabel(new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\dodaj_seans_bg.png")); // inicjalizownie oraz ustawianie tła
+        background = new JLabel(new ImageIcon("kino\\src\\main\\resources\\Images\\dodaj_seans_bg.png")); // inicjalizownie oraz ustawianie tła
         background.setBounds(0,0,1920,1080);
         add(background);
     }

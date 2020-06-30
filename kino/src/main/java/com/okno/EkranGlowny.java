@@ -12,7 +12,7 @@ import java.util.List;
 public class EkranGlowny extends JFrame implements ActionListener{
     JLabel background;
     JSlider test;
-    ImageIcon iStronaGlowna = new ImageIcon("Images\\Strona Logowania.png");
+    ImageIcon iStronaGlowna = new ImageIcon("kino\\src\\main\\resources\\Images\\Strona Logowania.png");
     BazaDanych baza = new BazaDanych();
     List<Filmy> filmy = baza.selectFilmy();
     public EkranGlowny(Uzytkownicy uzyt){
