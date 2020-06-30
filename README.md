@@ -1,5 +1,5 @@
 # Java projekt
-### Tytuł: System rezerwacji biletów
+### Tytuł: System rezerwacji biletów do kina
 #### Projekt wykonany przez:
 
 ---
@@ -37,6 +37,7 @@ Projekt realizuje następujące założenia
         + Gałąź Master przechowującą stabilną wersje programu.
         + Gałąź Dev deweloperską służącą do integracji wprowadzanych funkcji.
         + Gałęzie bugfix służące do naprawiania bugów poszczególnych funkcji.
+        + Gałęzie feature służące do dodawania nowych funkcjonalności projektu.
 2. Design:
     + Skorzystaliśmy z [interface'ów](https://github.com/Dydek123/Cinema-booking-system/blob/master/kino/src/main/com/okno/OknoJPanel.java) i [klas abstrakcyjnych](https://github.com/Dydek123/Cinema-booking-system/blob/master/kino/src/main/com/movies/Filmy.java) jako elementu programowania obiektowego. 
     + Skorzystaliśmy z [polimorfizmu](https://github.com/Dydek123/Cinema-booking-system/blob/master/kino/src/main/com/movies/FactoryFilmy.java)
@@ -48,7 +49,7 @@ Projekt realizuje następujące założenia
         + Miłosz Momot - HR, merge i zarządzanie repozytorium, rozwiazywanie konfliktów i 
         problemów, oprawa graficzna, development, konstruowanie pom.xml
         + Kamil Maksymowicz -  development, wzorce projektowe
-        + Magdalena Marek - testowanie
+        + Magdalena Marek - testowanie, pomoc przy oprawie graficznej
         + Damian Marecik - szkielet programu, development, rozwiązywanie problemów, 
         wprowadzanie nowych funkcji, konstruowanie pom.xml
         + Dawid Mazurkiewicz - Oprawa graficzna, development, rozwiązywanie problemów,
