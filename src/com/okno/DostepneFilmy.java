@@ -129,12 +129,14 @@ public class DostepneFilmy extends JPanel implements ActionListener, MouseListen
                 if (p == lista_plakatow.get(i).getiPlakat()) {
                     if(lista_plakatow.get(i).selected == false) {
                         if(this.is_selected == true){
+                            System.out.println("NAJPIERW: "+this.plakat_border.chosenMovieTitle);
                             this.plakat_border.set_border(null);
-                            //this.selected_poster.getiPlakat().setBorder(null);
+                            this.selected_poster.getiPlakat().setBorder(null);
                             this.selected_poster.selected = false;
                             this.selected_poster = lista_plakatow.get(i);
                             this.selected_poster.selected = true;
                             this.plakat_border = new PlakatFilmuBorder(this.selected_poster);
+                            System.out.println("POTEM: "+this.plakat_border.chosenMovieTitle);
                             this.plakat_border.set_border(plakat_border.border_yellow);
                             //this.selected_poster.getiPlakat().setBorder(this.selected_poster.border);
                         }else if(this.is_selected == false){
