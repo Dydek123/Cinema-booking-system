@@ -5,7 +5,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
 	http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.registerKino</groupId>
+  <groupId>com.okno</groupId>
   <artifactId>kino</artifactId>
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
@@ -18,6 +18,12 @@
   </properties>
 
   <dependencies>
+    <dependency>
+      <groupId>junit</groupId>     <!-- NOT org.junit here -->
+      <artifactId>junit-dep</artifactId>
+      <version>4.8.2</version>
+      <scope>test</scope>
+    </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -33,6 +39,8 @@
 
   <build>
     <finalName>kino</finalName>
+    <sourceDirectory>src/main/</sourceDirectory>
+    <testSourceDirectory>src/test/</testSourceDirectory>
     <plugins>
 
       <!-- download source code in Eclipse, best practice -->
@@ -65,7 +73,7 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <mainClass>main.java.com.okno.Main</mainClass>
+              <mainClass>com.okno.Main</mainClass>
               <classpathPrefix>dependency-jars/</classpathPrefix>
             </manifest>
           </archive>
@@ -96,7 +104,7 @@
     </plugins>
     <resources>
       <resource>
-        <directory>Coś tam</directory>
+        <directory>src/main/com/okno/image</directory>
         <filtering>true</filtering>
       </resource>
     </resources>
