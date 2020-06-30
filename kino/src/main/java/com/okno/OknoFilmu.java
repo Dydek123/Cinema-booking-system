@@ -25,6 +25,12 @@ public class OknoFilmu  extends JPanel implements ActionListener, MouseListener,
     private int selectedSeansId;
     private Uzytkownicy uzytkownicy;
 
+    private ImageIcon powrot = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot.png");
+    private ImageIcon powrotHover = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot2_hover.png");
+
+    private ImageIcon zarezerwuj = new ImageIcon("Coś tam\\Nowe Grafiki\\rezerwuj.png");
+    private ImageIcon zarezerwujHover = new ImageIcon("Coś tam\\Nowe Grafiki\\rezerwuj_zielony.png");
+
     /*
      chcialem to tak zrobic zeby tabela wyglądała tak:
     dostepneSeanse:
@@ -202,12 +208,22 @@ public class OknoFilmu  extends JPanel implements ActionListener, MouseListener,
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        Object p= e.getSource();
+        if(p==bPowrot){
+            bPowrot.setIcon(powrotHover);
+        }else if(p == bZarezerwuj){
+            bZarezerwuj.setIcon(zarezerwujHover);
+        }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        Object p= e.getSource();
+        if(p==bPowrot){
+            bPowrot.setIcon(powrot);
+        }else if(p == bZarezerwuj){
+            bZarezerwuj.setIcon(zarezerwuj);
+        }
     }
 
     @Override

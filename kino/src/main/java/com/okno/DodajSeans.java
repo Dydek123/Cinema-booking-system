@@ -20,7 +20,10 @@ public class DodajSeans extends JPanel implements MouseListener, OknoJPanel {
     private JLabel bZatwierdz, bPowrot, lTytul, lNumerSali, lDataSeansu, lGodzinaSeansu, background, lWrongData;
     private JTextField tTytul, tDataSeansu, tGodzinaSeansu, tNumerSali;
     private Uzytkownicy uzytkownik;
-
+    private ImageIcon iPowrot = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot2.png");
+    private ImageIcon iPowrot_hover = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot_button_hover.png");
+    private ImageIcon iZatwierdz = new ImageIcon("Coś tam\\Nowe Grafiki\\zatwierdz.png");
+    private ImageIcon iZatwierdz_hover = new ImageIcon("Coś tam\\Nowe Grafiki\\zatwierdz_hover.png");
     private String pData = "[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]";
     private String pGodzina = "[0-9][0-9]:[0-9][0-9]:[0-9][0-9]";
     private Pattern pattern;
@@ -221,7 +224,9 @@ public class DodajSeans extends JPanel implements MouseListener, OknoJPanel {
     public void mouseReleased(MouseEvent e) {
         Object p = e.getSource();
         if(p == bZatwierdz) {
-            //   bZatwierdz.setIcon(iZarejestrujHover);
+            bZatwierdz.setIcon(iZatwierdz);
+        }else if(p == bPowrot) {
+            bPowrot.setIcon(iPowrot);
         }
     }
 
@@ -229,7 +234,9 @@ public class DodajSeans extends JPanel implements MouseListener, OknoJPanel {
     public void mouseEntered(MouseEvent e) {
         Object p = e.getSource();
         if(p == bZatwierdz) {
-            //   bZatwierdz.setIcon(iZarejestrujHover);
+            bZatwierdz.setIcon(iZatwierdz_hover);
+        }else if(p == bPowrot) {
+            bPowrot.setIcon(iPowrot_hover);
         }
     }
 
@@ -237,7 +244,9 @@ public class DodajSeans extends JPanel implements MouseListener, OknoJPanel {
     public void mouseExited(MouseEvent e) {
         Object p = e.getSource();
         if(p == bZatwierdz) {
-            //   bZatwierdz.setIcon(iZarejestrujZielone);
+            bZatwierdz.setIcon(iZatwierdz);
+        }else if(p == bPowrot) {
+            bPowrot.setIcon(iPowrot);
         }
     }
 
