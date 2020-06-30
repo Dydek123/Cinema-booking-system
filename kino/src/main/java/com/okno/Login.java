@@ -100,7 +100,6 @@ public class Login extends JPanel implements MouseListener, OknoJPanel{
                 String pass = fPassword.getText();
                 List<Uzytkownicy> uzyt = baza.selectUzytkownicy();
                 for(Uzytkownicy c: uzyt) {
-                    System.out.println("login podany "+ l + " login z bazy " + c.getLogin() + ".");
                     if(l.equals(c.getLogin()) && pass.equals(c.getHaslo())){
                         lWrongPass.setVisible(false);
                         exit();

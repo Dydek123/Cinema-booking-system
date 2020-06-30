@@ -240,7 +240,6 @@ public class OknoUzytkownika extends JPanel implements  MouseListener, OknoJPane
     {
 
             Object p = e.getSource();
-            System.out.println(e.getSource());
 
             if ( p == bDostepneFilmy ) {
                 try {
