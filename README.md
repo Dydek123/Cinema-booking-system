@@ -19,7 +19,7 @@ Do realizacji projektu użyliśmy:
 + Własnoręcznie zaprojektowanych grafik
 + Git'a jako systemu kontroli wersji
 + SQLite do obsługi bazy danych
-+ Każdy z nas używał InteliJ jako środowiska programistycznego
++ Każdy z nas używał IntelliJ jako środowiska programistycznego
 
 #### Założenia projektowe:
 Projekt realizuje następujące założenia
@@ -31,7 +31,7 @@ Projekt realizuje następujące założenia
     do graficznych elementów. Poprawnie skompilowane tło można zauważyć w pliku [Java-projekt.jar](https://github.com/Dydek123/Cinema-booking-system/blob/master/kino/target/Java-projekt.jar).
     W innych miejscach ścieżka podana jest bezpośrednio.
     + Poprawności programu dowodzi [6 testów jednostkowych](https://github.com/Dydek123/Cinema-booking-system/tree/master/kino/src/test/com)
-    + Ktore mają status **PASSED** podczas budowania przez Maven
+    + Które mają status **PASSED** podczas budowania przez Maven
     + Projekt został umieszczony pod kontrolą wersji za pomocą [Gita](https://github.com/Dydek123/Cinema-booking-system).
     + Struktura gałęzi została podzielona odpowiednio na:
         + Gałąź Master przechowującą stabilną wersje programu.
@@ -54,7 +54,7 @@ Projekt realizuje następujące założenia
         + Dawid Mazurkiewicz - Oprawa graficzna, development, rozwiązywanie problemów,
          konstruowanie pom.xml
    
-####Ciekawe rozwiązania:
+#### Ciekawe rozwiązania:
 + Edycja danych nie wymaga wychodzenia z panelu
 + Zastąpienie prostej listy dostępnych filmów siatką plakatów. Filmy, dla których nie sa dostępne
 seanse w najblizszym czasie( jak i te, których wszystkie seanse już się odbyły) **nie są wyświetlane**.
