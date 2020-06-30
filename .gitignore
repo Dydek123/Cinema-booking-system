@@ -50,6 +50,11 @@ cmake-build-*/
 # IntelliJ
 out/
 target/
+production/
+target/classes/*
+target/classes/com/okno/*
+/target/classes/*
+/target/classes/com/okno/*
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
@@ -71,20 +76,7 @@ fabric.properties
 
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
-.idea/misc.xml
-JFrameTest.iml
+*.xml
 *.iml
-.idea/dataSources.xml
-.idea/modules.xml
-.idea/compiler.xml
-Java-projekt.iml
-.idea/modules.xml
-.idea/modules.xml
 *.class
 JavaKino.db
-target/classes/*
-target/classes/com/okno/*
-production/
-/target/classes/*
-/target/classes/com/okno/*
-/production/
