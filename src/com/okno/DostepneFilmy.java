@@ -119,7 +119,7 @@ public class DostepneFilmy extends JPanel implements MouseListener, OknoJPanel {
                             this.plakat_border.set_border(null);
                             this.selected_poster.getiPlakat().setBorder(null);
                             this.selected_poster.selected = false;
-                            this.selected_poster = plakatFilmu;
+                            this.selected_poster = lista_plakatow.get(i);
                             this.selected_poster.selected = true;
                             this.plakat_border = new PlakatFilmuBorder(this.selected_poster);
                             System.out.println("POTEM: "+this.plakat_border.chosenMovieTitle);
@@ -127,7 +127,7 @@ public class DostepneFilmy extends JPanel implements MouseListener, OknoJPanel {
                             //this.selected_poster.getiPlakat().setBorder(this.selected_poster.border);
                         }else if(this.is_selected == false){
                             System.out.println("KLIKAM W FILM CO JEST");
-                            this.selected_poster = plakatFilmu;
+                            this.selected_poster = lista_plakatow.get(i);
                             this.selected_poster.selected = true;
                             this.plakat_border = new PlakatFilmuBorder(this.selected_poster);
                             this.plakat_border.set_border(plakat_border.border_yellow);
