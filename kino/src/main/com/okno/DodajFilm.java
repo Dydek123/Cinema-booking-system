@@ -42,7 +42,7 @@ public class DodajFilm extends JPanel implements MouseListener, OknoJPanel {
 
 
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\src\\main\\resources\\Fonts\\Caudex-Regular.ttf"));
 
             lTytul = new JLabel("Tytul:",JLabel.LEFT); // inicjalizownie oraz ustawianie tekstu "wiek"
             lTytul.setFont(font.deriveFont(Font.BOLD, 50f));
@@ -58,7 +58,7 @@ public class DodajFilm extends JPanel implements MouseListener, OknoJPanel {
         add(tTytul);
 
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\src\\main\\resources\\Fonts\\Caudex-Regular.ttf"));
 
             lGatunek = new JLabel("Gatunek: ",JLabel.LEFT); // inicjalizownie oraz ustawianie tekstu "imie"
             lGatunek.setFont(font.deriveFont(Font.BOLD, 50f));
@@ -74,7 +74,7 @@ public class DodajFilm extends JPanel implements MouseListener, OknoJPanel {
         add(tGatunek);
 
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\src\\main\\resources\\Fonts\\Caudex-Regular.ttf"));
 
             lCzasTrwania = new JLabel("Czas trwania: ",JLabel.LEFT); // inicjalizownie oraz ustawianie tekstu "email"
             lCzasTrwania.setFont(font.deriveFont(Font.BOLD, 50f));
@@ -91,7 +91,7 @@ public class DodajFilm extends JPanel implements MouseListener, OknoJPanel {
         add(tCzasTrwania);
 
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\src\\main\\resources\\Fonts\\Caudex-Regular.ttf"));
 
             lRokProdukcji = new JLabel("Rok produkcji: "); // inicjalizownie oraz ustawianie tekstu "telefon"
             lRokProdukcji.setFont(font.deriveFont(Font.BOLD, 50f));
@@ -107,7 +107,7 @@ public class DodajFilm extends JPanel implements MouseListener, OknoJPanel {
         add(tRokProdukcji);
 
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\src\\main\\resources\\Fonts\\Caudex-Regular.ttf"));
 
             lOcena = new JLabel("Ocena: "); // inicjalizownie oraz ustawianie tekstu "nazwisko"
             lOcena.setFont(font.deriveFont(Font.BOLD, 50f));
@@ -123,7 +123,7 @@ public class DodajFilm extends JPanel implements MouseListener, OknoJPanel {
         add(tOcena);
 
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\src\\main\\resources\\Fonts\\Caudex-Regular.ttf"));
 
             lRezyserImie = new JLabel("Imie reżysera:",JLabel.LEFT); // inicjalizownie oraz ustawianie tekstu "login"
             lRezyserImie.setFont(font.deriveFont(Font.BOLD, 40f));
@@ -151,7 +151,7 @@ public class DodajFilm extends JPanel implements MouseListener, OknoJPanel {
         add(tRezyserNazwisko);
 
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\src\\main\\resources\\Fonts\\Caudex-Regular.ttf"));
 
             lOpis = new JLabel("Opis: "); // inicjalizownie oraz ustawianie tekstu "telefon"
             lOpis.setFont(font.deriveFont(Font.BOLD, 50f));
@@ -168,7 +168,7 @@ public class DodajFilm extends JPanel implements MouseListener, OknoJPanel {
 
         bPowrot=new JLabel();
         //ImageIcon iZarejestrujZielone = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_zielone.png");
-        bPowrot.setIcon(new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot2.png"));
+        bPowrot.setIcon(iPowrot);
         bPowrot.setBounds(x,y+10*(height+20),400,100);
         bPowrot.setBorder(null);
         bPowrot.addMouseListener(this);
@@ -176,14 +176,14 @@ public class DodajFilm extends JPanel implements MouseListener, OknoJPanel {
 
         bZatwierdz=new JLabel();
         //ImageIcon iZarejestrujZielone = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_zielone.png");
-        bZatwierdz.setIcon(new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\zatwierdz.png"));
+        bZatwierdz.setIcon(iZatwierdz);
         bZatwierdz.setBounds(x+width+50,y+10*(height+20),400,100);
         bZatwierdz.setBorder(null);
         bZatwierdz.addMouseListener(this);
         add(bZatwierdz);
 
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\src\\main\\resources\\Fonts\\Caudex-Regular.ttf"));
 
             test = new JLabel("Kliknięcie sie powiodło");
             test.setFont(font.deriveFont(Font.BOLD, 50f));
@@ -196,7 +196,7 @@ public class DodajFilm extends JPanel implements MouseListener, OknoJPanel {
         }
 
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\src\\main\\resources\\Fonts\\Caudex-Regular.ttf"));
 
             lWrongData = new JLabel("Złe dane",JLabel.CENTER);
             lWrongData.setFont(font.deriveFont(Font.BOLD, 50f));

@@ -31,7 +31,7 @@ public class Login extends JPanel implements MouseListener, OknoJPanel{
         setLayout(null);
 
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\src\\main\\resources\\Fonts\\Caudex-Regular.ttf"));
 
             lLogin = new JLabel("Login: ", JLabel.LEFT);
             lLogin.setBounds(x, y, width, height);

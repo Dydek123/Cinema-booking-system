@@ -47,7 +47,7 @@ public class OknoFilmu  extends JPanel implements ActionListener, MouseListener,
         this.uzytkownicy = uzytkownicy;
         this.chosenMovieTitle = chosenMovieTitle;
         Filmy chosenMovie = baza.selectFilm(this.chosenMovieTitle);
-        Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
+        Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\src\\main\\resources\\Fonts\\Caudex-Regular.ttf"));
 
         ImageIcon zarezerwuj = new ImageIcon("kino\\src\\main\\resources\\Images\\rezerwuj_zielony.png");
         bZarezerwuj = new JLabel(zarezerwuj);

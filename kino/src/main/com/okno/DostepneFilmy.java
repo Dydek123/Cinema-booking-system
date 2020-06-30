@@ -32,7 +32,7 @@ public class DostepneFilmy extends JPanel implements MouseListener, OknoJPanel {
         setLayout(null);
 
         this.uzytkownik=uzytkownik;
-        Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
+        Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\src\\main\\resources\\Fonts\\Caudex-Regular.ttf"));
 
         bRezerwuj = new JLabel(new ImageIcon("kino\\src\\main\\resources\\Images\\wybierz_film.png"));
         bRezerwuj.setBounds(1580, 25, 260, 110);

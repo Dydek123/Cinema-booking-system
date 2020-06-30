@@ -44,7 +44,7 @@ public class Register extends JPanel implements MouseListener, OknoJPanel {
         setLayout(null);
 
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\src\\main\\resources\\Fonts\\Caudex-Regular.ttf"));
 
             lLogin = new JLabel("Login: ",JLabel.LEFT); // inicjalizownie oraz ustawianie tekstu "login"
             lLogin.setFont(font.deriveFont(Font.BOLD, 50f));
@@ -72,7 +72,7 @@ public class Register extends JPanel implements MouseListener, OknoJPanel {
         add(fPassword);
 
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\src\\main\\resources\\Fonts\\Caudex-Regular.ttf"));
 
             lEmail = new JLabel("E-mail: ",JLabel.LEFT); // inicjalizownie oraz ustawianie tekstu "email"
             lEmail.setFont(font.deriveFont(Font.BOLD, 50f));
@@ -89,7 +89,7 @@ public class Register extends JPanel implements MouseListener, OknoJPanel {
         add(tEmail);
 
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\src\\main\\resources\\Fonts\\Caudex-Regular.ttf"));
 
             lName = new JLabel("Imie: ",JLabel.LEFT); // inicjalizownie oraz ustawianie tekstu "imie"
             lName.setFont(font.deriveFont(Font.BOLD, 50f));
@@ -105,7 +105,7 @@ public class Register extends JPanel implements MouseListener, OknoJPanel {
         add(tName);
 
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\src\\main\\resources\\Fonts\\Caudex-Regular.ttf"));
 
             lSurname = new JLabel("Nazwisko: "); // inicjalizownie oraz ustawianie tekstu "nazwisko"
             lSurname.setFont(font.deriveFont(Font.BOLD, 50f));
@@ -121,7 +121,7 @@ public class Register extends JPanel implements MouseListener, OknoJPanel {
         add(tSurname);
 
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\src\\main\\resources\\Fonts\\Caudex-Regular.ttf"));
 
             lAge = new JLabel("Wiek",JLabel.LEFT); // inicjalizownie oraz ustawianie tekstu "wiek"
             lAge.setFont(font.deriveFont(Font.BOLD, 50f));
@@ -137,7 +137,7 @@ public class Register extends JPanel implements MouseListener, OknoJPanel {
         add(tAge);
 
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\src\\main\\resources\\Fonts\\Caudex-Regular.ttf"));
 
             lPhone = new JLabel("Nr telefonu: "); // inicjalizownie oraz ustawianie tekstu "telefon"
             lPhone.setFont(font.deriveFont(Font.BOLD, 50f));
@@ -175,7 +175,7 @@ public class Register extends JPanel implements MouseListener, OknoJPanel {
 
 
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\src\\main\\resources\\Fonts\\Caudex-Regular.ttf"));
 
             test = new JLabel("Kliknięcie sie powiodło");
             test.setFont(font.deriveFont(Font.BOLD, 50f));
@@ -188,7 +188,7 @@ public class Register extends JPanel implements MouseListener, OknoJPanel {
         }
 
         try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\src\\main\\resources\\Fonts\\Caudex-Regular.ttf"));
 
             lWrongData = new JLabel("Złe dane",JLabel.CENTER);
             lWrongData.setFont(font.deriveFont(Font.BOLD, 50f));

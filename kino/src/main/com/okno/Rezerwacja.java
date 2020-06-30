@@ -46,7 +46,7 @@ public class Rezerwacja extends JPanel implements MouseListener, OknoJPanel {
 
         createListOfSeats(listaSiedzen);
         baza.ktore_zajete(selectedSeansId, listaSiedzen);
-        Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\Coś tam\\Fonts\\Caudex-Regular.ttf"));
+        Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\src\\main\\resources\\Fonts\\Caudex-Regular.ttf"));
 
         tIleBiletow = new JLabel("0");
         tIleBiletow.setBounds(1030, 165, 45, 40);
