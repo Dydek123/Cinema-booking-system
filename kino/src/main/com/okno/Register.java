@@ -249,7 +249,7 @@ public class Register extends JPanel implements MouseListener, OknoJPanel {
                 exit();
                 System.exit(0);
             }
-        } catch (RuntimeException err) {
+        } catch (RuntimeException | IOException err) {
             System.out.println(err);
             lWrongData.setForeground(Color.red);
             lWrongData.setVisible(true);

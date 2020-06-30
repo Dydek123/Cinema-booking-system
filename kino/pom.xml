@@ -104,7 +104,7 @@
     </plugins>
     <resources>
       <resource>
-        <directory>src/main/com/okno/image</directory>
+        <directory>src/main/com/okno/resources</directory>
         <filtering>true</filtering>
       </resource>
     </resources>

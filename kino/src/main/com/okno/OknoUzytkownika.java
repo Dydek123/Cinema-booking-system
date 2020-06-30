@@ -30,6 +30,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -253,7 +254,11 @@ public class OknoUzytkownika extends JPanel implements  MouseListener, OknoJPane
                 }
             }else if( p == bWyloguj){
                 exit();
-                Main.setJPanel(Window.Login);
+                try {
+                    Main.setJPanel(Window.Login);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }else if( p == bTwojeRezerwacje){
 
                 tNajblizszeSeanse.setVisible(false);

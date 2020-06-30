@@ -9,7 +9,7 @@ public class Main {
 
     private static Okno okno;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
          okno = new Okno();
 
@@ -17,8 +17,7 @@ public class Main {
 
     }
 
-    public static void setJPanel(Window window)
-    {
+    public static void setJPanel(Window window) throws IOException {
         switch (window)
         {
             case Login:

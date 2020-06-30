@@ -2,12 +2,15 @@ package com.okno;
 
 import com.bazydanych.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 
 public class Login extends JPanel implements MouseListener, OknoJPanel{
@@ -26,30 +29,30 @@ public class Login extends JPanel implements MouseListener, OknoJPanel{
     private ImageIcon iZamknijClicked = new ImageIcon("kino\\src\\main\\resources\\Images\\Zamknij_x_clicked.png");
 
     int x = (935-80)/3, y= 300, width = (935-80)/2, height = 50; // x=80, 935, y = 260
-    public Login(){
+    public Login() throws IOException {
         setBounds(0,0,1920,1080);
         setLayout(null);
 
-        try {
-            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\src\\main\\resources\\Fonts\\Caudex-Regular.ttf"));
+       // try {
+            //Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\src\\main\\resources\\Fonts\\Caudex-Regular.ttf"));
 
             lLogin = new JLabel("Login: ", JLabel.LEFT);
             lLogin.setBounds(x, y, width, height);
-            lLogin.setFont(font.deriveFont(Font.BOLD, 30));
+            //lLogin.setFont(font.deriveFont(Font.BOLD, 30));
             add(lLogin);
 
             lPassword = new JLabel("Hasło: ", JLabel.LEFT);
             lPassword.setBounds(x, y + (2 * height), width, height);
-            lPassword.setFont(font.deriveFont(Font.BOLD, 30));
+            //lPassword.setFont(font.deriveFont(Font.BOLD, 30));
             add(lPassword);
 
             lWrongPass = new JLabel();
             lWrongPass.setBounds(x,y + (4*height),width,height);
-            lWrongPass.setFont(font.deriveFont(Font.BOLD, 30));
+            //lWrongPass.setFont(font.deriveFont(Font.BOLD, 30));
             add(lWrongPass);
-        } catch (FontFormatException | IOException ex) {
-            ex.printStackTrace();
-        }
+       // } catch (FontFormatException | IOException ex) {
+       //     ex.printStackTrace();
+       // }
 
         tLogin = new JTextField();
             tLogin.setBounds(x, y + height, width, height);
@@ -81,8 +84,17 @@ public class Login extends JPanel implements MouseListener, OknoJPanel{
         bExit.addMouseListener(this);
         add(bExit);
 
-        ImageIcon iStronaLogowania = new ImageIcon("kino\\src\\main\\resources\\Images\\Strona Logowania2.png");
-        background = new JLabel(iStronaLogowania);
+       // ImageIcon iStronaLogowania = new ImageIcon("kino\\src\\main\\resources\\Images\\Strona Logowania2.png");
+
+        /*
+        InputStream stream = getClass().getResourceAsStream("main/resources/Images/Strona Logowania2.png");
+        ImageIcon iStronaLogowania= new ImageIcon(ImageIO.read(stream));
+        */
+
+        URL imgURL = getClass().getResource("resources/strona.png");
+        ImageIcon iStronaLogowania=new ImageIcon(imgURL, "description");
+
+        background=new JLabel(iStronaLogowania);
         background.setBounds(0,0,1920,1080);
         add(background);
 
@@ -93,7 +105,11 @@ public class Login extends JPanel implements MouseListener, OknoJPanel{
         Object p = e.getSource();
         if(p == bSingUp){
             exit();
-            Main.setJPanel(Window.Register);
+            try {
+                Main.setJPanel(Window.Register);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }else if(p == bLogUp){
                 String l = tLogin.getText();
                 String pass = fPassword.getText();
