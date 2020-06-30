@@ -33,26 +33,26 @@ public class Login extends JPanel implements MouseListener, OknoJPanel{
         setBounds(0,0,1920,1080);
         setLayout(null);
 
-       // try {
-            //Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\src\\main\\resources\\Fonts\\Caudex-Regular.ttf"));
+        try {
+            Font font = Font.createFont(Font.TRUETYPE_FONT, new File("kino\\src\\main\\resources\\Fonts\\Caudex-Regular.ttf"));
 
             lLogin = new JLabel("Login: ", JLabel.LEFT);
             lLogin.setBounds(x, y, width, height);
-            //lLogin.setFont(font.deriveFont(Font.BOLD, 30));
+            lLogin.setFont(font.deriveFont(Font.BOLD, 30));
             add(lLogin);
 
             lPassword = new JLabel("Hasło: ", JLabel.LEFT);
             lPassword.setBounds(x, y + (2 * height), width, height);
-            //lPassword.setFont(font.deriveFont(Font.BOLD, 30));
+            lPassword.setFont(font.deriveFont(Font.BOLD, 30));
             add(lPassword);
 
             lWrongPass = new JLabel();
             lWrongPass.setBounds(x,y + (4*height),width,height);
             //lWrongPass.setFont(font.deriveFont(Font.BOLD, 30));
             add(lWrongPass);
-       // } catch (FontFormatException | IOException ex) {
-       //     ex.printStackTrace();
-       // }
+        } catch (FontFormatException | IOException ex) {
+            ex.printStackTrace();
+        }
 
         tLogin = new JTextField();
             tLogin.setBounds(x, y + height, width, height);
@@ -84,16 +84,9 @@ public class Login extends JPanel implements MouseListener, OknoJPanel{
         bExit.addMouseListener(this);
         add(bExit);
 
-       // ImageIcon iStronaLogowania = new ImageIcon("kino\\src\\main\\resources\\Images\\Strona Logowania2.png");
-
-        /*
-        InputStream stream = getClass().getResourceAsStream("main/resources/Images/Strona Logowania2.png");
-        ImageIcon iStronaLogowania= new ImageIcon(ImageIO.read(stream));
-        */
 
         URL imgURL = getClass().getResource("resources/strona.png");
         ImageIcon iStronaLogowania=new ImageIcon(imgURL, "description");
-
         background=new JLabel(iStronaLogowania);
         background.setBounds(0,0,1920,1080);
         add(background);
