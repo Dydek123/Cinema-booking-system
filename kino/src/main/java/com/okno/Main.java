@@ -17,14 +17,14 @@ public class Main {
 
         setJPanel(Window.Login);
 
-        BazaDanych test = new BazaDanych();
-//        List<ArrayList<String>> s = test.selectRezerwacjeUzytkownika(6);
-        List<Uzytkownicy> uzytkownicy = test.selectUzytkownicy();
-        System.out.println("Lista uzytkownikow: ");
-        for(Uzytkownicy c: uzytkownicy)
-            System.out.println(c.getLogin() + " " + c.getHaslo());
-
-        System.out.println("test commit");
+//        BazaDanych test = new BazaDanych();
+//
+//        List<Uzytkownicy> uzytkownicy = test.selectUzytkownicy();
+//        System.out.println("Lista uzytkownikow: ");
+//        for(Uzytkownicy c: uzytkownicy)
+//            System.out.println(c.getLogin() + " " + c.getHaslo());
+//
+//        System.out.println("test commit");
 
 
        /* //test dodawania filmu

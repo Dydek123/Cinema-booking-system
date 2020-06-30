@@ -92,7 +92,6 @@ class ButtonEditor extends DefaultCellEditor
         enabel = new Boolean[rowNumber];
         for(int i = 0; i < rowNumber; i++)
             enabel[i] = true;
-        System.out.println(enabel.length);
 
         //WHEN BUTTON IS CLICKED
         btn.addActionListener(new ActionListener() {
@@ -113,7 +112,6 @@ class ButtonEditor extends DefaultCellEditor
             btn.setEnabled(false);
 
             String index = (String) table.getModel().getValueAt(row, 5);
-            System.out.println(index);
 
             BazaDanych baza = new BazaDanych();
 
