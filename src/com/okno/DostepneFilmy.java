@@ -20,6 +20,8 @@ public class DostepneFilmy extends JPanel implements ActionListener, MouseListen
     BazaDanych baza = new BazaDanych();
     public JFrame bSignUp;
     public JLabel background, bRezerwuj,bPowrot, hover;
+    private ImageIcon iPowrot = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot.png");
+    private ImageIcon iPowrotHover = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot2_hover.png");
     public String[] dostepneFilmy=baza.selectDostepneFilmy();
     //Lista przechowująca obiekty klasy PlakatFilmu - pętla je wyswietli
     public List<PlakatFilmu> lista_plakatow = new LinkedList<>();
@@ -41,7 +43,7 @@ public class DostepneFilmy extends JPanel implements ActionListener, MouseListen
         bRezerwuj.addMouseListener(this);
         add(bRezerwuj);
 
-        bPowrot = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\powrot.png"));
+        bPowrot = new JLabel(iPowrot);
         bPowrot.setBounds(1300, 25, 260, 110);
         bPowrot.addMouseListener(this);
         add(bPowrot);
@@ -187,6 +189,9 @@ public class DostepneFilmy extends JPanel implements ActionListener, MouseListen
 
                 }
             }
+            if(p==bPowrot){
+                bPowrot.setIcon(iPowrotHover);
+            }
         }catch (RuntimeException err){
             System.out.println(err);
         }
@@ -201,6 +206,9 @@ public class DostepneFilmy extends JPanel implements ActionListener, MouseListen
                     if(poster.selected == false) poster.iPlakat.setBorder(null);
 
                 }
+            if(p==bPowrot){
+                bPowrot.setIcon(iPowrot);
+            }
             }
         }catch (RuntimeException err){
             System.out.println(err);

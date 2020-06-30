@@ -27,6 +27,11 @@ public class Rezerwacja extends JPanel implements ActionListener, MouseListener 
     private JLabel tIleBiletow;
     private JLabel bPowrot,bRezerwuj;
 
+    private ImageIcon powrot = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot.png");
+    private ImageIcon powrotHover = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot2_hover.png");
+
+    private ImageIcon zarezerwuj = new ImageIcon("Coś tam\\Nowe Grafiki\\rezerwuj.png");
+    private ImageIcon zarezerwujHover = new ImageIcon("Coś tam\\Nowe Grafiki\\rezerwuj_zielony.png");
 
     private Siedzenie [][] listaSiedzen = new Siedzenie[3][10];
     //private JLabel [][] listaSiedzenB = new JLabel[3][10];
@@ -60,12 +65,12 @@ public class Rezerwacja extends JPanel implements ActionListener, MouseListener 
         tTxt.setForeground(new Color(23, 101, 202));
         add(tTxt);
 
-        bPowrot = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\powrot.png"));
+        bPowrot = new JLabel(powrot);
         bPowrot.setBounds(1300, 25, 260, 110);
         bPowrot.addMouseListener(this);
         add(bPowrot);
 
-        bRezerwuj = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\rezerwuj.png"));
+        bRezerwuj = new JLabel(zarezerwuj);
         bRezerwuj.setBounds(1580, 25, 260, 110);
         bRezerwuj.addMouseListener(this);
         add(bRezerwuj);
@@ -193,11 +198,17 @@ public class Rezerwacja extends JPanel implements ActionListener, MouseListener 
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        Object p= e.getSource();
+        if(p==bPowrot){
+            bPowrot.setIcon(powrotHover);
+        }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        Object p= e.getSource();
+        if(p==bPowrot){
+            bPowrot.setIcon(powrot);
+        }
     }
 }

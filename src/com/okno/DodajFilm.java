@@ -26,6 +26,10 @@ public class DodajFilm extends JPanel implements ActionListener, MouseListener {
     //private ImageIcon iZarejestrujClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_clicked.png");
     //private JPasswordField fPassword;
     //private Login login;
+    private ImageIcon iPowrot = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot2.png");
+    private ImageIcon iPowrot_hover = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot_button_hover.png");
+    private ImageIcon iZatwierdz = new ImageIcon("Coś tam\\Nowe Grafiki\\zatwierdz.png");
+    private ImageIcon iZatwierdz_hover = new ImageIcon("Coś tam\\Nowe Grafiki\\zatwierdz_hover.png");
     private String regex = "^([0-9])h[0-9][0-9]m$";
     private Pattern pattern;
     private BufferedImage bi;
@@ -178,7 +182,7 @@ public class DodajFilm extends JPanel implements ActionListener, MouseListener {
 
         bPowrot=new JLabel();
         //ImageIcon iZarejestrujZielone = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_zielone.png");
-        bPowrot.setIcon(new ImageIcon("Coś tam\\Nowe Grafiki\\powrot2.png"));
+        bPowrot.setIcon(iPowrot);
         bPowrot.setBounds(x,y+10*(height+20),400,100);
         bPowrot.setBorder(null);
         bPowrot.addMouseListener(this);
@@ -186,7 +190,7 @@ public class DodajFilm extends JPanel implements ActionListener, MouseListener {
 
         bZatwierdz=new JLabel();
         //ImageIcon iZarejestrujZielone = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_zielone.png");
-        bZatwierdz.setIcon(new ImageIcon("Coś tam\\Nowe Grafiki\\zatwierdz.png"));
+        bZatwierdz.setIcon(iZatwierdz);
         bZatwierdz.setBounds(x+width+50,y+10*(height+20),400,100);
         bZatwierdz.setBorder(null);
         bZatwierdz.addMouseListener(this);
@@ -309,17 +313,19 @@ public class DodajFilm extends JPanel implements ActionListener, MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        Object p = e.getSource();
-        if(p == bZatwierdz) {
-       //     bZatwierdz.setIcon(iZarejestrujClicked);
-        }
+//        Object p = e.getSource();
+//        if(p == bZatwierdz) {
+//            bZatwierdz.setIcon(iZarejestrujClicked);
+//        }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
         Object p = e.getSource();
         if(p == bZatwierdz) {
-         //   bZatwierdz.setIcon(iZarejestrujHover);
+            bZatwierdz.setIcon(iZatwierdz);
+        }else if(p == bPowrot) {
+            bPowrot.setIcon(iPowrot);
         }
     }
 
@@ -327,7 +333,9 @@ public class DodajFilm extends JPanel implements ActionListener, MouseListener {
     public void mouseEntered(MouseEvent e) {
         Object p = e.getSource();
         if(p == bZatwierdz) {
-         //   bZatwierdz.setIcon(iZarejestrujHover);
+            bZatwierdz.setIcon(iZatwierdz_hover);
+        }else if(p == bPowrot) {
+            bPowrot.setIcon(iPowrot_hover);
         }
     }
 
@@ -335,7 +343,9 @@ public class DodajFilm extends JPanel implements ActionListener, MouseListener {
     public void mouseExited(MouseEvent e) {
         Object p = e.getSource();
         if(p == bZatwierdz) {
-         //   bZatwierdz.setIcon(iZarejestrujZielone);
+            bZatwierdz.setIcon(iZatwierdz);
+        }else if(p == bPowrot) {
+            bPowrot.setIcon(iPowrot);
         }
     }
 }

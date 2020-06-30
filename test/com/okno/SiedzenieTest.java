@@ -1,5 +1,6 @@
 package com.okno;
 
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,7 +14,7 @@ public class SiedzenieTest {
     @Before
     public void setUp() {
         siedzenie = new Siedzenie(1, 3, "A3", State.WOLNE);
-        ImageIcon iWolne = new ImageIcon("Coś tam\\Nowe Grafiki\\wolne.png");
+
     }
 
 
@@ -21,6 +22,11 @@ public class SiedzenieTest {
     public void isWolne() {
 
         assertEquals(State.WOLNE, siedzenie.getState());
+    }
+
+    @Test
+    public void ifMiejsce() {
+        assertEquals("A3", siedzenie.getMiejsce());
     }
 }
     

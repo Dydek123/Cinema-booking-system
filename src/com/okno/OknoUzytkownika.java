@@ -53,6 +53,36 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
     private TwojeRezerwacje twojeRezerwacje;
     BazaDanych baza = new BazaDanych();
 
+    private ImageIcon zamknij = new ImageIcon("Coś tam\\Nowe Grafiki\\Zamknij_button.png");
+    private ImageIcon zamknij_hover = new ImageIcon("Coś tam\\Nowe Grafiki\\Zamknij_button_hover.png");
+
+    private ImageIcon edytuj_dane = new ImageIcon("Coś tam\\Nowe Grafiki\\edytuj_dane.png");
+    private ImageIcon edytuj_dane_hover = new ImageIcon("Coś tam\\Nowe Grafiki\\edytuj_dane_hover.png");
+
+    private ImageIcon wyloguj = new ImageIcon("Coś tam\\Nowe Grafiki\\wyloguj.png");
+    private ImageIcon wyloguj_hover = new ImageIcon("Coś tam\\Nowe Grafiki\\wyloguj_hover.png");
+
+    private ImageIcon dodajSeans = new ImageIcon("Coś tam\\Nowe Grafiki\\dodaj_seans.png");
+    private ImageIcon dodajSeans_hover = new ImageIcon("Coś tam\\Nowe Grafiki\\dodaj_seans_hover.png");
+
+    private ImageIcon dodajFilm = new ImageIcon("Coś tam\\Nowe Grafiki\\dodaj_film.png");
+    private ImageIcon dodajFilm_hover = new ImageIcon("Coś tam\\Nowe Grafiki\\dodaj_film_hover.png");
+
+    private ImageIcon twoje_rezerwacje = new ImageIcon("Coś tam\\Nowe Grafiki\\twoje_rezerwacje.png");
+    private ImageIcon twoje_rezerwacje_hover = new ImageIcon("Coś tam\\Nowe Grafiki\\twoje_rezerwacje_hover.png");
+
+    private ImageIcon wyswietl_dostepne = new ImageIcon("Coś tam\\Nowe Grafiki\\wyswietl_dostepne_filmy.png");
+    private ImageIcon wyswietl_dostepne_hover = new ImageIcon("Coś tam\\Nowe Grafiki\\wyswietl_dostepne_filmy_hover.png");
+
+    private ImageIcon powrot = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot.png");
+    private ImageIcon powrot_hover = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot_hover.png");
+
+    private ImageIcon zapisz_dane = new ImageIcon("Coś tam\\Nowe Grafiki\\zapisz_dane.png");
+    private ImageIcon zapisz_dane_hover = new ImageIcon("Coś tam\\Nowe Grafiki\\zapisz_dane_hover.png");
+
+    private ImageIcon powrot_mini = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot_mini.png");
+    private ImageIcon powrot_mini_hover = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot_mini_hover.png");
+
     //List<Filmy> filmy = baza.selectFilmy();
 
     private BufferedImage bi;
@@ -63,7 +93,6 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
 
         uzytkownik=uzyt;
 
-        ImageIcon zamknij = new ImageIcon("Coś tam\\Nowe Grafiki\\Zamknij_button.png");
         bExit = new JLabel(zamknij);  //wersja robocza
         bExit.setBounds(1600, 48, 280, 70);
         bExit.setBorder(null);
@@ -75,29 +104,24 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
         twojeRezerwacje.setVisible(false);
         add(twojeRezerwacje);
 
-        ImageIcon edytuj_dane = new ImageIcon("Coś tam\\Nowe Grafiki\\edytuj_dane.png");
         bEdytujDane = new JLabel(edytuj_dane); //wersja robocza
         bEdytujDane.setBounds(60, 575, 377, 75);
         bEdytujDane.setBorder(null);
         bEdytujDane.addMouseListener(this);
         add(bEdytujDane);
 
-        ImageIcon wyloguj = new ImageIcon("Coś tam\\Nowe Grafiki\\wyloguj.png");
         bWyloguj = new JLabel(wyloguj);  //wersja robocza
         bWyloguj.setBounds(1300, 48, 280, 70);
         bWyloguj.setBorder(null);
         bWyloguj.addMouseListener(this);
         add(bWyloguj);
 
-        ImageIcon dodajSeans = new ImageIcon("Coś tam\\Nowe Grafiki\\dodaj_seans.png");
         bDodajSeans = new JLabel(dodajSeans);  //wersja robocza
         bDodajSeans.setBounds(1000, 48, 280, 70);
         bDodajSeans.setBorder(null);
         bDodajSeans.addMouseListener(this);
         add(bDodajSeans);
 
-
-        ImageIcon dodajFilm = new ImageIcon("Coś tam\\Nowe Grafiki\\dodaj_film.png");
         bDodajFilm = new JLabel(dodajFilm);  //wersja robocza
         bDodajFilm.setBounds(700, 48, 280, 70);
         bDodajFilm.setBorder(null);
@@ -114,19 +138,18 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
             bDodajFilm.setVisible(false);
         }
 
-        ImageIcon twoje_rezerwacje = new ImageIcon("Coś tam\\Nowe Grafiki\\twoje_rezerwacje.png");
         bTwojeRezerwacje = new JLabel(twoje_rezerwacje);
         bTwojeRezerwacje.setBounds(520, 720, 1380, 150);
         bTwojeRezerwacje.setBorder(null);
         bTwojeRezerwacje.addMouseListener(this);
         add(bTwojeRezerwacje);
 
-        bPowrot = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\powrot.png"));
+        bPowrot = new JLabel(powrot);
         bPowrot.setBounds(1080, 744, 260, 110);
         bPowrot.addMouseListener(this);
         add(bPowrot);
 
-        ImageIcon wyswietl_dostepne = new ImageIcon("Coś tam\\Nowe Grafiki\\wyswietl_dostepne_filmy.png");
+
         bDostepneFilmy = new JLabel(wyswietl_dostepne);
         bDostepneFilmy.setBounds(520, 900, 1380, 150);
         bDostepneFilmy.setBorder(null);
@@ -189,14 +212,14 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
         fNoweHaslo.setVisible(false);
         add(fNoweHaslo);
 
-        bZapiszDane = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\zapisz_dane.png"));
+        bZapiszDane = new JLabel(zapisz_dane);
         bZapiszDane.setBounds(255,1005,235,50);
         bZapiszDane.setBorder(null);
         bZapiszDane.setVisible(false);
         bZapiszDane.addMouseListener(this);
         add(bZapiszDane);
 
-        bPowrotMini = new JLabel(new ImageIcon("Coś tam\\Nowe Grafiki\\powrot_mini.png"));
+        bPowrotMini = new JLabel(powrot_mini);
         bPowrotMini.setBounds(10,1005,235,50);
         bPowrotMini.setBorder(null);
         bPowrotMini.setVisible(false);
@@ -405,18 +428,81 @@ public class OknoUzytkownika extends JPanel implements ActionListener, MouseList
     @Override
     public void mouseReleased(MouseEvent e)
     {
-
+        Object p = e.getSource();
+        if(p == bExit) {
+            bExit.setIcon(zamknij);
+        }else if(p == bEdytujDane){
+            bEdytujDane.setIcon(edytuj_dane);
+        }else if(p == bWyloguj){
+            bWyloguj.setIcon(wyloguj);
+        }else if(p == bDodajSeans){
+            bDodajSeans.setIcon(dodajSeans);
+        }else if(p == bDodajFilm){
+            bDodajFilm.setIcon(dodajFilm);
+        }else if(p == bTwojeRezerwacje){
+            bTwojeRezerwacje.setIcon(twoje_rezerwacje);
+        }else if(p == bDostepneFilmy){
+            bDostepneFilmy.setIcon(wyswietl_dostepne);
+        }else if(p == bPowrot){
+            bPowrot.setIcon(powrot);
+        }else if(p == bZapiszDane){
+            bZapiszDane.setIcon(zapisz_dane);
+        }else if(p == bPowrotMini){
+            bPowrotMini.setIcon(powrot_mini);
+        }
     }
 
     @Override
     public void mouseEntered(MouseEvent e)
     {
-
+        Object p = e.getSource();
+        if(p == bExit) {
+            bExit.setIcon(zamknij_hover);
+        }else if(p == bEdytujDane){
+            bEdytujDane.setIcon(edytuj_dane_hover);
+        }else if(p == bWyloguj){
+            bWyloguj.setIcon(wyloguj_hover);
+        }else if(p == bDodajSeans){
+            bDodajSeans.setIcon(dodajSeans_hover);
+        }else if(p == bDodajFilm){
+            bDodajFilm.setIcon(dodajFilm_hover);
+        }else if(p == bTwojeRezerwacje){
+            bTwojeRezerwacje.setIcon(twoje_rezerwacje_hover);
+        }else if(p == bDostepneFilmy){
+            bDostepneFilmy.setIcon(wyswietl_dostepne_hover);
+        }else if(p == bPowrot){
+            bPowrot.setIcon(powrot_hover);
+        }else if(p == bZapiszDane){
+            bZapiszDane.setIcon(zapisz_dane_hover);
+        }else if(p == bPowrotMini){
+            bPowrotMini.setIcon(powrot_mini_hover);
+        }
     }
 
     @Override
     public void mouseExited(MouseEvent e)
     {
-
+        Object p = e.getSource();
+        if(p == bExit) {
+            bExit.setIcon(zamknij);
+        }else if(p == bEdytujDane){
+            bEdytujDane.setIcon(edytuj_dane);
+        }else if(p == bWyloguj){
+            bWyloguj.setIcon(wyloguj);
+        }else if(p == bDodajSeans){
+            bDodajSeans.setIcon(dodajSeans);
+        }else if(p == bDodajFilm){
+            bDodajFilm.setIcon(dodajFilm);
+        }else if(p == bTwojeRezerwacje){
+            bTwojeRezerwacje.setIcon(twoje_rezerwacje);
+        }else if(p == bDostepneFilmy){
+            bDostepneFilmy.setIcon(wyswietl_dostepne);
+        }else if(p == bPowrot){
+            bPowrot.setIcon(powrot);
+        }else if(p == bZapiszDane){
+            bZapiszDane.setIcon(zapisz_dane);
+        }else if(p == bPowrotMini){
+            bPowrotMini.setIcon(powrot_mini);
+        }
     }
 }

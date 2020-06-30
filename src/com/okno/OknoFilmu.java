@@ -25,6 +25,12 @@ public class OknoFilmu  extends JPanel implements ActionListener, MouseListener 
     private int selectedSeansId;
     private Uzytkownicy uzytkownicy;
 
+    private ImageIcon powrot = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot.png");
+    private ImageIcon powrotHover = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot2_hover.png");
+
+    private ImageIcon zarezerwuj = new ImageIcon("Coś tam\\Nowe Grafiki\\rezerwuj.png");
+    private ImageIcon zarezerwujHover = new ImageIcon("Coś tam\\Nowe Grafiki\\rezerwuj_zielony.png");
+
     /*
      chcialem to tak zrobic zeby tabela wyglądała tak:
     dostepneSeanse:
@@ -45,14 +51,13 @@ public class OknoFilmu  extends JPanel implements ActionListener, MouseListener 
         Filmy chosenMovie = baza.selectFilm(this.chosenMovieTitle);
         Font font = Font.createFont(Font.TRUETYPE_FONT, new File("Coś tam\\Fonts\\Caudex-Regular.ttf"));
 
-        ImageIcon zarezerwuj = new ImageIcon("Coś tam\\Nowe Grafiki\\rezerwuj_zielony.png");
+
         bZarezerwuj = new JLabel(zarezerwuj);
         bZarezerwuj.setBounds(1580, 25, 260, 110);
         bZarezerwuj.setBorder(null);
         bZarezerwuj.addMouseListener(this);
         add(bZarezerwuj);
 
-        ImageIcon powrot = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot.png");
         bPowrot = new JLabel(powrot);
         bPowrot.setBounds(1300, 25, 260, 110);
         bPowrot.setBorder(null);
@@ -202,11 +207,21 @@ public class OknoFilmu  extends JPanel implements ActionListener, MouseListener 
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
+        Object p= e.getSource();
+        if(p==bPowrot){
+            bPowrot.setIcon(powrotHover);
+        }else if(p == bZarezerwuj){
+            bZarezerwuj.setIcon(zarezerwujHover);
+        }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        Object p= e.getSource();
+        if(p==bPowrot){
+            bPowrot.setIcon(powrot);
+        }else if(p == bZarezerwuj){
+            bZarezerwuj.setIcon(zarezerwuj);
+        }
     }
 }
