@@ -49,12 +49,7 @@ cmake-build-*/
 
 # IntelliJ
 out/
-target/
-production/
-target/classes/*
-target/classes/com/okno/*
-/target/classes/*
-/target/classes/com/okno/*
+
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/

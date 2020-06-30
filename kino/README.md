@@ -25,6 +25,6 @@ Do realizacji projektu użyliśmy:
 Projekt realizuje następujące założenia
 1. Narzędziowe:
     + Projekt jest Mavenowy i poprawnie buduje się spoza środowiska developerskiego.
-    Za poprawną budowe odpowiada plik [pom.xml](https://github.com/Dydek123/Cinema-booking-system/blob/master/pom.xml), który dostarcza informacje o wersjach,
-    lokalizacji klasy Main, uzytych bibliotekach i lokalizacji resources. Wynikiem budowania jest plik kino.jar
+    Za poprawną budowe odpowiada plik [pom.xml](https://github.com/Dydek123/Cinema-booking-system/blob/master/kino/pom.xml), który dostarcza informacje o wersjach,
+    lokalizacji klasy Main, uzytych bibliotekach i lokalizacji resources. Wynikiem budowy jest plik kino.jar
     +
