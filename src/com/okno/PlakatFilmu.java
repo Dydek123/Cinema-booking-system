@@ -15,7 +15,6 @@ public class PlakatFilmu {
     int cordX=170;
     int cordY=200;
     BazaDanych baza = new BazaDanych();
-    Border border = BorderFactory.createLineBorder(Color.YELLOW,5);
     JLabel iPlakat;
     public boolean selected = false;
 
@@ -56,7 +55,6 @@ public class PlakatFilmu {
         this.cordY = cordY;
         this.iPlakat.setBounds(this.cordX, this.cordY, 272, 400);
     }
-
 
     public JLabel getiPlakat() {
         return this.iPlakat;
