@@ -24,7 +24,8 @@ jest latwa do przerowbienia, tylko trzeba miec obrazy tych przciskow, a z tym tr
 
 package main.java.com.okno;
 
-import main.java.com.bazydanych.*;
+import main.java.com.bazydanych.BazaDanych;
+import main.java.com.bazydanych.Uzytkownicy;
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,35 +48,35 @@ public class OknoUzytkownika extends JPanel implements  MouseListener, OknoJPane
     private TwojeRezerwacje twojeRezerwacje;
     BazaDanych baza = new BazaDanych();
 
-    private ImageIcon zamknij = new ImageIcon("Coś tam\\Nowe Grafiki\\Zamknij_button.png");
-    private ImageIcon zamknij_hover = new ImageIcon("Coś tam\\Nowe Grafiki\\Zamknij_button_hover.png");
+    private ImageIcon zamknij = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\Zamknij_button.png");
+    private ImageIcon zamknij_hover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\Zamknij_button_hover.png");
 
-    private ImageIcon edytuj_dane = new ImageIcon("Coś tam\\Nowe Grafiki\\edytuj_dane.png");
-    private ImageIcon edytuj_dane_hover = new ImageIcon("Coś tam\\Nowe Grafiki\\edytuj_dane_hover.png");
+    private ImageIcon edytuj_dane = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\edytuj_dane.png");
+    private ImageIcon edytuj_dane_hover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\edytuj_dane_hover.png");
 
-    private ImageIcon wyloguj = new ImageIcon("Coś tam\\Nowe Grafiki\\wyloguj.png");
-    private ImageIcon wyloguj_hover = new ImageIcon("Coś tam\\Nowe Grafiki\\wyloguj_hover.png");
+    private ImageIcon wyloguj = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\wyloguj.png");
+    private ImageIcon wyloguj_hover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\wyloguj_hover.png");
 
-    private ImageIcon dodajSeans = new ImageIcon("Coś tam\\Nowe Grafiki\\dodaj_seans.png");
-    private ImageIcon dodajSeans_hover = new ImageIcon("Coś tam\\Nowe Grafiki\\dodaj_seans_hover.png");
+    private ImageIcon dodajSeans = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\dodaj_seans.png");
+    private ImageIcon dodajSeans_hover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\dodaj_seans_hover.png");
 
-    private ImageIcon dodajFilm = new ImageIcon("Coś tam\\Nowe Grafiki\\dodaj_film.png");
-    private ImageIcon dodajFilm_hover = new ImageIcon("Coś tam\\Nowe Grafiki\\dodaj_film_hover.png");
+    private ImageIcon dodajFilm = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\dodaj_film.png");
+    private ImageIcon dodajFilm_hover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\dodaj_film_hover.png");
 
-    private ImageIcon twoje_rezerwacje = new ImageIcon("Coś tam\\Nowe Grafiki\\twoje_rezerwacje.png");
-    private ImageIcon twoje_rezerwacje_hover = new ImageIcon("Coś tam\\Nowe Grafiki\\twoje_rezerwacje_hover.png");
+    private ImageIcon twoje_rezerwacje = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\twoje_rezerwacje.png");
+    private ImageIcon twoje_rezerwacje_hover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\twoje_rezerwacje_hover.png");
 
-    private ImageIcon wyswietl_dostepne = new ImageIcon("Coś tam\\Nowe Grafiki\\wyswietl_dostepne_filmy.png");
-    private ImageIcon wyswietl_dostepne_hover = new ImageIcon("Coś tam\\Nowe Grafiki\\wyswietl_dostepne_filmy_hover.png");
+    private ImageIcon wyswietl_dostepne = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\wyswietl_dostepne_filmy.png");
+    private ImageIcon wyswietl_dostepne_hover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\wyswietl_dostepne_filmy_hover.png");
 
-    private ImageIcon powrot = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot.png");
-    private ImageIcon powrot_hover = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot_hover.png");
+    private ImageIcon powrot = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot.png");
+    private ImageIcon powrot_hover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot_hover.png");
 
-    private ImageIcon zapisz_dane = new ImageIcon("Coś tam\\Nowe Grafiki\\zapisz_dane.png");
-    private ImageIcon zapisz_dane_hover = new ImageIcon("Coś tam\\Nowe Grafiki\\zapisz_dane_hover.png");
+    private ImageIcon zapisz_dane = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\zapisz_dane.png");
+    private ImageIcon zapisz_dane_hover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\zapisz_dane_hover.png");
 
-    private ImageIcon powrot_mini = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot_mini.png");
-    private ImageIcon powrot_mini_hover = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot_mini_hover.png");
+    private ImageIcon powrot_mini = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot_mini.png");
+    private ImageIcon powrot_mini_hover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot_mini_hover.png");
 
     //List<Filmy> filmy = baza.selectFilmy();
 

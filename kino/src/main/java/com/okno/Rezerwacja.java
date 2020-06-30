@@ -1,6 +1,7 @@
 package main.java.com.okno;
-import main.java.com.bazydanych.*;
+
 import main.java.com.bazydanych.BazaDanych;
+import main.java.com.bazydanych.Uzytkownicy;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,11 +24,11 @@ public class Rezerwacja extends JPanel implements MouseListener, OknoJPanel {
     private JLabel tIleBiletow;
     private JLabel bPowrot,bRezerwuj;
 
-    private ImageIcon powrot = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot.png");
-    private ImageIcon powrotHover = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot2_hover.png");
+    private ImageIcon powrot = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot.png");
+    private ImageIcon powrotHover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot2_hover.png");
 
-    private ImageIcon zarezerwuj = new ImageIcon("Coś tam\\Nowe Grafiki\\rezerwuj.png");
-    private ImageIcon zarezerwujHover = new ImageIcon("Coś tam\\Nowe Grafiki\\rezerwuj_zielony.png");
+    private ImageIcon zarezerwuj = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\rezerwuj.png");
+    private ImageIcon zarezerwujHover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\rezerwuj_zielony.png");
 
     private Siedzenie [][] listaSiedzen = new Siedzenie[3][10];
     //private JLabel [][] listaSiedzenB = new JLabel[3][10];

@@ -1,11 +1,12 @@
 package main.java.com.okno;
 
-import main.java.com.bazydanych.*;
+import main.java.com.bazydanych.BazaDanych;
+import main.java.com.bazydanych.Uzytkownicy;
 import main.java.com.movies.Filmy;
 
-import java.awt.*;
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class EkranGlowny extends JFrame implements ActionListener{

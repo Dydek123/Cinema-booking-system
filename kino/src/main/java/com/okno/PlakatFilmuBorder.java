@@ -4,7 +4,6 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.io.IOException;
-
 //DEKORATOR
 
 public class PlakatFilmuBorder extends PlakatFilmu{

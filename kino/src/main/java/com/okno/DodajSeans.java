@@ -7,7 +7,8 @@ import main.java.com.movies.Filmy;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -20,10 +21,10 @@ public class DodajSeans extends JPanel implements MouseListener, OknoJPanel {
     private JLabel bZatwierdz, bPowrot, lTytul, lNumerSali, lDataSeansu, lGodzinaSeansu, background, lWrongData;
     private JTextField tTytul, tDataSeansu, tGodzinaSeansu, tNumerSali;
     private Uzytkownicy uzytkownik;
-    private ImageIcon iPowrot = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot2.png");
-    private ImageIcon iPowrot_hover = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot_button_hover.png");
-    private ImageIcon iZatwierdz = new ImageIcon("Coś tam\\Nowe Grafiki\\zatwierdz.png");
-    private ImageIcon iZatwierdz_hover = new ImageIcon("Coś tam\\Nowe Grafiki\\zatwierdz_hover.png");
+    private ImageIcon iPowrot = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot2.png");
+    private ImageIcon iPowrot_hover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot_button_hover.png");
+    private ImageIcon iZatwierdz = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\zatwierdz.png");
+    private ImageIcon iZatwierdz_hover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\zatwierdz_hover.png");
     private String pData = "[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]";
     private String pGodzina = "[0-9][0-9]:[0-9][0-9]:[0-9][0-9]";
     private Pattern pattern;

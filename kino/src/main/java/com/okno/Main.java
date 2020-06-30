@@ -1,11 +1,10 @@
 package main.java.com.okno;
 
-import main.java.com.bazydanych.*;
+import main.java.com.bazydanych.BazaDanych;
+import main.java.com.bazydanych.Uzytkownicy;
 
-import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Main {

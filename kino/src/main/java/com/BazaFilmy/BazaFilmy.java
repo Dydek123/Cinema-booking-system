@@ -1,17 +1,11 @@
 package main.java.com.BazaFilmy;
 
-import main.java.com.bazydanych.*;
-import main.java.com.movies.*;
+import main.java.com.bazydanych.BazaDanych;
+import main.java.com.movies.Filmy;
 
+import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 public class BazaFilmy {
 

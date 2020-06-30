@@ -26,7 +26,7 @@ public class Register extends JPanel implements MouseListener, OknoJPanel {
 
     private ImageIcon iPowrotZielone = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot_zielone.png");
     private ImageIcon iPowrotHover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot_hover.png");
-    private ImageIcon iPowrotClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot_clicked.png");
+    private ImageIcon iPowrotClicked = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot_clicked.png");
     private ImageIcon iZamknij = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\Zamknij_x.png");
     private ImageIcon iZamknijHover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\Zamknij_x_hover.png");
     private ImageIcon iZamknijClicked = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\Zamknij_x_clicked.png");

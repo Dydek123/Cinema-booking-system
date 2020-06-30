@@ -2,8 +2,6 @@ package main.java.com.okno;
 
 import main.java.com.bazydanych.BazaDanych;
 import main.java.com.bazydanych.Uzytkownicy;
-import main.java.com.okno.PlakatFilmuBorder;
-import main.java.com.movies.Filmy;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,8 +17,8 @@ public class DostepneFilmy extends JPanel implements MouseListener, OknoJPanel {
     public PlakatFilmuBorder plakat_border;
     public JFrame bSignUp;
     public JLabel background, bRezerwuj,bPowrot, hover;
-    private ImageIcon iPowrot = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot.png");
-    private ImageIcon iPowrotHover = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot2_hover.png");
+    private ImageIcon iPowrot = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot.png");
+    private ImageIcon iPowrotHover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot2_hover.png");
     public String[] dostepneFilmy=baza.selectDostepneFilmy();
     //Lista przechowująca obiekty klasy PlakatFilmu - pętla je wyswietli
     public List<PlakatFilmu> lista_plakatow = new LinkedList<>();
@@ -191,7 +189,7 @@ public class DostepneFilmy extends JPanel implements MouseListener, OknoJPanel {
             if(p==bPowrot){
                 bPowrot.setIcon(iPowrotHover);
             }
-        }catch (RuntimeException err){
+        }catch (RuntimeException | IOException err){
             System.out.println(err);
         }
     }

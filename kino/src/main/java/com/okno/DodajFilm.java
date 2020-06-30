@@ -9,7 +9,8 @@ import main.java.com.movies.Gatunek;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -26,10 +27,10 @@ public class DodajFilm extends JPanel implements MouseListener, OknoJPanel {
     //private ImageIcon iZarejestrujClicked = new ImageIcon("Coś tam\\Nowe Grafiki\\zarejestruj_clicked.png");
     //private JPasswordField fPassword;
     //private Login login;
-    private ImageIcon iPowrot = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot2.png");
-    private ImageIcon iPowrot_hover = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot_button_hover.png");
-    private ImageIcon iZatwierdz = new ImageIcon("Coś tam\\Nowe Grafiki\\zatwierdz.png");
-    private ImageIcon iZatwierdz_hover = new ImageIcon("Coś tam\\Nowe Grafiki\\zatwierdz_hover.png");
+    private ImageIcon iPowrot = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot2.png");
+    private ImageIcon iPowrot_hover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot_button_hover.png");
+    private ImageIcon iZatwierdz = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\zatwierdz.png");
+    private ImageIcon iZatwierdz_hover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\zatwierdz_hover.png");
     private String regex = "^([0-9])h[0-9][0-9]m$";
     private Pattern pattern;
     private BufferedImage bi;

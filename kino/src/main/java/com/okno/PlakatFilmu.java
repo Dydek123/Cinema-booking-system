@@ -1,10 +1,10 @@
 package main.java.com.okno;
+
 import main.java.com.bazydanych.BazaDanych;
 import main.java.com.movies.Filmy;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;

@@ -25,11 +25,11 @@ public class OknoFilmu  extends JPanel implements ActionListener, MouseListener,
     private int selectedSeansId;
     private Uzytkownicy uzytkownicy;
 
-    private ImageIcon powrot = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot.png");
-    private ImageIcon powrotHover = new ImageIcon("Coś tam\\Nowe Grafiki\\powrot2_hover.png");
+    private ImageIcon powrot = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot.png");
+    private ImageIcon powrotHover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\powrot2_hover.png");
 
-    private ImageIcon zarezerwuj = new ImageIcon("Coś tam\\Nowe Grafiki\\rezerwuj.png");
-    private ImageIcon zarezerwujHover = new ImageIcon("Coś tam\\Nowe Grafiki\\rezerwuj_zielony.png");
+    private ImageIcon zarezerwuj = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\rezerwuj.png");
+    private ImageIcon zarezerwujHover = new ImageIcon("kino\\Coś tam\\Nowe Grafiki\\rezerwuj_zielony.png");
 
     /*
      chcialem to tak zrobic zeby tabela wyglądała tak:

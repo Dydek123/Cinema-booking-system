@@ -1,5 +1,5 @@
 package main.java.com.okno;
 
 public enum State {
-    WOLNE, ZAJETE, WYBRANE;
+    WOLNE, ZAJETE, WYBRANE
 }
